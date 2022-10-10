@@ -7,6 +7,7 @@ namespace DailyReport.Pages.Reports
     {
         public void OnGet()
         {
+
         }
     }
 }
