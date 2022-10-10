@@ -1,6 +1,6 @@
 ﻿namespace DailyReport.Models
 {
-    public class FinalReportModel
+    public class FinalReport
     {
         public int Id { get; set; }
         public DateTime date { get; set; }

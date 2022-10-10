@@ -2,7 +2,7 @@
 
 namespace DailyReport.Models
 {
-    public class DepReportModel
+    public class DepReport
     {
         public int Id { get; set; }
         public DateTime date { get; set; }

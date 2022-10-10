@@ -1,13 +1,17 @@
 ﻿using DailyReport.Models;
 using DailyReport.Pages;
+using Microsoft.AspNetCore.SignalR;
 using System.ComponentModel.DataAnnotations;
 
 namespace DailyReport.Services
 {
     public class DepReportServise
     {
-        public DepReportModel DepReport = new DepReportModel();
-        public void initialize()
+        public DepReport DepReport = new DepReport();
+        /// <summary>
+        /// инициализация для отладочных целей
+        /// </summary>
+        public DepReportServise()
         { 
             DepReport.Id = 1;
             DepReport.date = DateTime.Today;
@@ -69,8 +73,11 @@ namespace DailyReport.Services
             DepReport.other = 1;
             DepReport.otherChildrens = 1;
         }
-    
-        public 
+
+        public DepReport Get()
+        {
+            return DepReport;
+        }
     
     
     }
