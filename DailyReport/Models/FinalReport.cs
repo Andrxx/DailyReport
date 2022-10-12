@@ -26,6 +26,8 @@
         public int oNIVLVPOChildrens { get; set; }
         public int oNIVLMask { get; set; }
         public int oNIVLMaskChildrens { get; set; }
+        public int oMask { get; set; }
+        public int oMaskChildren { get; set; }
         public int oBrease { get; set; }
         public int oBreaseChildrens { get; set; }
         public int pregnant { get; set; }

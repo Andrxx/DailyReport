@@ -15,23 +15,135 @@
             </tr>
             <tr>
                 <th scope="col">Состояло</th>
+                <th scope="col"><input value="@Model.reportModel.existed" /></th>
+                <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">Выбыло</th>
+                <th scope="col"><input value="@Model.reportModel.outcome" /></th>
+                <th scope="col"><input value="@Model.reportModel.outcomeChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">Поступило</th>
                 <th scope="col"><input value="@Model.reportModel.existedChildrens" /></th>
                 <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
             </tr>
             <tr>
-                <th scope="col">Состояло</th>
+                <th scope="col">Переведено из отделения</th>
                 <th scope="col"><input value="@Model.reportModel.existedChildrens" /></th>
                 <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
             </tr>
             <tr>
-                <th scope="col">Состояло</th>
+                <th scope="col">Переведено в отделение</th>
+                <th scope="col"><input value="@Model.reportModel.movedInDep" /></th>
+                <th scope="col"><input value="@Model.reportModel.movedInDepChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">Умерло</th>
                 <th scope="col"><input value="@Model.reportModel.existedChildrens" /></th>
                 <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
             </tr>
             <tr>
-                <th scope="col">Состояло</th>
+                <th scope="col">Состоит</th>
                 <th scope="col"><input value="@Model.reportModel.existedChildrens" /></th>
                 <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
+            </tr>
+            @*раздел кислорода*@
+            <tr>
+                <th scope="col">ИВЛ</th>
+                <th scope="col"><input value="@Model.reportModel.oIVL" /></th>
+                <th scope="col"><input value="@Model.reportModel.oIVLChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">НИВЛ</th>
+                <th scope="col"><input value="@Model.reportModel.oNIVL" /></th>
+                <th scope="col"><input value="@Model.reportModel.oNIVLChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">НИВЛ+ВПО</th>
+                <th scope="col"><input value="@Model.reportModel.oNIVLVPO" /></th>
+                <th scope="col"><input value="@Model.reportModel.oNIVLVPOChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">НИВЛ+КМ</th>
+                <th scope="col"><input value="@Model.reportModel.oNIVLMask" /></th>
+                <th scope="col"><input value="@Model.reportModel.oNIVLMaskChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">Лицевая маска</th>
+                <th scope="col"><input value="@Model.reportModel.oMask" /></th>
+                <th scope="col"><input value="@Model.reportModel.oMaskChildren" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">Спонтанное дыхание</th>
+                <th scope="col"><input value="@Model.reportModel.oBrease" /></th>
+                <th scope="col"><input value="@Model.reportModel.oBreaseChildrens" /> </th>
+            </tr>
+            @*админ рздел*@
+            <tr>
+                <th scope="col">Состояло</th>
+                <th scope="col"><input value="@Model.reportModel.existed" /></th>
+                <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">Выбыло</th>
+                <th scope="col"><input value="@Model.reportModel.outcome" /></th>
+                <th scope="col"><input value="@Model.reportModel.outcomeChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">Поступило</th>
+                <th scope="col"><input value="@Model.reportModel.existedChildrens" /></th>
+                <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">Переведено из отделения</th>
+                <th scope="col"><input value="@Model.reportModel.existedChildrens" /></th>
+                <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">Переведено в отделение</th>
+                <th scope="col"><input value="@Model.reportModel.movedInDep" /></th>
+                <th scope="col"><input value="@Model.reportModel.movedInDepChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">Умерло</th>
+                <th scope="col"><input value="@Model.reportModel.existedChildrens" /></th>
+                <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">Состоит</th>
+                <th scope="col"><input value="@Model.reportModel.existedChildrens" /></th>
+                <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">ИВЛ</th>
+                <th scope="col"><input value="@Model.reportModel.oIVL" /></th>
+                <th scope="col"><input value="@Model.reportModel.oIVLChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">НИВЛ</th>
+                <th scope="col"><input value="@Model.reportModel.oNIVL" /></th>
+                <th scope="col"><input value="@Model.reportModel.oNIVLChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">НИВЛ+ВПО</th>
+                <th scope="col"><input value="@Model.reportModel.oNIVLVPO" /></th>
+                <th scope="col"><input value="@Model.reportModel.oNIVLVPOChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">НИВЛ+КМ</th>
+                <th scope="col"><input value="@Model.reportModel.oNIVLMask" /></th>
+                <th scope="col"><input value="@Model.reportModel.oNIVLMaskChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">Лицевая маска</th>
+                <th scope="col"><input value="@Model.reportModel.oMask" /></th>
+                <th scope="col"><input value="@Model.reportModel.oMaskChildren" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">Спонтанное дыхание</th>
+                <th scope="col"><input value="@Model.reportModel.oBrease" /></th>
+                <th scope="col"><input value="@Model.reportModel.oBreaseChildrens" /> </th>
             </tr>
         </thead>
     </table>
