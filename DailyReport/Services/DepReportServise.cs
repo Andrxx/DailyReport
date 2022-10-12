@@ -38,6 +38,8 @@ namespace DailyReport.Services
             DepReport.oNIVLVPOChildrens = 1;
             DepReport.oNIVLMask = 1;
             DepReport.oNIVLMaskChildrens = 1;
+            DepReport.oMask = 1;
+            DepReport.oMaskChildren = 1;
             DepReport.oBrease = 1;
             DepReport.oBreaseChildrens = 1;
             DepReport.pregnant = 1;
@@ -45,7 +47,7 @@ namespace DailyReport.Services
             DepReport.restZone = 1;
             DepReport.restZoneChildrens = 1;
             DepReport.outRegions = 1;
-            DepReport.outRegionshildrens = 1;
+            DepReport.outRegionsChildrens = 1;
             DepReport.forein = 1;
             DepReport.foreinChildrens = 1;
             DepReport.LNR_DNR = 1;

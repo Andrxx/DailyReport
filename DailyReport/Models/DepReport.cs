@@ -39,7 +39,7 @@ namespace DailyReport.Models
         public int restZone { get; set; }
         public int restZoneChildrens { get; set; }
         public int outRegions { get; set; }
-        public int outRegionshildrens { get; set; }
+        public int outRegionsChildrens { get; set; }
         public int forein { get; set; }
         public int foreinChildrens { get; set; }
         public int LNR_DNR { get; set; }

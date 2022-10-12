@@ -6,145 +6,172 @@
 }
 
 <div class="container">
+    <div class="row">
+        <div class="col-4">
+            Сводка _____ отделения <br />
+            ______ зона
+        </div>
+        <div class="col-4 offset-4" >
+            Дата @Model.reportModel.date.ToShortDateString()
+        </div>
+    </div>
+    <form name="repForm" method="post">
     <table class="table mt-5">
         <thead>
             <tr>
-                <th scope="col">        </th>
+                <th scope="col">  </th>
                 <th scope="col">Взрослые</th>
                 <th scope="col">Дети</th>
             </tr>
             <tr>
                 <th scope="col">Состояло</th>
-                <th scope="col"><input value="@Model.reportModel.existed" /></th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
+                <th scope="col"><input value="@Model.reportModel.existed" type="number" name="existed"/></th>
+                    <th scope="col"><input value="@Model.reportModel.existedChildrens" type="number" name="existedChildrens" /> </th>
             </tr>
             <tr>
                 <th scope="col">Выбыло</th>
-                <th scope="col"><input value="@Model.reportModel.outcome" /></th>
-                <th scope="col"><input value="@Model.reportModel.outcomeChildrens" /> </th>
+                    <th scope="col"><input value="@Model.reportModel.outcome" type="number" name="outcome" /></th>
+                    <th scope="col"><input value="@Model.reportModel.outcomeChildrens" type="number" name="outcomeChildrens" /> </th>
             </tr>
             <tr>
                 <th scope="col">Поступило</th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /></th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
+                    <th scope="col"><input value="@Model.reportModel.income" type="number" name="income" /></th>
+                    <th scope="col"><input value="@Model.reportModel.incomeChildrens" type="number" name="incomeChildrens" /> </th>
             </tr>
             <tr>
                 <th scope="col">Переведено из отделения</th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /></th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
+                    <th scope="col"><input value="@Model.reportModel.movedOutDep" type="number" name="movedOutDep" /></th>
+                    <th scope="col"><input value="@Model.reportModel.movedInDepChildrens" type="number" name="movedInDepChildrens" /> </th>
             </tr>
             <tr>
                 <th scope="col">Переведено в отделение</th>
-                <th scope="col"><input value="@Model.reportModel.movedInDep" /></th>
-                <th scope="col"><input value="@Model.reportModel.movedInDepChildrens" /> </th>
+                    <th scope="col"><input value="@Model.reportModel.movedInDep" type="number" name="movedInDep" /></th>
+                    <th scope="col"><input value="@Model.reportModel.movedInDepChildrens" type="number" name="movedInDepChildrens" /> </th>
             </tr>
             <tr>
                 <th scope="col">Умерло</th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /></th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
+                    <th scope="col"><input value="@Model.reportModel.died" type="number" name="died" /></th>
+                    <th scope="col"><input value="@Model.reportModel.diedChildrens" type="number" name="diedChildrens" /> </th>
             </tr>
             <tr>
                 <th scope="col">Состоит</th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /></th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
+                    <th scope="col"><input value="@Model.reportModel.present" type="number" name="present"/></th>
+                    <th scope="col"><input value="@Model.reportModel.presentChildrens" type="number" name="presentChildrens" /> </th>
             </tr>
             @*раздел кислорода*@
             <tr>
                 <th scope="col">ИВЛ</th>
-                <th scope="col"><input value="@Model.reportModel.oIVL" /></th>
-                <th scope="col"><input value="@Model.reportModel.oIVLChildrens" /> </th>
+                    <th scope="col"><input value="@Model.reportModel.oIVL" type="number" name="oIVL" /></th>
+                    <th scope="col"><input value="@Model.reportModel.oIVLChildrens" type="number" name="oIVLChildrens" /> </th>
             </tr>
             <tr>
                 <th scope="col">НИВЛ</th>
-                <th scope="col"><input value="@Model.reportModel.oNIVL" /></th>
-                <th scope="col"><input value="@Model.reportModel.oNIVLChildrens" /> </th>
+                    <th scope="col"><input value="@Model.reportModel.oNIVL" type="number" name="oNIVL" /></th>
+                    <th scope="col"><input value="@Model.reportModel.oNIVLChildrens" type="number" name="oNIVLChildrens" /> </th>
             </tr>
             <tr>
                 <th scope="col">НИВЛ+ВПО</th>
-                <th scope="col"><input value="@Model.reportModel.oNIVLVPO" /></th>
-                <th scope="col"><input value="@Model.reportModel.oNIVLVPOChildrens" /> </th>
+                    <th scope="col"><input value="@Model.reportModel.oNIVLVPO" type="number" name="oNIVLVPO" /></th>
+                    <th scope="col"><input value="@Model.reportModel.oNIVLVPOChildrens" type="number" name="oNIVLVPOChildrens" /> </th>
             </tr>
             <tr>
                 <th scope="col">НИВЛ+КМ</th>
-                <th scope="col"><input value="@Model.reportModel.oNIVLMask" /></th>
-                <th scope="col"><input value="@Model.reportModel.oNIVLMaskChildrens" /> </th>
+                    <th scope="col"><input value="@Model.reportModel.oNIVLMask" type="number" name="oNIVLMask" /></th>
+                    <th scope="col"><input value="@Model.reportModel.oNIVLMaskChildrens" type="number" name="oNIVLMaskChildrens" /> </th>
             </tr>
             <tr>
                 <th scope="col">Лицевая маска</th>
-                <th scope="col"><input value="@Model.reportModel.oMask" /></th>
-                <th scope="col"><input value="@Model.reportModel.oMaskChildren" /> </th>
+                    <th scope="col"><input value="@Model.reportModel.oMask" type="number" name="oMask" /></th>
+                    <th scope="col"><input value="@Model.reportModel.oMaskChildren" type="number" name="oMaskChildren" /> </th>
             </tr>
             <tr>
                 <th scope="col">Спонтанное дыхание</th>
-                <th scope="col"><input value="@Model.reportModel.oBrease" /></th>
-                <th scope="col"><input value="@Model.reportModel.oBreaseChildrens" /> </th>
+                    <th scope="col"><input value="@Model.reportModel.oBrease" type="number" name="oBrease" /></th>
+                    <th scope="col"><input value="@Model.reportModel.oBreaseChildrens" type="number" name="oBreaseChildrens" /> </th>
             </tr>
-            @*админ рздел*@
+                @*админ рздел*@
+                <tr>
+                    <th scope="col">Беременные</th>
+                    <th scope="col"><input value="@Model.reportModel.pregnant" type="number" name="pregnant"/></th>
+                    <th scope="col"><input value="@Model.reportModel.pregnantChildrens" type="number" name="pregnantChildrens" /> </th>
+                </tr>
             <tr>
-                <th scope="col">Состояло</th>
-                <th scope="col"><input value="@Model.reportModel.existed" /></th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
-            </tr>
-            <tr>
-                <th scope="col">Выбыло</th>
-                <th scope="col"><input value="@Model.reportModel.outcome" /></th>
-                <th scope="col"><input value="@Model.reportModel.outcomeChildrens" /> </th>
-            </tr>
-            <tr>
-                <th scope="col">Поступило</th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /></th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
+                <th scope="col">Пациенты из зон отдыха</th>
+                    <th scope="col"><input value="@Model.reportModel.restZone" type="number" name="restZone" /></th>
+                    <th scope="col"><input value="@Model.reportModel.restZoneChildrens" type="number" name="restZoneChildrens" /> </th>
             </tr>
             <tr>
-                <th scope="col">Переведено из отделения</th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /></th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
+                <th scope="col">Инокраевые</th>
+                    <th scope="col"><input value="@Model.reportModel.outRegions" type="number" name="outRegions" /></th>
+                    <th scope="col"><input value="@Model.reportModel.outRegionsChildrens" type="number" name="outRegionsChildrens" /> </th>
             </tr>
             <tr>
-                <th scope="col">Переведено в отделение</th>
-                <th scope="col"><input value="@Model.reportModel.movedInDep" /></th>
-                <th scope="col"><input value="@Model.reportModel.movedInDepChildrens" /> </th>
+                <th scope="col">Иностранные граждане</th>
+                    <th scope="col"><input value="@Model.reportModel.forein" type="number" name="forein" /></th>
+                    <th scope="col"><input value="@Model.reportModel.foreinChildrens" type="number" name="foreinChildrens" /> </th>
             </tr>
             <tr>
-                <th scope="col">Умерло</th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /></th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
+                <th scope="col">Прибывшие из ЛНР/ДНР</th>
+                <th scope="col"><input value="@Model.reportModel.LNR_DNR" type="number" name="LNR_DNR"/></th>
+                    <th scope="col"><input value="@Model.reportModel.LNR_DNRChildrens" type="number" name="LNR_DNRChildrens" /> </th>
             </tr>
             <tr>
-                <th scope="col">Состоит</th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /></th>
-                <th scope="col"><input value="@Model.reportModel.existedChildrens" /> </th>
+                <th scope="col">Поступили из другой МО</th>
+                    <th scope="col"><input value="@Model.reportModel.incomeHospital" type="number" name="incomeHospital" /></th>
+                    <th scope="col"><input value="@Model.reportModel.incomeHospitalChildrens" type="number" name="incomeHospitalChildrens" /> </th>
             </tr>
             <tr>
-                <th scope="col">ИВЛ</th>
-                <th scope="col"><input value="@Model.reportModel.oIVL" /></th>
-                <th scope="col"><input value="@Model.reportModel.oIVLChildrens" /> </th>
+                <th scope="col">Переведены в другую МО</th>
+                <th scope="col"><input value="@Model.reportModel.outcomeHospital" type="number" name="outcomeHospital"/></th>
+                    <th scope="col"><input value="@Model.reportModel.outcomeHospitalChildrens" type="number" name="outcomeHospitalChildrens" /> </th>
+            </tr>
+            @*Нозоологии*@
+            <tr>
+                <th scope="col">U 07.1 Covid-19</th>
+                    <th scope="col"><input value="@Model.reportModel.U071" type="number" name="U071" /></th>
+                    <th scope="col"><input value="@Model.reportModel.U071Childrens" type="number" name="U 071Childrens"/> </th>
             </tr>
             <tr>
-                <th scope="col">НИВЛ</th>
-                <th scope="col"><input value="@Model.reportModel.oNIVL" /></th>
-                <th scope="col"><input value="@Model.reportModel.oNIVLChildrens" /> </th>
+                <th scope="col">U 07.2 Covid-19</th>
+                <th scope="col"><input value="@Model.reportModel.U072" type="number" name="U072"/></th>
+                    <th scope="col"><input value="@Model.reportModel.U072Childrens" type="number" name="U072Childrens" /> </th>
             </tr>
             <tr>
-                <th scope="col">НИВЛ+ВПО</th>
-                <th scope="col"><input value="@Model.reportModel.oNIVLVPO" /></th>
-                <th scope="col"><input value="@Model.reportModel.oNIVLVPOChildrens" /> </th>
+                <th scope="col">ОРИ</th>
+                    <th scope="col"><input value="@Model.reportModel.ORVI" type="number" name="ORVI" /></th>
+                    <th scope="col"><input value="@Model.reportModel.ORVIChildrens" type="number" name="ORVIChildrens" /> </th>
             </tr>
             <tr>
-                <th scope="col">НИВЛ+КМ</th>
-                <th scope="col"><input value="@Model.reportModel.oNIVLMask" /></th>
-                <th scope="col"><input value="@Model.reportModel.oNIVLMaskChildrens" /> </th>
+                <th scope="col">Пневмония</th>
+                    <th scope="col"><input value="@Model.reportModel.pneumonia" type="number" name="pneumonia" /></th>
+                    <th scope="col"><input value="@Model.reportModel.pneumoniaChildrens" type="number" name="pneumoniaChildrens" /> </th>
             </tr>
             <tr>
-                <th scope="col">Лицевая маска</th>
-                <th scope="col"><input value="@Model.reportModel.oMask" /></th>
-                <th scope="col"><input value="@Model.reportModel.oMaskChildren" /> </th>
+                <th scope="col">ОКИ</th>
+                    <th scope="col"><input value="@Model.reportModel.OKI" type="number" name="OKI" /></th>
+                    <th scope="col"><input value="@Model.reportModel.OKIChildrens" type="number" name="OKIChildrens" /> </th>
             </tr>
             <tr>
-                <th scope="col">Спонтанное дыхание</th>
-                <th scope="col"><input value="@Model.reportModel.oBrease" /></th>
-                <th scope="col"><input value="@Model.reportModel.oBreaseChildrens" /> </th>
+                <th scope="col">Менингит, энцефалит, миелит</th>
+                    <th scope="col"><input value="@Model.reportModel.meningit" type="number" name="meningit" /></th>
+                    <th scope="col"><input value="@Model.reportModel.meningitChildrens" type="number" name="meningitChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">Гепатит</th>
+                <th scope="col"><input value="@Model.reportModel.hepatit" type="number" name="hepatit"/></th>
+                    <th scope="col"><input value="@Model.reportModel.hepatitChildrens" type="number" name="hepatitChildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">В-20</th>
+                    <th scope="col"><input value="@Model.reportModel.HIV" type="number" name="HIV" /></th>
+                    <th scope="col"><input value="@Model.reportModel.HIVCildrens" type="number" name="HIVCildrens" /> </th>
+            </tr>
+            <tr>
+                <th scope="col">Прочие</th>
+                <th scope="col"><input value="@Model.reportModel.other" type="number" name="other"/></th>
+                <th scope="col"><input value="@Model.reportModel.otherChildrens" type="number" name="otherChildrens"/> </th>
             </tr>
         </thead>
     </table>
+    </form>
 </div>
