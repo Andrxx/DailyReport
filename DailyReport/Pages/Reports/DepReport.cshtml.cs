@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Security.Cryptography;
 
 
 namespace DailyReport.Pages.Reports
@@ -14,21 +15,27 @@ namespace DailyReport.Pages.Reports
         ApplicationContext context;
         //[BindProperty]
         public DepReport _report = new DepReport();
-        //public List<DepReport> Reports { get; private set; } = new();
+        public List<DepReport> Reports { get; private set; } = new();
         public DepReportModel(ApplicationContext db)
         {
             context = db;
         }
-
+        int _dn;
         public DepReportServise reportServise = new DepReportServise();
-        public void OnGet()
+        public void OnGet(int? depNumber)
         {
-            _report = reportServise.CreateTest();
+            Reports = context.DepReports.AsNoTracking().ToList();
+            //_report = reportServise.CreateTest();
+            if (depNumber.HasValue)
+            {
+                _dn = depNumber.Value;
+                _report.depNumber = depNumber.Value;
+            } 
         }
 
-        public void OnPost()
+        public void OnPost(DepReport _report)
         {
-            _report.depNumber = 1;
+            //_report.depNumber = _dn;
             _report.existed = int.Parse(Request.Form["existed"]);
             _report.existedChildrens = int.Parse(Request.Form["existedChildrens"]);
             _report.income = int.Parse(Request.Form["income"]);
@@ -87,6 +94,9 @@ namespace DailyReport.Pages.Reports
             _report.HIVCildrens = int.Parse(Request.Form["HIVCildrens"]);
             _report.other = int.Parse(Request.Form["other"]);
             _report.otherChildrens = int.Parse(Request.Form["otherChildrens"]);
+            
+            _report.date = DateTime.Today;
+            _report.date = _report.date.AddDays(-1);
 
             context.DepReports.Add(_report);
             context.SaveChanges();

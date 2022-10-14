@@ -2,13 +2,16 @@
 @using DailyReport.Models
 @model DailyReport.Pages.Reports.DepReportModel
 @{
-    ViewData["Title"] = "Сводка отделения";
+    string msg;
+    if (Model._report.depNumber == 90) msg = "ОРИТ";
+    else msg = Model._report.depNumber + " отделения";
+    ViewData["Title"] = "Сводка " + msg;
 }
 
 <div class="container">
     <div class="row">
         <div class="col-4">
-            Сводка _____ отделения <br />
+            Сводка @msg <br />
             ______ зона
         </div>
         <div class="col-4 offset-4" >
