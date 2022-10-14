@@ -11,7 +11,7 @@ namespace DailyReport.Services
         /// <summary>
         /// инициализация для отладочных целей
         /// </summary>
-        public DepReportServise()
+        public DepReport CreateTest()
         { 
             DepReport.Id = 1;
             DepReport.date = DateTime.Today;
@@ -74,10 +74,12 @@ namespace DailyReport.Services
             DepReport.HIVCildrens = 1;
             DepReport.other = 1;
             DepReport.otherChildrens = 1;
+            return DepReport;
         }
 
         public DepReport Get()
         {
+
             return DepReport;
         }
     
