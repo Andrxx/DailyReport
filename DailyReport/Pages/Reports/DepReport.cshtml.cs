@@ -2,17 +2,30 @@ using DailyReport.Services;
 using DailyReport.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using System;
+
 
 namespace DailyReport.Pages.Reports
 {
+    [IgnoreAntiforgeryToken]
     public class DepReportModel : PageModel
     {
+        ApplicationContext context;
+        //[BindProperty]
         public DepReport _report = new DepReport();
+        //public List<DepReport> Reports { get; private set; } = new();
+        public DepReportModel(ApplicationContext db)
+        {
+            context = db;
+        }
+
         public DepReportServise reportServise = new DepReportServise();
         public void OnGet()
         {
-            _report = reportServise.Get();
+            _report = reportServise.CreateTest();
         }
+
         public void OnPost()
         {
             _report.depNumber = 1;
@@ -74,6 +87,9 @@ namespace DailyReport.Pages.Reports
             _report.HIVCildrens = int.Parse(Request.Form["HIVCildrens"]);
             _report.other = int.Parse(Request.Form["other"]);
             _report.otherChildrens = int.Parse(Request.Form["otherChildrens"]);
+
+            context.DepReports.Add(_report);
+            context.SaveChanges();
         }
 
     }
