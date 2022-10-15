@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Security.Cryptography;
-
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace DailyReport.Pages.Reports
 {
@@ -14,28 +14,39 @@ namespace DailyReport.Pages.Reports
     {
         ApplicationContext context;
         //[BindProperty]
-        public DepReport _report = new DepReport();
+        public DepReport _report; //= new DepReport();
         public List<DepReport> Reports { get; private set; } = new();
+        DateTime actualDate = DateTime.Today.AddDays(-1);
         public DepReportModel(ApplicationContext db)
         {
             context = db;
         }
-        int _dn;
         public DepReportServise reportServise = new DepReportServise();
         public void OnGet(int? depNumber)
         {
             Reports = context.DepReports.AsNoTracking().ToList();
             //_report = reportServise.CreateTest();
+            //_report = context.DepReports.FirstOrDefault(r=>r.depNumber == depNumber);
+            //.Include(r => r.depNumber)
+
+            //.Where(r => r.depNumber == depNumber)
+            //.Where(r => r.date == DateTime.Now.AddDays(-1))
+
+            //.Single<DepReport>()
+
+            //_report = (from report in context.DepReports
+                       //where (report.depNumber == depNumber) && (report.date.Date == actualDate)
+                       //select report).FirstOrDefault<DepReport>();
+            if (_report == null) _report = new();
             if (depNumber.HasValue)
             {
-                _dn = depNumber.Value;
                 _report.depNumber = depNumber.Value;
-            } 
+            }
+            OnPostDelete();
         }
 
-        public void OnPost(DepReport _report)
+        public async Task<IActionResult> OnPostAsync(DepReport _report)
         {
-            //_report.depNumber = _dn;
             _report.existed = int.Parse(Request.Form["existed"]);
             _report.existedChildrens = int.Parse(Request.Form["existedChildrens"]);
             _report.income = int.Parse(Request.Form["income"]);
@@ -99,8 +110,19 @@ namespace DailyReport.Pages.Reports
             _report.date = _report.date.AddDays(-1);
 
             context.DepReports.Add(_report);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
+            return RedirectToPage("DepReport", new { depNumber = _report.depNumber });
         }
 
+        public void OnPostDelete()
+        {
+
+            var report = context.DepReports.AsNoTracking().ToList();
+            foreach (DepReport r in report)
+            {
+                context.DepReports.Remove(r);
+            }
+            context.SaveChanges();
+        }
     }
 }
