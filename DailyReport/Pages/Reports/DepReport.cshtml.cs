@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using System.Reflection.Metadata;
 
 namespace DailyReport.Pages.Reports
 {
@@ -13,7 +14,6 @@ namespace DailyReport.Pages.Reports
     public class DepReportModel : PageModel
     {
         ApplicationContext context;
-        //[BindProperty]
         public DepReport _report; //= new DepReport();
         public List<DepReport> Reports { get; private set; } = new();
         DateTime actualDate = DateTime.Today.AddDays(-1);
@@ -26,23 +26,23 @@ namespace DailyReport.Pages.Reports
         {
             Reports = context.DepReports.AsNoTracking().ToList();
             //_report = reportServise.CreateTest();
-            //_report = context.DepReports.FirstOrDefault(r=>r.depNumber == depNumber);
-            //.Include(r => r.depNumber)
 
-            //.Where(r => r.depNumber == depNumber)
-            //.Where(r => r.date == DateTime.Now.AddDays(-1))
+            _report = (from report in context.DepReports
+                       where (report.depNumber == depNumber) && (report.date.Date == actualDate)
+                       select report).FirstOrDefault();
 
-            //.Single<DepReport>()
-
-            //_report = (from report in context.DepReports
-                       //where (report.depNumber == depNumber) && (report.date.Date == actualDate)
-                       //select report).FirstOrDefault<DepReport>();
-            if (_report == null) _report = new();
-            if (depNumber.HasValue)
+            if (_report == null)
             {
-                _report.depNumber = depNumber.Value;
+                _report = new();
+                if (depNumber.HasValue)
+                {
+                    _report.depNumber = depNumber.Value;
+                }
             }
-            OnPostDelete();
+            else
+            {
+                
+            }
         }
 
         public async Task<IActionResult> OnPostAsync(DepReport _report)
@@ -106,8 +106,8 @@ namespace DailyReport.Pages.Reports
             _report.other = int.Parse(Request.Form["other"]);
             _report.otherChildrens = int.Parse(Request.Form["otherChildrens"]);
             
-            _report.date = DateTime.Today;
-            _report.date = _report.date.AddDays(-1);
+            //_report.date = DateTime.Today;
+            //_report.date = _report.date.AddDays(-1);
 
             context.DepReports.Add(_report);
             await context.SaveChangesAsync();
@@ -116,7 +116,6 @@ namespace DailyReport.Pages.Reports
 
         public void OnPostDelete()
         {
-
             var report = context.DepReports.AsNoTracking().ToList();
             foreach (DepReport r in report)
             {
