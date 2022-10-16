@@ -10,5 +10,6 @@ namespace DailyReport.Models
         {
             Database.EnsureCreated();   // создаем базу данных при первом обращении
         }
+       
     }
 }

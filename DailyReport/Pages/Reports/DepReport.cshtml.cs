@@ -17,6 +17,7 @@ namespace DailyReport.Pages.Reports
         public DepReport _report; //= new DepReport();
         public List<DepReport> Reports { get; private set; } = new();
         DateTime actualDate = DateTime.Today.AddDays(-1);
+        //bool isNew;
         public DepReportModel(ApplicationContext db)
         {
             context = db;
@@ -25,7 +26,7 @@ namespace DailyReport.Pages.Reports
         public void OnGet(int? depNumber)
         {
             Reports = context.DepReports.AsNoTracking().ToList();
-            //_report = reportServise.CreateTest();
+            _report = reportServise.CreateTest();
 
             _report = (from report in context.DepReports
                        where (report.depNumber == depNumber) && (report.date.Date == actualDate)
@@ -33,6 +34,7 @@ namespace DailyReport.Pages.Reports
 
             if (_report == null)
             {
+                //isNew = true;
                 _report = new();
                 if (depNumber.HasValue)
                 {
@@ -41,11 +43,13 @@ namespace DailyReport.Pages.Reports
             }
             else
             {
-                
+                //isNew=false;
+
             }
+            //OnPostDelete();
         }
 
-        public async Task<IActionResult> OnPostAsync(DepReport _report)
+        public RedirectToPageResult OnPost(DepReport _report)
         {
             _report.existed = int.Parse(Request.Form["existed"]);
             _report.existedChildrens = int.Parse(Request.Form["existedChildrens"]);
@@ -105,12 +109,16 @@ namespace DailyReport.Pages.Reports
             _report.HIVCildrens = int.Parse(Request.Form["HIVCildrens"]);
             _report.other = int.Parse(Request.Form["other"]);
             _report.otherChildrens = int.Parse(Request.Form["otherChildrens"]);
-            
-            //_report.date = DateTime.Today;
-            //_report.date = _report.date.AddDays(-1);
+            //_report.Id = int.Parse(Request.Form["id"]);
 
-            context.DepReports.Add(_report);
-            await context.SaveChangesAsync();
+            //if (isNew)
+            //{
+            //    context.DepReports.Add(_report);
+            //}
+            context.DepReports.Update(_report);
+         
+
+            context.SaveChanges();
             return RedirectToPage("DepReport", new { depNumber = _report.depNumber });
         }
 
