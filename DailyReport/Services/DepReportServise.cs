@@ -13,7 +13,7 @@ namespace DailyReport.Services
         /// </summary>
         public DepReport CreateTest()
         { 
-            DepReport.Id = 1;
+            //DepReport.Id = 1;
             DepReport.date = DateTime.Today;
             DepReport.depNumber = 1;
             DepReport.existed = 1;
