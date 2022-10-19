@@ -3,10 +3,7 @@ using DailyReport.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Security.Cryptography;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using System.Reflection.Metadata;
 
 namespace DailyReport.Pages.Reports
 {
@@ -23,6 +20,7 @@ namespace DailyReport.Pages.Reports
             context = db;
         }
         public DepReportServise reportServise = new DepReportServise();
+
         public void OnGet(int? depNumber)
         {
             Reports = context.DepReports.AsNoTracking().ToList();
@@ -49,7 +47,16 @@ namespace DailyReport.Pages.Reports
             //OnPostDelete();
         }
 
-        public RedirectToPageResult OnPost(DepReport _report)
+        public void OnPostPrevReport(int depNumber)
+        {
+            //Reports = context.DepReports.AsNoTracking().ToList();
+            DateTime actualDate = DateTime.Today.AddDays(-2);
+            _report = (from report in context.DepReports
+                       where (report.depNumber == depNumber) && (report.date.Date == actualDate)
+                       select report).FirstOrDefault();
+        }
+
+        public RedirectToPageResult OnPostReport(DepReport _report)
         {
             _report.existed = int.Parse(Request.Form["existed"]);
             _report.existedChildrens = int.Parse(Request.Form["existedChildrens"]);

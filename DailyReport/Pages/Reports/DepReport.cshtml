@@ -176,7 +176,8 @@
             </tr>
         </thead>
     </table>
-    
-    <input type="submit" value="Отправить"/>
+
+        <input type="submit" value="Отправить" asp-page-handler="Report" />
+        <input type="submit" value="Загрузить предыдущую сводку" asp-page-handler="PrevReport" asp-route-depNumber=@Model._report.depNumber />
     </form>
 </div>
