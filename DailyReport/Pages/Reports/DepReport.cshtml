@@ -2,9 +2,11 @@
 @using DailyReport.Models
 @model DailyReport.Pages.Reports.DepReportModel
 @{
-    string msg;
-    if (Model._report.depNumber == 90) msg = "ОРИТ";
+    string msg, zone;
+    if ((Model._report.depNumber == 90) || (Model._report.depNumber == 91)) msg = "ОРИТ";
     else msg = Model._report.depNumber + " отделения";
+    if ((Model._report.depNumber == 1) || (Model._report.depNumber == 91)) zone = "грязная ";
+    else zone = "чистая ";
     ViewData["Title"] = "Сводка " + msg;
 }
 
@@ -12,7 +14,7 @@
     <div class="row">
         <div class="col-4">
             Сводка @msg <br />
-            ______ зона
+            @zone зона
         </div>
         <div class="col-4 offset-4" >
             Дата @Model._report.date.ToShortDateString()
@@ -20,7 +22,7 @@
     </div>
     <form name="repForm" method="post">
     <table class="table mt-5">
-        <thead>
+        <thead> 
             <tr>
                     <th scope="col"><input value="@Model._report.Id" type="number" name="id" style="visibility:hidden" />  </th>
                 <th scope="col">Взрослые</th>
@@ -177,7 +179,7 @@
         </thead>
     </table>
 
-        <input type="submit" value="Отправить" asp-page-handler="Report" />
+        <input type="submit" value="Отправить" asp-page-handler="Report" asp-route-depNumber=@Model._report.depNumber/>
         <input type="submit" value="Загрузить предыдущую сводку" asp-page-handler="PrevReport" asp-route-depNumber=@Model._report.depNumber />
     </form>
 </div>

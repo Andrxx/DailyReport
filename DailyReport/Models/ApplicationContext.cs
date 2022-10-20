@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using DailyReport.Models;
 
 namespace DailyReport.Models
 {
@@ -10,6 +11,7 @@ namespace DailyReport.Models
         {
             Database.EnsureCreated();   // создаем базу данных при первом обращении
         }
+        public DbSet<DailyReport.Models.FinalReport> FinalReport { get; set; }
        
     }
 }
