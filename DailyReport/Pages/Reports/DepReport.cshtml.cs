@@ -11,7 +11,7 @@ namespace DailyReport.Pages.Reports
     public class DepReportModel : PageModel
     {
         ApplicationContext context;
-        public DepReport _report; //= new DepReport();
+        public DepReport _report;
         public List<DepReport> Reports { get; private set; } = new();
         DateTime actualDate = DateTime.Today.AddDays(-1);
         //bool isNew;
@@ -50,9 +50,9 @@ namespace DailyReport.Pages.Reports
         public void OnPostPrevReport(int depNumber)
         {
             //Reports = context.DepReports.AsNoTracking().ToList();
-            DateTime actualDate = DateTime.Today.AddDays(-2);
+            DateTime lastDate = DateTime.Today.AddDays(-2);
             _report = (from report in context.DepReports
-                       where (report.depNumber == depNumber) && (report.date.Date == actualDate)
+                       where (report.depNumber == depNumber) && (report.date.Date == lastDate)
                        select report).FirstOrDefault();
             if(_report == null )
             {
