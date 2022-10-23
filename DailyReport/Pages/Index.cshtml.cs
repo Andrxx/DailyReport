@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DailyReport.Models;
+using DailyReport.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DailyReport.Pages
@@ -14,7 +16,6 @@ namespace DailyReport.Pages
 
         public void OnGet()
         {
-
         }
     }
 }

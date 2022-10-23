@@ -24,7 +24,7 @@ namespace DailyReport.Pages.Reports
         public void OnGet(int? depNumber)
         {
             //Reports = context.DepReports.AsNoTracking().ToList();
-            _report = reportServise.CreateTest();
+            //_report = reportServise.CreateTest();
 
             _report = (from report in context.DepReports
                        where (report.depNumber == depNumber) && (report.date.Date == actualDate)
