@@ -1,4 +1,7 @@
-﻿namespace DailyReport.Services
+﻿using DailyReport.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace DailyReport.Services
 {
     public class FinalReprortServise
     {
