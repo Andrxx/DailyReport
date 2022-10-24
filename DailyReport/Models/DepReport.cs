@@ -22,6 +22,8 @@ namespace DailyReport.Models
         public int diedChildrens { get; set; }
         public int present { get; set; }
         public int presentChildrens { get; set; }
+        public int attachedToORIT { get; set; }
+        public int attachedToORITCildrens { get; set; }
         public int oIVL { get; set; }
         public int oIVLChildrens { get; set; }
         public int oNIVL { get; set; }

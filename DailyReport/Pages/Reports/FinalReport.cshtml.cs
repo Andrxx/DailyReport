@@ -16,50 +16,62 @@ namespace DailyReport.Pages.Reports
         {
             context = db;
         }
-        public List<DepReport> Reports { get; private set; } = new();
+        public List<DepReport> reports { get; private set; } = new();
         public List<DepReport> _rep = new List<DepReport>();
-        DateTime actualDate = DateTime.Today.AddDays(-5);
+        DateTime actualDate = DateTime.Today.AddDays(-1);
         
         public void OnGet()
         {
             //_rep = context.DepReports.AsNoTracking().ToList();
 
-            Reports = (from report in context.DepReports
+            reports = (from report in context.DepReports
                     where (report.date.Date == actualDate)
                     select report).ToList();
 #pragma warning disable CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
-            depReport1 = (from report in context.DepReports
-                          where (report.date.Date == actualDate)&&(report.depNumber == 1)
-                          select report).FirstOrDefault();
-            depReport2 = (from report in context.DepReports
-                          where (report.date.Date == actualDate) && (report.depNumber == 2)
-                          select report).FirstOrDefault();
+            depReport1 = reports.Find(p => p.depNumber == 1);
+            depReport2 = reports.Find(p => p.depNumber == 2);
+            depReport3 = reports.Find(p => p.depNumber == 3);
+            depReport4 = reports.Find(p => p.depNumber == 4);
+            depReport5 = reports.Find(p => p.depNumber == 5);
+            depReport6 = reports.Find(p => p.depNumber == 6);
+            depReport7 = reports.Find(p => p.depNumber == 7);
+            depReport8 = reports.Find(p => p.depNumber == 8);
+            depReport90 = reports.Find(p => p.depNumber == 90);
+            depReport91 = reports.Find(p => p.depNumber == 91);
 
-            depReport3 = (from report in context.DepReports
-                          where ((report.date.Date == actualDate) && (report.depNumber == 3))
-                          select report).FirstOrDefault();
 
-            depReport4 = (from report in context.DepReports
-                          where ((report.date.Date == actualDate) && (report.depNumber == 4))
-                          select report).FirstOrDefault();
-            depReport5 = (from report in context.DepReports
-                          where ((report.date.Date == actualDate) && (report.depNumber == 5))
-                          select report).FirstOrDefault();
-            depReport6 = (from report in context.DepReports
-                          where ((report.date.Date == actualDate) && (report.depNumber == 6))
-                          select report).FirstOrDefault();
-            depReport7 = (from report in context.DepReports
-                          where ((report.date.Date == actualDate) && (report.depNumber == 7))
-                          select report).FirstOrDefault();
-            depReport8 = (from report in context.DepReports
-                          where ((report.date.Date == actualDate) && (report.depNumber == 8))
-                          select report).FirstOrDefault();
-            depReport90 = (from report in context.DepReports
-                          where ((report.date.Date == actualDate) && (report.depNumber == 90))
-                          select report).FirstOrDefault();
-            depReport91 = (from report in context.DepReports
-                          where ((report.date.Date == actualDate) && (report.depNumber == 91))
-                          select report).FirstOrDefault();
+            //depReport1 = (from report in context.DepReports
+            //              where (report.date.Date == actualDate)&&(report.depNumber == 1)
+            //              select report).FirstOrDefault();
+            //depReport2 = (from report in context.DepReports
+            //              where (report.date.Date == actualDate) && (report.depNumber == 2)
+            //              select report).FirstOrDefault();
+
+            //depReport3 = (from report in context.DepReports
+            //              where ((report.date.Date == actualDate) && (report.depNumber == 3))
+            //              select report).FirstOrDefault();
+
+            //depReport4 = (from report in context.DepReports
+            //              where ((report.date.Date == actualDate) && (report.depNumber == 4))
+            //              select report).FirstOrDefault();
+            //depReport5 = (from report in context.DepReports
+            //              where ((report.date.Date == actualDate) && (report.depNumber == 5))
+            //              select report).FirstOrDefault();
+            //depReport6 = (from report in context.DepReports
+            //              where ((report.date.Date == actualDate) && (report.depNumber == 6))
+            //              select report).FirstOrDefault();
+            //depReport7 = (from report in context.DepReports
+            //              where ((report.date.Date == actualDate) && (report.depNumber == 7))
+            //              select report).FirstOrDefault();
+            //depReport8 = (from report in context.DepReports
+            //              where ((report.date.Date == actualDate) && (report.depNumber == 8))
+            //              select report).FirstOrDefault();
+            //depReport90 = (from report in context.DepReports
+            //              where ((report.date.Date == actualDate) && (report.depNumber == 90))
+            //              select report).FirstOrDefault();
+            //depReport91 = (from report in context.DepReports
+            //              where ((report.date.Date == actualDate) && (report.depNumber == 91))
+            //              select report).FirstOrDefault();
 
 #pragma warning restore CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
             if (depReport1 == null) depReport1 = new();

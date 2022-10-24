@@ -2,7 +2,7 @@
 @using DailyReport.Models
 @model DailyReport.Pages.Reports.DepReportModel
 @{
-    string msg, zone;
+    string msg, zone/*, alertMsg = string.Empty*/;
     if ((Model._report.depNumber == 90) || (Model._report.depNumber == 91)) msg = "ОРИТ";
     else if (Model._report.depNumber == 8) msg = "Дневной стационар";
     else msg = Model._report.depNumber + " отделения";
@@ -12,6 +12,7 @@
 }
 
 <div class="container">
+    <div class="row"> <p>@ViewData["alertMsg"]</p></div>
     <div class="row">
         <div class="col-4">
             Сводка @msg <br />
@@ -64,6 +65,11 @@
                 <td scope="col">Состоит</td>
                     <td scope="col"><input value="@Model._report.present" type="number" name="present"/></td>
                     <td scope="col"><input value="@Model._report.presentChildrens" type="number" name="presentChildrens" /> </td>
+            </tr>
+            <tr>
+                <td scope="col">Прикреплено в ОРИТ</td>
+                <td scope="col"><input value="@Model._report.attachedToORIT" type="number" name="attachedToORIT" /></td>
+                <td scope="col"><input value="@Model._report.attachedToORITCildrens" type="number" name="attachedToORITCildrens" /> </td>
             </tr>
             @*раздел кислорода*@
             <tr>
