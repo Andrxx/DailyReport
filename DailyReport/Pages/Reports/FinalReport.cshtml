@@ -10,7 +10,7 @@
            
             <tbody>
                 <tr>
-                    <td rowspan="2">21 октября 2022</td>
+                    <td rowspan="2">@DateTime.Today.AddDays(-1).ToShortDateString()</td>
                     <td colspan="2" rowspan="2">1-е ИО (42) грязная</td>
                     <td colspan="2" rowspan="2">3-е ИО (40) чистая</td>
                     <td colspan="2" rowspan="2">4-е ИО (40, 18 бюджет, 2д бюджет) чистая</td>
@@ -98,7 +98,7 @@
                     <td>@Model.depReport90.existedChildrens</td>
                     <td>@Model.depReport8.existed</td>
                     <td>@Model.depReport8.existedChildrens</td>
-                    <td></td>
+                    <td>@Model._finalReport.existed</td>
                     <td></td>
                     <td></td>
                     <td></td>

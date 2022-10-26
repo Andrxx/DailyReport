@@ -8,7 +8,7 @@ namespace DailyReport.Pages.Reports
 {
     public class FinalReportModel : PageModel
     {
-        FinalReport _finalReport;
+        public FinalReport _finalReport;
         public DepReport depReport1, depReport2, depReport3, depReport4, depReport5,
             depReport6, depReport7, depReport8, depReport90, depReport91;
         ApplicationContext context;
@@ -39,40 +39,6 @@ namespace DailyReport.Pages.Reports
             depReport90 = reports.Find(p => p.depNumber == 90);
             depReport91 = reports.Find(p => p.depNumber == 91);
 
-
-            //depReport1 = (from report in context.DepReports
-            //              where (report.date.Date == actualDate)&&(report.depNumber == 1)
-            //              select report).FirstOrDefault();
-            //depReport2 = (from report in context.DepReports
-            //              where (report.date.Date == actualDate) && (report.depNumber == 2)
-            //              select report).FirstOrDefault();
-
-            //depReport3 = (from report in context.DepReports
-            //              where ((report.date.Date == actualDate) && (report.depNumber == 3))
-            //              select report).FirstOrDefault();
-
-            //depReport4 = (from report in context.DepReports
-            //              where ((report.date.Date == actualDate) && (report.depNumber == 4))
-            //              select report).FirstOrDefault();
-            //depReport5 = (from report in context.DepReports
-            //              where ((report.date.Date == actualDate) && (report.depNumber == 5))
-            //              select report).FirstOrDefault();
-            //depReport6 = (from report in context.DepReports
-            //              where ((report.date.Date == actualDate) && (report.depNumber == 6))
-            //              select report).FirstOrDefault();
-            //depReport7 = (from report in context.DepReports
-            //              where ((report.date.Date == actualDate) && (report.depNumber == 7))
-            //              select report).FirstOrDefault();
-            //depReport8 = (from report in context.DepReports
-            //              where ((report.date.Date == actualDate) && (report.depNumber == 8))
-            //              select report).FirstOrDefault();
-            //depReport90 = (from report in context.DepReports
-            //              where ((report.date.Date == actualDate) && (report.depNumber == 90))
-            //              select report).FirstOrDefault();
-            //depReport91 = (from report in context.DepReports
-            //              where ((report.date.Date == actualDate) && (report.depNumber == 91))
-            //              select report).FirstOrDefault();
-
 #pragma warning restore CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
             if (depReport1 == null) depReport1 = new();
             if (depReport2 == null) depReport2 = new();
@@ -84,6 +50,12 @@ namespace DailyReport.Pages.Reports
             if (depReport8 == null) depReport8 = new();
             if (depReport90 == null) depReport90 = new();
             if (depReport91 == null) depReport91 = new();
+
+            _finalReport = new();
+            foreach(DepReport _rep in reports)
+            {
+                _finalReport.existed += _rep.existed;
+            }
         }
     }
 }

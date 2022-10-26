@@ -132,8 +132,9 @@ namespace DailyReport.Pages.Reports
             }
             catch
             {
-                string alertMsg = "¬ведены неверные данные, повторите ввод";
-                ViewData.Add("alertMsg", alertMsg);
+                //TODO - сообщение о неверных данных
+                //string alertMsg = "¬ведены неверные данные, повторите ввод";
+                //ViewData.Add("alertMsg", alertMsg);
                 return RedirectToPage("DepReport", new { depNumber = _report.depNumber });
             }
             //if (isNew)
