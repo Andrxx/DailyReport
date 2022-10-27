@@ -10,12 +10,10 @@ namespace DailyReport.Pages.Reports
     [IgnoreAntiforgeryToken]
     public class DepReportModel : PageModel
     {
-        //string alertMsg = string.Empty;
         ApplicationContext context;
         public DepReport _report;
         public List<DepReport> Reports { get; private set; } = new();
         DateTime actualDate = DateTime.Today.AddDays(-1);
-        //bool isNew;
         public DepReportModel(ApplicationContext db)
         {
             string alertMsg = string.Empty;
@@ -34,8 +32,8 @@ namespace DailyReport.Pages.Reports
 
             if (_report == null)
             {
-                //isNew = true;
-                _report = new();
+                //тест для БД, изменить на создание нового для релиза
+                _report = reportServise.CreateTest();
                 if (depNumber.HasValue)
                 {
                     _report.depNumber = depNumber.Value;
@@ -43,8 +41,6 @@ namespace DailyReport.Pages.Reports
             }
             else
             {
-                //isNew=false;
-
             }
             //OnPostDelete();
         }
@@ -133,14 +129,9 @@ namespace DailyReport.Pages.Reports
             catch
             {
                 //TODO - сообщение о неверных данных
-                //string alertMsg = "Введены неверные данные, повторите ввод";
-                //ViewData.Add("alertMsg", alertMsg);
+                
                 return RedirectToPage("DepReport", new { depNumber = _report.depNumber });
             }
-            //if (isNew)
-            //{
-            //    context.DepReports.Add(_report);
-            //}
             context.DepReports.Update(_report);
          
 

@@ -9,6 +9,7 @@ namespace DailyReport.Pages.Reports
     public class FinalReportModel : PageModel
     {
         public FinalReport _finalReport;
+        public List<FinalReport> _finalReports;
         public DepReport depReport1, depReport2, depReport3, depReport4, depReport5,
             depReport6, depReport7, depReport8, depReport90, depReport91;
         ApplicationContext context;
@@ -23,10 +24,13 @@ namespace DailyReport.Pages.Reports
         public void OnGet()
         {
             //_rep = context.DepReports.AsNoTracking().ToList();
+            _finalReports = context.FinalReports.AsNoTracking().ToList();
 
             reports = (from report in context.DepReports
                     where (report.date.Date == actualDate)
                     select report).ToList();
+
+           
 #pragma warning disable CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
             depReport1 = reports.Find(p => p.depNumber == 1);
             depReport2 = reports.Find(p => p.depNumber == 2);
@@ -39,6 +43,9 @@ namespace DailyReport.Pages.Reports
             depReport90 = reports.Find(p => p.depNumber == 90);
             depReport91 = reports.Find(p => p.depNumber == 91);
 
+             //_finalReport = (from report in context.FinalReports
+             //                where report.date.Date == actualDate
+             //               select report).FirstOrDefault();
 #pragma warning restore CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
             if (depReport1 == null) depReport1 = new();
             if (depReport2 == null) depReport2 = new();
@@ -51,10 +58,64 @@ namespace DailyReport.Pages.Reports
             if (depReport90 == null) depReport90 = new();
             if (depReport91 == null) depReport91 = new();
 
-            _finalReport = new();
+            if (_finalReport == null) _finalReport = new();
+
+
             foreach(DepReport _rep in reports)
             {
                 _finalReport.existed += _rep.existed;
+                _finalReport.existedChildren += _rep.existedChildrens;
+                _finalReport.income += _rep.income;
+                _finalReport.incomeChildren += _rep.incomeChildrens;
+                _finalReport.outcome += _rep.outcome;
+                _finalReport.outcomeChildren += _rep.outcomeChildrens;
+                _finalReport.attachedToORIT += _rep.attachedToORIT;
+                _finalReport.attachedToORITChildren += _rep.attachedToORITCildrens;
+                _finalReport.movedOutDep += _rep.movedOutDep;
+                _finalReport.movedInDep += _rep.movedInDepChildrens;
+                _finalReport.died += _rep.died;
+                _finalReport.diedChildren += _rep.diedChildrens;
+                _finalReport.present += _rep.present;
+                _finalReport.presentChildren += _rep.presentChildrens;          
+                _finalReport.oIVL += _rep.oIVL;
+                _finalReport.oIVLChildren += _rep.oIVLChildrens;
+                _finalReport.oNIVL += _rep.oNIVLChildrens;
+                _finalReport.oNIVLVPO += _rep.oNIVLVPO;
+                _finalReport.oNIVLVPOChildren += _rep.oNIVLVPOChildrens;
+                _finalReport.oNIVLMask += _rep.oNIVLMaskChildrens;
+                _finalReport.oMask += _rep.oMask;
+                _finalReport.oMaskChildren += _rep.oMaskChildren;
+                _finalReport.pregnant += _rep.pregnant;
+                _finalReport.pregnantChildren += _rep.pregnantChildrens;
+                _finalReport.restZone += _rep.restZone;
+                _finalReport.restZoneChildren += _rep.restZoneChildrens;
+                _finalReport.outRegions += _rep.outRegions;
+                _finalReport.outRegionsChildren += _rep.outRegionsChildrens;
+                _finalReport.forein += _rep.foreinChildrens;
+                _finalReport.LNR_DNR += _rep.LNR_DNR;
+                _finalReport.LNR_DNRChildren += _rep.LNR_DNRChildrens;
+                _finalReport.incomeHospital += _rep.incomeHospital;
+                _finalReport.incomeHospitalChildren += _rep.incomeHospitalChildrens;
+                _finalReport.outcomeHospital += _rep.outcomeHospital;
+                _finalReport.outcomeHospitalChildren += _rep.outcomeHospitalChildrens;
+                _finalReport.U071 += _rep.U071;
+                _finalReport.U071Children += _rep.U071Childrens;
+                _finalReport.U072 += _rep.U072;
+                _finalReport.U072Children += _rep.U072Childrens;
+                _finalReport.ORVI += _rep.ORVI;
+                _finalReport.ORVIChildren += _rep.ORVIChildrens;
+                _finalReport.pneumonia += _rep.pneumonia;
+                _finalReport.pneumoniaChildren += _rep.pneumoniaChildrens;
+                _finalReport.OKI += _rep.OKI;
+                _finalReport.OKIChildren += _rep.OKIChildrens;
+                _finalReport.meningit += _rep.meningit;
+                _finalReport.meningitChildren += _rep.meningitChildrens;
+                _finalReport.hepatit += _rep.hepatit;
+                _finalReport.hepatitChildren += _rep.hepatitChildrens;
+                _finalReport.HIV += _rep.HIV;
+                _finalReport.HIVCildren += _rep.HIVCildrens;
+                _finalReport.other += _rep.other;
+                _finalReport.otherChildren += _rep.otherChildrens;
             }
         }
     }

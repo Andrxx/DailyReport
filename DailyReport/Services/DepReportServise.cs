@@ -14,7 +14,7 @@ namespace DailyReport.Services
         public DepReport CreateTest()
         { 
             //DepReport.Id = 1;
-            DepReport.date = DateTime.Today;
+            DepReport.date = DateTime.Now.Date.AddDays(-1);
             DepReport.depNumber = 1;
             DepReport.existed = 1;
             DepReport.existedChildrens = 1;
@@ -30,6 +30,8 @@ namespace DailyReport.Services
             DepReport.diedChildrens = 1;
             DepReport.present = 1;
             DepReport.presentChildrens = 1;
+            DepReport.attachedToORIT = 1;
+            DepReport.attachedToORITCildrens = 1;
             DepReport.oIVL = 1;
             DepReport.oIVLChildrens = 1;
             DepReport.oNIVL = 1;
