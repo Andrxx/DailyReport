@@ -69,6 +69,10 @@ namespace DailyReport.Models
         public int other { get; set; }
         public int otherChildrens { get; set; }
 
+        /// <summary>
+        /// подсчет количества больных на кислороде, только по взрослым (в текущей версии детей не сохраняем и не показываем)
+        /// </summary>
+        /// <returns></returns>
         public int CountO2()
         {
             int _summary = oIVL + oMask + oNIVL + oNIVLMask + oNIVLVPO;
