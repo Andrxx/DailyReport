@@ -68,5 +68,8 @@
         public int oSummaryChildren { get; set; }
         public int nozSummary { get; set; }
         public int nozSummaryChildren { get; set; }
+        public int presentNonDaycare { get; set; }
+        public int presentNonDaycareChildren { get; set; }
+
     }
 }

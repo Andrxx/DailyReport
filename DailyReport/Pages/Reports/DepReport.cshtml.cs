@@ -80,18 +80,20 @@ namespace DailyReport.Pages.Reports
                 _report.presentChildrens = int.Parse(Request.Form["presentChildrens"]);
                 _report.attachedToORIT = int.Parse(Request.Form["attachedToORIT"]);
                 _report.attachedToORITCildrens = int.Parse(Request.Form["attachedToORITCildrens"]);
+                //раздел килорода
                 _report.oIVL = int.Parse(Request.Form["oIVL"]);
-                _report.oIVLChildrens = int.Parse(Request.Form["oIVLChildrens"]);
+                //_report.oIVLChildrens = int.Parse(Request.Form["oIVLChildrens"]);
                 _report.oNIVL = int.Parse(Request.Form["oNIVL"]);
-                _report.oNIVLChildrens = int.Parse(Request.Form["oNIVLChildrens"]);
+                //_report.oNIVLChildrens = int.Parse(Request.Form["oNIVLChildrens"]);
                 _report.oNIVLVPO = int.Parse(Request.Form["oNIVLVPO"]);
-                _report.oNIVLVPOChildrens = int.Parse(Request.Form["oNIVLVPOChildrens"]);
+                //_report.oNIVLVPOChildrens = int.Parse(Request.Form["oNIVLVPOChildrens"]);
                 _report.oNIVLMask = int.Parse(Request.Form["oNIVLMask"]);
-                _report.oNIVLMaskChildrens = int.Parse(Request.Form["oNIVLMaskChildrens"]);
+                //_report.oNIVLMaskChildrens = int.Parse(Request.Form["oNIVLMaskChildrens"]);
                 _report.oMask = int.Parse(Request.Form["oMask"]);
-                _report.oMaskChildren = int.Parse(Request.Form["oMaskChildren"]);
-                _report.oBrease = int.Parse(Request.Form["oBrease"]);
-                _report.oBreaseChildrens = int.Parse(Request.Form["oBreaseChildrens"]);
+                //_report.oMaskChildren = int.Parse(Request.Form["oMaskChildren"]);
+                //_report.oBrease = int.Parse(Request.Form["oBrease"]);
+                //_report.oBreaseChildrens = int.Parse(Request.Form["oBreaseChildrens"]);
+                //админ
                 _report.pregnant = int.Parse(Request.Form["pregnant"]);
                 _report.pregnantChildrens = int.Parse(Request.Form["pregnantChildrens"]);
                 _report.restZone = int.Parse(Request.Form["restZone"]);
@@ -106,6 +108,7 @@ namespace DailyReport.Pages.Reports
                 _report.incomeHospitalChildrens = int.Parse(Request.Form["incomeHospitalChildrens"]);
                 _report.outcomeHospital = int.Parse(Request.Form["outcomeHospital"]);
                 _report.outcomeHospitalChildrens = int.Parse(Request.Form["outcomeHospitalChildrens"]);
+                //нозологии
                 _report.U071 = int.Parse(Request.Form["U071"]);
                 _report.U071Childrens = int.Parse(Request.Form["U071Childrens"]);
                 _report.U072 = int.Parse(Request.Form["U072"]);
