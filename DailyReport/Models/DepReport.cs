@@ -69,5 +69,13 @@ namespace DailyReport.Models
         public int other { get; set; }
         public int otherChildrens { get; set; }
 
+        public int CountO2()
+        {
+            int _summary = oIVL + oMask + oNIVL + oNIVLMask + oNIVLVPO;
+            return _summary;
+        }
+
     }
+
+    
 }

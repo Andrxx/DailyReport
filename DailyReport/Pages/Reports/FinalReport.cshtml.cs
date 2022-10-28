@@ -18,7 +18,7 @@ namespace DailyReport.Pages.Reports
             context = db;
         }
         public List<DepReport> reports { get; private set; } = new();
-        public List<DepReport> _rep = new List<DepReport>();
+        public List<DepReport> _filteredReports = new List<DepReport>();
         DateTime actualDate = DateTime.Today.AddDays(-1);
         
         public void OnGet()
@@ -33,7 +33,7 @@ namespace DailyReport.Pages.Reports
            
 #pragma warning disable CS8601 // ¬озможно, назначение-ссылка, допускающее значение NULL.
             depReport1 = reports.Find(p => p.depNumber == 1);
-            depReport2 = reports.Find(p => p.depNumber == 2);
+            //depReport2 = reports.Find(p => p.depNumber == 2); //отделение пока не работает
             depReport3 = reports.Find(p => p.depNumber == 3);
             depReport4 = reports.Find(p => p.depNumber == 4);
             depReport5 = reports.Find(p => p.depNumber == 5);
@@ -60,8 +60,19 @@ namespace DailyReport.Pages.Reports
 
             if (_finalReport == null) _finalReport = new();
 
+            _filteredReports.Add(depReport1);
+            //_filteredReports.Add(depReport2); отделение не работает
+            _filteredReports.Add(depReport3);
+            _filteredReports.Add(depReport4);
+            _filteredReports.Add(depReport5);
+            _filteredReports.Add(depReport6);
+            _filteredReports.Add(depReport7);
+            _filteredReports.Add(depReport90);
+            _filteredReports.Add(depReport91);
 
-            foreach(DepReport _rep in reports)
+            //_filteredReports.Add(depReport8); дневной стационар не входит в обий список
+
+            foreach (DepReport _rep in _filteredReports)
             {
                 _finalReport.existed += _rep.existed;
                 _finalReport.existedChildren += _rep.existedChildrens;
@@ -72,17 +83,21 @@ namespace DailyReport.Pages.Reports
                 _finalReport.attachedToORIT += _rep.attachedToORIT;
                 _finalReport.attachedToORITChildren += _rep.attachedToORITCildrens;
                 _finalReport.movedOutDep += _rep.movedOutDep;
-                _finalReport.movedInDep += _rep.movedInDepChildrens;
+                _finalReport.movedOutDepChildren += _rep.movedOutDepChildrens;
+                _finalReport.movedInDep += _rep.movedInDep;
+                _finalReport.movedInDepChildren += _rep.movedInDepChildrens;
                 _finalReport.died += _rep.died;
                 _finalReport.diedChildren += _rep.diedChildrens;
                 _finalReport.present += _rep.present;
                 _finalReport.presentChildren += _rep.presentChildrens;          
                 _finalReport.oIVL += _rep.oIVL;
                 _finalReport.oIVLChildren += _rep.oIVLChildrens;
-                _finalReport.oNIVL += _rep.oNIVLChildrens;
+                _finalReport.oNIVL += _rep.oNIVL;
+                _finalReport.oNIVLChildren += _rep.oNIVLChildrens;
                 _finalReport.oNIVLVPO += _rep.oNIVLVPO;
                 _finalReport.oNIVLVPOChildren += _rep.oNIVLVPOChildrens;
-                _finalReport.oNIVLMask += _rep.oNIVLMaskChildrens;
+                _finalReport.oNIVLMask += _rep.oNIVLMask;
+                _finalReport.oNIVLMaskChildren += _rep.oNIVLMaskChildrens;
                 _finalReport.oMask += _rep.oMask;
                 _finalReport.oMaskChildren += _rep.oMaskChildren;
                 _finalReport.pregnant += _rep.pregnant;
@@ -117,6 +132,9 @@ namespace DailyReport.Pages.Reports
                 _finalReport.other += _rep.other;
                 _finalReport.otherChildren += _rep.otherChildrens;
             }
+            //_finalReport.presentNonDaycare = _finalReport.present - depReport8.present;
+            //_finalReport.presentNonDaycareChildren = _finalReport.presentChildren - depReport8.presentChildrens;
+
         }
     }
 }
