@@ -20,7 +20,8 @@ namespace DailyReport.Pages.Reports
         public List<DepReport> reports { get; private set; } = new();
         public List<DepReport> _filteredReports = new List<DepReport>();
         DateTime actualDate = DateTime.Today.AddDays(-1);
-        
+        public int oxygenSum1, oxygenSum91;
+
         public void OnGet()
         {
             //_rep = context.DepReports.AsNoTracking().ToList();
@@ -132,9 +133,9 @@ namespace DailyReport.Pages.Reports
                 _finalReport.other += _rep.other;
                 _finalReport.otherChildren += _rep.otherChildrens;
             }
-            //_finalReport.presentNonDaycare = _finalReport.present - depReport8.present;
-            //_finalReport.presentNonDaycareChildren = _finalReport.presentChildren - depReport8.presentChildrens;
-
+           
+            oxygenSum1 = depReport1.CountO2();
+            oxygenSum91 = depReport91.CountO2();
         }
     }
 }
