@@ -71,5 +71,17 @@
         public int presentNonDaycare { get; set; }
         public int presentNonDaycareChildren { get; set; }
 
+        public int CountDiseases()
+        {
+            int _summary = U071 + U072 + ORVI + pneumonia + OKI + meningit + hepatit + HIV + other;
+            return _summary;
+        }
+        public int CountDiseasesChildren()
+        {
+            int _summary = U071Children + U072Children + ORVIChildren + pneumoniaChildren + OKIChildren + meningitChildren +
+                hepatitChildren + HIVCildren + otherChildren;
+            return _summary;
+        }
+
     }
 }
