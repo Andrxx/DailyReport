@@ -20,7 +20,10 @@ namespace DailyReport.Pages.Reports
         public List<DepReport> reports { get; private set; } = new();
         public List<DepReport> _filteredReports = new List<DepReport>();
         DateTime actualDate = DateTime.Today.AddDays(-1);
-        public int oxygenSum1, oxygenSum91;
+        public int oxygenSum1, oxygenSum91, deseaseSum1, deseaseSum2, deseaseSum3, deseaseSum4, deseaseSum5, deseaseSum6, deseaseSum7,
+            deseaseSum8, deseaseSum90, deseaseSum91, deseaseSum1Children, deseaseSum2Children, deseaseSum3Children, deseaseSum4Children,
+            deseaseSum5Children, deseaseSum6Children, deseaseSum7Children, deseaseSum8Children, deseaseSum90Children, deseaseSum91Children,
+            deseaseSumFinal, deseaseSumFinalChildren;
 
         public void OnGet()
         {
@@ -133,9 +136,32 @@ namespace DailyReport.Pages.Reports
                 _finalReport.other += _rep.other;
                 _finalReport.otherChildren += _rep.otherChildrens;
             }
+
            
             oxygenSum1 = depReport1.CountO2();
             oxygenSum91 = depReport91.CountO2();
+            deseaseSum1 = depReport1.CountDiseases();
+            deseaseSum2 = depReport1.CountDiseases();
+            deseaseSum3 = depReport1.CountDiseases();
+            deseaseSum4 = depReport1.CountDiseases();
+            deseaseSum5 = depReport1.CountDiseases();
+            deseaseSum6 = depReport1.CountDiseases();
+            deseaseSum7 = depReport1.CountDiseases();
+            deseaseSum8 = depReport1.CountDiseases();
+            deseaseSum90 = depReport1.CountDiseases();
+            deseaseSum91 = depReport1.CountDiseases();
+            deseaseSum1Children = depReport1.CountDiseasesChildren();
+            deseaseSum2Children = depReport1.CountDiseasesChildren();
+            deseaseSum3Children = depReport1.CountDiseasesChildren();
+            deseaseSum4Children = depReport1.CountDiseasesChildren();
+            deseaseSum5Children = depReport1.CountDiseasesChildren();
+            deseaseSum6Children = depReport1.CountDiseasesChildren();
+            deseaseSum7Children = depReport1.CountDiseasesChildren();
+            deseaseSum8Children = depReport1.CountDiseasesChildren();
+            deseaseSum90Children = depReport1.CountDiseasesChildren();
+            deseaseSum91Children = depReport1.CountDiseasesChildren();
+            deseaseSumFinal = _finalReport.CountDiseases();
+            deseaseSumFinalChildren = _finalReport.CountDiseasesChildren(); 
         }
     }
 }

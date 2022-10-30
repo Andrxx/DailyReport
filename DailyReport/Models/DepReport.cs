@@ -78,7 +78,17 @@ namespace DailyReport.Models
             int _summary = oIVL + oMask + oNIVL + oNIVLMask + oNIVLVPO;
             return _summary;
         }
-
+        public int CountDiseases()
+        {
+            int _summary = U071 + U072 + ORVI + pneumonia + OKI + meningit + hepatit + HIV + other;
+            return _summary;
+        }
+        public int CountDiseasesChildren()
+        {
+            int _summary = U071Childrens + U072Childrens + ORVIChildrens + pneumoniaChildrens + OKIChildrens + meningitChildrens +
+                hepatitChildrens + HIVCildrens + otherChildrens;
+            return _summary;
+        }
     }
 
     
