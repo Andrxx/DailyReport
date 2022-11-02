@@ -25,7 +25,7 @@ namespace DailyReport.Services
                 _freeSpots.dep1Children = _ds.dep11Children - _dRep.Find(p => p.depNumber == 1).presentChildrens;
                 _freeSpots.dep11 = _ds.dep11 + -_dRep.Find(p => p.depNumber == 11).present;
                 _freeSpots.dep11Children = _ds.dep11Children - _dRep.Find(p => p.depNumber == 11).presentChildrens;
-                //_freeSpots.dep2 = _ds.dep2 + _ds. - _dRep.Find(p => p.depNumber == 2).present - _dRep.Find(p => p.depNumber == 2).presentChildrens;
+            //_freeSpots.dep2 = _ds.dep2 + _ds. - _dRep.Find(p => p.depNumber == 2).present - _dRep.Find(p => p.depNumber == 2).presentChildrens;
                 _freeSpots.dep3 = _ds.dep3 - _dRep.Find(p => p.depNumber == 3).present;
                 _freeSpots.dep3Children = _ds.dep3Children - _dRep.Find(p => p.depNumber == 3).presentChildrens;
                 _freeSpots.dep4 = _ds.dep4 - _dRep.Find(p => p.depNumber == 4).present;
