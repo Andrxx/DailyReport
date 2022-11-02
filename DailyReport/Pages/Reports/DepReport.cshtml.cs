@@ -16,7 +16,6 @@ namespace DailyReport.Pages.Reports
         DateTime actualDate = DateTime.Today.AddDays(-1);
         public DepReportModel(ApplicationContext db)
         {
-            string alertMsg = string.Empty;
             context = db;
         }
         public DepReportServise reportServise = new DepReportServise();

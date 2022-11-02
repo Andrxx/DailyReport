@@ -1,4 +1,5 @@
 using DailyReport.Models;
+using DailyReport.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,7 @@ namespace DailyReport.Pages.Reports
     {
         public FinalReport _finalReport;
         public List<FinalReport> _finalReports;
-        public DepReport depReport1, depReport2, depReport3, depReport4, depReport5,
+        public DepReport depReport1, depReport11, depReport2, depReport3, depReport4, depReport5,
             depReport6, depReport7, depReport8, depReport90, depReport91;
         ApplicationContext context;
         public FinalReportModel(ApplicationContext db)
@@ -20,15 +21,23 @@ namespace DailyReport.Pages.Reports
         public List<DepReport> reports { get; private set; } = new();
         public List<DepReport> _filteredReports = new List<DepReport>();
         DateTime actualDate = DateTime.Today.AddDays(-1);
-        public int oxygenSum1, oxygenSum91, deseaseSum1, deseaseSum2, deseaseSum3, deseaseSum4, deseaseSum5, deseaseSum6, deseaseSum7,
-            deseaseSum8, deseaseSum90, deseaseSum91, deseaseSum1Children, deseaseSum2Children, deseaseSum3Children, deseaseSum4Children,
+        public int oxygenSum11, oxygenSum91, deseaseSum1, deseaseSum11, deseaseSum2, deseaseSum3, deseaseSum4, deseaseSum5, deseaseSum6, deseaseSum7,
+            deseaseSum8, deseaseSum90, deseaseSum91, deseaseSum1Children, deseaseSum11Children, deseaseSum2Children, deseaseSum3Children, deseaseSum4Children,
             deseaseSum5Children, deseaseSum6Children, deseaseSum7Children, deseaseSum8Children, deseaseSum90Children, deseaseSum91Children,
             deseaseSumFinal, deseaseSumFinalChildren;
+        public DepartmentSpots departmentSpots; 
+        public FreeSpots freeSpots;
 
         public void OnGet()
         {
+            departmentSpots = DepSpotsService.GetSpots();
+            departmentSpots.sum = DepSpotsService.CountSum();
+            departmentSpots.sumChildren = DepSpotsService.CountSumChildren();
+            departmentSpots.sumOC = DepSpotsService.CountSumOC();
+            departmentSpots.sumOCChildren = DepSpotsService.CountSumOCChildren();
+
             //_rep = context.DepReports.AsNoTracking().ToList();
-            _finalReports = context.FinalReports.AsNoTracking().ToList();
+            //_finalReports = context.FinalReports.AsNoTracking().ToList();
 
             reports = (from report in context.DepReports
                     where (report.date.Date == actualDate)
@@ -37,6 +46,7 @@ namespace DailyReport.Pages.Reports
            
 #pragma warning disable CS8601 // ¬озможно, назначение-ссылка, допускающее значение NULL.
             depReport1 = reports.Find(p => p.depNumber == 1);
+            depReport11 = reports.Find(p => p.depNumber == 11);
             //depReport2 = reports.Find(p => p.depNumber == 2); //отделение пока не работает
             depReport3 = reports.Find(p => p.depNumber == 3);
             depReport4 = reports.Find(p => p.depNumber == 4);
@@ -52,6 +62,7 @@ namespace DailyReport.Pages.Reports
              //               select report).FirstOrDefault();
 #pragma warning restore CS8601 // ¬озможно, назначение-ссылка, допускающее значение NULL.
             if (depReport1 == null) depReport1 = new();
+            if (depReport11 == null) depReport11 = new();
             if (depReport2 == null) depReport2 = new();
             if (depReport3 == null) depReport3 = new();
             if (depReport4 == null) depReport4 = new();
@@ -65,6 +76,7 @@ namespace DailyReport.Pages.Reports
             if (_finalReport == null) _finalReport = new();
 
             _filteredReports.Add(depReport1);
+            _filteredReports.Add(depReport11);
             //_filteredReports.Add(depReport2); отделение не работает
             _filteredReports.Add(depReport3);
             _filteredReports.Add(depReport4);
@@ -74,7 +86,11 @@ namespace DailyReport.Pages.Reports
             _filteredReports.Add(depReport90);
             _filteredReports.Add(depReport91);
 
-            //_filteredReports.Add(depReport8); дневной стационар не входит в обий список
+            //_filteredReports.Add(depReport8); дневной стационар не входит в общий список
+
+            freeSpots = FreeSpotsServices.CountSpots(reports, departmentSpots);
+
+
 
             foreach (DepReport _rep in _filteredReports)
             {
@@ -138,9 +154,10 @@ namespace DailyReport.Pages.Reports
             }
 
            
-            oxygenSum1 = depReport1.CountO2();
+            oxygenSum11 = depReport11.CountO2();
             oxygenSum91 = depReport91.CountO2();
             deseaseSum1 = depReport1.CountDiseases();
+            deseaseSum11 = depReport11.CountDiseases();
             deseaseSum2 = depReport1.CountDiseases();
             deseaseSum3 = depReport1.CountDiseases();
             deseaseSum4 = depReport1.CountDiseases();
@@ -151,6 +168,7 @@ namespace DailyReport.Pages.Reports
             deseaseSum90 = depReport1.CountDiseases();
             deseaseSum91 = depReport1.CountDiseases();
             deseaseSum1Children = depReport1.CountDiseasesChildren();
+            deseaseSum11Children = depReport11.CountDiseasesChildren();
             deseaseSum2Children = depReport1.CountDiseasesChildren();
             deseaseSum3Children = depReport1.CountDiseasesChildren();
             deseaseSum4Children = depReport1.CountDiseasesChildren();

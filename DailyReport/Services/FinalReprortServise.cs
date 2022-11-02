@@ -3,26 +3,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DailyReport.Services
 {
-    public class FinalReprortServise
+    public static class FinalReprortServise
     {
-        ApplicationContext _context;
-        FinalReport finalReport;
-        
-        List<DepReport> depReports = new List<DepReport>();
-        public List<FinalReport> Reports { get; private set; } = new();
+        //ApplicationContext _context;
+        //FinalReport finalReport;
+        //List<DepReport> depReports = new List<DepReport>();
+        //public List<FinalReport> Reports { get; private set; } = new();
 
         //public FinalReprortServise() { }
 
-        public void Initialaze(ApplicationContext  db)
-        {
-            _context = db;
-        }
+        //public static int CountRestSpots(DepReport _dr, int _depSpots)
+        //{
+        //int rest;
+        //rest = 
 
-        void GetDepReports()
-        {
-            depReports = _context.DepReports.AsNoTracking().ToList();
 
-        }
+        //return rest;
+        //}  
 
 
     }
