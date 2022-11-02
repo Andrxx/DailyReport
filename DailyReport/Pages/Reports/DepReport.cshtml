@@ -6,7 +6,7 @@
     if ((Model._report.depNumber == 90) || (Model._report.depNumber == 91)) msg = "ОРИТ";
     else if (Model._report.depNumber == 8) msg = "Дневной стационар";
     else msg = Model._report.depNumber + " отделения";
-    if ((Model._report.depNumber == 1) || (Model._report.depNumber == 91)) zone = "грязная ";
+    if ((Model._report.depNumber == 11) || (Model._report.depNumber == 91)) zone = "грязная ";
     else zone = "чистая ";
     ViewData["Title"] = "Сводка " + msg;
 }
