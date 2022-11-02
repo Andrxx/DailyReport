@@ -327,19 +327,19 @@
                 </tr>
                 <tr>
                     <td>Свободные места</td>
-                    <td colspan="2">@Model.freeSpots.dep11</td>
-                    <td colspan="2">@Model.freeSpots.dep1</td>
-                    <td colspan="2">@Model.freeSpots.dep3</td>
-                    <td colspan="2">@Model.freeSpots.dep4</td>
-                    <td colspan="2">@Model.freeSpots.dep5</td>
-                    <td colspan="2">@Model.freeSpots.dep6</td>
-                    <td colspan="2">@Model.freeSpots.dep7</td>
-                    <td colspan="2">@Model.freeSpots.dep91</td>
-                    <td colspan="2">@Model.freeSpots.dep90</td>
-                    <td colspan="2">@Model.freeSpots.dep8</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td colspan="2">@(@Model.freeSpots.dep11 + @Model.freeSpots.dep11Children)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep1 + @Model.freeSpots.dep1Children)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep3 + @Model.freeSpots.dep3Children)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep4 + @Model.freeSpots.dep4Children)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep5 + @Model.freeSpots.dep5Children)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep6 + @Model.freeSpots.dep6Children)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep7 + @Model.freeSpots.dep7Children)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep8 + @Model.freeSpots.dep8Children)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep90 + @Model.freeSpots.dep90Children)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep91 + @Model.freeSpots.dep91Children)</td>
+                    <td>@Model.freeSpots.sum</td>
+                    <td>@Model.freeSpots.sumChildren</td>
+                    <td>@(@Model.freeSpots.sum + @Model.freeSpots.sumChildren)</td>
                 </tr>
                 <tr>
                     <td>ИВЛ</td>

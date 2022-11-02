@@ -88,6 +88,7 @@ namespace DailyReport.Pages.Reports
 
             //_filteredReports.Add(depReport8); дневной стационар не входит в общий список
 
+            //в метод передаем данные не отфильтрованных сводок, иначе потеряем ДС (dep8)
             freeSpots = FreeSpotsServices.CountSpots(reports, departmentSpots);
 
 
