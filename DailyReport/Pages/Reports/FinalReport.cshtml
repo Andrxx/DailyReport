@@ -9,7 +9,7 @@
         <table class="table m-0 p-0 table-bordered border-dark">
            
             <tbody>
-                <tr>
+                <tr class="table-primary">
                     <td rowspan="2">@DateTime.Today.AddDays(-1).ToShortDateString()</td>
                     <td colspan="4">1-е ИО</td>
                     <td colspan="2" rowspan="2">3-е ИО (40) чистая</td>
@@ -22,13 +22,13 @@
                     <td colspan="3" rowspan="2">290 стационарных коек</td>
                     <td colspan="3" rowspan="2">Всего 300 с учетом дневного стационара</td>
                 </tr>
-                <tr> 
+                <tr class="table-primary">
                     <td colspan ="2">Грязная</td>
                     <td colspan="2">Чистая</td>
                     <td colspan ="2">Грязная</td>
                     <td colspan="2">Чистая</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>Всего: взрослые 155, детские 135, COVID-19: ВЗР-40, ДЕТ-10</td>
                     <td>Взр</td>
                     <td>Дет</td>
@@ -57,7 +57,7 @@
                     <td>Дет</td>
                     <td>Всего</td>                   
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>Количество коек (фактическое)</td>
                     <td>@Model.departmentSpots.dep11</td>
                     <td>@Model.departmentSpots.dep11Children</td>
@@ -84,7 +84,7 @@
                     <td>@Model.departmentSpots.sumOCChildren</td>
                     <td>@(@Model.departmentSpots.sumOC + @Model.departmentSpots.sumOCChildren)</td>
                 </tr>
-                <tr>
+                <tr class="table-success">
                     <td>Состояло</td>
                     <td>@Model.depReport11.existed</td>
                     <td>@Model.depReport11.existedChildrens</td>
@@ -114,7 +114,7 @@
                     <td>@(@Model._finalReport.existed + @Model.depReport8.existed + 
                         @Model._finalReport.existedChildren + @Model.depReport8.existedChildrens)</td>
                 </tr>
-                <tr>
+                <tr class="table-warning">
                     <td>Поступило</td>
                     <td>@Model.depReport11.income</td>
                     <td>@Model.depReport11.incomeChildrens</td>
@@ -144,7 +144,7 @@
                     <td>@(@Model._finalReport.income + @Model.depReport8.income + 
                         @Model._finalReport.incomeChildren + @Model.depReport8.incomeChildrens)</td>
                 </tr>
-                <tr>
+                <tr class="table-success">
                     <td>Выбыло</td>
                     <td>@Model.depReport11.outcome</td>
                     <td>@Model.depReport11.outcomeChildrens</td>
@@ -174,7 +174,7 @@
                     <td>@(@Model._finalReport.outcome + @Model.depReport8.outcome + 
                         @Model._finalReport.outcomeChildren + @Model.depReport8.outcomeChildrens)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>Прикреплено в ОРИТ</td>
                     <td>@Model.depReport11.attachedToORIT</td>
                     <td>@Model.depReport11.attachedToORITCildrens</td>
@@ -204,8 +204,7 @@
                     <td>@(@Model._finalReport.attachedToORIT + @Model.depReport8.attachedToORIT + 
                         @Model._finalReport.attachedToORITChildren + @Model.depReport8.attachedToORITCildrens)</td>
                 </tr>
-                <tr>
-
+                <tr class="table-secondary">
                     <td>Переведено из отделения</td>
                     <td>@Model.depReport11.movedOutDep</td>
                     <td>@Model.depReport11.movedOutDepChildrens</td>
@@ -235,7 +234,7 @@
                     <td>@(@Model._finalReport.movedOutDep + @Model.depReport8.movedOutDep + 
                         @Model._finalReport.movedOutDepChildren + @Model.depReport8.movedOutDepChildrens)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>Переведено в отделение</td>
                     <td>@Model.depReport11.movedInDep</td>
                     <td>@Model.depReport11.movedInDepChildrens</td>
@@ -265,7 +264,7 @@
                     <td>@(@Model._finalReport.movedInDep + @Model.depReport8.movedInDep + 
                         @Model._finalReport.movedInDepChildren + @Model.depReport8.movedInDepChildrens)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>Умерло</td>
                     <td>@Model.depReport11.died</td>
                     <td>@Model.depReport11.diedChildrens</td>
@@ -295,7 +294,7 @@
                     <td>@(@Model._finalReport.died + @Model.depReport8.died + 
                         @Model._finalReport.diedChildren + @Model.depReport8.diedChildrens)</td>
                 </tr>
-                <tr>
+                <tr class="table-warning">
                     <td>Состоит в отделении</td>
                     <td>@Model.depReport11.present</td>
                     <td>@Model.depReport11.presentChildrens</td>
@@ -325,7 +324,7 @@
                     <td>@(@Model._finalReport.present + @Model.depReport8.present + 
                         @Model._finalReport.presentChildren + @Model.depReport8.presentChildrens)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>Свободные места</td>
                     <td colspan="2">@(@Model.freeSpots.dep11 + @Model.freeSpots.dep11Children)</td>
                     <td colspan="2">@(@Model.freeSpots.dep1 + @Model.freeSpots.dep1Children)</td>
@@ -340,8 +339,9 @@
                     <td>@Model.freeSpots.sum</td>
                     <td>@Model.freeSpots.sumChildren</td>
                     <td>@(@Model.freeSpots.sum + @Model.freeSpots.sumChildren)</td>
+                    <td colspan="3" ></td>
                 </tr>
-                <tr>
+                <tr class="bg-info">
                     <td>ИВЛ</td>
                     <td colspan="2">@Model.depReport11.oIVL</td>
                     @*<td>@Model.depReport11.oIVLChildrens</td>*@
@@ -367,7 +367,7 @@
                     <td>@Model._finalReport.oIVLChildren</td>
                     <td >@(@Model._finalReport.oIVL + @Model._finalReport.oIVLChildren)</td>
                 </tr>
-                <tr>
+                <tr class="bg-info">
                     <td>НИВЛ </td>
                     <td colspan="2">@Model.depReport11.oNIVL</td>
                     @*<td>@Model.depReport1.oNIVLChildrens</td>*@
@@ -393,7 +393,7 @@
                     <td>@Model._finalReport.oNIVLChildren</td>
                     <td>@(@Model._finalReport.oNIVL + @Model._finalReport.oNIVLChildren)</td>
                 </tr>
-                <tr>
+                <tr class="bg-info">
                     <td>НИВЛ+ВПО</td>
                     <td colspan="2">@Model.depReport11.oNIVLVPO</td>
                     @*<td>@Model.depReport11.oNIVLVPOChildrens</td>*@
@@ -419,7 +419,7 @@
                     <td>@Model._finalReport.oNIVLVPOChildren</td>
                     <td>@(@Model._finalReport.oNIVLVPO + @Model._finalReport.oNIVLVPOChildren)</td>
                 </tr>
-                <tr>
+                <tr class="bg-info">
                     <td>НИВЛ+КМ</td>
                     <td colspan="2">@Model.depReport11.oNIVLMask</td>
                     @*<td>@Model.depReport1.oNIVLMaskChildrens</td>*@
@@ -445,7 +445,7 @@
                     <td>@Model._finalReport.oNIVLMaskChildren</td>
                     <td>@(@Model._finalReport.oNIVLMask + @Model._finalReport.oNIVLMaskChildren)</td>
                 </tr>
-                <tr>
+                <tr class="bg-info">
                     <td>Лицевая маска</td>
                     <td colspan="2">@Model.depReport11.oMask</td>
                     @*<td>@Model.depReport1.oMaskChildren</td>*@
@@ -471,7 +471,7 @@
                     <td>@Model._finalReport.oMaskChildren</td>
                     <td>@(@Model._finalReport.oMask + @Model._finalReport.oMaskChildren)</td>
                 </tr>
-                <tr>
+                <tr class="table-warning">
                     <td>Количество пациентов на кислороде</td>
                     <td colspan="2">@Model.oxygenSum11</td>
                     <td colspan="2"></td>
@@ -487,7 +487,7 @@
                     <td></td>
                     <td>@(@Model.oxygenSum11 + @Model.oxygenSum91)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>Беременные</td>
                     <td colspan="2">@Model.depReport11.pregnant</td>
                     <td colspan="2">@Model.depReport1.pregnant</td>
@@ -512,7 +512,7 @@
                     <td>@Model._finalReport.pregnantChildren</td>
                     <td>@(@Model._finalReport.pregnant + @Model._finalReport.pregnantChildren)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>Пациенты из зон отдыха</td>
                     <td>@Model.depReport11.restZone</td>
                     <td>@Model.depReport11.restZoneChildrens</td>
@@ -538,7 +538,7 @@
                     <td>@Model._finalReport.restZoneChildren</td>
                     <td>@(@Model._finalReport.restZone + @Model._finalReport.restZoneChildren)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>Инокраевые</td>
                     <td>@Model.depReport11.outRegions</td>
                     <td>@Model.depReport11.outRegionsChildrens</td>
@@ -564,7 +564,7 @@
                     <td>@Model._finalReport.outRegionsChildren</td>
                     <td>@(@Model._finalReport.outRegions + @Model._finalReport.outRegionsChildren)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>Иностранные граждне</td>
                     <td>@Model.depReport11.forein</td>
                     <td>@Model.depReport11.foreinChildrens</td>
@@ -590,7 +590,7 @@
                     <td>@Model._finalReport.foreinChildren</td>
                     <td>@(@Model._finalReport.forein + @Model._finalReport.foreinChildren)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>Прибывшие из ЛНР, ДНР</td>
                     <td>@Model.depReport11.LNR_DNR</td>
                     <td>@Model.depReport11.LNR_DNRChildrens</td>
@@ -616,7 +616,7 @@
                     <td>@Model._finalReport.LNR_DNRChildren</td>
                     <td>@(@Model._finalReport.LNR_DNR + @Model._finalReport.LNR_DNRChildren)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>Поступили переводом из другой МО</td>
                     <td>@Model.depReport11.incomeHospital</td>
                     <td>@Model.depReport11.incomeHospitalChildrens</td>
@@ -642,7 +642,7 @@
                     <td>@Model._finalReport.incomeHospitalChildren</td>
                     <td>@(@Model._finalReport.incomeHospital + @Model._finalReport.incomeHospitalChildren)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>Переведены в другое МО</td>
                     <td>@Model.depReport11.outcomeHospital</td>
                     <td>@Model.depReport11.outcomeHospitalChildrens</td>
@@ -668,11 +668,11 @@
                     <td>@Model._finalReport.outcomeHospitalChildren</td>
                     <td>@(@Model._finalReport.outcomeHospital + @Model._finalReport.outcomeHospitalChildren)</td>
                 </tr>
-                <tr>
+                <tr class="table-primary">
                     <td><b>Нозологии</b></td>
-                    <td colspan="21"></td>
+                    <td colspan="23"></td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>U07.1 COVID-19 </td>
                     <td>@Model.depReport11.U071</td>
                     <td>@Model.depReport11.U071Childrens</td>
@@ -698,7 +698,7 @@
                     <td>@Model._finalReport.U071Children</td>
                     <td>@(@Model._finalReport.U071 + @Model._finalReport.U071Children)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>U07.2 COVID-19 </td>
                     <td>@Model.depReport11.U072</td>
                     <td>@Model.depReport11.U072Childrens</td>
@@ -724,7 +724,7 @@
                     <td>@Model._finalReport.U072Children</td>
                     <td>@(@Model._finalReport.U072 + @Model._finalReport.U072Children)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>ОРИ</td>
                     <td>@Model.depReport11.ORVI</td>
                     <td>@Model.depReport11.ORVIChildrens</td>
@@ -750,7 +750,7 @@
                     <td>@Model._finalReport.ORVIChildren</td>
                     <td>@(@Model._finalReport.ORVI + @Model._finalReport.ORVIChildren)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>Пневмония</td>
                     <td>@Model.depReport11.pneumonia</td>
                     <td>@Model.depReport11.pneumoniaChildrens</td>
@@ -776,7 +776,7 @@
                     <td>@Model._finalReport.pneumoniaChildren</td>
                     <td>@(@Model._finalReport.pneumonia + @Model._finalReport.pneumoniaChildren)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>ОКИ</td>
                     <td>@Model.depReport11.OKI</td>
                     <td>@Model.depReport11.OKIChildrens</td>
@@ -802,7 +802,7 @@
                     <td>@Model._finalReport.OKIChildren</td>
                     <td>@(@Model._finalReport.OKI + @Model._finalReport.OKIChildren)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>Менингит, энцефлит, миелит </td>
                     <td>@Model.depReport11.meningit</td>
                     <td>@Model.depReport11.meningitChildrens</td>
@@ -828,7 +828,7 @@
                     <td>@Model._finalReport.meningitChildren</td>
                     <td>@(@Model._finalReport.meningit + @Model._finalReport.meningitChildren)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>Гепатит</td>
                     <td>@Model.depReport11.hepatit</td>
                     <td>@Model.depReport11.hepatitChildrens</td>
@@ -854,7 +854,7 @@
                     <td>@Model._finalReport.hepatitChildren</td>
                     <td>@(@Model._finalReport.hepatit + @Model._finalReport.hepatitChildren)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>В-20</td>
                     <td>@Model.depReport11.HIV</td>
                     <td>@Model.depReport11.HIVCildrens</td>
@@ -880,7 +880,7 @@
                     <td>@Model._finalReport.HIVCildren</td>
                     <td>@(@Model._finalReport.HIV + @Model._finalReport.HIVCildren)</td>
                 </tr>
-                <tr>
+                <tr class="table-secondary">
                     <td>Прочее</td>
                     <td>@Model.depReport11.other</td>
                     <td>@Model.depReport11.otherChildrens</td>
@@ -906,7 +906,7 @@
                     <td>@Model._finalReport.otherChildren</td>
                     <td>@(@Model._finalReport.other + @Model._finalReport.otherChildren)</td>
                 </tr>
-                <tr>
+                <tr class="table-primary">
                     <td>Итого</td>
                     <td>@Model.deseaseSum11</td>
                     <td>@Model.deseaseSum11Children</td>
