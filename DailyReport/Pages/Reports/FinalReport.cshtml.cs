@@ -182,5 +182,13 @@ namespace DailyReport.Pages.Reports
             deseaseSumFinal = _finalReport.CountDiseases();
             deseaseSumFinalChildren = _finalReport.CountDiseasesChildren(); 
         }
+
+
+        public RedirectToPageResult OnPostSaveFinalRep(FinalReport finalReport)
+        {
+            context.FinalReports.Update(finalReport);
+
+            return RedirectToPage("FinalReport");
+        }
     }
 }
