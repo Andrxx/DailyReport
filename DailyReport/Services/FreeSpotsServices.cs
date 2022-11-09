@@ -14,10 +14,10 @@ namespace DailyReport.Services
         public static FreeSpots CountSpots(List<DepReport> _dRep, DepartmentSpots _ds )
         {
             _freeSpots = new();
-            if (_dRep.Count != 9)
-            {
-                _dRep = CheckReports(_dRep);
-            }
+            //if (_dRep.Count != 9)
+            //{
+            _dRep = CheckReports(_dRep);
+            //}
             //else
             //{
 #pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
