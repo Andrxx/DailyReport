@@ -7,10 +7,11 @@ using System.Security.Cryptography;
 
 namespace DailyReport.Pages.Reports
 {
+    [IgnoreAntiforgeryToken]
     public class FinalReportModel : PageModel
     {
-        public FinalReport _finalReport;
-        public List<FinalReport> _finalReports;
+        public FinalReport finalReport;
+        public List<FinalReport> finalReports;
         public DepReport depReport1, depReport11, depReport2, depReport3, depReport4, depReport5,
             depReport6, depReport7, depReport8, depReport90, depReport91;
         ApplicationContext context;
@@ -37,7 +38,7 @@ namespace DailyReport.Pages.Reports
             departmentSpots.sumOCChildren = DepSpotsService.CountSumOCChildren();
 
             //_rep = context.DepReports.AsNoTracking().ToList();
-            //_finalReports = context.FinalReports.AsNoTracking().ToList();
+            finalReports = context.FinalReports.AsNoTracking().ToList();
 
             reports = (from report in context.DepReports
                     where (report.date.Date == actualDate)
@@ -73,7 +74,7 @@ namespace DailyReport.Pages.Reports
             if (depReport90 == null) depReport90 = new();
             if (depReport91 == null) depReport91 = new();
 
-            if (_finalReport == null) _finalReport = new();
+            if (finalReport == null) finalReport = new();
 
             _filteredReports.Add(depReport1);
             _filteredReports.Add(depReport11);
@@ -95,63 +96,63 @@ namespace DailyReport.Pages.Reports
 
             foreach (DepReport _rep in _filteredReports)
             {
-                _finalReport.existed += _rep.existed;
-                _finalReport.existedChildren += _rep.existedChildrens;
-                _finalReport.income += _rep.income;
-                _finalReport.incomeChildren += _rep.incomeChildrens;
-                _finalReport.outcome += _rep.outcome;
-                _finalReport.outcomeChildren += _rep.outcomeChildrens;
-                _finalReport.attachedToORIT += _rep.attachedToORIT;
-                _finalReport.attachedToORITChildren += _rep.attachedToORITCildrens;
-                _finalReport.movedOutDep += _rep.movedOutDep;
-                _finalReport.movedOutDepChildren += _rep.movedOutDepChildrens;
-                _finalReport.movedInDep += _rep.movedInDep;
-                _finalReport.movedInDepChildren += _rep.movedInDepChildrens;
-                _finalReport.died += _rep.died;
-                _finalReport.diedChildren += _rep.diedChildrens;
-                _finalReport.present += _rep.present;
-                _finalReport.presentChildren += _rep.presentChildrens;          
-                _finalReport.oIVL += _rep.oIVL;
-                _finalReport.oIVLChildren += _rep.oIVLChildrens;
-                _finalReport.oNIVL += _rep.oNIVL;
-                _finalReport.oNIVLChildren += _rep.oNIVLChildrens;
-                _finalReport.oNIVLVPO += _rep.oNIVLVPO;
-                _finalReport.oNIVLVPOChildren += _rep.oNIVLVPOChildrens;
-                _finalReport.oNIVLMask += _rep.oNIVLMask;
-                _finalReport.oNIVLMaskChildren += _rep.oNIVLMaskChildrens;
-                _finalReport.oMask += _rep.oMask;
-                _finalReport.oMaskChildren += _rep.oMaskChildren;
-                _finalReport.pregnant += _rep.pregnant;
-                _finalReport.pregnantChildren += _rep.pregnantChildrens;
-                _finalReport.restZone += _rep.restZone;
-                _finalReport.restZoneChildren += _rep.restZoneChildrens;
-                _finalReport.outRegions += _rep.outRegions;
-                _finalReport.outRegionsChildren += _rep.outRegionsChildrens;
-                _finalReport.forein += _rep.foreinChildrens;
-                _finalReport.LNR_DNR += _rep.LNR_DNR;
-                _finalReport.LNR_DNRChildren += _rep.LNR_DNRChildrens;
-                _finalReport.incomeHospital += _rep.incomeHospital;
-                _finalReport.incomeHospitalChildren += _rep.incomeHospitalChildrens;
-                _finalReport.outcomeHospital += _rep.outcomeHospital;
-                _finalReport.outcomeHospitalChildren += _rep.outcomeHospitalChildrens;
-                _finalReport.U071 += _rep.U071;
-                _finalReport.U071Children += _rep.U071Childrens;
-                _finalReport.U072 += _rep.U072;
-                _finalReport.U072Children += _rep.U072Childrens;
-                _finalReport.ORVI += _rep.ORVI;
-                _finalReport.ORVIChildren += _rep.ORVIChildrens;
-                _finalReport.pneumonia += _rep.pneumonia;
-                _finalReport.pneumoniaChildren += _rep.pneumoniaChildrens;
-                _finalReport.OKI += _rep.OKI;
-                _finalReport.OKIChildren += _rep.OKIChildrens;
-                _finalReport.meningit += _rep.meningit;
-                _finalReport.meningitChildren += _rep.meningitChildrens;
-                _finalReport.hepatit += _rep.hepatit;
-                _finalReport.hepatitChildren += _rep.hepatitChildrens;
-                _finalReport.HIV += _rep.HIV;
-                _finalReport.HIVCildren += _rep.HIVCildrens;
-                _finalReport.other += _rep.other;
-                _finalReport.otherChildren += _rep.otherChildrens;
+                finalReport.existed += _rep.existed;
+                finalReport.existedChildren += _rep.existedChildrens;
+                finalReport.income += _rep.income;
+                finalReport.incomeChildren += _rep.incomeChildrens;
+                finalReport.outcome += _rep.outcome;
+                finalReport.outcomeChildren += _rep.outcomeChildrens;
+                finalReport.attachedToORIT += _rep.attachedToORIT;
+                finalReport.attachedToORITChildren += _rep.attachedToORITCildrens;
+                finalReport.movedOutDep += _rep.movedOutDep;
+                finalReport.movedOutDepChildren += _rep.movedOutDepChildrens;
+                finalReport.movedInDep += _rep.movedInDep;
+                finalReport.movedInDepChildren += _rep.movedInDepChildrens;
+                finalReport.died += _rep.died;
+                finalReport.diedChildren += _rep.diedChildrens;
+                finalReport.present += _rep.present;
+                finalReport.presentChildren += _rep.presentChildrens;          
+                finalReport.oIVL += _rep.oIVL;
+                finalReport.oIVLChildren += _rep.oIVLChildrens;
+                finalReport.oNIVL += _rep.oNIVL;
+                finalReport.oNIVLChildren += _rep.oNIVLChildrens;
+                finalReport.oNIVLVPO += _rep.oNIVLVPO;
+                finalReport.oNIVLVPOChildren += _rep.oNIVLVPOChildrens;
+                finalReport.oNIVLMask += _rep.oNIVLMask;
+                finalReport.oNIVLMaskChildren += _rep.oNIVLMaskChildrens;
+                finalReport.oMask += _rep.oMask;
+                finalReport.oMaskChildren += _rep.oMaskChildren;
+                finalReport.pregnant += _rep.pregnant;
+                finalReport.pregnantChildren += _rep.pregnantChildrens;
+                finalReport.restZone += _rep.restZone;
+                finalReport.restZoneChildren += _rep.restZoneChildrens;
+                finalReport.outRegions += _rep.outRegions;
+                finalReport.outRegionsChildren += _rep.outRegionsChildrens;
+                finalReport.forein += _rep.foreinChildrens;
+                finalReport.LNR_DNR += _rep.LNR_DNR;
+                finalReport.LNR_DNRChildren += _rep.LNR_DNRChildrens;
+                finalReport.incomeHospital += _rep.incomeHospital;
+                finalReport.incomeHospitalChildren += _rep.incomeHospitalChildrens;
+                finalReport.outcomeHospital += _rep.outcomeHospital;
+                finalReport.outcomeHospitalChildren += _rep.outcomeHospitalChildrens;
+                finalReport.U071 += _rep.U071;
+                finalReport.U071Children += _rep.U071Childrens;
+                finalReport.U072 += _rep.U072;
+                finalReport.U072Children += _rep.U072Childrens;
+                finalReport.ORVI += _rep.ORVI;
+                finalReport.ORVIChildren += _rep.ORVIChildrens;
+                finalReport.pneumonia += _rep.pneumonia;
+                finalReport.pneumoniaChildren += _rep.pneumoniaChildrens;
+                finalReport.OKI += _rep.OKI;
+                finalReport.OKIChildren += _rep.OKIChildrens;
+                finalReport.meningit += _rep.meningit;
+                finalReport.meningitChildren += _rep.meningitChildrens;
+                finalReport.hepatit += _rep.hepatit;
+                finalReport.hepatitChildren += _rep.hepatitChildrens;
+                finalReport.HIV += _rep.HIV;
+                finalReport.HIVCildren += _rep.HIVCildrens;
+                finalReport.other += _rep.other;
+                finalReport.otherChildren += _rep.otherChildrens;
             }
 
            
@@ -179,16 +180,19 @@ namespace DailyReport.Pages.Reports
             deseaseSum8Children = depReport1.CountDiseasesChildren();
             deseaseSum90Children = depReport1.CountDiseasesChildren();
             deseaseSum91Children = depReport1.CountDiseasesChildren();
-            deseaseSumFinal = _finalReport.CountDiseases();
-            deseaseSumFinalChildren = _finalReport.CountDiseasesChildren(); 
+            deseaseSumFinal = finalReport.CountDiseases();
+            deseaseSumFinalChildren = finalReport.CountDiseasesChildren();
+            
         }
 
 
-        public RedirectToPageResult OnPostSaveFinalRep(FinalReport finalReport)
+        /// <summary>
+        /// todo сохранение финальной сводки
+        /// </summary>
+        public void SaveReport()
         {
-            context.FinalReports.Update(finalReport);
-
-            return RedirectToPage("FinalReport");
+            
         }
+
     }
 }

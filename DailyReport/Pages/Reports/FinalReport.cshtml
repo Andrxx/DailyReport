@@ -106,13 +106,13 @@
                     <td>@Model.depReport90.existedChildrens</td>
                     <td>@Model.depReport8.existed</td>
                     <td>@Model.depReport8.existedChildrens</td>
-                    <td>@Model._finalReport.existed</td>
-                    <td>@Model._finalReport.existedChildren</td>
-                    <td>@(@Model._finalReport.existed + @Model._finalReport.existedChildren)</td>
-                    <td>@(@Model._finalReport.existed + @Model.depReport8.existed)</td>
-                    <td>@(@Model._finalReport.existedChildren + @Model.depReport8.existedChildrens)</td>
-                    <td>@(@Model._finalReport.existed + @Model.depReport8.existed + 
-                        @Model._finalReport.existedChildren + @Model.depReport8.existedChildrens)</td>
+                    <td>@Model.finalReport.existed</td>
+                    <td>@Model.finalReport.existedChildren</td>
+                    <td>@(@Model.finalReport.existed + @Model.finalReport.existedChildren)</td>
+                    <td>@(@Model.finalReport.existed + @Model.depReport8.existed)</td>
+                    <td>@(@Model.finalReport.existedChildren + @Model.depReport8.existedChildrens)</td>
+                    <td>@(@Model.finalReport.existed + @Model.depReport8.existed + 
+                        @Model.finalReport.existedChildren + @Model.depReport8.existedChildrens)</td>
                 </tr>
                 <tr class="table-warning">
                     <td>Поступило</td>
@@ -136,13 +136,13 @@
                     <td>@Model.depReport90.incomeChildrens</td>
                     <td>@Model.depReport8.income</td>
                     <td>@Model.depReport8.incomeChildrens</td>
-                    <td>@Model._finalReport.income</td>
-                    <td>@Model._finalReport.incomeChildren</td>
-                    <td>@(@Model._finalReport.income + @Model._finalReport.incomeChildren)</td>
-                    <td>@(@Model._finalReport.income + @Model.depReport8.income)</td>
-                    <td>@(@Model._finalReport.incomeChildren + @Model.depReport8.incomeChildrens)</td>
-                    <td>@(@Model._finalReport.income + @Model.depReport8.income + 
-                        @Model._finalReport.incomeChildren + @Model.depReport8.incomeChildrens)</td>
+                    <td>@Model.finalReport.income</td>
+                    <td>@Model.finalReport.incomeChildren</td>
+                    <td>@(@Model.finalReport.income + @Model.finalReport.incomeChildren)</td>
+                    <td>@(@Model.finalReport.income + @Model.depReport8.income)</td>
+                    <td>@(@Model.finalReport.incomeChildren + @Model.depReport8.incomeChildrens)</td>
+                    <td>@(@Model.finalReport.income + @Model.depReport8.income + 
+                        @Model.finalReport.incomeChildren + @Model.depReport8.incomeChildrens)</td>
                 </tr>
                 <tr class="table-success">
                     <td>Выбыло</td>
@@ -166,13 +166,13 @@
                     <td>@Model.depReport90.outcomeChildrens</td>
                     <td>@Model.depReport8.outcome</td>
                     <td>@Model.depReport8.outcomeChildrens</td>
-                    <td>@Model._finalReport.outcome</td>
-                    <td>@Model._finalReport.outcomeChildren</td>
-                    <td>@(@Model._finalReport.outcome + @Model._finalReport.outcomeChildren)</td>
-                    <td>@(@Model._finalReport.outcome + @Model.depReport8.outcome)</td>
-                    <td>@(@Model._finalReport.outcomeChildren + @Model.depReport8.outcomeChildrens)</td>
-                    <td>@(@Model._finalReport.outcome + @Model.depReport8.outcome + 
-                        @Model._finalReport.outcomeChildren + @Model.depReport8.outcomeChildrens)</td>
+                    <td>@Model.finalReport.outcome</td>
+                    <td>@Model.finalReport.outcomeChildren</td>
+                    <td>@(@Model.finalReport.outcome + @Model.finalReport.outcomeChildren)</td>
+                    <td>@(@Model.finalReport.outcome + @Model.depReport8.outcome)</td>
+                    <td>@(@Model.finalReport.outcomeChildren + @Model.depReport8.outcomeChildrens)</td>
+                    <td>@(@Model.finalReport.outcome + @Model.depReport8.outcome + 
+                        @Model.finalReport.outcomeChildren + @Model.depReport8.outcomeChildrens)</td>
                 </tr>
                 <tr class="table-secondary">
                     <td>Прикреплено в ОРИТ</td>
@@ -196,13 +196,13 @@
                     <td>@Model.depReport90.attachedToORITCildrens</td>
                     <td>@Model.depReport8.attachedToORIT</td>
                     <td>@Model.depReport8.attachedToORITCildrens</td>
-                    <td>@Model._finalReport.attachedToORIT</td>
-                    <td>@Model._finalReport.attachedToORITChildren</td>
-                    <td>@(@Model._finalReport.attachedToORIT + @Model._finalReport.attachedToORITChildren)</td>
-                    <td>@(@Model._finalReport.attachedToORIT + @Model.depReport8.attachedToORIT)</td>
-                    <td>@(@Model._finalReport.attachedToORITChildren + @Model.depReport8.attachedToORITCildrens)</td>
-                    <td>@(@Model._finalReport.attachedToORIT + @Model.depReport8.attachedToORIT + 
-                        @Model._finalReport.attachedToORITChildren + @Model.depReport8.attachedToORITCildrens)</td>
+                    <td>@Model.finalReport.attachedToORIT</td>
+                    <td>@Model.finalReport.attachedToORITChildren</td>
+                    <td>@(@Model.finalReport.attachedToORIT + @Model.finalReport.attachedToORITChildren)</td>
+                    <td>@(@Model.finalReport.attachedToORIT + @Model.depReport8.attachedToORIT)</td>
+                    <td>@(@Model.finalReport.attachedToORITChildren + @Model.depReport8.attachedToORITCildrens)</td>
+                    <td>@(@Model.finalReport.attachedToORIT + @Model.depReport8.attachedToORIT + 
+                        @Model.finalReport.attachedToORITChildren + @Model.depReport8.attachedToORITCildrens)</td>
                 </tr>
                 <tr class="table-secondary">
                     <td>Переведено из отделения</td>
@@ -226,13 +226,13 @@
                     <td>@Model.depReport90.movedOutDepChildrens</td>
                     <td>@Model.depReport8.movedOutDep</td>
                     <td>@Model.depReport8.movedOutDepChildrens</td>
-                    <td>@Model._finalReport.movedOutDep</td>
-                    <td>@Model._finalReport.movedOutDepChildren</td>
-                    <td>@(@Model._finalReport.movedOutDep + @Model._finalReport.movedOutDepChildren)</td>
-                    <td>@(@Model._finalReport.movedOutDep + @Model.depReport8.movedOutDep)</td>
-                    <td>@(@Model._finalReport.movedOutDepChildren + @Model.depReport8.movedOutDepChildrens)</td>
-                    <td>@(@Model._finalReport.movedOutDep + @Model.depReport8.movedOutDep + 
-                        @Model._finalReport.movedOutDepChildren + @Model.depReport8.movedOutDepChildrens)</td>
+                    <td>@Model.finalReport.movedOutDep</td>
+                    <td>@Model.finalReport.movedOutDepChildren</td>
+                    <td>@(@Model.finalReport.movedOutDep + @Model.finalReport.movedOutDepChildren)</td>
+                    <td>@(@Model.finalReport.movedOutDep + @Model.depReport8.movedOutDep)</td>
+                    <td>@(@Model.finalReport.movedOutDepChildren + @Model.depReport8.movedOutDepChildrens)</td>
+                    <td>@(@Model.finalReport.movedOutDep + @Model.depReport8.movedOutDep + 
+                        @Model.finalReport.movedOutDepChildren + @Model.depReport8.movedOutDepChildrens)</td>
                 </tr>
                 <tr class="table-secondary">
                     <td>Переведено в отделение</td>
@@ -256,13 +256,13 @@
                     <td>@Model.depReport90.movedInDepChildrens</td>
                     <td>@Model.depReport8.movedInDep</td>
                     <td>@Model.depReport8.movedInDepChildrens</td>
-                    <td>@Model._finalReport.movedInDep</td>
-                    <td>@Model._finalReport.movedInDepChildren</td>
-                    <td>@(@Model._finalReport.movedInDep + @Model._finalReport.movedInDepChildren)</td>
-                    <td>@(@Model._finalReport.movedInDep + @Model.depReport8.movedInDep)</td>
-                    <td>@(@Model._finalReport.movedInDepChildren + @Model.depReport8.movedInDepChildrens)</td>
-                    <td>@(@Model._finalReport.movedInDep + @Model.depReport8.movedInDep + 
-                        @Model._finalReport.movedInDepChildren + @Model.depReport8.movedInDepChildrens)</td>
+                    <td>@Model.finalReport.movedInDep</td>
+                    <td>@Model.finalReport.movedInDepChildren</td>
+                    <td>@(@Model.finalReport.movedInDep + @Model.finalReport.movedInDepChildren)</td>
+                    <td>@(@Model.finalReport.movedInDep + @Model.depReport8.movedInDep)</td>
+                    <td>@(@Model.finalReport.movedInDepChildren + @Model.depReport8.movedInDepChildrens)</td>
+                    <td>@(@Model.finalReport.movedInDep + @Model.depReport8.movedInDep + 
+                        @Model.finalReport.movedInDepChildren + @Model.depReport8.movedInDepChildrens)</td>
                 </tr>
                 <tr class="table-secondary">
                     <td>Умерло</td>
@@ -286,13 +286,13 @@
                     <td>@Model.depReport90.diedChildrens</td>
                     <td>@Model.depReport8.died</td>
                     <td>@Model.depReport8.diedChildrens</td>
-                    <td>@Model._finalReport.died</td>
-                    <td>@Model._finalReport.diedChildren</td>
-                    <td>@(@Model._finalReport.died + @Model._finalReport.diedChildren)</td>
-                    <td>@(@Model._finalReport.died + @Model.depReport8.died)</td>
-                    <td>@(@Model._finalReport.diedChildren + @Model.depReport8.diedChildrens)</td>
-                    <td>@(@Model._finalReport.died + @Model.depReport8.died + 
-                        @Model._finalReport.diedChildren + @Model.depReport8.diedChildrens)</td>
+                    <td>@Model.finalReport.died</td>
+                    <td>@Model.finalReport.diedChildren</td>
+                    <td>@(@Model.finalReport.died + @Model.finalReport.diedChildren)</td>
+                    <td>@(@Model.finalReport.died + @Model.depReport8.died)</td>
+                    <td>@(@Model.finalReport.diedChildren + @Model.depReport8.diedChildrens)</td>
+                    <td>@(@Model.finalReport.died + @Model.depReport8.died + 
+                        @Model.finalReport.diedChildren + @Model.depReport8.diedChildrens)</td>
                 </tr>
                 <tr class="table-warning">
                     <td>Состоит в отделении</td>
@@ -316,13 +316,13 @@
                     <td>@Model.depReport90.presentChildrens</td>
                     <td>@Model.depReport8.present</td>
                     <td>@Model.depReport8.presentChildrens</td>
-                    <td>@Model._finalReport.present</td>
-                    <td>@Model._finalReport.presentChildren</td>
-                    <td>@(@Model._finalReport.present + @Model._finalReport.presentChildren)</td>
-                    <td>@(@Model._finalReport.present + @Model.depReport8.present)</td>
-                    <td>@(@Model._finalReport.pregnantChildren + @Model.depReport8.presentChildrens)</td>
-                    <td>@(@Model._finalReport.present + @Model.depReport8.present + 
-                        @Model._finalReport.presentChildren + @Model.depReport8.presentChildrens)</td>
+                    <td>@Model.finalReport.present</td>
+                    <td>@Model.finalReport.presentChildren</td>
+                    <td>@(@Model.finalReport.present + @Model.finalReport.presentChildren)</td>
+                    <td>@(@Model.finalReport.present + @Model.depReport8.present)</td>
+                    <td>@(@Model.finalReport.pregnantChildren + @Model.depReport8.presentChildrens)</td>
+                    <td>@(@Model.finalReport.present + @Model.depReport8.present + 
+                        @Model.finalReport.presentChildren + @Model.depReport8.presentChildrens)</td>
                 </tr>
                 <tr class="table-secondary">
                     <td>Свободные места</td>
@@ -362,9 +362,9 @@
                     @*<td class="bg-dark">@Model.depReport90.oIVLChildrens</td>*@
                     <td colspan="2" class="bg-dark">@*@Model.depReport8.oIVL*@</td>
                     @*<td>@Model.depReport8.oIVLChildrens</td>*@
-                    <td >@Model._finalReport.oIVL</td>
-                    <td>@Model._finalReport.oIVLChildren</td>
-                    <td >@(@Model._finalReport.oIVL + @Model._finalReport.oIVLChildren)</td>
+                    <td >@Model.finalReport.oIVL</td>
+                    <td>@Model.finalReport.oIVLChildren</td>
+                    <td >@(@Model.finalReport.oIVL + @Model.finalReport.oIVLChildren)</td>
                     <td colspan="3" class="bg-transparent "></td>
                 </tr>
                 <tr class="table-success">
@@ -389,9 +389,9 @@
                     @*<td class="bg-dark">@Model.depReport90.oNIVLChildrens</td>*@
                     <td colspan="2" class="bg-dark">@*@Model.depReport8.oNIVL*@</td>
                     @*<td>@Model.depReport8.oNIVLChildrens</td>*@
-                    <td>@Model._finalReport.oNIVL</td>
-                    <td>@Model._finalReport.oNIVLChildren</td>
-                    <td>@(@Model._finalReport.oNIVL + @Model._finalReport.oNIVLChildren)</td>
+                    <td>@Model.finalReport.oNIVL</td>
+                    <td>@Model.finalReport.oNIVLChildren</td>
+                    <td>@(@Model.finalReport.oNIVL + @Model.finalReport.oNIVLChildren)</td>
                     <td colspan="3" class="bg-transparent "></td>
                 </tr>
                 <tr class="table-success">
@@ -416,9 +416,9 @@
                     @*<td class="bg-dark">@Model.depReport90.oNIVLVPOChildrens</td>*@
                     <td colspan="2" class="bg-dark">@*@Model.depReport8.oNIVLVPO*@</td>
                     @*<td>@Model.depReport8.oNIVLVPOChildrens</td>*@
-                    <td>@Model._finalReport.oNIVLVPO</td>
-                    <td>@Model._finalReport.oNIVLVPOChildren</td>
-                    <td>@(@Model._finalReport.oNIVLVPO + @Model._finalReport.oNIVLVPOChildren)</td>
+                    <td>@Model.finalReport.oNIVLVPO</td>
+                    <td>@Model.finalReport.oNIVLVPOChildren</td>
+                    <td>@(@Model.finalReport.oNIVLVPO + @Model.finalReport.oNIVLVPOChildren)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
                 <tr class="table-success">
@@ -443,9 +443,9 @@
                     @*<td class="bg-dark">@Model.depReport90.oNIVLMaskChildrens</td>*@
                     <td colspan="2" class="bg-dark">@*@Model.depReport8.oNIVLMask*@</td>
                     @*<td>@Model.depReport8.oNIVLMaskChildrens</td>*@
-                    <td>@Model._finalReport.oNIVLMask</td>
-                    <td>@Model._finalReport.oNIVLMaskChildren</td>
-                    <td>@(@Model._finalReport.oNIVLMask + @Model._finalReport.oNIVLMaskChildren)</td>
+                    <td>@Model.finalReport.oNIVLMask</td>
+                    <td>@Model.finalReport.oNIVLMaskChildren</td>
+                    <td>@(@Model.finalReport.oNIVLMask + @Model.finalReport.oNIVLMaskChildren)</td>
                     <td colspan="3" class="bg-transparent "></td>
                 </tr>
                 <tr class="table-success">
@@ -470,9 +470,9 @@
                     @*<td class="bg-dark">@Model.depReport90.oMaskChildren</td>*@
                     <td colspan="2" class="bg-dark">@*@Model.depReport8.oMask*@</td>
                     @*<td>@Model.depReport8.oMaskChildren</td>*@
-                    <td>@Model._finalReport.oMask</td>
-                    <td>@Model._finalReport.oMaskChildren</td>
-                    <td>@(@Model._finalReport.oMask + @Model._finalReport.oMaskChildren)</td>
+                    <td>@Model.finalReport.oMask</td>
+                    <td>@Model.finalReport.oMaskChildren</td>
+                    <td>@(@Model.finalReport.oMask + @Model.finalReport.oMaskChildren)</td>
                     <td colspan="3" class="bg-transparent "></td>
                 </tr>
                 <tr class="table-warning">
@@ -488,8 +488,6 @@
                     <td colspan="2">@Model.oxygenSum91</td>
                     <td colspan="2"></td>
                     <td colspan="2"></td>
-                    <td></td>
-                    <td></td>
                     <td>@(@Model.oxygenSum11 + @Model.oxygenSum91)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
@@ -514,9 +512,9 @@
                     
                     <td colspan="2">@Model.depReport8.pregnant</td>
                     
-                    <td>@Model._finalReport.pregnant</td>
-                    <td>@Model._finalReport.pregnantChildren</td>
-                    <td>@(@Model._finalReport.pregnant + @Model._finalReport.pregnantChildren)</td>
+                    <td>@Model.finalReport.pregnant</td>
+                    <td>@Model.finalReport.pregnantChildren</td>
+                    <td>@(@Model.finalReport.pregnant + @Model.finalReport.pregnantChildren)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
                 <tr class="table-secondary">
@@ -541,9 +539,9 @@
                     <td>@Model.depReport90.restZoneChildrens</td>
                     <td>@Model.depReport8.restZone</td>
                     <td>@Model.depReport8.restZoneChildrens</td>
-                    <td>@Model._finalReport.restZone</td>
-                    <td>@Model._finalReport.restZoneChildren</td>
-                    <td>@(@Model._finalReport.restZone + @Model._finalReport.restZoneChildren)</td>
+                    <td>@Model.finalReport.restZone</td>
+                    <td>@Model.finalReport.restZoneChildren</td>
+                    <td>@(@Model.finalReport.restZone + @Model.finalReport.restZoneChildren)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
                 <tr class="table-secondary">
@@ -568,9 +566,9 @@
                     <td>@Model.depReport90.outRegionsChildrens</td>
                     <td>@Model.depReport8.outRegions</td>
                     <td>@Model.depReport8.outRegionsChildrens</td>
-                    <td>@Model._finalReport.outRegions</td>
-                    <td>@Model._finalReport.outRegionsChildren</td>
-                    <td>@(@Model._finalReport.outRegions + @Model._finalReport.outRegionsChildren)</td>
+                    <td>@Model.finalReport.outRegions</td>
+                    <td>@Model.finalReport.outRegionsChildren</td>
+                    <td>@(@Model.finalReport.outRegions + @Model.finalReport.outRegionsChildren)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
                 <tr class="table-secondary">
@@ -595,9 +593,9 @@
                     <td>@Model.depReport90.foreinChildrens</td>
                     <td>@Model.depReport8.forein</td>
                     <td>@Model.depReport8.foreinChildrens</td>
-                    <td>@Model._finalReport.forein</td>
-                    <td>@Model._finalReport.foreinChildren</td>
-                    <td>@(@Model._finalReport.forein + @Model._finalReport.foreinChildren)</td>
+                    <td>@Model.finalReport.forein</td>
+                    <td>@Model.finalReport.foreinChildren</td>
+                    <td>@(@Model.finalReport.forein + @Model.finalReport.foreinChildren)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
                 <tr class="table-secondary">
@@ -622,9 +620,9 @@
                     <td>@Model.depReport90.LNR_DNRChildrens</td>
                     <td>@Model.depReport8.LNR_DNR</td>
                     <td>@Model.depReport8.LNR_DNRChildrens</td>
-                    <td>@Model._finalReport.LNR_DNR</td>
-                    <td>@Model._finalReport.LNR_DNRChildren</td>
-                    <td>@(@Model._finalReport.LNR_DNR + @Model._finalReport.LNR_DNRChildren)</td>
+                    <td>@Model.finalReport.LNR_DNR</td>
+                    <td>@Model.finalReport.LNR_DNRChildren</td>
+                    <td>@(@Model.finalReport.LNR_DNR + @Model.finalReport.LNR_DNRChildren)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
                 <tr class="table-secondary">
@@ -649,9 +647,9 @@
                     <td>@Model.depReport90.incomeHospitalChildrens</td>
                     <td>@Model.depReport8.incomeHospital</td>
                     <td>@Model.depReport8.incomeHospitalChildrens</td>
-                    <td>@Model._finalReport.incomeHospital</td>
-                    <td>@Model._finalReport.incomeHospitalChildren</td>
-                    <td>@(@Model._finalReport.incomeHospital + @Model._finalReport.incomeHospitalChildren)</td>
+                    <td>@Model.finalReport.incomeHospital</td>
+                    <td>@Model.finalReport.incomeHospitalChildren</td>
+                    <td>@(@Model.finalReport.incomeHospital + @Model.finalReport.incomeHospitalChildren)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
                 <tr class="table-secondary">
@@ -676,9 +674,9 @@
                     <td>@Model.depReport90.outcomeHospitalChildrens</td>
                     <td>@Model.depReport8.outcomeHospital</td>
                     <td>@Model.depReport8.outcomeHospitalChildrens</td>
-                    <td>@Model._finalReport.outcomeHospital</td>
-                    <td>@Model._finalReport.outcomeHospitalChildren</td>
-                    <td>@(@Model._finalReport.outcomeHospital + @Model._finalReport.outcomeHospitalChildren)</td>
+                    <td>@Model.finalReport.outcomeHospital</td>
+                    <td>@Model.finalReport.outcomeHospitalChildren</td>
+                    <td>@(@Model.finalReport.outcomeHospital + @Model.finalReport.outcomeHospitalChildren)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
                 <tr class="table-primary">
@@ -708,9 +706,9 @@
                     <td>@Model.depReport90.U071Childrens</td>
                     <td>@Model.depReport8.U071Childrens</td>
                     <td>@Model.depReport8.U071Childrens</td>
-                    <td>@Model._finalReport.U071</td>
-                    <td>@Model._finalReport.U071Children</td>
-                    <td>@(@Model._finalReport.U071 + @Model._finalReport.U071Children)</td>
+                    <td>@Model.finalReport.U071</td>
+                    <td>@Model.finalReport.U071Children</td>
+                    <td>@(@Model.finalReport.U071 + @Model.finalReport.U071Children)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
                 <tr class="table-secondary">
@@ -735,9 +733,9 @@
                     <td>@Model.depReport90.U072Childrens</td>
                     <td>@Model.depReport8.U072</td>
                     <td>@Model.depReport8.U072Childrens</td>
-                    <td>@Model._finalReport.U072</td>
-                    <td>@Model._finalReport.U072Children</td>
-                    <td>@(@Model._finalReport.U072 + @Model._finalReport.U072Children)</td>
+                    <td>@Model.finalReport.U072</td>
+                    <td>@Model.finalReport.U072Children</td>
+                    <td>@(@Model.finalReport.U072 + @Model.finalReport.U072Children)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
                 <tr class="table-secondary">
@@ -762,9 +760,9 @@
                     <td>@Model.depReport90.ORVIChildrens</td>
                     <td>@Model.depReport8.ORVI</td>
                     <td>@Model.depReport8.ORVIChildrens</td>
-                    <td>@Model._finalReport.ORVI</td>
-                    <td>@Model._finalReport.ORVIChildren</td>
-                    <td>@(@Model._finalReport.ORVI + @Model._finalReport.ORVIChildren)</td>
+                    <td>@Model.finalReport.ORVI</td>
+                    <td>@Model.finalReport.ORVIChildren</td>
+                    <td>@(@Model.finalReport.ORVI + @Model.finalReport.ORVIChildren)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
                 <tr class="table-secondary">
@@ -789,9 +787,9 @@
                     <td>@Model.depReport90.pneumoniaChildrens</td>
                     <td>@Model.depReport8.pneumonia</td>
                     <td>@Model.depReport8.pneumoniaChildrens</td>
-                    <td>@Model._finalReport.pneumonia</td>
-                    <td>@Model._finalReport.pneumoniaChildren</td>
-                    <td>@(@Model._finalReport.pneumonia + @Model._finalReport.pneumoniaChildren)</td>
+                    <td>@Model.finalReport.pneumonia</td>
+                    <td>@Model.finalReport.pneumoniaChildren</td>
+                    <td>@(@Model.finalReport.pneumonia + @Model.finalReport.pneumoniaChildren)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
                 <tr class="table-secondary">
@@ -816,9 +814,9 @@
                     <td>@Model.depReport90.OKIChildrens</td>
                     <td>@Model.depReport8.OKI</td>
                     <td>@Model.depReport8.OKIChildrens</td>
-                    <td>@Model._finalReport.OKI</td>
-                    <td>@Model._finalReport.OKIChildren</td>
-                    <td>@(@Model._finalReport.OKI + @Model._finalReport.OKIChildren)</td>
+                    <td>@Model.finalReport.OKI</td>
+                    <td>@Model.finalReport.OKIChildren</td>
+                    <td>@(@Model.finalReport.OKI + @Model.finalReport.OKIChildren)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
                 <tr class="table-secondary">
@@ -843,9 +841,9 @@
                     <td>@Model.depReport90.meningitChildrens</td>
                     <td>@Model.depReport8.meningit</td>
                     <td>@Model.depReport8.meningitChildrens</td>
-                    <td>@Model._finalReport.meningit</td>
-                    <td>@Model._finalReport.meningitChildren</td>
-                    <td>@(@Model._finalReport.meningit + @Model._finalReport.meningitChildren)</td>
+                    <td>@Model.finalReport.meningit</td>
+                    <td>@Model.finalReport.meningitChildren</td>
+                    <td>@(@Model.finalReport.meningit + @Model.finalReport.meningitChildren)</td>
                     <td colspan="3" class="bg-transparent "></td>
                 </tr>
                 <tr class="table-secondary">
@@ -870,9 +868,9 @@
                     <td>@Model.depReport90.hepatitChildrens</td>
                     <td>@Model.depReport8.hepatit</td>
                     <td>@Model.depReport8.hepatitChildrens</td>
-                    <td>@Model._finalReport.hepatit</td>
-                    <td>@Model._finalReport.hepatitChildren</td>
-                    <td>@(@Model._finalReport.hepatit + @Model._finalReport.hepatitChildren)</td>
+                    <td>@Model.finalReport.hepatit</td>
+                    <td>@Model.finalReport.hepatitChildren</td>
+                    <td>@(@Model.finalReport.hepatit + @Model.finalReport.hepatitChildren)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
                 <tr class="table-secondary">
@@ -897,9 +895,9 @@
                     <td>@Model.depReport90.HIVCildrens</td>
                     <td>@Model.depReport8.HIV</td>
                     <td>@Model.depReport8.HIVCildrens</td>
-                    <td>@Model._finalReport.HIV</td>
-                    <td>@Model._finalReport.HIVCildren</td>
-                    <td>@(@Model._finalReport.HIV + @Model._finalReport.HIVCildren)</td>
+                    <td>@Model.finalReport.HIV</td>
+                    <td>@Model.finalReport.HIVCildren</td>
+                    <td>@(@Model.finalReport.HIV + @Model.finalReport.HIVCildren)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
                 <tr class="table-secondary">
@@ -924,9 +922,9 @@
                     <td>@Model.depReport90.otherChildrens</td>
                     <td>@Model.depReport8.other</td>
                     <td>@Model.depReport8.otherChildrens</td>
-                    <td>@Model._finalReport.other</td>
-                    <td>@Model._finalReport.otherChildren</td>
-                    <td>@(@Model._finalReport.other + @Model._finalReport.otherChildren)</td>
+                    <td>@Model.finalReport.other</td>
+                    <td>@Model.finalReport.otherChildren</td>
+                    <td>@(@Model.finalReport.other + @Model.finalReport.otherChildren)</td>
                     <td colspan="3" class="bg-transparent "></td>
                 </tr>
                 <tr class="table-primary">
@@ -956,14 +954,8 @@
                     <td>@(@Model.deseaseSumFinal + @Model.deseaseSumFinalChildren)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
-
             </tbody>
         </table>
-        <form class="col-4 offset-4 mt-2" method="post" >
-            <input type="submit" value="Зафиксировать сводку" asp-page-handler="SaveFinalRep" asp-route-depNumber=@Model._finalReport />
-            
-        </form>
-        
     </div>
 
 </div>
