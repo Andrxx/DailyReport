@@ -14,12 +14,7 @@ namespace DailyReport.Services
         public static FreeSpots CountSpots(List<DepReport> _dRep, DepartmentSpots _ds )
         {
             _freeSpots = new();
-            //if (_dRep.Count != 9)
-            //{
             _dRep = CheckReports(_dRep);
-            //}
-            //else
-            //{
 #pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
                 _freeSpots.dep1 = _ds.dep1 - _dRep.Find(p => p.depNumber == 1).present;
                 _freeSpots.dep1Children = _ds.dep11Children - _dRep.Find(p => p.depNumber == 1).presentChildrens;
