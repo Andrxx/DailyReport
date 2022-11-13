@@ -28,7 +28,9 @@ namespace DailyReport.Pages.Reports
             deseaseSumFinal, deseaseSumFinalChildren;
         public DepartmentSpots departmentSpots; 
         public FreeSpots freeSpots;
-
+        public List<string> doctors = DutyServices.GetDoctorsList();
+        [BindProperty]
+        public DutyDoc newDoc { get; set; } = new();
         public void OnGet()
         {
             departmentSpots = DepSpotsService.GetSpots();
@@ -193,6 +195,26 @@ namespace DailyReport.Pages.Reports
         {
             
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult OnPostSaveDoc()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            DutyServices.AddDutyDoc(newDoc);
+            return RedirectToAction("Get");
+        }
+
+        //public IActionResult OnPostDelete(int id)
+        //{
+        //    PizzaService.Delete(id);
+        //    return RedirectToAction("Get");
+        //}
 
     }
 }
