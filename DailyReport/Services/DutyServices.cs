@@ -1,4 +1,9 @@
 ﻿using DailyReport.Models;
+using Microsoft.EntityFrameworkCore;
+using DailyReport.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Cryptography;
 
 namespace DailyReport.Services
 {
@@ -40,14 +45,32 @@ namespace DailyReport.Services
             return dutyShifts;
         }
 
-        public static void AddDutyDoc(DutyDoc dutyShift)
+        public static void AddDutyDoc(DutyDoc dutyDoc, ApplicationContext context)
         {
+            context.DutyDocs.Add(dutyDoc);
+            context.SaveChanges();
+        }
+        public static void DeleteDutyDoc(int id, ApplicationContext context)
+        {
+            DutyDoc _doc = (from doc in context.DutyDocs
+                            where (doc.Id == id)
+                            select doc).FirstOrDefault();
+            if (_doc != null) context.DutyDocs.Remove(_doc);
+            context.SaveChanges();
+        }
+        public static void UpdateDutyDoc(DutyDoc doc, ApplicationContext context)
+        {
+            DutyDoc _doc = (from d in context.DutyDocs
+                            where (d.Id == doc.Id)
+                            select d).FirstOrDefault();
+            if (_doc != null)
+            {
+                _doc.dutyDoc = doc.dutyDoc;
+                _doc.type = doc.type;
+                _doc.departments = doc.departments;
+                context.SaveChanges();
+            }
             
         }
-        public static void DeleteDutyDoc(DutyDoc dutyShift)
-        {
-
-        }
-
     }
 }

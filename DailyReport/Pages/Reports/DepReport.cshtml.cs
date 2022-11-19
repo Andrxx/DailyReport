@@ -25,10 +25,11 @@ namespace DailyReport.Pages.Reports
             //Reports = context.DepReports.AsNoTracking().ToList();
             //_report = reportServise.CreateTest();
             
+            //падает при очистке БД - обработать для очистки и миграций
             _report = (from report in context.DepReports
                        where (report.depNumber == depNumber) && (report.date.Date == actualDate)
                        select report).FirstOrDefault();
-
+            
             if (_report == null)
             {
                 //тест для БД, изменить на создание нового для релиза
