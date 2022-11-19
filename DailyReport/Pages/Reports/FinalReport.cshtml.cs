@@ -20,7 +20,7 @@ namespace DailyReport.Pages.Reports
             context = db;
         }
         public List<DepReport> reports { get; private set; } = new();
-        public List<DepReport> _filteredReports = new List<DepReport>();
+        public List<DepReport> filteredReports = new List<DepReport>();
         DateTime actualDate = DateTime.Today.AddDays(-1);
         public int oxygenSum11, oxygenSum91, deseaseSum1, deseaseSum11, deseaseSum2, deseaseSum3, deseaseSum4, deseaseSum5, deseaseSum6, deseaseSum7,
             deseaseSum8, deseaseSum90, deseaseSum91, deseaseSum1Children, deseaseSum11Children, deseaseSum2Children, deseaseSum3Children, deseaseSum4Children,
@@ -31,6 +31,10 @@ namespace DailyReport.Pages.Reports
         public List<string> doctors = DutyServices.GetDoctorsList();
         [BindProperty]
         public DutyDoc newDoc { get; set; } = new();
+        public List<DutyDoc> depDocs { get; set; } = new();
+        public List<DutyDoc> oritDocs { get; set; } = new();
+        public List<DutyDoc> ktDocs { get; set; } = new();
+
         public void OnGet()
         {
             departmentSpots = DepSpotsService.GetSpots();
@@ -38,14 +42,21 @@ namespace DailyReport.Pages.Reports
             departmentSpots.sumChildren = DepSpotsService.CountSumChildren();
             departmentSpots.sumOC = DepSpotsService.CountSumOC();
             departmentSpots.sumOCChildren = DepSpotsService.CountSumOCChildren();
-
+            
+            //todo - падает при очистке БД
             //_rep = context.DepReports.AsNoTracking().ToList();
             finalReports = context.FinalReports.AsNoTracking().ToList();
 
-            reports = (from report in context.DepReports
-                    where (report.date.Date == actualDate)
-                    select report).ToList();
-
+            try
+            {
+                reports = (from report in context.DepReports
+                           where (report.date.Date == actualDate)
+                           select report).ToList();
+            }
+            catch
+            {
+                reports = new();
+            }
            
 #pragma warning disable CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
             depReport1 = reports.Find(p => p.depNumber == 1);
@@ -78,16 +89,16 @@ namespace DailyReport.Pages.Reports
 
             if (finalReport == null) finalReport = new();
 
-            _filteredReports.Add(depReport1);
-            _filteredReports.Add(depReport11);
+            filteredReports.Add(depReport1);
+            filteredReports.Add(depReport11);
             //_filteredReports.Add(depReport2); отделение не работает
-            _filteredReports.Add(depReport3);
-            _filteredReports.Add(depReport4);
-            _filteredReports.Add(depReport5);
-            _filteredReports.Add(depReport6);
-            _filteredReports.Add(depReport7);
-            _filteredReports.Add(depReport90);
-            _filteredReports.Add(depReport91);
+            filteredReports.Add(depReport3);
+            filteredReports.Add(depReport4);
+            filteredReports.Add(depReport5);
+            filteredReports.Add(depReport6);
+            filteredReports.Add(depReport7);
+            filteredReports.Add(depReport90);
+            filteredReports.Add(depReport91);
 
             //_filteredReports.Add(depReport8); дневной стационар не входит в общий список
 
@@ -96,7 +107,7 @@ namespace DailyReport.Pages.Reports
 
 
 
-            foreach (DepReport _rep in _filteredReports)
+            foreach (DepReport _rep in filteredReports)
             {
                 finalReport.existed += _rep.existed;
                 finalReport.existedChildren += _rep.existedChildrens;
@@ -184,7 +195,36 @@ namespace DailyReport.Pages.Reports
             deseaseSum91Children = depReport1.CountDiseasesChildren();
             deseaseSumFinal = finalReport.CountDiseases();
             deseaseSumFinalChildren = finalReport.CountDiseasesChildren();
-            
+
+            try 
+            { 
+                depDocs = (from doc in context.DutyDocs
+                        where (doc.dutyDate == actualDate) & (doc.type == DutyType.Department)
+                        select doc).ToList();
+            }
+            catch
+            {
+            }
+
+            try
+            {
+                oritDocs = (from doc in context.DutyDocs
+                           where (doc.dutyDate == actualDate) & (doc.type == DutyType.Reanimanion)
+                           select doc).ToList();
+            }
+            catch
+            {
+            }
+            try
+            {
+                ktDocs = (from doc in context.DutyDocs
+                            where (doc.dutyDate == actualDate) & (doc.type == DutyType.Rentgenology)
+                            select doc).ToList();
+            }
+            catch
+            {
+            }
+
         }
 
 
@@ -197,7 +237,7 @@ namespace DailyReport.Pages.Reports
         }
 
         /// <summary>
-        /// 
+        /// сохранение данных смены через абстракцию сервисов
         /// </summary>
         /// <returns></returns>
         public IActionResult OnPostSaveDoc()
@@ -206,15 +246,25 @@ namespace DailyReport.Pages.Reports
             {
                 return Page();
             }
-            DutyServices.AddDutyDoc(newDoc);
+            DutyServices.AddDutyDoc(newDoc, context);
             return RedirectToAction("Get");
         }
 
-        //public IActionResult OnPostDelete(int id)
-        //{
-        //    PizzaService.Delete(id);
-        //    return RedirectToAction("Get");
-        //}
+        public IActionResult OnPostDelete(int id)
+        {
+            DutyServices.DeleteDutyDoc(id, context);
+            return RedirectToAction("Get");
+        }
+
+        public IActionResult OnPostUpdate()
+        {
+            //DutyDoc doc = (from d in context.DutyDocs
+            //               where (d.Id == id)
+            //               select d).FirstOrDefault();
+            //doc.dutyDoc = newDoc.dutyDoc;
+            DutyServices.UpdateDutyDoc(newDoc, context);
+            return RedirectToAction("Get");
+        }
 
     }
 }

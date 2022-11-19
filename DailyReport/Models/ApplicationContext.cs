@@ -7,6 +7,8 @@ namespace DailyReport.Models
     {
         public DbSet<DepReport> DepReports { get; set; } = null!;
         public DbSet<FinalReport> FinalReports { get; set; } = null!;
+        public DbSet<DutyDoc> DutyDocs { get; set; } = null!;
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {

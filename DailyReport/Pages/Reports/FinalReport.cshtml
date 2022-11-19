@@ -958,17 +958,50 @@
         </table>
 
         <div class="row pt-5">
+            <div class="row">
+                <div class=" col-5">
+                    <h3>Дежурная смена</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class=" col-5">
+                    <h4>Врачи</h4>
+                </div>
+            </div>
+
+            <div class="row pb-4">
+                @{
+                    foreach(DutyDoc doc in Model.depDocs){
+                        <form method="post">
+                            <div class="row pb-2">
+                                <div class="col-4">
+                                    <select class="form-select" asp-for="newDoc.dutyDoc">
+                                        <option selected >@doc.dutyDoc</option>
+                                        @{
+                                            foreach(string d in Model.doctors){
+                                                <option value="@d">@d</option>
+                                            }
+                                        }
+                                    </select>
+                                </div> 
+                                <div class="col-2">
+                                    <input type="text" placeholder="Отделения" class="form-control" asp-for="newDoc.departments" value="@doc.departments"/>
+                                </div> 
+                                <div class="col-2 d-none">
+                                    <input type="text" value="@DutyType.Department" class="form-control invisible" asp-for="newDoc.type" />
+                                    <input type="text" value="@doc.Id" class="form-control invisible" asp-for="newDoc.Id" />
+                                </div>
+                                <div class="col-1">
+                                    <input type="submit" value="-" asp-page-handler="Delete" asp-route-id="@doc.Id"/>
+                                    <input type="submit" value="&#9998" asp-page-handler="Update"  />
+                                </div> 
+                            </div>
+                        </form>
+                    }
+                }
+            </div>
+
             <form method="post">
-                <div class="row">
-                    <div class=" col-5">
-                        <h3>Дежурная смена</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class=" col-5">
-                        <h4>Врачи</h4>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-4">
                         <select class="form-select" asp-for="newDoc.dutyDoc">
@@ -983,8 +1016,140 @@
                     <div class="col-2">
                          <input type="text" placeholder="Отделения" class="form-control" asp-for="newDoc.departments"/>
                     </div> 
+                     <div class="col-2 d-none">
+                        <input type="text" value="@DutyType.Department" class="form-control d-none" asp-for="newDoc.type" />
+                    </div>
                     <div class="col-1">
-                        <input type="submit" value="+" asp-page-handler="SaveDoc"  />
+                        <input type="submit" value="+" asp-page-handler="SaveDoc"/>
+                    </div> 
+                </div>
+            </form>
+
+            <div class="row">
+                <div class=" col-5">
+                    <h4>ОРИТ</h4>
+                </div>
+            </div>
+
+            <div class="row pb-4">
+                @{
+                    foreach(DutyDoc doc in Model.oritDocs){
+                        <form method="post">
+                            <div class="row pb-2">
+                                <div class="col-4">
+                                    <select class="form-select" asp-for="newDoc.dutyDoc">
+                                        <option selected >@doc.dutyDoc</option>
+                                        @{
+                                            foreach(string d in Model.doctors)
+                                            {
+                                                <option value="@d">@d</option>
+                                            }
+                                        }
+                                    </select>
+                                </div> 
+                                <div class="col-2">
+                                    <input type="text" placeholder="Отделения" class="form-control" asp-for="newDoc.departments" value="@doc.departments"/>
+                                </div> 
+                                <div class="col-2 d-none">
+                                    <input type="text" value="@DutyType.Department" class="form-control invisible" asp-for="newDoc.type" />
+                                    <input type="text" value="@doc.Id" class="form-control invisible" asp-for="newDoc.Id" />
+                                </div>
+                                <div class="col-1">
+                                    <input type="submit" value="-" asp-page-handler="Delete" asp-route-id="@doc.Id"/>
+                                    <input type="submit" value="&#9998" asp-page-handler="Update"  />
+                                </div> 
+                            </div>
+                        </form>
+                    }
+                }
+            </div>
+
+            <form method="post">
+                <div class="row">
+                    <div class="col-4">
+                        <select class="form-select" asp-for="newDoc.dutyDoc">
+                            <option selected disabled>Выбрать дежурного</option>
+                            @{
+                                foreach(string d in Model.doctors){
+                                    <option value="@d">@d</option>
+                                }
+                            }
+                        </select>
+                    </div> 
+                    <div class="col-2">
+                        <input type="text" value="ОРИТ" class="form-control" asp-for="newDoc.departments"/>
+                    </div>
+                    <div class="col-2 d-none">
+                        <input type="text" value="@DutyType.Reanimanion" class="form-control invisible" asp-for="newDoc.type" />
+                    </div>
+                    <div class="col-1">
+                        <input type="submit"  value="+" asp-page-handler="SaveDoc"/>
+                    </div> 
+                </div>
+            </form>
+
+
+
+
+             <div class="row">
+                <div class=" col-5">
+                    <h4>Компьютерная томография</h4>
+                </div>
+            </div>
+
+            <div class="row pb-4">
+                @{
+                    foreach(DutyDoc doc in Model.ktDocs){
+                        <form method="post">
+                            <div class="row pb-2">
+                                <div class="col-4">
+                                    <select class="form-select" asp-for="newDoc.dutyDoc">
+                                        <option selected >@doc.dutyDoc</option>
+                                        @{
+                                            foreach(string d in Model.doctors)
+                                            {
+                                                <option value="@d">@d</option>
+                                            }
+                                        }
+                                    </select>
+                                </div> 
+                                <div class="col-2">
+                                    <input type="text" placeholder="Отделения" class="form-control" asp-for="newDoc.departments" value="@doc.departments"/>
+                                </div> 
+                                <div class="col-2 d-none">
+                                    <input type="text" value="@DutyType.Department" class="form-control invisible" asp-for="newDoc.type" />
+                                    <input type="text" value="@doc.Id" class="form-control invisible" asp-for="newDoc.Id" />
+                                </div>
+                                <div class="col-1">
+                                    <input type="submit" value="-" asp-page-handler="Delete" asp-route-id="@doc.Id"/>
+                                    <input type="submit" value="&#9998" asp-page-handler="Update"  />
+                                </div> 
+                            </div>
+                        </form>
+                    }
+                }
+            </div>
+
+            <form method="post">
+                <div class="row">
+                    <div class="col-4">
+                        <select class="form-select" asp-for="newDoc.dutyDoc">
+                            <option selected disabled>Выбрать дежурного</option>
+                            @{
+                                foreach(string d in Model.doctors){
+                                    <option value="@d">@d</option>
+                                }
+                            }
+                        </select>
+                    </div> 
+                    <div class="col-2">
+                        <input type="text" value="Врач КТ" class="form-control" asp-for="newDoc.departments"/>
+                    </div>
+                    <div class="col-2 d-none">
+                        <input type="text" value="@DutyType.Rentgenology" class="form-control invisible" asp-for="newDoc.type" />
+                    </div>
+                    <div class="col-1">
+                        <input type="submit"  value="+" asp-page-handler="SaveDoc"/>
                     </div> 
                 </div>
             </form>
