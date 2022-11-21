@@ -12,18 +12,17 @@
 }
 
 <div class="container">
-    <div class="row"> <p>@ViewData["alertMsg"]</p></div>
     <div class="row">
         <div class="col-4">
-            Сводка @msg <br />
-            @zone зона
+            Сводка @msg @zone зона
         </div>
         <div class="col-4 offset-4" >
             Дата @Model._report.date.ToShortDateString()
         </div>
     </div>
+
     <form name="repForm" method="post">
-    <table class="table mt-2">
+        <table class="table mt-2  g-0 d-table table-sm">
         <thead> 
             <tr>
                 <th scope="col"><input value="@Model._report.Id" type="number" name="id" class="invisible" />  </th>
@@ -186,7 +185,7 @@
             </tr>
     </table>
 
-        <input type="submit" value="Отправить" asp-page-handler="Report" asp-route-depNumber=@Model._report.depNumber/>
-        <input type="submit" value="Загрузить предыдущую сводку" asp-page-handler="PrevReport" asp-route-depNumber=@Model._report.depNumber />
+        <input class="d-print-none" type="submit" value="Отправить" asp-page-handler="Report" asp-route-depNumber=@Model._report.depNumber />
+        <input class="d-print-none" type="submit" value="Загрузить предыдущую сводку" asp-page-handler="PrevReport" asp-route-depNumber=@Model._report.depNumber />
     </form>
 </div>

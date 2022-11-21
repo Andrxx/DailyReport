@@ -8,6 +8,44 @@ html {
   }
 }
 
+@media print {
+    html, body {
+        font-size: 12px;
+        height: 297mm;
+        width: 210mm;
+    }
+
+    *, *:before, *:after {
+        color: #000;
+        box-shadow: none;
+        text-shadow: none;
+    }
+
+    table {
+        margin: 0mm 0mm 0mm 0mm;
+        padding: 0mm 0mm 0mm 0mm;
+    }
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        border: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+        border: 0;
+    }
+}
+
+@page {
+    margin: 0mm 0mm 0mm 0mm;
+}
+
+
 html {
   position: relative;
   min-height: 100%;

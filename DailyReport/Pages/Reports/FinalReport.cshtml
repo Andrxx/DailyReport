@@ -957,7 +957,7 @@
             </tbody>
         </table>
 
-        <div class="row pt-5">
+        <div class="row pt-5 ">
             <div class="row">
                 <div class=" col-5">
                     <h3>Дежурная смена</h3>
@@ -991,8 +991,8 @@
                                     <input type="text" value="@DutyType.Department" class="form-control invisible" asp-for="newDoc.type" />
                                     <input type="text" value="@doc.Id" class="form-control invisible" asp-for="newDoc.Id" />
                                 </div>
-                                <div class="col-1">
-                                    <input type="submit" value="-" asp-page-handler="Delete" asp-route-id="@doc.Id"/>
+                                <div class="col-1 d-print-none">
+                                    <input type="submit" value="&#128465" asp-page-handler="Delete" asp-route-id="@doc.Id"/>
                                     <input type="submit" value="&#9998" asp-page-handler="Update"  />
                                 </div> 
                             </div>
@@ -1002,7 +1002,7 @@
             </div>
 
             <form method="post">
-                <div class="row">
+                <div class="row d-print-none">
                     <div class="col-4">
                         <select class="form-select" asp-for="newDoc.dutyDoc">
                             <option selected disabled>Выбрать дежурного</option>
@@ -1054,8 +1054,8 @@
                                     <input type="text" value="@DutyType.Department" class="form-control invisible" asp-for="newDoc.type" />
                                     <input type="text" value="@doc.Id" class="form-control invisible" asp-for="newDoc.Id" />
                                 </div>
-                                <div class="col-1">
-                                    <input type="submit" value="-" asp-page-handler="Delete" asp-route-id="@doc.Id"/>
+                                <div class="col-1 d-print-none">
+                                    <input type="submit" value="&#128465" asp-page-handler="Delete" asp-route-id="@doc.Id" />
                                     <input type="submit" value="&#9998" asp-page-handler="Update"  />
                                 </div> 
                             </div>
@@ -1065,7 +1065,7 @@
             </div>
 
             <form method="post">
-                <div class="row">
+                <div class="row d-print-none">
                     <div class="col-4">
                         <select class="form-select" asp-for="newDoc.dutyDoc">
                             <option selected disabled>Выбрать дежурного</option>
@@ -1117,8 +1117,8 @@
                                     <input type="text" value="@DutyType.Department" class="form-control invisible" asp-for="newDoc.type" />
                                     <input type="text" value="@doc.Id" class="form-control invisible" asp-for="newDoc.Id" />
                                 </div>
-                                <div class="col-1">
-                                    <input type="submit" value="-" asp-page-handler="Delete" asp-route-id="@doc.Id"/>
+                                <div class="col-1 d-print-none">
+                                    <input type="submit" value="&#128465" asp-page-handler="Delete" asp-route-id="@doc.Id" />
                                     <input type="submit" value="&#9998" asp-page-handler="Update"  />
                                 </div> 
                             </div>
@@ -1128,7 +1128,7 @@
             </div>
 
             <form method="post">
-                <div class="row">
+                <div class="row d-print-none">
                     <div class="col-4">
                         <select class="form-select" asp-for="newDoc.dutyDoc">
                             <option selected disabled>Выбрать дежурного</option>
