@@ -26,6 +26,7 @@ html {
         padding: 0mm 0mm 0mm 0mm;
     }
 
+    /*убираем стрелки в полях вводаа формы*/
     /* Chrome, Safari, Edge, Opera */
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
@@ -33,7 +34,6 @@ html {
         margin: 0;
         border: 0;
     }
-
     /* Firefox */
     input[type=number] {
         -moz-appearance: textfield;
