@@ -32,68 +32,68 @@
         </thead>
             <tr>
                 <td scope="col">Состояло</td>
-                <td scope="col"><input value="@Model._report.existed" type="number" name="existed"/></td>
-                    <td scope="col"><input value="@Model._report.existedChildrens" type="number" name="existedChildrens" /> </td>
+                <td scope="col"><input value="@Model._report.existed" type="number" name="existed" asp-for="_report.existed"/></td>
+                <td scope="col"><input value="@Model._report.existedChildrens" type="number" name="existedChildrens" asp-for="_report.existedChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">Выбыло</td>
-                    <td scope="col"><input value="@Model._report.outcome" type="number" name="outcome" /></td>
-                    <td scope="col"><input value="@Model._report.outcomeChildrens" type="number" name="outcomeChildrens" /> </td>
+                <td scope="col"><input value="@Model._report.outcome" type="number" name="outcome" asp-for="_report.outcome"/></td>
+                <td scope="col"><input value="@Model._report.outcomeChildrens" type="number" name="outcomeChildrens" asp-for="_report.outcomeChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">Поступило</td>
-                    <td scope="col"><input value="@Model._report.income" type="number" name="income" /></td>
-                    <td scope="col"><input value="@Model._report.incomeChildrens" type="number" name="incomeChildrens" /> </td>
+                <td scope="col"><input value="@Model._report.income" type="number" name="income" asp-for="_report.income"/></td>
+                <td scope="col"><input value="@Model._report.incomeChildrens" type="number" name="incomeChildrens" asp-for="_report.incomeChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">Переведено из отделения</td>
-                    <td scope="col"><input value="@Model._report.movedOutDep" type="number" name="movedOutDep" /></td>
-                    <td scope="col"><input value="@Model._report.movedOutDepChildrens" type="number" name="movedOutDepChildrens" /> </td>
+                    <td scope="col"><input value="@Model._report.movedOutDep" type="number" name="movedOutDep" asp-for="_report.movedOutDep"/></td>
+                <td scope="col"><input value="@Model._report.movedOutDepChildrens" type="number" name="movedOutDepChildrens" asp-for="_report.movedOutDepChildrens" /> </td>
             </tr>
             <tr>
                 <td scope="col">Переведено в отделение</td>
-                    <td scope="col"><input value="@Model._report.movedInDep" type="number" name="movedInDep" /></td>
-                    <td scope="col"><input value="@Model._report.movedInDepChildrens" type="number" name="movedInDepChildrens" /> </td>
+                <td scope="col"><input value="@Model._report.movedInDep" type="number" name="movedInDep" asp-for="_report.movedInDep"/></td>
+                <td scope="col"><input value="@Model._report.movedInDepChildrens" type="number" name="movedInDepChildrens" asp-for="_report.movedInDepChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">Умерло</td>
-                    <td scope="col"><input value="@Model._report.died" type="number" name="died" /></td>
-                    <td scope="col"><input value="@Model._report.diedChildrens" type="number" name="diedChildrens" /> </td>
+                <td scope="col"><input value="@Model._report.died" type="number" name="died" asp-for="_report.died"/></td>
+                <td scope="col"><input value="@Model._report.diedChildrens" type="number" name="diedChildrens" asp-for="_report.diedChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">Состоит</td>
-                    <td scope="col"><input value="@Model._report.present" type="number" name="present"/></td>
-                    <td scope="col"><input value="@Model._report.presentChildrens" type="number" name="presentChildrens" /> </td>
+                <td scope="col"><input value="@Model._report.present" type="number" name="present" asp-for="_report.present"/></td>
+                <td scope="col"><input value="@Model._report.presentChildrens" type="number" name="presentChildrens" asp-for="_report.presentChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">Прикреплено в ОРИТ</td>
-                <td scope="col"><input value="@Model._report.attachedToORIT" type="number" name="attachedToORIT" /></td>
-                <td scope="col"><input value="@Model._report.attachedToORITCildrens" type="number" name="attachedToORITCildrens" /> </td>
+                <td scope="col"><input value="@Model._report.attachedToORIT" type="number" name="attachedToORIT" asp-for="_report.attachedToORIT" /></td>
+                <td scope="col"><input value="@Model._report.attachedToORITCildrens" type="number" name="attachedToORITCildrens" asp-for="_report.attachedToORITCildrens"/> </td>
             </tr>
             @*раздел кислорода*@
             <tr>
                 <td scope="col">ИВЛ</td>
-                <td scope="col" colspan="2"><input value="@Model._report.oIVL" type="number" name="oIVL" /></td>
-                @*  <td scope="col"><input value="@Model._report.oIVLChildrens" type="number" name="oIVLChildrens" /> </td>*@
+                <td scope="col" colspan="2"><input value="@Model._report.oIVL" type="number" name="oIVL" asp-for="_report.oIVL" /></td>
+                @*  <td scope="col"><input value="@Model._report.oIVLChildrens" type="number" name="oIVLChildrens" asp-for="_report."/> </td>*@
             </tr>
             <tr>
                 <td scope="col">НИВЛ</td>
-                <td scope="col" colspan="2"><input value="@Model._report.oNIVL" type="number" name="oNIVL" /></td>
+                <td scope="col" colspan="2"><input value="@Model._report.oNIVL" type="number" name="oNIVL" asp-for="_report.oNIVL" /></td>
                 @*  <td scope="col"><input value="@Model._report.oNIVLChildrens" type="number" name="oNIVLChildrens" /> </td>*@
             </tr>
             <tr>
                 <td scope="col">НИВЛ+ВПО</td>
-                <td scope="col"colspan="2"><input value="@Model._report.oNIVLVPO" type="number" name="oNIVLVPO" /></td>
+                <td scope="col"colspan="2"><input value="@Model._report.oNIVLVPO" type="number" name="oNIVLVPO" asp-for="_report.oNIVLVPO"/></td>
                 @*   <td scope="col"><input value="@Model._report.oNIVLVPOChildrens" type="number" name="oNIVLVPOChildrens" /> </td>*@
             </tr>
             <tr>
                 <td scope="col">НИВЛ+КМ</td>
-                <td scope="col" colspan="2"><input value="@Model._report.oNIVLMask" type="number" name="oNIVLMask" /></td>
+                <td scope="col" colspan="2"><input value="@Model._report.oNIVLMask" type="number" name="oNIVLMask" asp-for="_report.oNIVLMask"/></td>
                 @*   <td scope="col"><input value="@Model._report.oNIVLMaskChildrens" type="number" name="oNIVLMaskChildrens" /> </td>*@
             </tr>
             <tr>
                 <td scope="col">Лицевая маска</td>
-                <td scope="col" colspan="2"><input value="@Model._report.oMask" type="number" name="oMask" /></td>
+                <td scope="col" colspan="2"><input value="@Model._report.oMask" type="number" name="oMask" asp-for="_report.oMask"/></td>
                 @*   <td scope="col"><input value="@Model._report.oMaskChildren" type="number" name="oMaskChildren" /> </td>*@
             </tr>
                 @* <tr>
@@ -104,84 +104,84 @@
                 @*админ рздел*@
                 <tr>
                     <td scope="col">Беременные</td>
-                    <td scope="col"><input value="@Model._report.pregnant" type="number" name="pregnant"/></td>
+                    <td scope="col"><input value="@Model._report.pregnant" type="number" name="pregnant" asp-for="_report.pregnant"/></td>
                     <td scope="col"><input value="@Model._report.pregnantChildrens" type="number" name="pregnantChildrens" class="invisible"/> </td>
                 </tr>
             <tr>
                 <td scope="col">Пациенты из зон отдыха</td>
-                    <td scope="col"><input value="@Model._report.restZone" type="number" name="restZone" /></td>
-                    <td scope="col"><input value="@Model._report.restZoneChildrens" type="number" name="restZoneChildrens" /> </td>
+                <td scope="col"><input value="@Model._report.restZone" type="number" name="restZone" asp-for="_report.restZone"/></td>
+                <td scope="col"><input value="@Model._report.restZoneChildrens" type="number" name="restZoneChildrens" asp-for="_report.restZoneChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">Инокраевые</td>
-                    <td scope="col"><input value="@Model._report.outRegions" type="number" name="outRegions" /></td>
-                    <td scope="col"><input value="@Model._report.outRegionsChildrens" type="number" name="outRegionsChildrens" /> </td>
+                <td scope="col"><input value="@Model._report.outRegions" type="number" name="outRegions" asp-for="_report.outRegions" /></td>
+                <td scope="col"><input value="@Model._report.outRegionsChildrens" type="number" name="outRegionsChildrens" asp-for="_report.outRegionsChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">Иностранные граждане</td>
-                    <td scope="col"><input value="@Model._report.forein" type="number" name="forein" /></td>
-                    <td scope="col"><input value="@Model._report.foreinChildrens" type="number" name="foreinChildrens" /> </td>
+                <td scope="col"><input value="@Model._report.forein" type="number" name="forein" asp-for="_report.forein"/></td>
+                <td scope="col"><input value="@Model._report.foreinChildrens" type="number" name="foreinChildrens" asp-for="_report.foreinChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">Прибывшие из ЛНР/ДНР</td>
-                <td scope="col"><input value="@Model._report.LNR_DNR" type="number" name="LNR_DNR"/></td>
-                    <td scope="col"><input value="@Model._report.LNR_DNRChildrens" type="number" name="LNR_DNRChildrens" /> </td>
+                <td scope="col"><input value="@Model._report.LNR_DNR" type="number" name="LNR_DNR" asp-for="_report.LNR_DNR"/></td>
+                <td scope="col"><input value="@Model._report.LNR_DNRChildrens" type="number" name="LNR_DNRChildrens" asp-for="_report.LNR_DNRChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">Поступили из другой МО</td>
-                    <td scope="col"><input value="@Model._report.incomeHospital" type="number" name="incomeHospital" /></td>
-                    <td scope="col"><input value="@Model._report.incomeHospitalChildrens" type="number" name="incomeHospitalChildrens" /> </td>
+                <td scope="col"><input value="@Model._report.incomeHospital" type="number" name="incomeHospital" asp-for="_report.incomeHospital"/></td>
+                <td scope="col"><input value="@Model._report.incomeHospitalChildrens" type="number" name="incomeHospitalChildrens" asp-for="_report.incomeHospitalChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">Переведены в другую МО</td>
-                <td scope="col"><input value="@Model._report.outcomeHospital" type="number" name="outcomeHospital"/></td>
-                    <td scope="col"><input value="@Model._report.outcomeHospitalChildrens" type="number" name="outcomeHospitalChildrens" /> </td>
+                <td scope="col"><input value="@Model._report.outcomeHospital" type="number" name="outcomeHospital" asp-for="_report.outcomeHospital"/></td>
+                <td scope="col"><input value="@Model._report.outcomeHospitalChildrens" type="number" name="outcomeHospitalChildrens" asp-for="_report.outcomeHospitalChildrens"/> </td>
             </tr>
             @*Нозоологии*@
             <tr>
                 <td scope="col">U 07.1 Covid-19</td>
-                    <td scope="col"><input value="@Model._report.U071" type="number" name="U071" /></td>
-                    <td scope="col"><input value="@Model._report.U071Childrens" type="number" name="U071Childrens"/> </td>
+                <td scope="col"><input value="@Model._report.U071" type="number" name="U071" asp-for="_report.U071"/></td>
+                <td scope="col"><input value="@Model._report.U071Childrens" type="number" name="U071Childrens" asp-for="_report.U071Childrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">U 07.2 Covid-19</td>
-                <td scope="col"><input value="@Model._report.U072" type="number" name="U072"/></td>
-                    <td scope="col"><input value="@Model._report.U072Childrens" type="number" name="U072Childrens" /> </td>
+                <td scope="col"><input value="@Model._report.U072" type="number" name="U072" asp-for="_report.U072" /></td>
+                <td scope="col"><input value="@Model._report.U072Childrens" type="number" name="U072Childrens" asp-for="_report.U072Childrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">ОРИ</td>
-                    <td scope="col"><input value="@Model._report.ORVI" type="number" name="ORVI" /></td>
-                    <td scope="col"><input value="@Model._report.ORVIChildrens" type="number" name="ORVIChildrens" /> </td>
+                <td scope="col"><input value="@Model._report.ORVI" type="number" name="ORVI" asp-for="_report.ORVI" /></td>
+                <td scope="col"><input value="@Model._report.ORVIChildrens" type="number" name="ORVIChildrens" asp-for="_report.ORVIChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">Пневмония</td>
-                    <td scope="col"><input value="@Model._report.pneumonia" type="number" name="pneumonia" /></td>
-                    <td scope="col"><input value="@Model._report.pneumoniaChildrens" type="number" name="pneumoniaChildrens" /> </td>
+                <td scope="col"><input value="@Model._report.pneumonia" type="number" name="pneumonia" asp-for="_report.pneumonia"/></td>
+                <td scope="col"><input value="@Model._report.pneumoniaChildrens" type="number" name="pneumoniaChildrens" asp-for="_report.pneumoniaChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">ОКИ</td>
-                    <td scope="col"><input value="@Model._report.OKI" type="number" name="OKI" /></td>
-                    <td scope="col"><input value="@Model._report.OKIChildrens" type="number" name="OKIChildrens" /> </td>
+                <td scope="col"><input value="@Model._report.OKI" type="number" name="OKI" asp-for="_report.OKI"/></td>
+                <td scope="col"><input value="@Model._report.OKIChildrens" type="number" name="OKIChildrens" asp-for="_report.OKIChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">Менингит, энцефалит, миелит</td>
-                    <td scope="col"><input value="@Model._report.meningit" type="number" name="meningit" /></td>
-                    <td scope="col"><input value="@Model._report.meningitChildrens" type="number" name="meningitChildrens" /> </td>
+                <td scope="col"><input value="@Model._report.meningit" type="number" name="meningit" asp-for="_report.meningit"/></td>
+                <td scope="col"><input value="@Model._report.meningitChildrens" type="number" name="meningitChildrens" asp-for="_report.meningitChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">Гепатит</td>
-                <td scope="col"><input value="@Model._report.hepatit" type="number" name="hepatit"/></td>
-                    <td scope="col"><input value="@Model._report.hepatitChildrens" type="number" name="hepatitChildrens" /> </td>
+                <td scope="col"><input value="@Model._report.hepatit" type="number" name="hepatit" asp-for="_report.hepatit"/></td>
+                <td scope="col"><input value="@Model._report.hepatitChildrens" type="number" name="hepatitChildrens" asp-for="_report.hepatitChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">В-20</td>
-                    <td scope="col"><input value="@Model._report.HIV" type="number" name="HIV" /></td>
-                    <td scope="col"><input value="@Model._report.HIVCildrens" type="number" name="HIVCildrens" /> </td>
+                <td scope="col"><input value="@Model._report.HIV" type="number" name="HIV" asp-for="_report.HIV"/></td>
+                <td scope="col"><input value="@Model._report.HIVCildrens" type="number" name="HIVCildrens" asp-for="_report.HIVCildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">Прочие</td>
-                <td scope="col"><input value="@Model._report.other" type="number" name="other"/></td>
-                <td scope="col"><input value="@Model._report.otherChildrens" type="number" name="otherChildrens"/> </td>
+                <td scope="col"><input value="@Model._report.other" type="number" name="other" asp-for="_report.other"/></td>
+                <td scope="col"><input value="@Model._report.otherChildrens" type="number" name="otherChildrens" asp-for="_report.otherChildrens"/> </td>
             </tr>
     </table>
 
