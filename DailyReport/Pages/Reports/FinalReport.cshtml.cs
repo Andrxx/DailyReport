@@ -258,10 +258,6 @@ namespace DailyReport.Pages.Reports
 
         public IActionResult OnPostUpdate()
         {
-            //DutyDoc doc = (from d in context.DutyDocs
-            //               where (d.Id == id)
-            //               select d).FirstOrDefault();
-            //doc.dutyDoc = newDoc.dutyDoc;
             DutyServices.UpdateDutyDoc(newDoc, context);
             return RedirectToAction("Get");
         }
