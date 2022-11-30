@@ -17,7 +17,7 @@ namespace DailyReport.Services
             _dRep = CheckReports(_dRep);
 #pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
                 _freeSpots.dep1 = _ds.dep1 - _dRep.Find(p => p.depNumber == 1).present;
-                _freeSpots.dep1Children = _ds.dep11Children - _dRep.Find(p => p.depNumber == 1).presentChildrens;
+                _freeSpots.dep1Children = _ds.dep1Children - _dRep.Find(p => p.depNumber == 1).presentChildrens;
                 _freeSpots.dep11 = _ds.dep11 + -_dRep.Find(p => p.depNumber == 11).present;
                 _freeSpots.dep11Children = _ds.dep11Children - _dRep.Find(p => p.depNumber == 11).presentChildrens;
             //_freeSpots.dep2 = _ds.dep2 + _ds. - _dRep.Find(p => p.depNumber == 2).present - _dRep.Find(p => p.depNumber == 2).presentChildrens;
