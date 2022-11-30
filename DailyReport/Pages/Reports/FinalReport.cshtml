@@ -146,26 +146,26 @@
                 </tr>
                 <tr class="table-success">
                     <td>Выбыло</td>
-                    <td>@Model.depReport11.outcome</td>
-                    <td>@Model.depReport11.outcomeChildrens</td>
-                    <td>@Model.depReport1.outcome</td>
-                    <td>@Model.depReport1.outcomeChildrens</td>
-                    <td>@Model.depReport3.outcome</td>
-                    <td>@Model.depReport3.outcomeChildrens</td>
-                    <td>@Model.depReport4.outcome</td>
-                    <td>@Model.depReport4.outcomeChildrens</td>
-                    <td>@Model.depReport5.outcome</td>
-                    <td>@Model.depReport5.outcomeChildrens</td>
-                    <td>@Model.depReport6.outcome</td>
-                    <td>@Model.depReport6.outcomeChildrens</td>
-                    <td>@Model.depReport7.outcome</td>
-                    <td>@Model.depReport7.outcomeChildrens</td>
-                    <td>@Model.depReport91.outcome</td>
-                    <td>@Model.depReport91.outcomeChildrens</td>
-                    <td>@Model.depReport90.outcome</td>
-                    <td>@Model.depReport90.outcomeChildrens</td>
-                    <td>@Model.depReport8.outcome</td>
-                    <td>@Model.depReport8.outcomeChildrens</td>
+                    <td>@if(@Model.depReport11.outcome > 0){@Model.depReport11.outcome}</td>
+                    <td>@if(@Model.depReport11.outcomeChildrens > 0) @Model.depReport11.outcomeChildrens </td>
+                    <td>@if(@Model.depReport1.outcome>0)@Model.depReport1.outcome</td>
+                    <td>@if(@Model.depReport1.outcomeChildrens > 0) @Model.depReport1.outcomeChildrens</td>
+                    <td>@if(@Model.depReport3.outcome>0)@Model.depReport3.outcome</td>
+                    <td>@if(@Model.depReport3.outcomeChildrens > 0) @Model.depReport3.outcomeChildrens</td>
+                    <td>@if(@Model.depReport4.outcome>0)@Model.depReport4.outcome</td>
+                    <td>@if(@Model.depReport4.outcomeChildrens > 0) @Model.depReport4.outcomeChildrens</td>
+                    <td>@if(@Model.depReport5.outcome>0)@Model.depReport5.outcome</td>
+                    <td>@if(@Model.depReport5.outcomeChildrens > 0) @Model.depReport5.outcomeChildrens</td>
+                    <td>@if(@Model.depReport6.outcome>0)@Model.depReport6.outcome</td>
+                    <td>@if(@Model.depReport6.outcomeChildrens > 0) @Model.depReport6.outcomeChildrens</td>
+                    <td>@if(@Model.depReport7.outcome>0)@Model.depReport7.outcome</td>
+                    <td>@if(@Model.depReport7.outcomeChildrens > 0) @Model.depReport7.outcomeChildrens</td>
+                    <td>@if(@Model.depReport91.outcome>0)@Model.depReport91.outcome</td>
+                    <td>@if(@Model.depReport91.outcomeChildrens > 0) @Model.depReport91.outcomeChildrens</td>
+                    <td>@if(@Model.depReport90.outcome>0)@Model.depReport90.outcome</td>
+                    <td>@if(@Model.depReport90.outcomeChildrens > 0) @Model.depReport90.outcomeChildrens</td>
+                    <td>@if(@Model.depReport8.outcome>0)@Model.depReport8.outcome</td>
+                    <td>@if(@Model.depReport8.outcomeChildrens > 0) @Model.depReport8.outcomeChildrens</td>
                     <td>@Model.finalReport.outcome</td>
                     <td>@Model.finalReport.outcomeChildren</td>
                     <td>@(@Model.finalReport.outcome + @Model.finalReport.outcomeChildren)</td>
