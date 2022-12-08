@@ -84,13 +84,15 @@ namespace DailyReport.Pages.Reports
             if (depReport6 == null) depReport6 = new();
             if (depReport7 == null) depReport7 = new();
             if (depReport8 == null) depReport8 = new();
-            if (depReport90 == null) depReport90 = new();
             if (depReport91 == null) depReport91 = new();
+            if (depReport90 == null) depReport90 = new();
+            
 
             if (finalReport == null) finalReport = new();
 
-            filteredReports.Add(depReport1);
+            //порядок списока отделений должен строго соответствовать порядку отделений в сводке
             filteredReports.Add(depReport11);
+            filteredReports.Add(depReport1);
             //_filteredReports.Add(depReport2); отделение не работает
             filteredReports.Add(depReport3);
             filteredReports.Add(depReport4);
@@ -99,13 +101,10 @@ namespace DailyReport.Pages.Reports
             filteredReports.Add(depReport7);
             filteredReports.Add(depReport90);
             filteredReports.Add(depReport91);
-
-            //_filteredReports.Add(depReport8); дневной стационар не входит в общий список
+            
 
             //в метод передаем данные не отфильтрованных сводок, иначе потеряем ДС (dep8)
             freeSpots = FreeSpotsServices.CountSpots(reports, departmentSpots);
-
-
 
             foreach (DepReport _rep in filteredReports)
             {
@@ -167,8 +166,8 @@ namespace DailyReport.Pages.Reports
                 finalReport.other += _rep.other;
                 finalReport.otherChildren += _rep.otherChildrens;
             }
+            filteredReports.Add(depReport8); //дневной стационар не входит в общий список, добавляем его в лист после вычисления общего количества
 
-           
             oxygenSum11 = depReport11.CountO2();
             oxygenSum91 = depReport91.CountO2();
             deseaseSum1 = depReport1.CountDiseases();

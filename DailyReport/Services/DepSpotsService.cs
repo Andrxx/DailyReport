@@ -15,7 +15,10 @@ namespace DailyReport.Services
             departmentSpots = CreateSpots();
 
         }
-
+        /// <summary>
+        /// Возвращет список коек отделений. Порядок списка должен соответствовть порядку отделений в сводке
+        /// </summary>
+        /// <returns></returns>
         static DepartmentSpots CreateSpots()
         {
             DepartmentSpots _departmentSpots = new();
@@ -37,10 +40,11 @@ namespace DailyReport.Services
             _departmentSpots.dep7Children = 8;
             _departmentSpots.dep8 = 7;
             _departmentSpots.dep8Children = 3;
-            _departmentSpots.dep90 = 0;
-            _departmentSpots.dep90Children = 13;
-            _departmentSpots.dep91 = 2;
-            _departmentSpots.dep91Children = 0;
+            _departmentSpots.dep91 = 1;
+            _departmentSpots.dep91Children = 1;
+            _departmentSpots.dep90 = 9;
+            _departmentSpots.dep90Children = 9;
+            
 
             return _departmentSpots;
         }
