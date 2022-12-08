@@ -3,7 +3,6 @@ using DailyReport.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using System.Composition;
 using System.Security.Cryptography;
 
 namespace DailyReport.Pages.Reports
@@ -22,48 +21,23 @@ namespace DailyReport.Pages.Reports
         }
         public List<DepReport> reports { get; private set; } = new();
         public List<DepReport> filteredReports = new List<DepReport>();
-        public DateTime actualDate = DateTime.Now, reportDate;//.AddDays(-1);
-        public bool _onlyView;
+        DateTime actualDate = DateTime.Today.AddDays(-1);
         public int oxygenSum11, oxygenSum91, deseaseSum1, deseaseSum11, deseaseSum2, deseaseSum3, deseaseSum4, deseaseSum5, deseaseSum6, deseaseSum7,
             deseaseSum8, deseaseSum90, deseaseSum91, deseaseSum1Children, deseaseSum11Children, deseaseSum2Children, deseaseSum3Children, deseaseSum4Children,
             deseaseSum5Children, deseaseSum6Children, deseaseSum7Children, deseaseSum8Children, deseaseSum90Children, deseaseSum91Children,
             deseaseSumFinal, deseaseSumFinalChildren;
-        public int reject, rejectChildren, ambulance, ambulanceChildren, submitOtherHosp, submitOtherHospChildren, sumReject, 
-            sumAmbulance, sumOther, sumAdults, sumChildren, sumTotal;
-        //фактические места в отделениях
         public DepartmentSpots departmentSpots; 
-        //свободные места
         public FreeSpots freeSpots;
-        public List<string> doctors;
-
+        public List<string> doctors = DutyServices.GetDoctorsList();
         [BindProperty]
         public DutyDoc newDoc { get; set; } = new();
         public List<DutyDoc> depDocs { get; set; } = new();
         public List<DutyDoc> oritDocs { get; set; } = new();
         public List<DutyDoc> ktDocs { get; set; } = new();
-        [BindProperty]
-        public OutcomingPatient newPatient { get; set; } = new();
-        public List<OutcomingPatient> patients { get; set; } = new();
-        public List<string> shipping = OutPatientService.GetShipping();
-        public List<string> submitedFrom = OutPatientService.GetSubmitedFrom();
-        public List<string> submitedTo = OutPatientService.GetSubmitedTo();
 
-        public void OnGet(double dateOffset = 0, bool onlyView = false)
+        public void OnGet()
         {
-            _onlyView = onlyView;
-            actualDate = actualDate.AddDays(dateOffset);
-            DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 8, 0, 0);
-            DateTime endTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 59, 59).AddDays(1);
-            if (actualDate.Hour < 8)
-            {
-                startTime = startTime.AddDays(-1);
-                endTime = endTime.AddDays(-1);
-                reportDate = actualDate.AddDays(-1);
-            }
-            //задаем дату отображения на сводке, устнавливть только после коррекции стартовой даты 
-            else { reportDate = actualDate; }
-
-            departmentSpots = DepSpotsService.GetSpots(context);
+            departmentSpots = DepSpotsService.GetSpots();
             departmentSpots.sum = DepSpotsService.CountSum();
             departmentSpots.sumChildren = DepSpotsService.CountSumChildren();
             departmentSpots.sumOC = DepSpotsService.CountSumOC();
@@ -71,12 +45,12 @@ namespace DailyReport.Pages.Reports
             
             //todo - падает при очистке БД
             //_rep = context.DepReports.AsNoTracking().ToList();
-            //finalReports = context.FinalReports.AsNoTracking().ToList();
+            finalReports = context.FinalReports.AsNoTracking().ToList();
 
             try
             {
                 reports = (from report in context.DepReports
-                           where ((report.date > startTime) && (report.date < endTime))
+                           where (report.date.Date == actualDate)
                            select report).ToList();
             }
             catch
@@ -116,7 +90,7 @@ namespace DailyReport.Pages.Reports
 
             if (finalReport == null) finalReport = new();
 
-            //порядок списка отделений должен строго соответствовать порядку отделений в сводке
+            //порядок списока отделений должен строго соответствовать порядку отделений в сводке
             filteredReports.Add(depReport11);
             filteredReports.Add(depReport1);
             //_filteredReports.Add(depReport2); отделение не работает
@@ -125,15 +99,13 @@ namespace DailyReport.Pages.Reports
             filteredReports.Add(depReport5);
             filteredReports.Add(depReport6);
             filteredReports.Add(depReport7);
-            filteredReports.Add(depReport91);
             filteredReports.Add(depReport90);
-            
+            filteredReports.Add(depReport91);
             
 
             //в метод передаем данные не отфильтрованных сводок, иначе потеряем ДС (dep8)
             freeSpots = FreeSpotsServices.CountSpots(reports, departmentSpots);
 
-            //Считаем сумму по отделениям
             foreach (DepReport _rep in filteredReports)
             {
                 finalReport.existed += _rep.existed;
@@ -181,8 +153,6 @@ namespace DailyReport.Pages.Reports
                 finalReport.U072Children += _rep.U072Childrens;
                 finalReport.ORVI += _rep.ORVI;
                 finalReport.ORVIChildren += _rep.ORVIChildrens;
-                finalReport.grippe += _rep.grippe;
-                finalReport.grippeChildren += _rep.grippeChildrens;
                 finalReport.pneumonia += _rep.pneumonia;
                 finalReport.pneumoniaChildren += _rep.pneumoniaChildrens;
                 finalReport.OKI += _rep.OKI;
@@ -195,10 +165,6 @@ namespace DailyReport.Pages.Reports
                 finalReport.HIVCildren += _rep.HIVCildrens;
                 finalReport.other += _rep.other;
                 finalReport.otherChildren += _rep.otherChildrens;
-                finalReport.sepsis += _rep.sepsis;
-                finalReport.sepsisChildren += _rep.sepsisChildren;
-                finalReport.care += _rep.care;
-                finalReport.careDisodered += _rep.careDisodered;
             }
             filteredReports.Add(depReport8); //дневной стационар не входит в общий список, добавляем его в лист после вычисления общего количества
 
@@ -206,45 +172,43 @@ namespace DailyReport.Pages.Reports
             oxygenSum91 = depReport91.CountO2();
             deseaseSum1 = depReport1.CountDiseases();
             deseaseSum11 = depReport11.CountDiseases();
-            deseaseSum2 = depReport2.CountDiseases();
-            deseaseSum3 = depReport3.CountDiseases();
-            deseaseSum4 = depReport4.CountDiseases();
-            deseaseSum5 = depReport5.CountDiseases();
-            deseaseSum6 = depReport6.CountDiseases();
-            deseaseSum7 = depReport7.CountDiseases();
-            deseaseSum8 = depReport8.CountDiseases();
-            deseaseSum90 = depReport90.CountDiseases();
-            deseaseSum91 = depReport91.CountDiseases();
+            deseaseSum2 = depReport1.CountDiseases();
+            deseaseSum3 = depReport1.CountDiseases();
+            deseaseSum4 = depReport1.CountDiseases();
+            deseaseSum5 = depReport1.CountDiseases();
+            deseaseSum6 = depReport1.CountDiseases();
+            deseaseSum7 = depReport1.CountDiseases();
+            deseaseSum8 = depReport1.CountDiseases();
+            deseaseSum90 = depReport1.CountDiseases();
+            deseaseSum91 = depReport1.CountDiseases();
             deseaseSum1Children = depReport1.CountDiseasesChildren();
             deseaseSum11Children = depReport11.CountDiseasesChildren();
-            deseaseSum2Children = depReport2.CountDiseasesChildren();
-            deseaseSum3Children = depReport3.CountDiseasesChildren();
-            deseaseSum4Children = depReport4.CountDiseasesChildren();
-            deseaseSum5Children = depReport5.CountDiseasesChildren();
-            deseaseSum6Children = depReport6.CountDiseasesChildren();
-            deseaseSum7Children = depReport7.CountDiseasesChildren();
-            deseaseSum8Children = depReport8.CountDiseasesChildren();
-            deseaseSum90Children = depReport90.CountDiseasesChildren();
-            deseaseSum91Children = depReport91.CountDiseasesChildren();
+            deseaseSum2Children = depReport1.CountDiseasesChildren();
+            deseaseSum3Children = depReport1.CountDiseasesChildren();
+            deseaseSum4Children = depReport1.CountDiseasesChildren();
+            deseaseSum5Children = depReport1.CountDiseasesChildren();
+            deseaseSum6Children = depReport1.CountDiseasesChildren();
+            deseaseSum7Children = depReport1.CountDiseasesChildren();
+            deseaseSum8Children = depReport1.CountDiseasesChildren();
+            deseaseSum90Children = depReport1.CountDiseasesChildren();
+            deseaseSum91Children = depReport1.CountDiseasesChildren();
             deseaseSumFinal = finalReport.CountDiseases();
             deseaseSumFinalChildren = finalReport.CountDiseasesChildren();
-
-            //список доступных докторов стационара
-            doctors = DutyServices.GetDoctorsList(context);
 
             try 
             { 
                 depDocs = (from doc in context.DutyDocs
-                        where ((doc.dutyDate > startTime) && (doc.dutyDate < endTime)) & (doc.type == DutyType.Department)
+                        where (doc.dutyDate == actualDate) & (doc.type == DutyType.Department)
                         select doc).ToList();
             }
             catch
             {
             }
+
             try
             {
                 oritDocs = (from doc in context.DutyDocs
-                           where ((doc.dutyDate > startTime) && (doc.dutyDate < endTime)) & (doc.type == DutyType.Reanimanion)
+                           where (doc.dutyDate == actualDate) & (doc.type == DutyType.Reanimanion)
                            select doc).ToList();
             }
             catch
@@ -253,41 +217,24 @@ namespace DailyReport.Pages.Reports
             try
             {
                 ktDocs = (from doc in context.DutyDocs
-                            where ((doc.dutyDate > startTime) && (doc.dutyDate < endTime)) & (doc.type == DutyType.Rentgenology)
+                            where (doc.dutyDate == actualDate) & (doc.type == DutyType.Rentgenology)
                             select doc).ToList();
             }
             catch
             {
             }
-            try
-            {
-                patients = (from patient in context.OutcomingPatients
-                            where ((patient.Date > startTime) && (patient.Date < endTime))
-                            select patient).ToList();
 
-                //todo исправить возможное отсутствие возрста
-                if (patients != null)
-                {
-                    reject = patients.FindAll(p => int.Parse(p.AgeYears) > 17 & p.SubmitedTo == "Отказ").Count();
-                    rejectChildren = patients.FindAll(p => int.Parse(p.AgeYears) < 18 & p.SubmitedTo == "Отказ").Count();
-                    ambulance = patients.FindAll(p => float.Parse(p.AgeYears) >= 18 & p.SubmitedTo == "Амбулаторно").Count();
-                    ambulanceChildren = patients.FindAll(p => float.Parse(p.AgeYears) < 18 & p.SubmitedTo == "Амбулаторно").Count();
-                    submitOtherHosp = patients.FindAll(p => float.Parse(p.AgeYears) >= 18 & p.SubmitedTo != "Амбулаторно" & p.SubmitedTo != "Отказ").Count();
-                    submitOtherHospChildren = patients.FindAll(p => float.Parse(p.AgeYears) < 18 & p.SubmitedTo != "Амбулаторно" & p.SubmitedTo != "Отказ").Count();
-                    sumReject = reject + rejectChildren;
-                    sumAmbulance = ambulance + ambulanceChildren;
-                    sumOther = submitOtherHosp + submitOtherHospChildren;
-                    sumAdults = reject + ambulance + submitOtherHosp;
-                    sumChildren = rejectChildren + ambulanceChildren + submitOtherHospChildren;
-                    sumTotal = sumAdults + sumChildren;
-                }
-            }
-            catch
-            {
-            }
         }
-      
-        
+
+
+        /// <summary>
+        /// todo сохранение финальной сводки
+        /// </summary>
+        public void SaveReport()
+        {
+            
+        }
+
         /// <summary>
         /// сохранение данных смены через абстракцию сервисов
         /// </summary>
@@ -296,47 +243,23 @@ namespace DailyReport.Pages.Reports
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Get");
+                return Page();
             }
-            newDoc.dutyDate = actualDate;
             DutyServices.AddDutyDoc(newDoc, context);
             return RedirectToAction("Get");
         }
 
-        public IActionResult OnPostDeleteDoc(int id)
+        public IActionResult OnPostDelete(int id)
         {
             DutyServices.DeleteDutyDoc(id, context);
             return RedirectToAction("Get");
         }
 
-        public IActionResult OnPostUpdateDoc()
+        public IActionResult OnPostUpdate()
         {
             DutyServices.UpdateDutyDoc(newDoc, context);
             return RedirectToAction("Get");
         }
 
-
-        public IActionResult OnPostSavePatients()
-        {
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction("Get");
-            }
-            newPatient.Date = actualDate;
-            OutPatientService.AddPatient(newPatient, context);
-            return RedirectToAction("Get");
-        }
-
-        public IActionResult OnPostDeletePaient(int id)
-        {
-            OutPatientService.DeleteOutPatient(id, context);
-            return RedirectToAction("Get");
-        }
-
-        public IActionResult OnPostUpdatePatient()
-        {
-            OutPatientService.UpdateOutPatient(newPatient, context);
-            return RedirectToAction("Get");
-        }
     }
 }
