@@ -10,3 +10,15 @@ $(function($){
 		});
 });
 
+function CountSum() {
+	let sum = parseInt($("#existed").val()) - parseInt($("#outcome").val()) + parseInt($("#income").val()) - parseInt($("#movedOutDep").val())
+		+ parseInt($("#movedInDep").val()) - parseInt($("#died").val());
+	$("#present").val(sum);
+	
+}
+function CountSumChildrens() {
+	let sum = parseInt($("#existedChildrens").val()) - parseInt($("#outcomeChildrens").val()) + parseInt($("#incomeChildrens").val())
+		- parseInt($("#movedOutDepChildrens").val()) + parseInt($("#movedInDepChildrens").val()) - parseInt($("#diedChildrens").val());
+	$("#presentChildrens").val(sum);
+
+}
