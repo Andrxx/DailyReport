@@ -32,38 +32,38 @@
         </thead>
             <tr>
                 <td scope="col">Состояло</td>
-                <td scope="col"><input value="@Model._report.existed" type="number" name="existed" asp-for="_report.existed"/></td>
-                <td scope="col"><input value="@Model._report.existedChildrens" type="number" name="existedChildrens" asp-for="_report.existedChildrens"/> </td>
+                <td scope="col"><input id="existed" oninput="CountSum()" value="@Model._report.existed" type="number" name="existed" asp-for="_report.existed" /></td>
+                <td scope="col"><input id="existedChildrens" oninput="CountSumChildrens()" value="@Model._report.existedChildrens" type="number" name="existedChildrens" asp-for="_report.existedChildrens" /> </td>
             </tr>
             <tr>
                 <td scope="col">Выбыло</td>
-                <td scope="col"><input value="@Model._report.outcome" type="number" name="outcome" asp-for="_report.outcome"/></td>
-                <td scope="col"><input value="@Model._report.outcomeChildrens" type="number" name="outcomeChildrens" asp-for="_report.outcomeChildrens"/> </td>
+                <td scope="col"><input id="outcome" oninput="CountSum()" value="@Model._report.outcome" type="number" name="outcome" asp-for="_report.outcome" /></td>
+                <td scope="col"><input id="outcomeChildrens" oninput="CountSumChildrens()" value="@Model._report.outcomeChildrens" type="number" name="outcomeChildrens" asp-for="_report.outcomeChildrens" /> </td>
             </tr>
             <tr>
                 <td scope="col">Поступило</td>
-                <td scope="col"><input value="@Model._report.income" type="number" name="income" asp-for="_report.income"/></td>
-                <td scope="col"><input value="@Model._report.incomeChildrens" type="number" name="incomeChildrens" asp-for="_report.incomeChildrens"/> </td>
+                <td scope="col"><input id="income" oninput="CountSum()" value="@Model._report.income" type="number" name="income" asp-for="_report.income" /></td>
+                <td scope="col"><input id="incomeChildrens" oninput="CountSumChildrens()" value="@Model._report.incomeChildrens" type="number" name="incomeChildrens" asp-for="_report.incomeChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">Переведено из отделения</td>
-                    <td scope="col"><input value="@Model._report.movedOutDep" type="number" name="movedOutDep" asp-for="_report.movedOutDep"/></td>
-                <td scope="col"><input value="@Model._report.movedOutDepChildrens" type="number" name="movedOutDepChildrens" asp-for="_report.movedOutDepChildrens" /> </td>
+                <td scope="col"><input id="movedOutDep" oninput="CountSum()" value="@Model._report.movedOutDep" type="number" name="movedOutDep" asp-for="_report.movedOutDep" /></td>
+                <td scope="col"><input id="movedOutDepChildrens" oninput="CountSumChildrens()" value="@Model._report.movedOutDepChildrens" type="number" name="movedOutDepChildrens" asp-for="_report.movedOutDepChildrens" /> </td>
             </tr>
             <tr>
                 <td scope="col">Переведено в отделение</td>
-                <td scope="col"><input value="@Model._report.movedInDep" type="number" name="movedInDep" asp-for="_report.movedInDep"/></td>
-                <td scope="col"><input value="@Model._report.movedInDepChildrens" type="number" name="movedInDepChildrens" asp-for="_report.movedInDepChildrens"/> </td>
+                <td scope="col"><input id="movedInDep" oninput="CountSum()" value="@Model._report.movedInDep" type="number" name="movedInDep" asp-for="_report.movedInDep" /></td>
+                <td scope="col"><input id="movedInDepChildrens" oninput="CountSumChildrens()" value="@Model._report.movedInDepChildrens" type="number" name="movedInDepChildrens" asp-for="_report.movedInDepChildrens" /> </td>
             </tr>
             <tr>
                 <td scope="col">Умерло</td>
-                <td scope="col"><input value="@Model._report.died" type="number" name="died" asp-for="_report.died"/></td>
-                <td scope="col"><input value="@Model._report.diedChildrens" type="number" name="diedChildrens" asp-for="_report.diedChildrens"/> </td>
+                <td scope="col"><input id="died" oninput="CountSum()" value="@Model._report.died" type="number" name="died" asp-for="_report.died" /></td>
+                <td scope="col"><input id="diedChildrens" oninput="CountSumChildrens()" value="@Model._report.diedChildrens" type="number" name="diedChildrens" asp-for="_report.diedChildrens" /> </td>
             </tr>
             <tr>
                 <td scope="col">Состоит</td>
-                <td scope="col"><input value="@Model._report.present" type="number" name="present" asp-for="_report.present"/></td>
-                <td scope="col"><input value="@Model._report.presentChildrens" type="number" name="presentChildrens" asp-for="_report.presentChildrens"/> </td>
+                <td scope="col"><input id="present" value="@Model._report.present" type="number" name="present" asp-for="_report.present" /></td>
+                <td scope="col"><input id="presentChildrens"  value="@Model._report.presentChildrens" type="number" name="presentChildrens" asp-for="_report.presentChildrens" /> </td>
             </tr>
             <tr>
                 <td scope="col">Прикреплено в ОРИТ</td>
