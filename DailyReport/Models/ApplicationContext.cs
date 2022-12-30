@@ -13,7 +13,7 @@ namespace DailyReport.Models
             : base(options)
         {
             //Database.EnsureDeleted();   // удаляем бд со старой схемой
-            Database.EnsureCreated();   // создаем базу данных при первом обращении
+            //Database.EnsureCreated();   // создаем базу данных при первом обращении
         }
     }
 }
