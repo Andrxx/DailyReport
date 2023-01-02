@@ -4,6 +4,7 @@ using DailyReport.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DailyReport.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20221230121403_GrippAdded")]
+    partial class GrippAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -224,7 +226,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DepReports", (string)null);
+                    b.ToTable("DepReports");
                 });
 
             modelBuilder.Entity("DailyReport.Models.DutyDoc", b =>
@@ -249,7 +251,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DutyDocs", (string)null);
+                    b.ToTable("DutyDocs");
                 });
 
             modelBuilder.Entity("DailyReport.Models.FinalReport", b =>
@@ -463,7 +465,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FinalReports", (string)null);
+                    b.ToTable("FinalReports");
                 });
 #pragma warning restore 612, 618
         }
