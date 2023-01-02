@@ -56,6 +56,8 @@ namespace DailyReport.Models
         public int U072Childrens { get; set; }
         public int ORVI { get; set; }
         public int ORVIChildrens { get; set; }
+        public int grippe { get; set; }
+        public int grippeChildrens { get; set; }
         public int pneumonia { get; set; }
         public int pneumoniaChildrens { get; set; }
         public int OKI { get; set; }
