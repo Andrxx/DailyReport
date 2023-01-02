@@ -6,13 +6,13 @@
     <title>@ViewData["Title"] - DailyReport</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    @*<link rel="stylesheet" href="~/DailyReport.styles.css" asp-append-version="true" />*@
+    <link rel="stylesheet" href="~/DailyReport.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 d-print-none">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Главная</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">DailyReport</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,10 +23,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Admin">Администрирование</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Admin/DBAdministration">Администрирование</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark invisible" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
                     </ul>
                 </div>
@@ -39,11 +39,11 @@
         </main>
     </div>
 
-    @*<footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted">
         <div class="container d-print-none">
-            &copy; 2022 - DailyReport <a asp-area="" asp-page="#"></a>
+            &copy; 2022 - DailyReport - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
-    </footer>*@
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

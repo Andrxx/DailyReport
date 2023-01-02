@@ -1,30 +1,18 @@
 using Microsoft.EntityFrameworkCore;
 using DailyReport.Models;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.WebHost.ConfigureKestrel(serverOptions =>
-//{
-//    serverOptions.ConfigureHttpsDefaults(listenOptions =>
-//    {
-//        ListenOptions.
-//    });
-//});
-
 // получаем строку подключения из файла конфигурации
-//string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // добавляем контекст ApplicationContext в качестве сервиса в приложение
-builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite(
-    builder.Configuration.GetConnectionString("localDb")));
+builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
-
-//app.Map("/", () => "Index Page");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
