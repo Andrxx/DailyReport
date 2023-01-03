@@ -644,7 +644,7 @@
                                     <input type="text" placeholder="Отделения" class="form-control" asp-for="newDoc.departments" value="@doc.departments"/>
                                 </div> 
                                 <div class="col-2 d-none">
-                                    <input type="text" value="@DutyType.Department" class="form-control invisible" asp-for="newDoc.type" />
+                                    <input type="text" value="@DutyType.Reanimanion" class="form-control invisible" asp-for="newDoc.type" />
                                     <input type="text" value="@doc.Id" class="form-control invisible" asp-for="newDoc.Id" />
                                 </div>
                                 <div class="col-1 d-print-none">
@@ -707,7 +707,7 @@
                                     <input type="text" placeholder="Отделения" class="form-control" asp-for="newDoc.departments" value="@doc.departments"/>
                                 </div> 
                                 <div class="col-2 d-none">
-                                    <input type="text" value="@DutyType.Department" class="form-control invisible" asp-for="newDoc.type" />
+                                    <input type="text" value="@DutyType.Rentgenology" class="form-control invisible" asp-for="newDoc.type" />
                                     <input type="text" value="@doc.Id" class="form-control invisible" asp-for="newDoc.Id" />
                                 </div>
                                 <div class="col-1 d-print-none">
@@ -740,11 +740,136 @@
                     </div>
                     <div class="col-1">
                         <input type="submit"  value="+" asp-page-handler="SaveDoc"/>
-
                     </div> 
                 </div>
-                
+            </form>           
+        </div>
+
+        <div class="row pt-5">
+            <div class="col-6">
+                <h3>Переводы и отказы</h3>
+            </div>
+            <div class="row text-end">
+                <div class="col-4 text-start">Пациент</div>
+                <div class="col-1">Возраст</div>
+                <div class="col-1">Диагноз</div>
+                <div class="col-1">Доставлен</div>
+                <div class="col-1">Направлен</div>
+                <div class="col-2">Переведен</div>
+            </div>
+            @{
+                foreach(OutcomingPatient patient in Model.patients){
+                    <form method="post">
+                    <div class="row pb-1">
+                        <div class="col-4">
+                            <input type="text" value="@patient.Name" class="form-control" asp-for="newPatient.Name"/>
+                        </div>
+                    
+                     <div class="col-1">
+                        <input type="text" value="@patient.Age" class="form-control" asp-for="newPatient.Age"/>
+                    </div>
+                    <div class="col-1">
+                        <input type="text" value="@patient.Diagnos" class="form-control" asp-for="newPatient.Diagnos"/>
+                    </div>
+                    <div class="col-1">
+                        <select class="form-select" asp-for="newPatient.Shipped">
+                            <option selected >@patient.Shipped</option>
+                            @{
+                                foreach(string s in Model.shipping){
+                                    <option value="@s">@s</option>
+                                }
+                            }
+                        </select>
+                    </div> 
+                    <div class="col-1">
+                        <select class="form-select" asp-for="newPatient.SubmitedFrom">
+                            <option selected>@patient.SubmitedFrom</option>
+                            @{
+                                foreach(string f in Model.submitedFrom){
+                                    <option value="@f">@f</option>
+                                }
+                            }
+                        </select>
+                    </div> 
+                    <div class="col-2">
+                        <select class="form-select" asp-for="newPatient.SubmitedTo">
+                            <option selected>@patient.SubmitedTo</option>
+                            @{
+                                foreach(string t in Model.submitedTo){
+                                    <option value="@t">@t</option>
+                                }
+                            }
+                        </select>
+                    </div> 
+                                <div class="col-1 d-none">
+                                    <input type="text" value="@patient.Id" class="form-control invisible" asp-for="newPatient.Id" />
+                                </div>
+                        <div class="col-1 d-print-none">
+                                <input type="submit" value="&#128465" asp-page-handler="DeletePaient" asp-route-id="@patient.Id" />
+                                <input type="submit" value="&#9998" asp-page-handler="UpdatePatient" />
+                        </div> 
+                    </div>
+                    </form>
+                }
+
+
+
+            }
+
+
+            <form method="post">
+                <div class="row d-print-none">
+                    <div class="col-4">
+                        <input type="text" placeholder="ФИО пациента" class="form-control" asp-for="newPatient.Name"/>
+                    </div>
+                    <div class="col-1">
+                        <input type="text" placeholder="Возраст" class="form-control" asp-for="newPatient.Age"/>
+                    </div>
+                    <div class="col-1">
+                        <input type="text" placeholder="Диагноз" class="form-control" asp-for="newPatient.Diagnos"/>
+                    </div>
+                    <div class="col-1">
+                        <select class="form-select" asp-for="newPatient.Shipped">
+                            <option selected disabled>Доставлен</option>
+                            @{
+                                foreach(string s in Model.shipping){
+                                    <option value="@s">@s</option>
+                                }
+                            }
+                        </select>
+                    </div> 
+                    <div class="col-1">
+                        <select class="form-select" asp-for="newPatient.SubmitedFrom">
+                            <option selected disabled>Направлен</option>
+                            @{
+                                foreach(string f in Model.submitedFrom){
+                                    <option value="@f">@f</option>
+                                }
+                            }
+                        </select>
+                    </div> 
+                    <div class="col-2">
+                        <select class="form-select" asp-for="newPatient.SubmitedTo">
+                            <option selected disabled>Переведен</option>
+                            @{
+                                foreach(string t in Model.submitedTo){
+                                    <option value="@t">@t</option>
+                                }
+                            }
+                        </select>
+                    </div> 
+                    <div class="col-1">
+                        <input type="submit" value="+" asp-page-handler="SavePatients" />
+                    </div> 
+                </div>
             </form>
+
+
+
+
+        </div>
+
+        <div class="col-4 pt-3">
             <button class="d-print-none mt-2 action-print">Печать</button>
         </div>
      </div>
