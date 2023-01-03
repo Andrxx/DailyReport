@@ -9,8 +9,6 @@ namespace DailyReport.Services
 {
     public static class DutyServices
     {
-
-
         public static List<string> GetDoctorsList()
         {
             List<string> doctors = new List<string>();
