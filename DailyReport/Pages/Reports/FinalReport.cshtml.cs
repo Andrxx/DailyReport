@@ -37,6 +37,12 @@ namespace DailyReport.Pages.Reports
         public List<DutyDoc> depDocs { get; set; } = new();
         public List<DutyDoc> oritDocs { get; set; } = new();
         public List<DutyDoc> ktDocs { get; set; } = new();
+        [BindProperty]
+        public OutcomingPatient newPatient { get; set; } = new();
+        public List<OutcomingPatient> patients { get; set; } = new();
+        public List<string> shipping = OutPatientService.GetShipping();
+        public List<string> submitedFrom = OutPatientService.GetSubmitedFrom();
+        public List<string> submitedTo = OutPatientService.GetSubmitedTo();
 
         public void OnGet()
         {
@@ -48,7 +54,7 @@ namespace DailyReport.Pages.Reports
             
             //todo - падает при очистке БД
             //_rep = context.DepReports.AsNoTracking().ToList();
-            finalReports = context.FinalReports.AsNoTracking().ToList();
+            //finalReports = context.FinalReports.AsNoTracking().ToList();
 
             try
             {
@@ -226,8 +232,18 @@ namespace DailyReport.Pages.Reports
             catch
             {
             }
-
+            try
+            {
+                patients = (from patient in context.OutcomingPatients
+                            where (patient.Date == actualDate)
+                            select patient).ToList();
+            }
+            catch
+            {
+            }
         }
+
+
 
 
         /// <summary>
@@ -264,5 +280,27 @@ namespace DailyReport.Pages.Reports
             return RedirectToAction("Get");
         }
 
+
+        public IActionResult OnPostSavePatients()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            OutPatientService.AddPatient(newPatient, context);
+            return RedirectToAction("Get");
+        }
+
+        public IActionResult OnPostDeletePaient(int id)
+        {
+            OutPatientService.DeleteOutPatient(id, context);
+            return RedirectToAction("Get");
+        }
+
+        public IActionResult OnPostUpdatePatient()
+        {
+            OutPatientService.UpdateOutPatient(newPatient, context);
+            return RedirectToAction("Get");
+        }
     }
 }
