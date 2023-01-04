@@ -2,15 +2,14 @@
 
 namespace DailyReport.Models
 {
-    public class DepReport : ICloneable
+    public class DepReport
     {
-        internal int incomeChildren;
-
         public int Id { get; set; }
-        public DateTime date { get; set; } = DateTime.Now;//.AddDays(-1);
+        public DateTime date { get; set; } = DateTime.Now.Date.AddDays(-1);
+        [Range(0 , 7)]
         public int depNumber { get; set; }
         public int existed { get; set; }
-        public int existedChildren { get; set; }
+        public int existedChildrens { get; set; }
         public int income { get; set; }
         public int incomeChildrens { get; set; }
         public int outcome { get; set; }
@@ -47,8 +46,6 @@ namespace DailyReport.Models
         public int foreinChildrens { get; set; }
         public int LNR_DNR { get; set; }
         public int LNR_DNRChildrens { get; set; }
-        public int otherUkrane { get; set; }
-        public int otherUkraneChildren { get; set; }
         public int incomeHospital { get; set; }
         public int incomeHospitalChildrens { get; set; }
         public int outcomeHospital { get; set; }
@@ -73,80 +70,26 @@ namespace DailyReport.Models
         public int HIVCildrens { get; set; }
         public int other { get; set; }
         public int otherChildrens { get; set; }
-        public int sepsis { get; set; }
-        public int sepsisChildren { get; set; }
-        public int measles { get; set; }
-        public int measlesChildren { get; set; }
-
-        //уход
-        public int care { get; set; }
-        public int careDisodered { get; set; }
-        public int presentWithCare { get; set; }
-        public int presentWithCareChildren { get; set; }
-
-        public string? dutyNurse { get; set; }
 
         /// <summary>
-        /// подсчет количества больных на кислороде (считаем и детей и взрослых)
+        /// подсчет количества больных на кислороде, только по взрослым (в текущей версии детей не сохраняем и не показываем)
         /// </summary>
         /// <returns></returns>
         public int CountO2()
         {
-            int _summary = oIVL + oMask + oNIVL + oNIVLMask + oNIVLVPO 
-                + oIVLChildrens + oMaskChildren + oNIVLChildrens + oNIVLMaskChildrens + oNIVLVPOChildrens;
+            int _summary = oIVL + oMask + oNIVL + oNIVLMask + oNIVLVPO;
             return _summary;
         }
-        /// <summary>
-        /// Подсчет количества взрослых больных
-        /// </summary>
-        /// <returns></returns>
         public int CountDiseases()
         {
-            int _summary = U071 + U072 + ORVI + pneumonia + OKI + grippe + meningit + hepatit
-                + HIV + other + sepsis + measles;
+            int _summary = U071 + U072 + ORVI + pneumonia + OKI + grippe + meningit + hepatit + HIV + other;
             return _summary;
         }
-        /// <summary>
-        /// Подсчет количества больных детей
-        /// </summary>
-        /// <returns></returns>
         public int CountDiseasesChildren()
         {
             int _summary = U071Childrens + U072Childrens + ORVIChildrens + grippeChildrens + pneumoniaChildrens + OKIChildrens + meningitChildrens +
-                hepatitChildrens + HIVCildrens + otherChildrens + sepsisChildren + measlesChildren;
+                hepatitChildrens + HIVCildrens + otherChildrens;
             return _summary;
-        }
-        /// <summary>
-        /// Считаем всех с учетом ухода. Запускать после заполнения всех полей
-        /// </summary>
-        /// <returns></returns>
-        public int CountPresentCare()
-        {
-            int _summary = present + care;
-            return _summary;
-        }
-
-        /// <summary>
-        /// Считаем взрослых из Украины
-        /// </summary>
-        /// <returns></returns>
-        public int CountUcrane()
-        {
-            return LNR_DNR + otherUkrane;
-        }
-        /// <summary>
-        /// Считаем детей из Украины
-        /// </summary>
-        /// <returns></returns>
-        public int CountUkraneChildren()
-        {
-            return LNR_DNRChildrens + otherUkraneChildren;
-        }
-
-
-        public object Clone()
-        {
-            return MemberwiseClone();
         }
     }
 
