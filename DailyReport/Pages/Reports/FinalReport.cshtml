@@ -751,6 +751,7 @@
             </div>
             <div class="row text-end">
                 <div class="col-4 text-start">Пациент</div>
+                <div class="col-1">Пол</div>
                 <div class="col-1">Возраст</div>
                 <div class="col-1">Диагноз</div>
                 <div class="col-1">Доставлен</div>
@@ -764,7 +765,16 @@
                         <div class="col-4">
                             <input type="text" value="@patient.Name" class="form-control" asp-for="newPatient.Name"/>
                         </div>
-                    
+                            <div class="col-1">
+                                <select class="form-select" asp-for="newPatient.Gender">
+                                    <option selected disabled>@patient.Gender</option>
+                                    @{
+                                        <option value="М">М</option>
+                                        <option value="Ж">Ж</option>
+
+                                    }
+                                </select>
+                            </div>
                      <div class="col-1">
                         <input type="text" value="@patient.Age" class="form-control" asp-for="newPatient.Age"/>
                     </div>
@@ -821,6 +831,16 @@
                 <div class="row d-print-none">
                     <div class="col-4">
                         <input type="text" placeholder="ФИО пациента" class="form-control" asp-for="newPatient.Name"/>
+                    </div>
+                    <div class="col-1">
+                        <select class="form-select" asp-for="newPatient.Gender">
+                            <option selected disabled>Пол</option>
+                            @{
+                                <option value="М">М</option>
+                                <option value="Ж">Ж</option>
+                               
+                            }
+                        </select>
                     </div>
                     <div class="col-1">
                         <input type="text" placeholder="Возраст" class="form-control" asp-for="newPatient.Age"/>
