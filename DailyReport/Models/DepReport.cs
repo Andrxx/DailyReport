@@ -82,12 +82,12 @@ namespace DailyReport.Models
         }
         public int CountDiseases()
         {
-            int _summary = U071 + U072 + ORVI + pneumonia + OKI + meningit + hepatit + HIV + other;
+            int _summary = U071 + U072 + ORVI + pneumonia + OKI + grippe + meningit + hepatit + HIV + other;
             return _summary;
         }
         public int CountDiseasesChildren()
         {
-            int _summary = U071Childrens + U072Childrens + ORVIChildrens + pneumoniaChildrens + OKIChildrens + meningitChildrens +
+            int _summary = U071Childrens + U072Childrens + ORVIChildrens + grippeChildrens + pneumoniaChildrens + OKIChildrens + meningitChildrens +
                 hepatitChildrens + HIVCildrens + otherChildrens;
             return _summary;
         }
