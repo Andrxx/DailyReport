@@ -443,6 +443,19 @@
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
                 <tr class="table-secondary">
+                    <td>Грипп</td>
+                    @{
+                        foreach(DepReport dr in Model.filteredReports){
+                            <td>@if(dr.grippe > 0) @dr.grippe </td>
+                            <td>@if (dr.grippeChildrens > 0) @dr.grippeChildrens </td>
+                        }
+                    }
+                    <td>@Model.finalReport.grippe</td>
+                    <td>@Model.finalReport.grippeChildren</td>
+                    <td>@(@Model.finalReport.grippe + @Model.finalReport.grippeChildren)</td>
+                    <td colspan="3" class="bg-transparent"></td>
+                </tr>
+                <tr class="table-secondary">
                     <td>Пневмония</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -761,7 +774,7 @@
             @{
                 foreach(OutcomingPatient patient in Model.patients){
                     <form method="post">
-                    <div class="row pb-1">
+                    <div class="row pb-1 m-0 ">
                         <div class="col-4">
                             <input type="text" value="@patient.Name" class="form-control" asp-for="newPatient.Name"/>
                         </div>
@@ -821,12 +834,7 @@
                     </div>
                     </form>
                 }
-
-
-
             }
-
-
             <form method="post">
                 <div class="row d-print-none">
                     <div class="col-4">

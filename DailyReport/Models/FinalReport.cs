@@ -52,6 +52,8 @@
         public int U072Children { get; set; }
         public int ORVI { get; set; }
         public int ORVIChildren { get; set; }
+        public int grippe { get; set; }
+        public int grippeChildren { get; set; }
         public int pneumonia { get; set; }
         public int pneumoniaChildren { get; set; }
         public int OKI { get; set; }
@@ -73,12 +75,12 @@
 
         public int CountDiseases()
         {
-            int _summary = U071 + U072 + ORVI + pneumonia + OKI + meningit + hepatit + HIV + other;
+            int _summary = U071 + U072 + ORVI + grippe + pneumonia + OKI + meningit + hepatit + HIV + other;
             return _summary;
         }
         public int CountDiseasesChildren()
         {
-            int _summary = U071Children + U072Children + ORVIChildren + pneumoniaChildren + OKIChildren + meningitChildren +
+            int _summary = U071Children + U072Children + ORVIChildren + grippeChildren + pneumoniaChildren + OKIChildren + meningitChildren +
                 hepatitChildren + HIVCildren + otherChildren;
             return _summary;
         }
