@@ -262,7 +262,7 @@ namespace DailyReport.Pages.Reports
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                return RedirectToAction("Get");
             }
             DutyServices.AddDutyDoc(newDoc, context);
             return RedirectToAction("Get");
@@ -285,7 +285,7 @@ namespace DailyReport.Pages.Reports
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                return RedirectToAction("Get");
             }
             OutPatientService.AddPatient(newPatient, context);
             return RedirectToAction("Get");
