@@ -5,6 +5,7 @@ namespace DailyReport.Pages.Admin
 {
     public class PersonelManegementModel : PageModel
     {
+
         public void OnGet()
         {
         }

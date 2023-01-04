@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DailyReport.Migrations
 {
-    public partial class PatientsAdded : Migration
+    public partial class PersonePatientslAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,12 +28,31 @@ namespace DailyReport.Migrations
                 {
                     table.PrimaryKey("PK_OutcomingPatients", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Personels",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PersType = table.Column<int>(type: "int", nullable: false),
+                    Department = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Personels", x => x.Id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "OutcomingPatients");
+
+            migrationBuilder.DropTable(
+                name: "Personels");
         }
     }
 }
