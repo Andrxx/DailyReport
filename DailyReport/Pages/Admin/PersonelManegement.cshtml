@@ -21,7 +21,10 @@
                 <select class="form-select" asp-for="newPersonel.PersType">
                     <option selected disabled>Должность</option>
                     @{
-                        
+                        foreach (string s in Model.)
+                        {
+                            <option value="@s">@s</option>
+                        }
                     }
                 </select>
             </div>
