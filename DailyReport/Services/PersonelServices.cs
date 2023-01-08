@@ -1,9 +1,20 @@
 ﻿using DailyReport.Models;
+using Microsoft.Build.Evaluation;
+using System.Numerics;
 
 namespace DailyReport.Services
 {
     public static class PersonelServices
     {
+        public static List<string> GetPType()
+        {
+            List<string> PType = new();
+            PType.Add("Врач");
+            PType.Add("Медсестра");
+            PType.Add("Оператор ПК");
+            PType.Add("Санитар");
+            return PType;
+        }
         public static void AddPersonel(Personel personel, ApplicationContext context)
         {
             context.Personels.Add(personel);
