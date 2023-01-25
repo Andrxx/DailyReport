@@ -40,6 +40,10 @@ namespace DailyReport.Pages.Admin
 
         public IActionResult OnPostUpdatePersonel()
         {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Get");
+            }
             PersonelServices.UpdatePersonel(newPersonel, context);
             return RedirectToAction("Get");
         }
