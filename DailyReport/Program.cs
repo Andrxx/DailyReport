@@ -23,7 +23,7 @@ builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-app.Map("/", () => "Index Page");
+//app.Map("/", () => "Index Page");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
