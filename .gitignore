@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/DailyReport/departments.db-shm
+/DailyReport/departments.db-wal
+/DailyReport/departments.db~tDirty67Added
