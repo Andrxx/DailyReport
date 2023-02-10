@@ -3,6 +3,8 @@ using DailyReport.Models;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
+// Add services to the container.
+builder.Services.AddRazorPages();
 
 //builder.WebHost.ConfigureKestrel(serverOptions =>
 //{
@@ -19,8 +21,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite(
     builder.Configuration.GetConnectionString("localDb")));
 
-// Add services to the container.
-builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
