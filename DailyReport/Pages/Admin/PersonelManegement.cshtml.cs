@@ -38,7 +38,7 @@ namespace DailyReport.Pages.Admin
             return RedirectToAction("Get");
         }
 
-        public IActionResult OnPostUpdatePersonel()
+        public IActionResult OnPostUpdatePersonel(Personel newPersonel)
         {
             if (!ModelState.IsValid)
             {
