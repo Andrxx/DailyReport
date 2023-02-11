@@ -9,13 +9,13 @@
             <form method="post">
                 <div class="row pt-2">
                     <div class="col-4">
-                        <input type="text" value="@pers.Name" class="form-control" asp-for="newPersonel.Name" />
+                        <input type="text" value="@pers.Name" class="form-control" asp-for="newPersonel.Name"/>
                     </div>
                     <div class="col-3">
-                        <input type="text" value="@pers.Phone" class="form-control" asp-for="newPersonel.Phone" />
+                        <input type="text" value="@pers.Phone" class="form-control" asp-for="newPersonel.Phone"/>
                     </div>
                     <div class="col-2">
-                        <input type="text" value="@pers.Department" class="form-control" asp-for="newPersonel.Department" />
+                        <input type="text" value="@pers.Department" class="form-control" asp-for="newPersonel.Department"/>
                     </div>
                     <div class="col-2">
                         <select class="form-select" asp-for="newPersonel.PersType">
@@ -29,7 +29,7 @@
                         </select>
                     </div>
                     <div class="col-2 d-none">
-                        <input type="text" value="@pers.Id" class="form-control" asp-for="newPersonel.Id" />
+                        <input type="text" value="@pers.Id" class="form-control" asp-for="newPersonel.Id"/>
                     </div>
                     <div class="col-1 d-print-none">
                         <input type="submit" value="&#128465" asp-page-handler="DeletePersonel" asp-route-id="@pers.Id"/>
@@ -43,8 +43,9 @@
     <div class="row">
         <div class="col-4"><h3>Добавить сотрудника</h3> </div>
     </div>
-    <div class="row">
-        <form method="post">
+    
+    <form method="post">
+        <div class="row">
             <div class="col-4">
                 <input type="text" placeholder="ФИО сотрудника" class="form-control" asp-for="newPersonel.Name" />
             </div>
@@ -64,8 +65,13 @@
                         }
                     }
                 </select>
+                
             </div>
-            <input type="submit" value="+" asp-page-handler="SavePersonel" />
-        </form>
-    </div>
+            <div class="col-1">
+                <input type="submit" value="+" asp-page-handler="SavePersonel" />
+            </div>
+        </div>
+    </form>
+    
+
 </div>
