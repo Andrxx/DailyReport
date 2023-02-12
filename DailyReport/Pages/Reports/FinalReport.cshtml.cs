@@ -26,6 +26,7 @@ namespace DailyReport.Pages.Reports
             deseaseSum8, deseaseSum90, deseaseSum91, deseaseSum1Children, deseaseSum11Children, deseaseSum2Children, deseaseSum3Children, deseaseSum4Children,
             deseaseSum5Children, deseaseSum6Children, deseaseSum7Children, deseaseSum8Children, deseaseSum90Children, deseaseSum91Children,
             deseaseSumFinal, deseaseSumFinalChildren;
+        public int reject, rejectChildren, ambulance, ambulanceChildren, submitOtherHosp, submitOtherHospChildren;
         //фактические места в отделениях
         public DepartmentSpots departmentSpots; 
         //свободные места
@@ -99,7 +100,7 @@ namespace DailyReport.Pages.Reports
 
             if (finalReport == null) finalReport = new();
 
-            //порядок списока отделений должен строго соответствовать порядку отделений в сводке
+            //порядок списка отделений должен строго соответствовать порядку отделений в сводке
             filteredReports.Add(depReport11);
             filteredReports.Add(depReport1);
             //_filteredReports.Add(depReport2); отделение не работает
@@ -115,6 +116,7 @@ namespace DailyReport.Pages.Reports
             //в метод передаем данные не отфильтрованных сводок, иначе потеряем ДС (dep8)
             freeSpots = FreeSpotsServices.CountSpots(reports, departmentSpots);
 
+            //Считаем сумму по отделениям
             foreach (DepReport _rep in filteredReports)
             {
                 finalReport.existed += _rep.existed;
@@ -176,6 +178,10 @@ namespace DailyReport.Pages.Reports
                 finalReport.HIVCildren += _rep.HIVCildrens;
                 finalReport.other += _rep.other;
                 finalReport.otherChildren += _rep.otherChildrens;
+                finalReport.sepsis += _rep.sepsis;
+                finalReport.sepsisChildren += _rep.sepsisChildren;
+                finalReport.care += _rep.care;
+                finalReport.careDisodered += _rep.careDisodered;
             }
             filteredReports.Add(depReport8); //дневной стационар не входит в общий список, добавляем его в лист после вычисления общего количества
 
@@ -183,26 +189,26 @@ namespace DailyReport.Pages.Reports
             oxygenSum91 = depReport91.CountO2();
             deseaseSum1 = depReport1.CountDiseases();
             deseaseSum11 = depReport11.CountDiseases();
-            deseaseSum2 = depReport1.CountDiseases();
-            deseaseSum3 = depReport1.CountDiseases();
-            deseaseSum4 = depReport1.CountDiseases();
-            deseaseSum5 = depReport1.CountDiseases();
-            deseaseSum6 = depReport1.CountDiseases();
-            deseaseSum7 = depReport1.CountDiseases();
-            deseaseSum8 = depReport1.CountDiseases();
-            deseaseSum90 = depReport1.CountDiseases();
-            deseaseSum91 = depReport1.CountDiseases();
+            deseaseSum2 = depReport2.CountDiseases();
+            deseaseSum3 = depReport3.CountDiseases();
+            deseaseSum4 = depReport4.CountDiseases();
+            deseaseSum5 = depReport5.CountDiseases();
+            deseaseSum6 = depReport6.CountDiseases();
+            deseaseSum7 = depReport7.CountDiseases();
+            deseaseSum8 = depReport8.CountDiseases();
+            deseaseSum90 = depReport90.CountDiseases();
+            deseaseSum91 = depReport91.CountDiseases();
             deseaseSum1Children = depReport1.CountDiseasesChildren();
             deseaseSum11Children = depReport11.CountDiseasesChildren();
-            deseaseSum2Children = depReport1.CountDiseasesChildren();
-            deseaseSum3Children = depReport1.CountDiseasesChildren();
-            deseaseSum4Children = depReport1.CountDiseasesChildren();
-            deseaseSum5Children = depReport1.CountDiseasesChildren();
-            deseaseSum6Children = depReport1.CountDiseasesChildren();
-            deseaseSum7Children = depReport1.CountDiseasesChildren();
-            deseaseSum8Children = depReport1.CountDiseasesChildren();
-            deseaseSum90Children = depReport1.CountDiseasesChildren();
-            deseaseSum91Children = depReport1.CountDiseasesChildren();
+            deseaseSum2Children = depReport2.CountDiseasesChildren();
+            deseaseSum3Children = depReport3.CountDiseasesChildren();
+            deseaseSum4Children = depReport4.CountDiseasesChildren();
+            deseaseSum5Children = depReport5.CountDiseasesChildren();
+            deseaseSum6Children = depReport6.CountDiseasesChildren();
+            deseaseSum7Children = depReport7.CountDiseasesChildren();
+            deseaseSum8Children = depReport8.CountDiseasesChildren();
+            deseaseSum90Children = depReport90.CountDiseasesChildren();
+            deseaseSum91Children = depReport91.CountDiseasesChildren();
             deseaseSumFinal = finalReport.CountDiseases();
             deseaseSumFinalChildren = finalReport.CountDiseasesChildren();
 
@@ -215,7 +221,6 @@ namespace DailyReport.Pages.Reports
             catch
             {
             }
-
             try
             {
                 oritDocs = (from doc in context.DutyDocs
@@ -239,6 +244,13 @@ namespace DailyReport.Pages.Reports
                 patients = (from patient in context.OutcomingPatients
                             where (patient.Date == actualDate)
                             select patient).ToList();
+
+                //reject = patients.FindAll(p => float.Parse(p.Age) > 18 & p.SubmitedTo == "Отказ").Count();
+                //rejectChildren = patients.FindAll(p => float.Parse(p.Age) < 18 & p.SubmitedTo == "Отказ").Count();
+                //ambulance = patients.FindAll(p => float.Parse(p.Age) > 18 & p.SubmitedTo == "Амбулаторно").Count();
+                //ambulanceChildren = patients.FindAll(p => float.Parse(p.Age) < 18 & p.SubmitedTo == "Амбулаторно").Count();
+                //submitOtherHosp = patients.FindAll(p => float.Parse(p.Age) > 18 & p.SubmitedTo != "Амбулаторно" & p.SubmitedTo != "Отказ").Count();
+                //submitOtherHospChildren = patients.FindAll(p => float.Parse(p.Age) < 18 & p.SubmitedTo != "Амбулаторно" & p.SubmitedTo != "Отказ").Count();
             }
             catch
             {

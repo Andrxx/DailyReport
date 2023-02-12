@@ -65,6 +65,12 @@ namespace DailyReport.Migrations
                     b.Property<int>("attachedToORITCildrens")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("care")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("careDisodered")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("date")
                         .HasColumnType("TEXT");
 
@@ -209,15 +215,27 @@ namespace DailyReport.Migrations
                     b.Property<int>("presentChildrens")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("presentWithCare")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("presentWithCareChildren")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("restZone")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("restZoneChildrens")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("sepsis")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("sepsisChildren")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
-                    b.ToTable("DepReports");
+                    b.ToTable("DepReports", (string)null);
                 });
 
             modelBuilder.Entity("DailyReport.Models.DutyDoc", b =>
@@ -240,7 +258,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DutyDocs");
+                    b.ToTable("DutyDocs", (string)null);
                 });
 
             modelBuilder.Entity("DailyReport.Models.FinalReport", b =>
@@ -289,6 +307,12 @@ namespace DailyReport.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("attachedToORITChildren")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("care")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("careDisodered")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("date")
@@ -450,15 +474,27 @@ namespace DailyReport.Migrations
                     b.Property<int>("presentNonDaycareChildren")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("presentWithCare")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("presentWithCareChildren")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("restZone")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("restZoneChildren")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("sepsis")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("sepsisChildren")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
-                    b.ToTable("FinalReports");
+                    b.ToTable("FinalReports", (string)null);
                 });
 
             modelBuilder.Entity("DailyReport.Models.OutcomingPatient", b =>
@@ -493,7 +529,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OutcomingPatients");
+                    b.ToTable("OutcomingPatients", (string)null);
                 });
 
             modelBuilder.Entity("DailyReport.Models.Personel", b =>
@@ -516,7 +552,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Personels");
+                    b.ToTable("Personels", (string)null);
                 });
 #pragma warning restore 612, 618
         }

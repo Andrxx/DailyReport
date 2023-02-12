@@ -70,6 +70,14 @@ namespace DailyReport.Models
         public int HIVCildrens { get; set; }
         public int other { get; set; }
         public int otherChildrens { get; set; }
+        public int sepsis { get; set; }
+        public int sepsisChildren { get; set; }
+
+        //уход
+        public int care { get; set; }
+        public int careDisodered { get; set; }
+        public int presentWithCare { get; set; }
+        public int presentWithCareChildren { get; set; }
 
         /// <summary>
         /// подсчет количества больных на кислороде, только по взрослым (в текущей версии детей не сохраняем и не показываем)
@@ -80,15 +88,32 @@ namespace DailyReport.Models
             int _summary = oIVL + oMask + oNIVL + oNIVLMask + oNIVLVPO;
             return _summary;
         }
+        /// <summary>
+        /// Подсчет количества взрослых больных
+        /// </summary>
+        /// <returns></returns>
         public int CountDiseases()
         {
-            int _summary = U071 + U072 + ORVI + pneumonia + OKI + grippe + meningit + hepatit + HIV + other;
+            int _summary = U071 + U072 + ORVI + pneumonia + OKI + grippe + meningit + hepatit + HIV + other + sepsis;
             return _summary;
         }
+        /// <summary>
+        /// Подсчет количества больных детей
+        /// </summary>
+        /// <returns></returns>
         public int CountDiseasesChildren()
         {
             int _summary = U071Childrens + U072Childrens + ORVIChildrens + grippeChildrens + pneumoniaChildrens + OKIChildrens + meningitChildrens +
-                hepatitChildrens + HIVCildrens + otherChildrens;
+                hepatitChildrens + HIVCildrens + otherChildrens + sepsisChildren;
+            return _summary;
+        }
+        /// <summary>
+        /// Считаем всех с учетом ухода. Запускать после заполнения всех полей
+        /// </summary>
+        /// <returns></returns>
+        public int CountPresentCare()
+        {
+            int _summary = present + care;
             return _summary;
         }
     }
