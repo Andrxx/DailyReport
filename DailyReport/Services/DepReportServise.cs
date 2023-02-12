@@ -8,6 +8,7 @@ namespace DailyReport.Services
     public class DepReportServise
     {
         public DepReport DepReport = new DepReport();
+
         /// <summary>
         /// инициализация для отладочных целей
         /// </summary>
