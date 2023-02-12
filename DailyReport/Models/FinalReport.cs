@@ -60,6 +60,8 @@
         public int OKIChildren { get; set; }
         public int meningit { get; set; }
         public int meningitChildren { get; set; }
+        public int sepsis { get; set; }
+        public int sepsisChildren { get; set; }
         public int hepatit { get; set; }
         public int hepatitChildren { get; set; }
         public int HIV { get; set; }
@@ -73,15 +75,29 @@
         public int presentNonDaycare { get; set; }
         public int presentNonDaycareChildren { get; set; }
 
+        //уход
+        public int care { get; set; }
+        public int careDisodered { get; set; }
+        public int presentWithCare { get; set; }
+        public int presentWithCareChildren { get; set; }
+
+        /// <summary>
+        /// Считаем больных по отделениям
+        /// </summary>
+        /// <returns></returns>
         public int CountDiseases()
         {
-            int _summary = U071 + U072 + ORVI + grippe + pneumonia + OKI + meningit + hepatit + HIV + other;
+            int _summary = U071 + U072 + ORVI + grippe + pneumonia + OKI + meningit + hepatit + HIV + other + sepsis;
             return _summary;
         }
+        /// <summary>
+        /// Считаем больных детей по отделениям
+        /// </summary>
+        /// <returns></returns>
         public int CountDiseasesChildren()
         {
             int _summary = U071Children + U072Children + ORVIChildren + grippeChildren + pneumoniaChildren + OKIChildren + meningitChildren +
-                hepatitChildren + HIVCildren + otherChildren;
+                hepatitChildren + HIVCildren + otherChildren + sepsisChildren;
             return _summary;
         }
 
