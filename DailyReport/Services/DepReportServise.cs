@@ -2,24 +2,23 @@
 using DailyReport.Pages;
 using Microsoft.AspNetCore.SignalR;
 using System.ComponentModel.DataAnnotations;
-using System.Composition;
 
 namespace DailyReport.Services
 {
-    public static class DepReportServise
+    public class DepReportServise
     {
-        public static DepReport DepReport = new DepReport();
+        public DepReport DepReport = new DepReport();
 
         /// <summary>
         /// инициализация для отладочных целей
         /// </summary>
-        public static DepReport CreateTest()
-        {
+        public DepReport CreateTest()
+        { 
             //DepReport.Id = 1;
-            //DepReport.date = DateTime.Now;//.Date.AddDays(-1);
-            //DepReport.depNumber = 1;
+            DepReport.date = DateTime.Now.Date.AddDays(-1);
+            DepReport.depNumber = 1;
             DepReport.existed = 1;
-            DepReport.existedChildren = 1;
+            DepReport.existedChildrens = 1;
             DepReport.income = 1;
             DepReport.incomeChildrens = 1;
             DepReport.outcome = 1;
@@ -81,46 +80,12 @@ namespace DailyReport.Services
             return DepReport;
         }
 
-        /// <summary>
-        /// метод для добавления отчета с произвольной датой, dateOffset задает смещение относительно текущей даты, по умолчанию 
-        /// создается тестовый отчет с единицами
-        /// </summary>
-        /// <param name="dateOffset"></param>
-        /// <returns></returns>
-        public static DepReport CreateRandomReport(int department, double dateOffset = 0, bool test = true)
+        public DepReport Get()
         {
-            DepReport report = new();
-            if(test) report = CreateTest();
-            report.depNumber = department;
-            report.date = DateTime.Now.AddDays(dateOffset);
-            return report;
-        }
 
-        /// <summary>
-        /// Метод перезапсывет сводку данными другой сводки, коррекця с прошлых суток, не меняет дату, нозологии и Id
-        /// </summary>
-        /// <param name="lastReport"></param>
-        /// <returns></returns>
-        public static DepReport RewriteReportForLastDay(DepReport lastReport)
-        {
-            DepReport newReport = new();
-            newReport = (DepReport)lastReport.Clone();
-            newReport.present = lastReport.present;
-            newReport.presentChildrens = lastReport.presentChildrens;
-            newReport.existed = lastReport.present;
-            newReport.existedChildren = lastReport.presentChildrens;
-            newReport.income = 0;
-            newReport.incomeChildrens = 0;
-            newReport.outcome = 0;
-            newReport.outcomeChildrens = 0;
-            newReport.movedInDep = 0;
-            newReport.movedOutDep = 0;
-            newReport.movedInDepChildrens = 0;
-            newReport.movedOutDepChildrens = 0;
-            newReport.died = 0;
-            newReport.diedChildrens = 0;
-            return newReport;
+            return DepReport;
         }
-
+    
+    
     }
 }

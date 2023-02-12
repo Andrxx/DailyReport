@@ -49,7 +49,6 @@
                     <td>Взр</td>
                     <td>Дет</td>
                     <td>Взр</td>
-
                     <td>Дет</td>
                     <td>Взр</td>
                     <td>Дет</td>
@@ -495,6 +494,19 @@
                     <td colspan="3" class="bg-transparent "></td>
                 </tr>
                 <tr class="table-secondary">
+                    <td>Сепсис</td>
+                    @{
+                        foreach(DepReport dr in Model.filteredReports){
+                            <td>@if(dr.sepsis > 0) @dr.sepsis </td>
+                            <td>@if (dr.sepsisChildren > 0) @dr.sepsisChildren </td>
+                        }
+                    }
+                    <td>@Model.finalReport.sepsis</td>
+                    <td>@Model.finalReport.sepsisChildren</td>
+                    <td>@(@Model.finalReport.sepsis + @Model.finalReport.sepsisChildren)</td>
+                    <td colspan="3" class="bg-transparent"></td>
+                </tr>
+                <tr class="table-secondary">
                     <td>Гепатит</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -559,6 +571,89 @@
                     <td>@Model.deseaseSumFinalChildren</td>
                     <td>@(@Model.deseaseSumFinal + @Model.deseaseSumFinalChildren)</td>
                     <td colspan="3" class="bg-transparent"></td>
+                </tr>
+                
+                <tr class="table-secondary">
+                    <td>Лица по уходу </td>
+                    @{
+                        foreach(DepReport dr in Model.filteredReports){
+                            <td colspan="2" class="text-left">@if(dr.care > 0) @dr.care</td>  
+                        }
+                    }
+                    <td colspan="3" class="text-center">@Model.finalReport.care</td>
+                    <td colspan="3" class="bg-transparent "></td>
+                </tr>
+                <tr class="table-secondary">
+                    <td>Лица по уходу до 4х лет или детьми инвалидами</td>
+                    @{
+                        foreach(DepReport dr in Model.filteredReports){
+                            <td colspan="2" class="text-left">@if(dr.careDisodered > 0) @dr.careDisodered</td>  
+                        }
+                    }
+                    <td colspan="3" class="text-center">@Model.finalReport.careDisodered</td>
+                    <td colspan="3" class="bg-transparent "></td>
+                </tr>
+                <tr class="table-secondary">
+                    <td>Количество человек в крулосуточном стационаре</td>
+                    @{
+                         <td>@(@Model.deseaseSum11 + @Model.depReport11.care)</td>
+                        <td>@Model.deseaseSum11Children</td>
+                        <td>@(@Model.deseaseSum1 + @Model.depReport1.care)</td>
+                        <td>@Model.deseaseSum1Children</td>
+                        <td>@(@Model.deseaseSum3 + @Model.depReport3.care)</td>
+                        <td>@Model.deseaseSum3Children</td>
+                        <td>@(@Model.deseaseSum4 + @Model.depReport4.care)</td>
+                        <td>@Model.deseaseSum4Children</td>
+                        <td>@(@Model.deseaseSum5 + @Model.depReport5.care)</td>
+                        <td>@Model.deseaseSum5Children</td>
+                        <td>@(@Model.deseaseSum6 + @Model.depReport6.care)</td>
+                        <td>@Model.deseaseSum6Children</td>
+                        <td>@(@Model.deseaseSum7 + @Model.depReport7.care)</td>
+                        <td>@Model.deseaseSum7Children</td>
+                        <td>@(@Model.deseaseSum8 + @Model.depReport8.care)</td>
+                        <td>@Model.deseaseSum8Children</td>
+                        <td>@(@Model.deseaseSum90 + @Model.depReport90.care)</td>
+                        <td>@Model.deseaseSum90Children</td>
+                        <td>@(@Model.deseaseSum91 + @Model.depReport91.care)</td>
+                        <td>@Model.deseaseSum91Children</td>
+                        <td>@(@Model.deseaseSumFinal + Model.finalReport.care)</td>
+                        <td>@Model.deseaseSumFinalChildren</td>
+                        <td>@(@Model.deseaseSumFinal + Model.finalReport.care + @Model.deseaseSumFinalChildren)</td>
+                     }
+                    <td colspan="3" class="bg-transparent "></td>
+                </tr>
+                
+                <tr class="table-secondary">
+                    <td >Отказ от госпитализации</td>
+                    <td colspan="20"></td>
+                    <td  class="text-center">@Model.reject</td>
+                    <td  class="text-center">@Model.rejectChildren</td>
+                    <td  class="text-center"></td>
+                    <td colspan="3" class="bg-transparent "></td>
+                </tr>
+                <tr class="table-secondary">
+                    <td >На амбулаторное лечение</td>
+                    <td colspan="20"></td>
+                    <td  class="text-center">@Model.ambulance</td>
+                    <td  class="text-center">@Model.ambulanceChildren</td>
+                    <td  class="text-center"></td>
+                    <td colspan="3" class="bg-transparent "></td>
+                </tr>
+                <tr class="table-secondary">
+                    <td >В другое МО</td>
+                    <td colspan="20"></td>
+                    <td  class="text-center">@Model.submitOtherHosp</td>
+                    <td class="text-center">@Model.submitOtherHospChildren</td>
+                    <td  class="text-center"></td>
+                    <td colspan="3" class="bg-transparent "></td>
+                    <tr class="table-secondary">
+                    <td >Всего не госпитализировано</td>
+                    <td colspan="20"></td>
+                    <td  class="text-center"></td>
+                    <td  class="text-center"></td>
+                    <td  class="text-center"></td>
+                    <td colspan="3" class="bg-transparent "></td>
+                </tr>
                 </tr>
             </tbody>
         </table>
@@ -789,7 +884,7 @@
                                 </select>
                             </div>
                      <div class="col-1">
-                        <input type="text" value="@patient.Age" class="form-control" asp-for="newPatient.Age"/>
+                                <input type="number" step="0.1" value="@patient.Age" class="form-control" asp-for="newPatient.Age" />
                     </div>
                     <div class="col-1">
                         <input type="text" value="@patient.Diagnos" class="form-control" asp-for="newPatient.Diagnos"/>
@@ -851,7 +946,7 @@
                         </select>
                     </div>
                     <div class="col-1">
-                        <input type="text" placeholder="Возраст" class="form-control" asp-for="newPatient.Age"/>
+                        <input type="number" step="0.1" placeholder="Возраст" class="form-control" asp-for="newPatient.Age"/>
                     </div>
                     <div class="col-1">
                         <input type="text" placeholder="Диагноз" class="form-control" asp-for="newPatient.Diagnos"/>

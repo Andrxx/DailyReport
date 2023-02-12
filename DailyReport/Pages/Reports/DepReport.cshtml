@@ -23,13 +23,13 @@
 
     <form name="repForm" method="post">
         <table class="table mt-2  g-0 d-table table-sm">
-        <thead> 
-            <tr>
-                <th scope="col"><input value="@Model._report.Id" type="number" name="id" class="invisible" />  </th>
-                <th scope="col">Взрослые</th>
-                <th scope="col">Дети</th>
-            </tr>
-        </thead>
+            <thead> 
+                <tr>
+                    <th scope="col"><input value="@Model._report.Id" type="number" name="id" class="invisible" />  </th>
+                    <th scope="col">Взрослые</th>
+                    <th scope="col">Дети</th>
+                </tr>
+            </thead>
             <tr>
                 <td scope="col">Состояло</td>
                 <td scope="col"><input id="existed" oninput="CountSum()" value="@Model._report.existed" type="number" name="existed" asp-for="_report.existed" /></td>
@@ -102,11 +102,11 @@
                     <td scope="col"><input value="@Model._report.oBreaseChildrens" type="number" name="oBreaseChildrens" /> </td>
                 </tr> *@
                 @*админ рздел*@
-                <tr>
+             <tr>
                     <td scope="col">Беременные</td>
                     <td scope="col"><input value="@Model._report.pregnant" type="number" name="pregnant" asp-for="_report.pregnant"/></td>
                     <td scope="col"><input value="@Model._report.pregnantChildrens" type="number" name="pregnantChildrens" class="invisible"/> </td>
-                </tr>
+            </tr>
             <tr>
                 <td scope="col">Пациенты из зон отдыха</td>
                 <td scope="col"><input value="@Model._report.restZone" type="number" name="restZone" asp-for="_report.restZone"/></td>
@@ -174,6 +174,11 @@
                 <td scope="col"><input value="@Model._report.meningitChildrens" type="number" name="meningitChildrens" asp-for="_report.meningitChildrens"/> </td>
             </tr>
             <tr>
+                <td scope="col">Сепсис</td>
+                <td scope="col"><input value="@Model._report.sepsis" type="number" name="sepsis" asp-for="_report.sepsis"/></td>
+                <td scope="col"><input value="@Model._report.sepsisChildren" type="number" name="sepsisChildrens" asp-for="_report.sepsisChildren"/> </td>
+            </tr>
+            <tr>
                 <td scope="col">Гепатит</td>
                 <td scope="col"><input value="@Model._report.hepatit" type="number" name="hepatit" asp-for="_report.hepatit"/></td>
                 <td scope="col"><input value="@Model._report.hepatitChildrens" type="number" name="hepatitChildrens" asp-for="_report.hepatitChildrens"/> </td>
@@ -188,7 +193,16 @@
                 <td scope="col"><input value="@Model._report.other" type="number" name="other" asp-for="_report.other"/></td>
                 <td scope="col"><input value="@Model._report.otherChildrens" type="number" name="otherChildrens" asp-for="_report.otherChildrens"/> </td>
             </tr>
-    </table>
+            <tr>
+                <td scope="col">Лица по уходу (общее количество)</td>
+                <td scope="col" ><input value="@Model._report.care" type="number" name="care" asp-for="_report.care" /></td>
+                <td scope="col" class="d-print-none">В этом поле указывать всех по уходу, и до 4х лет и старше!!!</td>
+             </tr>
+             <tr>
+                <td scope="col">Лица по уходу до 4х лет или с детьми инвалидами</td>
+                <td scope="col" colspan="2"><input value="@Model._report.careDisodered" type="number" name="careDisodered" asp-for="_report.careDisodered" /></td>
+             </tr>
+        </table>
 
         <input class="d-print-none" type="submit" value="Отправить" asp-page-handler="Report" asp-route-depNumber=@Model._report.depNumber />
         <input class="d-print-none" type="submit" value="Загрузить предыдущую сводку" asp-page-handler="PrevReport" asp-route-depNumber=@Model._report.depNumber />

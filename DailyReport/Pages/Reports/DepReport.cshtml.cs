@@ -19,22 +19,27 @@ namespace DailyReport.Pages.Reports
         {
             context = db;
         }
-        public DepReportServise reportServise = new DepReportServise();
+        public DepReportServise reportServise = new();
 
         public void OnGet(int? depNumber)
         {
             //Reports = context.DepReports.AsNoTracking().ToList();
             //_report = reportServise.CreateTest();
-            
+
             //падает при очистке БД - обработать для очистки и миграций
-            _report = (from report in context.DepReports
-                       where (report.depNumber == depNumber) && (report.date.Date == actualDate)
-                       select report).FirstOrDefault();
-            
+            //try
+            //{
+                _report = (from report in context.DepReports
+                           where (report.depNumber == depNumber) && (report.date.Date == actualDate)
+                           select report).FirstOrDefault();
+            //}
+            //catch { throw new  }
             if (_report == null)
             {
                 //тест для БД, изменить на создание нового для релиза
-                _report = reportServise.CreateTest();
+                //_report = reportServise.CreateTest();
+                
+                _report = new();
                 if (depNumber.HasValue)
                 {
                     _report.depNumber = depNumber.Value;
@@ -43,7 +48,6 @@ namespace DailyReport.Pages.Reports
             else
             {
             }
-            //OnPostDelete();
         }
 
         public void OnPostPrevReport(int depNumber)
@@ -53,20 +57,19 @@ namespace DailyReport.Pages.Reports
             _report = (from report in context.DepReports
                        where (report.depNumber == depNumber) && (report.date.Date == lastDate)
                        select report).FirstOrDefault();
-            if(_report == null )
+            if (_report == null)
             {
-                _report = new();
-                _report.depNumber = depNumber;
-                _report.date = DateTime.Today.AddDays(-1);
+                _report = new()
+                {
+                    depNumber = depNumber,
+                    date = actualDate
+                };
             };
         }
 
         public RedirectToPageResult OnPostReport(DepReport _report)
-        {
-            
+        { 
             context.DepReports.Update(_report);
-         
-
             context.SaveChanges();
             return RedirectToPage("DepReport", new { depNumber = _report.depNumber });
         }
