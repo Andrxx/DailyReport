@@ -86,9 +86,6 @@ namespace DailyReport.Migrations
                     b.Property<int>("diedChildrens")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("dutyNurse")
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("existed")
                         .HasColumnType("INTEGER");
 
@@ -244,29 +241,6 @@ namespace DailyReport.Migrations
                     b.ToTable("DepReports");
                 });
 
-            modelBuilder.Entity("DailyReport.Models.Department", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AdultSpotsQuantity")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ChildrenSpotsQuantity")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Number")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("WardQuantity")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Departments");
-                });
-
             modelBuilder.Entity("DailyReport.Models.DutyDoc", b =>
                 {
                     b.Property<int>("Id")
@@ -330,12 +304,6 @@ namespace DailyReport.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("U072Children")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ambulance")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ambulanceChildren")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("attachedToORIT")
@@ -515,37 +483,16 @@ namespace DailyReport.Migrations
                     b.Property<int>("presentWithCareChildren")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("reject")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("rejectChildren")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("restZone")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("restZoneChildren")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("sendToMO")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("sendToMOChildren")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("sepsis")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("sepsisChildren")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("sumAdults")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("sumAll")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("sumChild")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -559,10 +506,7 @@ namespace DailyReport.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("AgeMonth")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("AgeYears")
+                    b.Property<string>("Age")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Date")
@@ -601,7 +545,6 @@ namespace DailyReport.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PersType")
