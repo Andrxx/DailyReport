@@ -9,6 +9,10 @@ namespace DailyReport.Services
 {
     public static class DutyServices
     {
+        /// <summary>
+        /// Тестовый список для отладки
+        /// </summary>
+        /// <returns></returns>
         public static List<string> GetDoctorsList()
         {
             List<string> doctors = new List<string>();
@@ -36,12 +40,29 @@ namespace DailyReport.Services
             return doctors;
         }
 
-        public static List<DutyDoc> GetDutyShifts()
+        /// <summary>
+        /// Получаем список персонала из БД, null если пусто
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static List<string> GetDoctorsList(ApplicationContext context)
         {
-            List<DutyDoc> dutyShifts = new();
-
-            return dutyShifts;
+            List<Personel> personels = new();
+            List<string> _doctors = new();
+            try
+            {
+                personels = (from personel in context.Personels
+                            where (personel.PersType == "Врач")
+                            select personel).ToList();
+            }
+            catch { }
+            foreach(Personel p in personels)
+            {
+                _doctors.Add(p.Name);
+            }
+            return _doctors;
         }
+
 
         public static void AddDutyDoc(DutyDoc dutyDoc, ApplicationContext context)
         {
@@ -67,8 +88,14 @@ namespace DailyReport.Services
                 _doc.type = doc.type;
                 _doc.departments = doc.departments;
                 context.SaveChanges();
-            }
-            
+            }   
         }
+
+        //static List<DutyDoc> ConvertPersToDoc(List<Personel> personels) 
+        //{ 
+
+        //    List<DutyDoc> docs = new List<DutyDoc>();
+        //    return docs;
+        //}
     }
 }
