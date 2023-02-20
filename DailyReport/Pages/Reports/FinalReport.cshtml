@@ -2,6 +2,7 @@
 @using DailyReport.Models
 @model DailyReport.Pages.Reports.FinalReportModel
 @{
+    ViewData["Title"] = "Сводка по больнице";
 }
 
 <div class="container">
@@ -626,34 +627,34 @@
                 <tr class="table-secondary">
                     <td >Отказ от госпитализации</td>
                     <td colspan="20"></td>
-                    <td  class="text-center">@Model.reject</td>
-                    <td  class="text-center">@Model.rejectChildren</td>
-                    <td  class="text-center"></td>
+                    <td><input id="reject" oninput="CountReject()" type="number" name="reject" class="reject" value="0"/></td>
+                    <td><input id="rejectChildren" oninput="CountReject()" type="number" name="rejectChildrens" class="reject" value="0"/> </td>
+                    <td class="text-center" id="sumRej"></td>
                     <td colspan="3" class="bg-transparent "></td>
                 </tr>
                 <tr class="table-secondary">
                     <td >На амбулаторное лечение</td>
                     <td colspan="20"></td>
-                    <td  class="text-center">@Model.ambulance</td>
-                    <td  class="text-center">@Model.ambulanceChildren</td>
-                    <td  class="text-center"></td>
+                    <td><input id="ambulance" oninput="CountReject()" type="number" name="existed" class="reject" value="0"/></td>
+                    <td><input id="ambulanceChildren" oninput="CountReject()" type="number" name="existedChildrens" class="reject" value="0"/> </td>
+                    <td class="text-center" id="sumAmb"></td>
                     <td colspan="3" class="bg-transparent "></td>
                 </tr>
                 <tr class="table-secondary">
                     <td >В другое МО</td>
                     <td colspan="20"></td>
-                    <td  class="text-center">@Model.submitOtherHosp</td>
-                    <td class="text-center">@Model.submitOtherHospChildren</td>
-                    <td  class="text-center"></td>
+                    <td><input id="sendToMO" oninput="CountReject()" type="number" name="existed" class="reject" value="0"/></td>
+                    <td><input id="sendToMOChildren" oninput="CountReject()" type="number" name="existedChildrens" class="reject" value="0"/> </td>
+                    <td  class="text-center" id="sumOth"></td>
                     <td colspan="3" class="bg-transparent "></td>
                     <tr class="table-secondary">
+                <tr>
                     <td >Всего не госпитализировано</td>
                     <td colspan="20"></td>
-                    <td  class="text-center"></td>
-                    <td  class="text-center"></td>
-                    <td  class="text-center"></td>
+                    <td  class="text-center" id="sumAdults"></td>
+                    <td  class="text-center" id="sumChild"></td>
+                    <td  class="text-center" id="sumAll"></td>
                     <td colspan="3" class="bg-transparent "></td>
-                </tr>
                 </tr>
             </tbody>
         </table>
@@ -664,13 +665,13 @@
                     <h3>Дежурная смена</h3>
                 </div>
             </div>
-            <div class="row">
+            <div class="row pt-4">
                 <div class=" col-5">
                     <h4>Врачи</h4>
                 </div>
             </div>
 
-            <div class="row pb-4">
+            <div class="row ">
                 @{
                     foreach(DutyDoc doc in Model.depDocs){
                         <form method="post">
@@ -726,13 +727,13 @@
                 </div>
             </form>
 
-            <div class="row">
+            <div class="row pt-4">
                 <div class=" col-5">
                     <h4>ОРИТ</h4>
                 </div>
             </div>
 
-            <div class="row pb-4">
+            <div class="row">
                 @{
                     foreach(DutyDoc doc in Model.oritDocs){
                         <form method="post">
@@ -789,13 +790,13 @@
                 </div>
             </form>
 
-             <div class="row">
+             <div class="row pt-4">
                 <div class=" col-5">
                     <h4>Компьютерная томография</h4>
                 </div>
             </div>
 
-            <div class="row pb-4">
+            <div class="row">
                 @{
                     foreach(DutyDoc doc in Model.ktDocs){
                         <form method="post">
