@@ -54,3 +54,7 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.reject {
+    max-width: 50px;
+}

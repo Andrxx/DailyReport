@@ -22,3 +22,18 @@ function CountSumChildrens() {
 	$("#presentChildrens").val(sum);
 
 }
+
+function CountReject() {
+	let sumRej = parseInt($("#reject").val()) + parseInt($("#rejectChildren").val());
+	let sumAmb = parseInt($("#ambulance").val()) + parseInt($("#ambulanceChildren").val());
+	let sumOth = parseInt($("#sendToMO").val()) + parseInt($("#sendToMOChildren").val());
+	$("#sumRej").html(sumRej);
+	$("#sumAmb").html(sumAmb);
+	$("#sumOth").html(sumOth);
+	let sumAdults = parseInt($("#reject").val()) + parseInt($("#ambulance").val()) + parseInt($("#sendToMO").val());
+	$("#sumAdults").html(sumAdults);
+	let sumChild = parseInt($("#rejectChildren").val()) + parseInt($("#ambulanceChildren").val()) + parseInt($("#sendToMOChildren").val());
+	$("#sumChild").html(sumChild);
+	let sumAll = sumAdults + sumChild;
+	$("#sumAll").html(sumAll);
+}
