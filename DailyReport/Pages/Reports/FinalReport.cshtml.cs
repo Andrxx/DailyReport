@@ -31,8 +31,8 @@ namespace DailyReport.Pages.Reports
         public DepartmentSpots departmentSpots; 
         //свободные места
         public FreeSpots freeSpots;
-        //список доступных докторов стационара
-        public List<string> doctors = DutyServices.GetDoctorsList();
+        public List<string> doctors;
+
         [BindProperty]
         public DutyDoc newDoc { get; set; } = new();
         public List<DutyDoc> depDocs { get; set; } = new();
@@ -212,6 +212,9 @@ namespace DailyReport.Pages.Reports
             deseaseSumFinal = finalReport.CountDiseases();
             deseaseSumFinalChildren = finalReport.CountDiseasesChildren();
 
+            //список доступных докторов стационара
+            doctors = DutyServices.GetDoctorsList(context);
+
             try 
             { 
                 depDocs = (from doc in context.DutyDocs
@@ -241,9 +244,9 @@ namespace DailyReport.Pages.Reports
             }
             try
             {
-                patients = (from patient in context.OutcomingPatients
-                            where (patient.Date == actualDate)
-                            select patient).ToList();
+                //patients = (from patient in context.OutcomingPatients
+                //            where (patient.Date == actualDate)
+                //            select patient).ToList();
 
                 //reject = patients.FindAll(p => float.Parse(p.Age) > 18 & p.SubmitedTo == "Отказ").Count();
                 //rejectChildren = patients.FindAll(p => float.Parse(p.Age) < 18 & p.SubmitedTo == "Отказ").Count();
@@ -258,16 +261,9 @@ namespace DailyReport.Pages.Reports
         }
 
 
-
-
-        /// <summary>
-        /// todo сохранение финальной сводки
-        /// </summary>
-        public void SaveReport()
-        {
-            
-        }
-
+       
+        
+        
         /// <summary>
         /// сохранение данных смены через абстракцию сервисов
         /// </summary>
