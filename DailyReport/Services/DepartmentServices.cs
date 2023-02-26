@@ -1,44 +1,21 @@
-﻿using DailyReport.Models;
-
-namespace DailyReport.Services
+﻿namespace DailyReport.Services
 {
     public static class DepartmentServices
     {
-        public static void AddDepartment(Department department, ApplicationContext context)
+        public static List<string> Get()
         {
-            context.Departments.Add(department);
-            context.SaveChanges();
+            List<string> PType = new();
+            PType.Add("Врач");
+            PType.Add("Медсестра");
+            PType.Add("Оператор ПК");
+            PType.Add("Санитар");
+            return PType;
         }
 
-        public static void DeleteDepartment(int id, ApplicationContext context)
-        {
-            Department department = (from d in context.Departments
-                                 where (d.Id == id)
-                                 select d).FirstOrDefault();
-            if (department != null) context.Departments.Remove(department);
-            context.SaveChanges();
-        }
-
-        public static void UpdateDepartment(Department department, ApplicationContext context)
-        {
-            Department _department = (from d in context.Departments
-                                  where (d.Id == department.Id)
-                                  select d).FirstOrDefault();
-            if (_department != null)
-            {
-                _department.Number = department.Number;
-                _department.WardQuantity = department.WardQuantity;
-                _department.AdultSpotsQuantity = department.AdultSpotsQuantity;
-                _department.ChildrenSpotsQuantity = department.ChildrenSpotsQuantity;
-                context.SaveChanges();
-            }
-        }
-
-        //public static List<string> GetDepNumber(ApplicationContext context)
+        //public static Enum DepNumbers { get; }
         //{
-        //    List<string> depNumbers = new List<string>();
-
+        //    first = 0
+        //    "Первое" = 1
         //}
-
     }
 }
