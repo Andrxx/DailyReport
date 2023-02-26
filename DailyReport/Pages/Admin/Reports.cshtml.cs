@@ -1,5 +1,4 @@
 using DailyReport.Models;
-using DailyReport.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -20,19 +19,6 @@ namespace DailyReport.Pages.Admin
         {
             _report = (from report in context.DepReports
                        select report).ToList();
-        }
-
-        public IActionResult OnPostDeleteReport(int id)
-        {
-            DepReport rep = (from r in context.DepReports
-                                        where (r.Id == id)
-                                        select r).FirstOrDefault();
-            if (rep != null)
-            {
-                context.DepReports.Remove(rep);
-                context.SaveChanges();
-            }
-            return RedirectToAction("Get");
         }
     }
 }

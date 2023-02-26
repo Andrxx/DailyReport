@@ -13,10 +13,10 @@ namespace DailyReport.Services
         /// инициализация для отладочных целей
         /// </summary>
         public DepReport CreateTest()
-        { 
+        {
             //DepReport.Id = 1;
-            DepReport.date = DateTime.Now.Date.AddDays(-1);
-            DepReport.depNumber = 1;
+            //DepReport.date = DateTime.Now;//.Date.AddDays(-1);
+            //DepReport.depNumber = 1;
             DepReport.existed = 1;
             DepReport.existedChildrens = 1;
             DepReport.income = 1;
@@ -80,12 +80,21 @@ namespace DailyReport.Services
             return DepReport;
         }
 
-        public DepReport Get()
+        /// <summary>
+        /// метод для добавления отчета с произвольной датой, dateOffset задает смещение относительно текущей даты, по умолчанию 
+        /// создается тестовый отчет с единицами
+        /// </summary>
+        /// <param name="dateOffset"></param>
+        /// <returns></returns>
+        public DepReport CreateRandomReport(int department, double dateOffset = +2, bool test = true)
         {
-
-            return DepReport;
+            DepReport report = new();
+            if(test) report = CreateTest();
+            report.depNumber = department;
+            report.date = DateTime.Now.AddDays(dateOffset);
+            return report;
         }
-    
-    
+
+
     }
 }
