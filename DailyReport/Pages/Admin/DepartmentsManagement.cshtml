@@ -1,0 +1,40 @@
+﻿@page
+@model DailyReport.Pages.Admin.DepartmentsManagementModel
+@{
+    ViewData["Title"] = "Список отделений";
+}
+
+<div class="container">
+    <form method="post">
+        <div class="row">
+            <div class="col-3">
+                <input type="number" placeholder="Номер отделения" class="form-control" asp-for="department.Number" />
+            </div>
+            <div class="col-3">
+                <input type="number" placeholder="Количиство палат" class="form-control" asp-for="department.WardQuantity" />
+            </div>
+            <div class="col-2">
+                <input type="text" placeholder="Взрослые" class="form-control" asp-for="department.AdltSpotsQuantity" />
+            </div>
+            <div class="col-2">
+                <input type="text" placeholder="Детские" class="form-control" asp-for="department.ChildrenSpotsQuantity" />
+            </div>
+            <div class="col-2">
+               @* <select class="form-select" asp-for="">
+                    <option selected disabled>Должность</option>
+                    @{
+                        foreach (string s in Model.PType)
+                        {
+                            <option value="@s">@s</option>
+                        }
+                    }
+                </select>*@
+
+            </div>
+            <div class="col-1">
+                <input type="submit" value="+" asp-page-handler="SavePersonel" />
+            </div>
+        </div>
+    </form>
+
+</div>
