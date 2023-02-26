@@ -14,7 +14,8 @@ namespace DailyReport.Pages.Reports
         [BindProperty]
         public DepReport _report { get; set; }
         public List<DepReport> Reports { get; private set; } = new();
-        DateTime actualDate = DateTime.Today.AddDays(-1);
+        public DateTime actualDate = DateTime.Today, reportDate;//.AddDays(-1);
+        
         public DepReportModel(ApplicationContext db)
         {
             context = db;
@@ -23,30 +24,48 @@ namespace DailyReport.Pages.Reports
 
         public void OnGet(int? depNumber)
         {
+            DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 6, 0, 0);
+            DateTime endTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 5, 59, 59).AddDays(1);
+            if(startTime.Hour < 6)
+            {
+                startTime = startTime.AddDays(-1);
+                endTime = endTime.AddDays(-1);
+            }
+            //задаем дату отображения на сводке, устнавливть только после коррекции стартовой даты 
+            reportDate = startTime;
             //Reports = context.DepReports.AsNoTracking().ToList();
             //_report = reportServise.CreateTest();
 
             //падает при очистке БД - обработать для очистки и миграций
             //try
             //{
-                _report = (from report in context.DepReports
-                           where (report.depNumber == depNumber) && (report.date.Date == actualDate)
-                           select report).FirstOrDefault();
+            _report = (from report in context.DepReports
+                       where (report.depNumber == depNumber)
+                       where ((report.date > startTime) && (report.date < endTime))
+                       select report).FirstOrDefault();
+
+
+            //if(_report.date > )
+            //тест 
+            //var reps = (from repo in context.DepReports
+            //            where (repo.depNumber == depNumber)
+            //            where (repo.date.Date > startTime) && (repo.date.Date < endTime)
+            //            select repo).ToList();
+            //_report = reportServise.CreateRandomReport((int)depNumber);
             //}
             //catch { throw new  }
+
             if (_report == null)
             {
                 //тест для БД, изменить на создание нового для релиза
                 //_report = reportServise.CreateTest();
-                
+
+
                 _report = new();
                 if (depNumber.HasValue)
                 {
                     _report.depNumber = depNumber.Value;
                 }
-            }
-            else
-            {
             }
         }
 
@@ -54,8 +73,10 @@ namespace DailyReport.Pages.Reports
         {
             //Reports = context.DepReports.AsNoTracking().ToList();
             DateTime lastDate = DateTime.Today.AddDays(-2);
+            DateTime startTime = new DateTime(lastDate.Year, lastDate.Month, lastDate.Day, 6, 0, 0);
+            DateTime endTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 5, 59, 59);
             _report = (from report in context.DepReports
-                       where (report.depNumber == depNumber) && (report.date.Date == lastDate)
+                       where (report.depNumber == depNumber) && (report.date.Date > startTime && report.date.Date < endTime)
                        select report).FirstOrDefault();
             if (_report == null)
             {
@@ -68,7 +89,7 @@ namespace DailyReport.Pages.Reports
         }
 
         public RedirectToPageResult OnPostReport(DepReport _report)
-        { 
+        {
             context.DepReports.Update(_report);
             context.SaveChanges();
             return RedirectToPage("DepReport", new { depNumber = _report.depNumber });

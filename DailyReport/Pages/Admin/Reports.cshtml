@@ -1,0 +1,26 @@
+﻿@page
+@using DailyReport.Models
+@model DailyReport.Pages.Admin.ReportsModel
+@{
+}
+
+<div class="container">
+    @foreach (DepReport rep in Model._report)
+    {
+        <div class="row">
+            <div class="col-2">
+                @rep.Id.ToString()
+                @rep.depNumber.ToString()
+            </div>
+        
+            <div class="col-2">
+                @rep.present.ToString()
+            </div>
+            <div class="col-2">
+                @rep.date.ToString()
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+    }
+</div>
