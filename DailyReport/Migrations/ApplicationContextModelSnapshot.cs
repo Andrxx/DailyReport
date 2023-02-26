@@ -238,6 +238,29 @@ namespace DailyReport.Migrations
                     b.ToTable("DepReports");
                 });
 
+            modelBuilder.Entity("DailyReport.Models.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AdultSpotsQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ChildrenSpotsQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("WardQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
+                });
+
             modelBuilder.Entity("DailyReport.Models.DutyDoc", b =>
                 {
                     b.Property<int>("Id")
