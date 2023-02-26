@@ -17,7 +17,7 @@
             Сводка @msg @zone зона
         </div>
         <div class="col-4 offset-4" >
-            Дата @Model._report.date.ToShortDateString()
+            Дата @Model.reportDate.ToShortDateString()
         </div>
     </div>
 
@@ -28,12 +28,14 @@
                     <th scope="col"><input value="@Model._report.Id" type="number" name="id" class="invisible" />  </th>
                     <th scope="col">Взрослые</th>
                     <th scope="col">Дети</th>
+                    
                 </tr>
             </thead>
             <tr>
                 <td scope="col">Состояло</td>
                 <td scope="col"><input id="existed" oninput="CountSum()" value="@Model._report.existed" type="number" name="existed" asp-for="_report.existed" /></td>
                 <td scope="col"><input id="existedChildrens" oninput="CountSumChildrens()" value="@Model._report.existedChildrens" type="number" name="existedChildrens" asp-for="_report.existedChildrens" /> </td>
+                <th scope="col"><input value="@Model._report.date" name="date" type="datetime" class="invisible" asp-for="_report.date" />  </th>
             </tr>
             <tr>
                 <td scope="col">Выбыло</td>
@@ -205,7 +207,7 @@
         </table>
 
         <input class="d-print-none" type="submit" value="Отправить" asp-page-handler="Report" asp-route-depNumber=@Model._report.depNumber />
-        <input class="d-print-none" type="submit" value="Загрузить предыдущую сводку" asp-page-handler="PrevReport" asp-route-depNumber=@Model._report.depNumber />
+        @*<input class="d-print-none" type="submit" value="Загрузить предыдущую сводку" asp-page-handler="PrevReport" asp-route-depNumber=@Model._report.depNumber />*@
     </form>
     <button class="d-print-none mt-2 action-print">Печать</button>
 

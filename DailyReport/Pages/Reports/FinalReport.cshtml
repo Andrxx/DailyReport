@@ -7,11 +7,10 @@
 
 <div class="container">
     <div class="row" >
-        <table class="table m-0 p-0 table-bordered border-dark">
-           
+        <table class="table m-0 p-0 table-bordered border-dark"> 
             <tbody>
                 <tr class="table-primary">
-                    <td rowspan="2">@DateTime.Today.AddDays(-1).ToShortDateString()</td>
+                    <td rowspan="2">@Model.reportDate.ToShortDateString()</td>
                     <td colspan="4">1-е ИО</td>
                     <td colspan="2" rowspan="2">3-е ИО (40) чистая</td>
                     <td colspan="2" rowspan="2">4-е ИО (40, 18 бюджет, 2д бюджет) чистая</td>
