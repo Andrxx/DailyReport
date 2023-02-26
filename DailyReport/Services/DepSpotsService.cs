@@ -24,26 +24,26 @@ namespace DailyReport.Services
             DepartmentSpots _departmentSpots = new();
             _departmentSpots.dep1 = 11;
             _departmentSpots.dep1Children = 11;
-            _departmentSpots.dep11 = 15;
-            _departmentSpots.dep11Children = 3;
+            _departmentSpots.dep11 = 16;
+            _departmentSpots.dep11Children = 2;
             //_departmentSpots.dep2 = 15;   второе отделение не работает
             //_departmentSpots.dep2Children = 5;
             _departmentSpots.dep3 = 1;
             _departmentSpots.dep3Children = 39;
-            _departmentSpots.dep4 = 38;
+            _departmentSpots.dep4 = 28;
             _departmentSpots.dep4Children = 2;
             _departmentSpots.dep5 = 1;
             _departmentSpots.dep5Children = 54;
-            _departmentSpots.dep6 = 43;
-            _departmentSpots.dep6Children = 12;
-            _departmentSpots.dep7 = 37;
-            _departmentSpots.dep7Children = 8;
-            _departmentSpots.dep8 = 7;
-            _departmentSpots.dep8Children = 3;
+            _departmentSpots.dep6 = 30;
+            _departmentSpots.dep6Children = 20;
+            _departmentSpots.dep7 = 36;
+            _departmentSpots.dep7Children = 9;
+            _departmentSpots.dep8 = 24;
+            _departmentSpots.dep8Children = 1;
             _departmentSpots.dep91 = 1;
             _departmentSpots.dep91Children = 1;
             _departmentSpots.dep90 = 9;
-            _departmentSpots.dep90Children = 9;
+            _departmentSpots.dep90Children = 4;
             
 
             return _departmentSpots;
