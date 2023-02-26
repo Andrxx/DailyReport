@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DailyReport.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230226132248_DepartmentsAdded")]
+    [Migration("20230226213909_DepartmentsAdded")]
     partial class DepartmentsAdded
     {
         /// <inheritdoc />
@@ -239,6 +239,29 @@ namespace DailyReport.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DepReports");
+                });
+
+            modelBuilder.Entity("DailyReport.Models.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AdultSpotsQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ChildrenSpotsQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("WardQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("DailyReport.Models.DutyDoc", b =>
