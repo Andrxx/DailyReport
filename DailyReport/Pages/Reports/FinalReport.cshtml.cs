@@ -21,7 +21,8 @@ namespace DailyReport.Pages.Reports
         }
         public List<DepReport> reports { get; private set; } = new();
         public List<DepReport> filteredReports = new List<DepReport>();
-        DateTime actualDate = DateTime.Today.AddDays(-1);
+        public DateTime actualDate = DateTime.Today, reportDate;//.AddDays(-1);
+
         public int oxygenSum11, oxygenSum91, deseaseSum1, deseaseSum11, deseaseSum2, deseaseSum3, deseaseSum4, deseaseSum5, deseaseSum6, deseaseSum7,
             deseaseSum8, deseaseSum90, deseaseSum91, deseaseSum1Children, deseaseSum11Children, deseaseSum2Children, deseaseSum3Children, deseaseSum4Children,
             deseaseSum5Children, deseaseSum6Children, deseaseSum7Children, deseaseSum8Children, deseaseSum90Children, deseaseSum91Children,
@@ -47,6 +48,16 @@ namespace DailyReport.Pages.Reports
 
         public void OnGet()
         {
+            DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 6, 0, 0);
+            DateTime endTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 5, 59, 59).AddDays(1);
+            if (startTime.Hour < 6)
+            {
+                startTime = startTime.AddDays(-1);
+                endTime = endTime.AddDays(-1);
+            }
+            //задаем дату отображения на сводке, устнавливть только после коррекции стартовой даты 
+            reportDate = startTime;
+
             departmentSpots = DepSpotsService.GetSpots();
             departmentSpots.sum = DepSpotsService.CountSum();
             departmentSpots.sumChildren = DepSpotsService.CountSumChildren();
