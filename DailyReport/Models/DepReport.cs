@@ -5,7 +5,7 @@ namespace DailyReport.Models
     public class DepReport
     {
         public int Id { get; set; }
-        public DateTime date { get; set; } = DateTime.Now.Date.AddDays(-1);
+        public DateTime date { get; set; } = DateTime.Now;//.AddDays(-1);
         [Range(0 , 7)]
         public int depNumber { get; set; }
         public int existed { get; set; }
