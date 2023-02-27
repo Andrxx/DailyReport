@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DailyReport.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230226213909_DepartmentsAdded")]
+    [Migration("20230227073239_DepartmentsAdded")]
     partial class DepartmentsAdded
     {
         /// <inheritdoc />
