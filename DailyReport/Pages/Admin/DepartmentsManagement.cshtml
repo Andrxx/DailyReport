@@ -6,6 +6,12 @@
 }
 
 <div class="container">
+    <div class="row">
+        <div class="col-2">Номер отделения</div>
+        <div class="col-2">Количество палат</div>
+        <div class="col-2">Количество взрослых коек</div>
+        <div class="col-2">Количество детских коек</div>
+    </div>
     @{
         foreach (Department deps in Model.Departments)
         {
@@ -29,7 +35,7 @@
                     <div class="col-2">
                         <input type="text" value="@deps.WardQuantity" class="form-control" asp-for="department.WardQuantity" />
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <input type="text" value="@deps.AdultSpotsQuantity" class="form-control" asp-for="department.AdultSpotsQuantity" />
                     </div>
                     <div class="col-2">
@@ -64,7 +70,7 @@
                     <option value="91">ОРИТ грязная зона</option>
                 </select>                
             </div>
-            <div class="col-3">
+            <div class="col-2">
                 <input type="number" placeholder="Количество палат" class="form-control" asp-for="department.WardQuantity" />
             </div>
             <div class="col-2">
@@ -77,7 +83,7 @@
 
             </div>
             <div class="col-1">
-                <input type="submit" value="+" asp-page-handler="Save" />
+                <input type="submit" value="+" asp-page-handler="SaveDepartment" />
             </div>
         </div>
     </form>
