@@ -75,28 +75,28 @@
             @*раздел кислорода*@
             <tr>
                 <td scope="col">ИВЛ</td>
-                <td scope="col" colspan="2"><input value="@Model._report.oIVL" type="number" name="oIVL" asp-for="_report.oIVL" /></td>
-                @*  <td scope="col"><input value="@Model._report.oIVLChildrens" type="number" name="oIVLChildrens" asp-for="_report."/> </td>*@
+                <td scope="col" ><input value="@Model._report.oIVL" type="number" name="oIVL" asp-for="_report.oIVL" /></td>
+                <td scope="col"><input value="@Model._report.oIVLChildrens" type="number" name="oIVLChildrens" asp-for="_report.oIVLChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">НИВЛ</td>
-                <td scope="col" colspan="2"><input value="@Model._report.oNIVL" type="number" name="oNIVL" asp-for="_report.oNIVL" /></td>
-                @*  <td scope="col"><input value="@Model._report.oNIVLChildrens" type="number" name="oNIVLChildrens" /> </td>*@
+                <td scope="col" ><input value="@Model._report.oNIVL" type="number" name="oNIVL" asp-for="_report.oNIVL" /></td>
+                <td scope="col"><input value="@Model._report.oNIVLChildrens" type="number" name="oNIVLChildrens" /> </td>
             </tr>
             <tr>
                 <td scope="col">НИВЛ+ВПО</td>
-                <td scope="col"colspan="2"><input value="@Model._report.oNIVLVPO" type="number" name="oNIVLVPO" asp-for="_report.oNIVLVPO"/></td>
-                @*   <td scope="col"><input value="@Model._report.oNIVLVPOChildrens" type="number" name="oNIVLVPOChildrens" /> </td>*@
+                <td scope="col"><input value="@Model._report.oNIVLVPO" type="number" name="oNIVLVPO" asp-for="_report.oNIVLVPO"/></td>
+                <td scope="col"><input value="@Model._report.oNIVLVPOChildrens" type="number" name="oNIVLVPOChildrens" /> </td>
             </tr>
             <tr>
                 <td scope="col">НИВЛ+КМ</td>
-                <td scope="col" colspan="2"><input value="@Model._report.oNIVLMask" type="number" name="oNIVLMask" asp-for="_report.oNIVLMask"/></td>
-                @*   <td scope="col"><input value="@Model._report.oNIVLMaskChildrens" type="number" name="oNIVLMaskChildrens" /> </td>*@
+                <td scope="col" ><input value="@Model._report.oNIVLMask" type="number" name="oNIVLMask" asp-for="_report.oNIVLMask"/></td>
+                <td scope="col"><input value="@Model._report.oNIVLMaskChildrens" type="number" name="oNIVLMaskChildrens" /> </td>
             </tr>
             <tr>
                 <td scope="col">Лицевая маска</td>
-                <td scope="col" colspan="2"><input value="@Model._report.oMask" type="number" name="oMask" asp-for="_report.oMask"/></td>
-                @*   <td scope="col"><input value="@Model._report.oMaskChildren" type="number" name="oMaskChildren" /> </td>*@
+                <td scope="col" ><input value="@Model._report.oMask" type="number" name="oMask" asp-for="_report.oMask"/></td>
+                <td scope="col"><input value="@Model._report.oMaskChildren" type="number" name="oMaskChildren" /> </td>
             </tr>
                 @* <tr>
                 <td scope="col">Спонтанное дыхание</td>
@@ -107,7 +107,7 @@
              <tr>
                     <td scope="col">Беременные</td>
                     <td scope="col"><input value="@Model._report.pregnant" type="number" name="pregnant" asp-for="_report.pregnant"/></td>
-                    <td scope="col"><input value="@Model._report.pregnantChildrens" type="number" name="pregnantChildrens" class="invisible"/> </td>
+                    <td scope="col"><input value="@Model._report.pregnantChildrens" type="number" name="pregnantChildrens"/> </td>
             </tr>
             <tr>
                 <td scope="col">Пациенты из зон отдыха</td>
