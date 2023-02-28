@@ -50,7 +50,7 @@ namespace DailyReport.Pages.Reports
         {
             DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 6, 0, 0);
             DateTime endTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 5, 59, 59).AddDays(1);
-            if (startTime.Hour < 6)
+            if (actualDate.Hour < 6)
             {
                 startTime = startTime.AddDays(-1);
                 endTime = endTime.AddDays(-1);
@@ -120,8 +120,9 @@ namespace DailyReport.Pages.Reports
             filteredReports.Add(depReport5);
             filteredReports.Add(depReport6);
             filteredReports.Add(depReport7);
-            filteredReports.Add(depReport90);
             filteredReports.Add(depReport91);
+            filteredReports.Add(depReport90);
+            
             
 
             //в метод передаем данные не отфильтрованных сводок, иначе потеряем ДС (dep8)
