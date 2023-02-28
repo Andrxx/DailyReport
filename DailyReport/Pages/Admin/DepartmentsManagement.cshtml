@@ -18,7 +18,7 @@
             <form method="post">
                 <div class="row pt-2">
                     <div class="col-2">
-                        <select class="form-select" asp-for="department.Number">
+                        <select class="form-select" value="@deps.Number" asp-for="department.Number">
                             <option selected value="@deps.Number"></option>
                             <option value="1">Первое</option>
                             <option value="11">Первое грязная зона</option>
@@ -52,7 +52,9 @@
             </form>
         }
     }
-
+     <div class="row">
+        <div class="col-4">Добавить отделение</div>
+    </div>
     <form method="post">
         <div class="row">
             <div class="col-2">
