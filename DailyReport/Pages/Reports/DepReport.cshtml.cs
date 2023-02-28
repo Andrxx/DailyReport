@@ -14,7 +14,7 @@ namespace DailyReport.Pages.Reports
         [BindProperty]
         public DepReport _report { get; set; }
         public List<DepReport> Reports { get; private set; } = new();
-        public DateTime actualDate = DateTime.Today, reportDate;//.AddDays(-1);
+        public DateTime actualDate = DateTime.Now, reportDate;//.AddDays(-1);
         
         public DepReportModel(ApplicationContext db)
         {
@@ -26,7 +26,7 @@ namespace DailyReport.Pages.Reports
         {
             DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 6, 0, 0);
             DateTime endTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 5, 59, 59).AddDays(1);
-            if(startTime.Hour < 6)
+            if(actualDate.Hour < 6)
             {
                 startTime = startTime.AddDays(-1);
                 endTime = endTime.AddDays(-1);
