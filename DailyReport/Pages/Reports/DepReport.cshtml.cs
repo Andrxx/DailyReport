@@ -24,9 +24,9 @@ namespace DailyReport.Pages.Reports
 
         public void OnGet(int? depNumber)
         {
-            DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 6, 0, 0);
-            DateTime endTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 5, 59, 59).AddDays(1);
-            if(actualDate.Hour < 6)
+            DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 0, 0);
+            DateTime endTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 6, 59, 59).AddDays(1);
+            if(actualDate.Hour < 7)
             {
                 startTime = startTime.AddDays(-1);
                 endTime = endTime.AddDays(-1);
