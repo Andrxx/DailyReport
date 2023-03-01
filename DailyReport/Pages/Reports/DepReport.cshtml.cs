@@ -22,8 +22,9 @@ namespace DailyReport.Pages.Reports
         }
         public DepReportServise reportServise = new();
 
-        public void OnGet(int? depNumber)
+        public void OnGet(int depNumber, double dateOffset = 0)
         {
+            actualDate = actualDate.AddDays(dateOffset);
             DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 0, 0);
             DateTime endTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 6, 59, 59).AddDays(1);
             if(actualDate.Hour < 7)
@@ -62,13 +63,8 @@ namespace DailyReport.Pages.Reports
             {
                 //тест для БД, изменить на создание нового для релиза
                 //_report = reportServise.CreateTest();
-
-
                 _report = new();
-                if (depNumber.HasValue)
-                {
-                    _report.depNumber = depNumber.Value;
-                }
+                _report.depNumber = depNumber;
             }
         }
 
