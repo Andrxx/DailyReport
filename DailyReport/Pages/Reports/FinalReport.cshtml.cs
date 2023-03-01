@@ -3,6 +3,7 @@ using DailyReport.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Composition;
 using System.Security.Cryptography;
 
 namespace DailyReport.Pages.Reports
@@ -21,7 +22,7 @@ namespace DailyReport.Pages.Reports
         }
         public List<DepReport> reports { get; private set; } = new();
         public List<DepReport> filteredReports = new List<DepReport>();
-        public DateTime actualDate = DateTime.Today, reportDate;//.AddDays(-1);
+        public DateTime actualDate = DateTime.Now, reportDate;//.AddDays(-1);
 
         public int oxygenSum11, oxygenSum91, deseaseSum1, deseaseSum11, deseaseSum2, deseaseSum3, deseaseSum4, deseaseSum5, deseaseSum6, deseaseSum7,
             deseaseSum8, deseaseSum90, deseaseSum91, deseaseSum1Children, deseaseSum11Children, deseaseSum2Children, deseaseSum3Children, deseaseSum4Children,
@@ -54,9 +55,10 @@ namespace DailyReport.Pages.Reports
             {
                 startTime = startTime.AddDays(-1);
                 endTime = endTime.AddDays(-1);
+                reportDate = actualDate.AddDays(-1);
             }
             //задаем дату отображения на сводке, устнавливть только после коррекции стартовой даты 
-            reportDate = startTime;
+            else { reportDate = actualDate; }
 
             departmentSpots = DepSpotsService.GetSpots();
             departmentSpots.sum = DepSpotsService.CountSum();
@@ -71,7 +73,7 @@ namespace DailyReport.Pages.Reports
             try
             {
                 reports = (from report in context.DepReports
-                           where (report.date.Date == actualDate)
+                           where ((report.date > startTime) && (report.date < endTime))
                            select report).ToList();
             }
             catch
@@ -230,7 +232,7 @@ namespace DailyReport.Pages.Reports
             try 
             { 
                 depDocs = (from doc in context.DutyDocs
-                        where (doc.dutyDate == actualDate) & (doc.type == DutyType.Department)
+                        where ((doc.dutyDate > startTime) && (doc.dutyDate < endTime)) & (doc.type == DutyType.Department)
                         select doc).ToList();
             }
             catch
@@ -239,7 +241,7 @@ namespace DailyReport.Pages.Reports
             try
             {
                 oritDocs = (from doc in context.DutyDocs
-                           where (doc.dutyDate == actualDate) & (doc.type == DutyType.Reanimanion)
+                           where ((doc.dutyDate > startTime) && (doc.dutyDate < endTime)) & (doc.type == DutyType.Reanimanion)
                            select doc).ToList();
             }
             catch
@@ -248,7 +250,7 @@ namespace DailyReport.Pages.Reports
             try
             {
                 ktDocs = (from doc in context.DutyDocs
-                            where (doc.dutyDate == actualDate) & (doc.type == DutyType.Rentgenology)
+                            where ((doc.dutyDate > startTime) && (doc.dutyDate < endTime)) & (doc.type == DutyType.Rentgenology)
                             select doc).ToList();
             }
             catch
@@ -256,9 +258,9 @@ namespace DailyReport.Pages.Reports
             }
             try
             {
-                //patients = (from patient in context.OutcomingPatients
-                //            where (patient.Date == actualDate)
-                //            select patient).ToList();
+                patients = (from patient in context.OutcomingPatients
+                            where ((patient.Date > startTime) && (patient.Date < endTime))
+                            select patient).ToList();
 
                 //reject = patients.FindAll(p => float.Parse(p.Age) > 18 & p.SubmitedTo == "Отказ").Count();
                 //rejectChildren = patients.FindAll(p => float.Parse(p.Age) < 18 & p.SubmitedTo == "Отказ").Count();
@@ -271,10 +273,7 @@ namespace DailyReport.Pages.Reports
             {
             }
         }
-
-
-       
-        
+      
         
         /// <summary>
         /// сохранение данных смены через абстракцию сервисов
