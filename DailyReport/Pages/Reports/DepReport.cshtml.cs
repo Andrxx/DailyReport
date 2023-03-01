@@ -30,9 +30,12 @@ namespace DailyReport.Pages.Reports
             {
                 startTime = startTime.AddDays(-1);
                 endTime = endTime.AddDays(-1);
+                reportDate = actualDate.AddDays(-1);
             }
             //задаем дату отображения на сводке, устнавливть только после коррекции стартовой даты 
-            reportDate = startTime;
+            else { reportDate = actualDate; }
+
+
             //Reports = context.DepReports.AsNoTracking().ToList();
             //_report = reportServise.CreateTest();
 
@@ -83,7 +86,7 @@ namespace DailyReport.Pages.Reports
                 _report = new()
                 {
                     depNumber = depNumber,
-                    date = actualDate
+                    date = reportDate
                 };
             };
         }
