@@ -226,13 +226,14 @@
                     <td colspan="2">@(@Model.freeSpots.dep5 + @Model.freeSpots.dep5Children)</td>
                     <td colspan="2">@(@Model.freeSpots.dep6 + @Model.freeSpots.dep6Children)</td>
                     <td colspan="2">@(@Model.freeSpots.dep7 + @Model.freeSpots.dep7Children)</td>
-                    <td colspan="2">@(@Model.freeSpots.dep8 + @Model.freeSpots.dep8Children)</td>
-                    <td colspan="2">@(@Model.freeSpots.dep90 + @Model.freeSpots.dep90Children)</td>
                     <td colspan="2">@(@Model.freeSpots.dep91 + @Model.freeSpots.dep91Children)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep90 + @Model.freeSpots.dep90Children)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep8 + @Model.freeSpots.dep8Children)</td>
                     <td>@Model.freeSpots.sum</td>
                     <td>@Model.freeSpots.sumChildren</td>
                     <td>@(@Model.freeSpots.sum + @Model.freeSpots.sumChildren)</td>
                 </tr>
+                
                 <tr>
                     <td>ИВЛ</td>
                     @{
@@ -399,6 +400,9 @@
                     <td>@(@Model.finalReport.outcomeHospital + @Model.finalReport.outcomeHospitalChildren)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
+                
+                @*НОЗООЛОГИИ *@
+
                 <tr class="table-primary">
                     <td><b>Нозологии</b></td>
                     <td colspan="23"></td>
@@ -538,7 +542,7 @@
                     <td>Прочее</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.other > 0) @dr.HIV </td>
+                            <td>@if(dr.other > 0) @dr.other </td>
                             <td>@if (dr.HIVCildrens > 0) @dr.otherChildrens</td>
                         }
                     }
@@ -563,12 +567,12 @@
                     <td>@Model.deseaseSum6Children</td>
                     <td>@Model.deseaseSum7</td>
                     <td>@Model.deseaseSum7Children</td>
-                    <td>@Model.deseaseSum8</td>
-                    <td>@Model.deseaseSum8Children</td>
-                    <td>@Model.deseaseSum90</td>
-                    <td>@Model.deseaseSum90Children</td>
                     <td>@Model.deseaseSum91</td>
                     <td>@Model.deseaseSum91Children</td>
+                    <td>@Model.deseaseSum90</td>
+                    <td>@Model.deseaseSum90Children</td>   
+                    <td>@Model.deseaseSum8</td>
+                    <td>@Model.deseaseSum8Children</td>
                     <td>@Model.deseaseSumFinal</td>
                     <td>@Model.deseaseSumFinalChildren</td>
                     <td>@(@Model.deseaseSumFinal + @Model.deseaseSumFinalChildren)</td>
@@ -598,7 +602,7 @@
                 <tr class="table-secondary">
                     <td>Количество человек в крулосуточном стационаре</td>
                     @{
-                         <td>@(@Model.deseaseSum11 + @Model.depReport11.care)</td>
+                        <td>@(@Model.deseaseSum11 + @Model.depReport11.care)</td>
                         <td>@Model.deseaseSum11Children</td>
                         <td>@(@Model.deseaseSum1 + @Model.depReport1.care)</td>
                         <td>@Model.deseaseSum1Children</td>
@@ -612,14 +616,14 @@
                         <td>@Model.deseaseSum6Children</td>
                         <td>@(@Model.deseaseSum7 + @Model.depReport7.care)</td>
                         <td>@Model.deseaseSum7Children</td>
-                        <td>@(@Model.deseaseSum8 + @Model.depReport8.care)</td>
-                        <td>@Model.deseaseSum8Children</td>
-                        <td>@(@Model.deseaseSum90 + @Model.depReport90.care)</td>
-                        <td>@Model.deseaseSum90Children</td>
                         <td>@(@Model.deseaseSum91 + @Model.depReport91.care)</td>
                         <td>@Model.deseaseSum91Children</td>
-                        <td>@(@Model.deseaseSumFinal + Model.finalReport.care)</td>
-                        <td>@Model.deseaseSumFinalChildren</td>
+                        <td>@(@Model.deseaseSum90 + @Model.depReport90.care)</td>
+                        <td>@Model.deseaseSum90Children</td>
+                        <td>@(@Model.deseaseSum8 + @Model.depReport8.care)</td>
+                        <td>@Model.deseaseSum8Children</td>
+                        <td>@*(@Model.deseaseSumFinal + Model.finalReport.care)*@</td>
+                        <td>@*Model.deseaseSumFinalChildren*@</td>
                         <td>@(@Model.deseaseSumFinal + Model.finalReport.care + @Model.deseaseSumFinalChildren)</td>
                      }
                     <td colspan="3" class="bg-transparent "></td>
@@ -721,6 +725,7 @@
                     </div> 
                      <div class="col-2 d-none">
                         <input type="text" value="@DutyType.Department" class="form-control d-none" asp-for="newDoc.type" />
+                        <input type="datetime" value="@Model.reportDate" class="form-control invisible" asp-for="newDoc.dutyDate" />
                     </div>
                     <div class="col-1">
                         <input type="submit" value="+" asp-page-handler="SaveDoc"/>
@@ -778,12 +783,14 @@
                                 }
                             }
                         </select>
+
                     </div> 
                     <div class="col-2">
                         <input type="text" value="ОРИТ" class="form-control" asp-for="newDoc.departments"/>
                     </div>
                     <div class="col-2 d-none">
                         <input type="text" value="@DutyType.Reanimanion" class="form-control invisible" asp-for="newDoc.type" />
+                        <input type="datetime" value="@Model.reportDate" class="form-control invisible" asp-for="newDoc.dutyDate" />
                     </div>
                     <div class="col-1">
                         <input type="submit"  value="+" asp-page-handler="SaveDoc"/>
@@ -844,6 +851,7 @@
                     </div> 
                     <div class="col-2">
                         <input type="text" value="Врач КТ" class="form-control" asp-for="newDoc.departments"/>
+                        <input type="datetime" value="@Model.reportDate" class="form-control invisible" asp-for="newDoc.dutyDate" />
                     </div>
                     <div class="col-2 d-none">
                         <input type="text" value="@DutyType.Rentgenology" class="form-control invisible" asp-for="newDoc.type" />
@@ -923,6 +931,7 @@
                     </div> 
                                 <div class="col-1 d-none">
                                     <input type="text" value="@patient.Id" class="form-control invisible" asp-for="newPatient.Id" />
+                                    <input type="datetime" value="@patient.Date" class="form-control invisible" asp-for="newPatient.Date" />
                                 </div>
                         <div class="col-1 d-print-none">
                                 <input type="submit" value="&#128465" asp-page-handler="DeletePaient" asp-route-id="@patient.Id" />
@@ -932,10 +941,12 @@
                     </form>
                 }
             }
+
             <form method="post">
                 <div class="row d-print-none">
                     <div class="col-4">
                         <input type="text" placeholder="ФИО пациента" class="form-control" asp-for="newPatient.Name"/>
+                        <input type="datetime" value="@Model.reportDate" class="form-control invisible" asp-for="newPatient.Date" />
                     </div>
                     <div class="col-1">
                         <select class="form-select" asp-for="newPatient.Gender">

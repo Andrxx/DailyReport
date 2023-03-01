@@ -75,8 +75,11 @@ namespace DailyReport.Services
             OutcomingPatient patient = (from p in context.OutcomingPatients
                                    where (p.Id == id)
                                    select p).FirstOrDefault();
-            if (patient != null) context.OutcomingPatients.Remove(patient);
-            context.SaveChanges();
+            if (patient != null)
+            {
+                context.OutcomingPatients.Remove(patient);
+                context.SaveChanges();
+            }
         }
 
         public static void UpdateOutPatient(OutcomingPatient patient, ApplicationContext context)
