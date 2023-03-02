@@ -26,7 +26,7 @@ namespace DailyReport.Pages.Reports
         {
             actualDate = actualDate.AddDays(dateOffset);
             DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 0, 0);
-            DateTime endTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 6, 59, 59).AddDays(1);
+            DateTime endTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 6, 59, 59).AddDays(1);
             if(actualDate.Hour < 7)
             {
                 startTime = startTime.AddDays(-1);
@@ -71,11 +71,11 @@ namespace DailyReport.Pages.Reports
         public void OnPostPrevReport(int depNumber)
         {
             //Reports = context.DepReports.AsNoTracking().ToList();
-            DateTime lastDate = DateTime.Today.AddDays(-2);
-            DateTime startTime = new DateTime(lastDate.Year, lastDate.Month, lastDate.Day, 6, 0, 0);
-            DateTime endTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 5, 59, 59);
+            DateTime lastlDate = actualDate.AddDays(-2);
+            DateTime startTime = new DateTime(lastlDate.Year, lastlDate.Month, lastlDate.Day, 7, 0, 0);
+            DateTime endTime = new DateTime(lastlDate.Year, lastlDate.Month, lastlDate.Day, 6, 59, 59).AddDays(1);
             _report = (from report in context.DepReports
-                       where (report.depNumber == depNumber) && (report.date.Date > startTime && report.date.Date < endTime)
+                       where (report.depNumber == depNumber) && (report.date > startTime && report.date < endTime)
                        select report).FirstOrDefault();
             if (_report == null)
             {
@@ -84,7 +84,8 @@ namespace DailyReport.Pages.Reports
                     depNumber = depNumber,
                     date = reportDate
                 };
-            };
+            }
+            else { _report.date = actualDate; }  
         }
 
         public RedirectToPageResult OnPostReport(DepReport _report)
