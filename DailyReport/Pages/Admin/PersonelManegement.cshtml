@@ -16,11 +16,19 @@
                         <input type="text" value="@pers.Phone" class="form-control" asp-for="newPersonel.Phone"/>
                     </div>
                     <div class="col-2">
-                        <input type="text" value="@pers.Department" class="form-control" asp-for="newPersonel.Department"/>
+                        <select class="form-select" asp-for="newPersonel.Department">
+                            <option selected value="@pers.Department">@pers.Department</option>
+                            @{
+                                foreach (string s in Model.DepsList)
+                                {
+                                    <option value="@s">@s</option>
+                                }
+                            }
+                        </select>
                     </div>
                     <div class="col-2">
                         <select class="form-select" asp-for="newPersonel.PersType">
-                            <option selected disabled>@pers.PersType</option>
+                            <option selected value="@pers.PersType">@pers.PersType</option>
                             @{
                                 foreach (string s in Model.PType)
                                 {
@@ -54,7 +62,15 @@
                 <input type="text" placeholder="Телефон" class="form-control" asp-for="newPersonel.Phone" />
             </div>
             <div class="col-2">
-                <input type="text" placeholder="Отделение" class="form-control" asp-for="newPersonel.Department" />
+                <select class="form-select" asp-for="newPersonel.Department">
+                    <option selected disabled>Отделение</option>
+                    @{
+                        foreach (string s in Model.DepsList)
+                        {
+                            <option value="@s">@s</option>
+                        }
+                    }
+                </select>
             </div>
             <div class="col-2">
                 <select class="form-select" asp-for="newPersonel.PersType">

@@ -36,8 +36,8 @@ namespace DailyReport.Services
             submiedFrom.Add("ГБ5");
             submiedFrom.Add("ГБ8");
             submiedFrom.Add("ККБ4");
-            //submiedFrom.Add("");
-            //submiedFrom.Add("");
+            submiedFrom.Add("ПТД");
+            submiedFrom.Add("Наркодиспансер");
             //submiedFrom.Add("");
             //submiedFrom.Add("");
             //submiedFrom.Add("");
@@ -56,8 +56,8 @@ namespace DailyReport.Services
             submiedTo.Add("ГБ5");
             submiedTo.Add("ГБ8");
             submiedTo.Add("ККБ4");
-            //submiedFrom.Add("");
-            //submiedFrom.Add("");
+            submiedTo.Add("ПТД");
+            submiedTo.Add("Наркодиспансер");
             //submiedFrom.Add("");
             //submiedFrom.Add("");
             //submiedFrom.Add("");

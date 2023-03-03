@@ -219,20 +219,36 @@
                 </tr>
                 <tr class="table-secondary">
                     <td>Свободные места</td>
-                    <td colspan="2">@(@Model.freeSpots.dep11 + @Model.freeSpots.dep11Children)</td>
-                    <td colspan="2">@(@Model.freeSpots.dep1 + @Model.freeSpots.dep1Children)</td>
-                    <td colspan="2">@(@Model.freeSpots.dep3 + @Model.freeSpots.dep3Children)</td>
-                    <td colspan="2">@(@Model.freeSpots.dep4 + @Model.freeSpots.dep4Children)</td>
-                    <td colspan="2">@(@Model.freeSpots.dep5 + @Model.freeSpots.dep5Children)</td>
-                    <td colspan="2">@(@Model.freeSpots.dep6 + @Model.freeSpots.dep6Children)</td>
-                    <td colspan="2">@(@Model.freeSpots.dep7 + @Model.freeSpots.dep7Children)</td>
-                    <td colspan="2">@(@Model.freeSpots.dep91 + @Model.freeSpots.dep91Children)</td>
-                    <td colspan="2">@(@Model.freeSpots.dep90 + @Model.freeSpots.dep90Children)</td>
-                    <td colspan="2">@(@Model.freeSpots.dep8 + @Model.freeSpots.dep8Children)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep11S @*+ @Model.freeSpots.dep11Children*@)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep1S @*+ @Model.freeSpots.dep1Children*@)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep3S @*+ @Model.freeSpots.dep3Children*@)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep4S @*+ @Model.freeSpots.dep4Children*@)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep5S @*+ @Model.freeSpots.dep5Children*@)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep6S @*+ @Model.freeSpots.dep6Children*@)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep7S @*+ @Model.freeSpots.dep7Children*@)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep91S @*+ @Model.freeSpots.dep91Children*@)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep90S @*+ @Model.freeSpots.dep90Children*@)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep8S @*+ @Model.freeSpots.dep8Children*@)</td>
                     <td>@Model.freeSpots.sum</td>
                     <td>@Model.freeSpots.sumChildren</td>
                     <td>@(@Model.freeSpots.sum + @Model.freeSpots.sumChildren)</td>
                 </tr>
+               @* <tr class="table-secondary">
+                    <td>Загруженность %</td>
+                    <td colspan="2">@(@Model.freeSpots.dep11P)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep1P)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep3P)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep4P)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep5P)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep6P)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep7P)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep91P)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep90P)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep8P)</td>
+                    <td>@Model.freeSpots.sum</td>
+                    <td>@Model.freeSpots.sumChildren</td>
+                    <td>@(@Model.freeSpots.sum + @Model.freeSpots.sumChildren)</td>
+                </tr>*@
                 
                 <tr>
                     <td>ИВЛ</td>
@@ -885,7 +901,7 @@
                         </div>
                             <div class="col-1">
                                 <select class="form-select" asp-for="newPatient.Gender">
-                                    <option selected disabled>@patient.Gender</option>
+                                    <option selected value="@patient.Gender">@patient.Gender</option>
                                     @{
                                         <option value="М">М</option>
                                         <option value="Ж">Ж</option>

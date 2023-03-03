@@ -10,9 +10,12 @@ $(function($){
 		});
 });
 
+
+
+
 function CountSum() {
-	let sum = parseInt($("#existed").val()) - parseInt($("#outcome").val()) + parseInt($("#income").val()) - parseInt($("#movedOutDep").val())
-		+ parseInt($("#movedInDep").val()) - parseInt($("#died").val());
+	let sum = parseInt($("#existed").val()) - parseInt($("#outcome").val()) + parseInt($("#income").val()) -
+		parseInt($("#movedOutDep").val()) + parseInt($("#movedInDep").val()) - parseInt($("#died").val());
 	$("#present").val(sum);
 	
 }
