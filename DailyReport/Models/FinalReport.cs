@@ -81,6 +81,17 @@
         public int presentWithCare { get; set; }
         public int presentWithCareChildren { get; set; }
 
+        //не госпитализированые пациенты
+        public int reject { get; set; }
+        public int rejectChildren { get; set; }
+        public int ambulance { get; set; }
+        public int ambulanceChildren { get; set; }
+        public int sendToMO { get; set; }
+        public int sendToMOChildren { get; set; }
+        public int sumAdults { get; set; }
+        public int sumChild { get; set; }
+        public int sumAll { get; set; }
+
         /// <summary>
         /// Считаем больных по отделениям
         /// </summary>

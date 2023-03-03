@@ -5,6 +5,7 @@
     string msg, zone/*, alertMsg = string.Empty*/;
     if ((Model._report.depNumber == 90) || (Model._report.depNumber == 91)) msg = "ОРИТ";
     else if (Model._report.depNumber == 8) msg = "Дневной стационар";
+    else if (Model._report.depNumber == 11) msg = " 1 отделения";
     else msg = Model._report.depNumber + " отделения";
     if ((Model._report.depNumber == 11) || (Model._report.depNumber == 91)) zone = "грязная ";
     else zone = "чистая ";

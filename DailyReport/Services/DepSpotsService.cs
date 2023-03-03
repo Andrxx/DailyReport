@@ -56,7 +56,7 @@ namespace DailyReport.Services
         public static int CountSum()
         {
             int sum = departmentSpots.dep1 + departmentSpots.dep11 + departmentSpots.dep3 + departmentSpots.dep4 + departmentSpots.dep5 +
-                departmentSpots.dep6 + departmentSpots.dep7 +  departmentSpots.dep91 + departmentSpots.dep91Children;
+                departmentSpots.dep6 + departmentSpots.dep7 + departmentSpots.dep91 + departmentSpots.dep90;
 
             return sum;
         }
@@ -68,7 +68,7 @@ namespace DailyReport.Services
         public static int CountSumChildren()
         {
             int sum = departmentSpots.dep1Children + departmentSpots.dep11Children + departmentSpots.dep3Children + departmentSpots.dep4Children + departmentSpots.dep5Children + 
-                departmentSpots.dep6Children + departmentSpots.dep7Children + departmentSpots.dep90 + departmentSpots.dep90Children ;
+                departmentSpots.dep6Children + departmentSpots.dep7Children + departmentSpots.dep90Children + departmentSpots.dep91Children;
 
             return sum;
         }
