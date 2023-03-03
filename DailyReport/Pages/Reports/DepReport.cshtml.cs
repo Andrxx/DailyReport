@@ -15,7 +15,6 @@ namespace DailyReport.Pages.Reports
         public DepReport _report { get; set; }
         public List<DepReport> Reports { get; private set; } = new();
         public DateTime actualDate = DateTime.Now, reportDate;//.AddDays(-1);
-        
         public DepReportModel(ApplicationContext db)
         {
             context = db;
@@ -27,6 +26,7 @@ namespace DailyReport.Pages.Reports
             actualDate = actualDate.AddDays(dateOffset);
             DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 0, 0);
             DateTime endTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 6, 59, 59).AddDays(1);
+            //коррекция даты для ночного времени
             if(actualDate.Hour < 7)
             {
                 startTime = startTime.AddDays(-1);
@@ -68,24 +68,24 @@ namespace DailyReport.Pages.Reports
             }
         }
 
-        public void OnPostPrevReport(int depNumber)
+        public RedirectToPageResult OnPostPrevReport(int depNumber)
         {
             //Reports = context.DepReports.AsNoTracking().ToList();
             DateTime lastlDate = actualDate.AddDays(-2);
-            DateTime startTime = new DateTime(lastlDate.Year, lastlDate.Month, lastlDate.Day, 7, 0, 0);
-            DateTime endTime = new DateTime(lastlDate.Year, lastlDate.Month, lastlDate.Day, 6, 59, 59).AddDays(1);
+            DateTime startTime = new DateTime(lastlDate.Year, lastlDate.Month, lastlDate.Day, 8, 0, 0);
+            DateTime endTime = new DateTime(lastlDate.Year, lastlDate.Month, lastlDate.Day, 7, 59, 59).AddDays(1);
             _report = (from report in context.DepReports
                        where (report.depNumber == depNumber) && (report.date > startTime && report.date < endTime)
                        select report).FirstOrDefault();
             if (_report == null)
             {
-                _report = new()
-                {
-                    depNumber = depNumber,
-                    date = reportDate
-                };
+                return RedirectToPage("DepReport", new { depNumber = depNumber });
             }
-            else { _report.date = actualDate; }  
+            else 
+            { 
+                _report.date = actualDate;
+                return RedirectToPage("DepReport", depNumber);
+            }  
         }
 
         public RedirectToPageResult OnPostReport(DepReport _report)
