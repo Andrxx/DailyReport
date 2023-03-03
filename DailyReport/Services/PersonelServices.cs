@@ -15,6 +15,25 @@ namespace DailyReport.Services
             PType.Add("Санитар");
             return PType;
         }
+
+        public static List<string> GetDepartment()
+        {
+            List<string> Department = new();
+            Department.Add("Приемное отделение");
+            Department.Add("1 отделение");
+            Department.Add("2 отделение");
+            Department.Add("3 отделение");
+            Department.Add("4 отделение");
+            Department.Add("5 отделение");
+            Department.Add("6 отделение");
+            Department.Add("7 отделение");
+            Department.Add("ОРИТ");
+            Department.Add("Рентгенологическое");
+            Department.Add("Дневной стционар");
+            Department.Add("Платные услуги");
+            return Department;
+        }
+
         public static void AddPersonel(Personel personel, ApplicationContext context)
         {
             context.Personels.Add(personel);

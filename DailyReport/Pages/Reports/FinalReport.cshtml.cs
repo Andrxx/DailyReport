@@ -50,9 +50,9 @@ namespace DailyReport.Pages.Reports
         public void OnGet(double dateOffset = 0)
         {
             actualDate = actualDate.AddDays(dateOffset);
-            DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 0, 0);
-            DateTime endTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 6, 59, 59).AddDays(1);
-            if (actualDate.Hour < 7)
+            DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 8, 0, 0);
+            DateTime endTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 59, 59).AddDays(1);
+            if (actualDate.Hour < 8)
             {
                 startTime = startTime.AddDays(-1);
                 endTime = endTime.AddDays(-1);
@@ -286,6 +286,7 @@ namespace DailyReport.Pages.Reports
             {
                 return RedirectToAction("Get");
             }
+            newDoc.dutyDate = actualDate;
             DutyServices.AddDutyDoc(newDoc, context);
             return RedirectToAction("Get");
         }
@@ -309,6 +310,7 @@ namespace DailyReport.Pages.Reports
             {
                 return RedirectToAction("Get");
             }
+            newPatient.Date = actualDate;
             OutPatientService.AddPatient(newPatient, context);
             return RedirectToAction("Get");
         }
