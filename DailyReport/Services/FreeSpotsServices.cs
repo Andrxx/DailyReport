@@ -100,7 +100,11 @@ namespace DailyReport.Services
 
 
 
-
+        /// <summary>
+        /// Проверка списка отделений. Если отделение не сохранено в БД, создем пустую запись
+        /// </summary>
+        /// <param name="reports"></param>
+        /// <returns></returns>
         public static List<DepReport> CheckReports (List<DepReport> reports)
         {
             DepReport dep1, dep11, dep3, dep4, dep5, dep6, dep7, dep8, dep90, dep91; //dep2
