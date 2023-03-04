@@ -71,7 +71,7 @@ namespace DailyReport.Pages.Reports
         public RedirectToPageResult OnPostPrevReport(int depNumber)
         {
             //Reports = context.DepReports.AsNoTracking().ToList();
-            DateTime lastlDate = actualDate.AddDays(-2);
+            DateTime lastlDate = actualDate.AddDays(-1);
             DateTime startTime = new DateTime(lastlDate.Year, lastlDate.Month, lastlDate.Day, 8, 0, 0);
             DateTime endTime = new DateTime(lastlDate.Year, lastlDate.Month, lastlDate.Day, 7, 59, 59).AddDays(1);
             _report = (from report in context.DepReports

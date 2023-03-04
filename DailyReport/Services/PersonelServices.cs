@@ -29,7 +29,7 @@ namespace DailyReport.Services
             Department.Add("7 отделение");
             Department.Add("ОРИТ");
             Department.Add("Рентгенологическое");
-            Department.Add("Дневной стционар");
+            Department.Add("Дневной стационар");
             Department.Add("Платные услуги");
             return Department;
         }
