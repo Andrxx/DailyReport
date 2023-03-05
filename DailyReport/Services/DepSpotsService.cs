@@ -40,7 +40,7 @@ namespace DailyReport.Services
             _departmentSpots.dep7Children = 9;
             _departmentSpots.dep8 = 24;
             _departmentSpots.dep8Children = 1;
-            _departmentSpots.dep91 = 1;
+            _departmentSpots.dep91 = 6;
             _departmentSpots.dep91Children = 1;
             _departmentSpots.dep90 = 9;
             _departmentSpots.dep90Children = 4;
