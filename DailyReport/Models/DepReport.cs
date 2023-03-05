@@ -2,11 +2,11 @@
 
 namespace DailyReport.Models
 {
-    public class DepReport
+    public class DepReport : ICloneable
     {
         public int Id { get; set; }
         public DateTime date { get; set; } = DateTime.Now;//.AddDays(-1);
-        [Range(0 , 7)]
+        //[Range(0 , 7)]
         public int depNumber { get; set; }
         public int existed { get; set; }
         public int existedChildrens { get; set; }
@@ -115,6 +115,11 @@ namespace DailyReport.Models
         {
             int _summary = present + care;
             return _summary;
+        }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
         }
     }
 
