@@ -7,6 +7,7 @@
 <div class="container">
     @foreach (DepReport rep in Model._report)
     {
+        <form method="post">
         <div class="row">
             <div class="col-2">
                 @rep.Id.ToString()
@@ -20,7 +21,10 @@
                 @rep.date.ToString()
             </div>
             <div class="col-2">
+                <input type="submit" value="&#128465" asp-page-handler="DeleteReport" asp-route-id="@rep.Id" />
             </div>
+
         </div>
+        </form>
     }
 </div>

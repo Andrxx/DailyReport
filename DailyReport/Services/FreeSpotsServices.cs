@@ -82,18 +82,30 @@ namespace DailyReport.Services
             if (_freeSpots.sum < 0) _freeSpots.sum = 0;
             if (_freeSpots.sumChildren < 0) _freeSpots.sumChildren = 0;
 
-            _freeSpots.dep1P = (_ds.dep1 + _ds.dep1Children) / (_freeSpots.dep1 + _freeSpots.dep1Children) * 100;
-            _freeSpots.dep11P = (_ds.dep11 + _ds.dep11Children) / (_freeSpots.dep11 + _freeSpots.dep11Children) * 100;
-            _freeSpots.dep3P = (_ds.dep3 + _ds.dep3Children) / (_freeSpots.dep3 + _freeSpots.dep3Children) * 100;
-            _freeSpots.dep4P = (_ds.dep4 + _ds.dep4Children) / (_freeSpots.dep4 + _freeSpots.dep4Children) * 100;
-            _freeSpots.dep5P = (_ds.dep5 + _ds.dep5Children) / (_freeSpots.dep5 + _freeSpots.dep5Children) * 100;
-            _freeSpots.dep6P = (_ds.dep6 + _ds.dep6Children) / (_freeSpots.dep6 + _freeSpots.dep6Children) * 100;
-            _freeSpots.dep7P = (_ds.dep7 + _ds.dep7Children) / (_freeSpots.dep7 + _freeSpots.dep7Children) * 100;
-            _freeSpots.dep8P = (_ds.dep8 + _ds.dep8Children) / (_freeSpots.dep8 + _freeSpots.dep8Children) * 100;
-            _freeSpots.dep90P = (_ds.dep90 + _ds.dep90Children) / (_freeSpots.dep90 + _freeSpots.dep90Children) * 100;
-            _freeSpots.dep91P = (_ds.dep91 + _ds.dep91Children) / (_freeSpots.dep91 + _freeSpots.dep91Children) * 100;
-            _freeSpots.dep1P = (_ds.dep1 + _ds.dep1Children) / (_freeSpots.dep1 + _freeSpots.dep1Children) * 100;
-            _freeSpots.dep1P = (_ds.dep1 + _ds.dep1Children) / (_freeSpots.dep1 + _freeSpots.dep1Children) * 100;
+            //_freeSpots.dep1P = (int)((_dRep.Find(p => p.depNumber == 1).present + _dRep.Find(p => p.depNumber == 1).presentChildrens) 
+            //    / (_freeSpots.dep1 + _freeSpots.dep1Children) * 100M);
+            //_freeSpots.dep11P = (double)((_dRep.Find(p => p.depNumber == 11).present + _dRep.Find(p => p.depNumber == 11).presentChildrens) 
+            //    / (_freeSpots.dep11 + _freeSpots.dep11Children) * 100M);
+            //_freeSpots.dep3P = (_dRep.Find(p => p.depNumber == 3).present + _dRep.Find(p => p.depNumber == 3).presentChildrens) 
+            //    / (_freeSpots.dep3 + _freeSpots.dep3Children) * 100;
+            //_freeSpots.dep4P = (_dRep.Find(p => p.depNumber == 4).present + _dRep.Find(p => p.depNumber == 4).presentChildrens) 
+            //    / (_freeSpots.dep4 + _freeSpots.dep4Children) * 100;
+            //_freeSpots.dep5P = (_dRep.Find(p => p.depNumber == 5).present + _dRep.Find(p => p.depNumber == 5).presentChildrens) 
+            //    / (_freeSpots.dep5 + _freeSpots.dep5Children) * 100;
+            //_freeSpots.dep6P = (_dRep.Find(p => p.depNumber == 6).present + _dRep.Find(p => p.depNumber == 6).presentChildrens) 
+            //    / (_freeSpots.dep6 + _freeSpots.dep6Children) * 100;
+            //_freeSpots.dep7P = (_dRep.Find(p => p.depNumber == 7).present + _dRep.Find(p => p.depNumber == 7).presentChildrens) 
+            //    / (_freeSpots.dep7 + _freeSpots.dep7Children) * 100;
+            //_freeSpots.dep8P = (_dRep.Find(p => p.depNumber == 8).present + _dRep.Find(p => p.depNumber == 8).presentChildrens) 
+            //    / (_freeSpots.dep8 + _freeSpots.dep8Children) * 100;
+            //_freeSpots.dep90P = (_dRep.Find(p => p.depNumber == 90).present + _dRep.Find(p => p.depNumber == 90).presentChildrens) 
+            //    / (_freeSpots.dep90 + _freeSpots.dep90Children) * 100;
+            //_freeSpots.dep91P = (_dRep.Find(p => p.depNumber == 91).present + _dRep.Find(p => p.depNumber == 91).presentChildrens) 
+            //    / (_freeSpots.dep91 + _freeSpots.dep91Children) * 100;
+            //_freeSpots.dep1P = (_dRep.Find(p => p.depNumber == 1).present + _dRep.Find(p => p.depNumber == 1).presentChildrens) 
+            //    / (_freeSpots.dep1 + _freeSpots.dep1Children) * 100;
+            //_freeSpots.dep1P = (_dRep.Find(p => p.depNumber == 1).present + _dRep.Find(p => p.depNumber == 1).presentChildrens) 
+            //    / (_freeSpots.dep1 + _freeSpots.dep1Children) * 100;
 
             return _freeSpots;
         }
