@@ -91,8 +91,8 @@
                     <td>Состояло</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.existed > 0) {@dr.existed}</td>
-                            <td>@if(dr.existedChildrens > 0) {@dr.existedChildrens}</td>
+                                <td>@if(dr.existed > 0) {@dr.existed}</td>
+                                <td>@if(dr.existedChildrens > 0) {@dr.existedChildrens}</td>
                         }
                     }
                     <td>@Model.finalReport.existed</td>
@@ -107,8 +107,8 @@
                     <td>Поступило</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.income > 0) {@dr.income}</td>
-                            <td>@if(dr.incomeChildrens > 0) {@dr.incomeChildrens}</td>
+                                <td>@if(dr.income > 0) {@dr.income}</td>
+                                <td>@if(dr.incomeChildrens > 0) {@dr.incomeChildrens}</td>
                         }
                     }
                     <td>@Model.finalReport.income</td>
@@ -123,8 +123,8 @@
                     <td>Выбыло</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.outcome > 0) {@dr.outcome}</td>
-                            <td>@if(dr.outcomeChildrens > 0) {@dr.outcomeChildrens}</td>
+                                <td>@if(dr.outcome > 0) {@dr.outcome}</td>
+                                <td>@if(dr.outcomeChildrens > 0) {@dr.outcomeChildrens}</td>
                         }
                     }
                     <td>@Model.finalReport.outcome</td>
@@ -141,8 +141,8 @@
 
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.attachedToORIT > 0) {@dr.attachedToORIT}</td>
-                            <td>@if(dr.attachedToORITCildrens > 0) {@dr.attachedToORITCildrens}</td>
+                                <td>@if(dr.attachedToORIT > 0) {@dr.attachedToORIT}</td>
+                                <td>@if(dr.attachedToORITCildrens > 0) {@dr.attachedToORITCildrens}</td>
                         }
                     }
                     <td>@Model.finalReport.attachedToORIT</td>
@@ -157,8 +157,8 @@
                     <td>Переведено из отделения</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.movedOutDep > 0) {@dr.movedOutDep}</td>
-                            <td>@if(dr.movedOutDepChildrens > 0) {@dr.movedOutDepChildrens}</td>
+                                <td>@if(dr.movedOutDep > 0) {@dr.movedOutDep}</td>
+                                <td>@if(dr.movedOutDepChildrens > 0) {@dr.movedOutDepChildrens}</td>
                         }
                     }
                     <td>@Model.finalReport.movedOutDep</td>
@@ -173,8 +173,8 @@
                     <td>Переведено в отделение</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.movedInDep > 0) {@dr.movedInDep}</td>
-                            <td>@if(dr.movedInDepChildrens > 0) {@dr.movedInDepChildrens}</td>
+                                <td>@if(dr.movedInDep > 0) {@dr.movedInDep}</td>
+                                <td>@if(dr.movedInDepChildrens > 0) {@dr.movedInDepChildrens}</td>
                         }
                     }
                     <td>@Model.finalReport.movedInDep</td>
@@ -189,8 +189,8 @@
                     <td>Умерло</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.died > 0) {@dr.died}</td>
-                            <td>@if(dr.diedChildrens > 0) {@dr.diedChildrens}</td>
+                                <td>@if(dr.died > 0) {@dr.died}</td>
+                                <td>@if(dr.diedChildrens > 0) {@dr.diedChildrens}</td>
                         }
                     }
                     <td>@Model.finalReport.died</td>
@@ -205,8 +205,8 @@
                     <td>Состоит в отделении</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.present > 0) {@dr.present}</td>
-                            <td>@if(dr.presentChildrens > 0) {@dr.presentChildrens}</td>
+                                <td>@if(dr.present > 0) {@dr.present}</td>
+                                <td>@if(dr.presentChildrens > 0) {@dr.presentChildrens}</td>
                         }
                     }
                     <td>@Model.finalReport.present</td>
@@ -254,7 +254,7 @@
                     <td>ИВЛ</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td colspan="2">@if(dr.oIVL > 0) @dr.oIVL </td>
+                                <td colspan="2">@if(dr.oIVL > 0) @dr.oIVL </td>
                         }
                     }
                     <td >@Model.finalReport.oIVL</td>
@@ -266,7 +266,7 @@
                     <td>НИВЛ </td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td colspan="2">@if(dr.oNIVL > 0) @dr.oNIVL </td>
+                                <td colspan="2">@if(dr.oNIVL > 0) @dr.oNIVL </td>
                         }
                     }
                     <td>@Model.finalReport.oNIVL</td>
@@ -278,7 +278,7 @@
                     <td>НИВЛ+ВПО</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td colspan="2">@if(dr.oNIVLVPO > 0) @dr.oNIVLVPO </td>
+                                <td colspan="2">@if(dr.oNIVLVPO > 0) @dr.oNIVLVPO </td>
                         }
                     }
                     <td>@Model.finalReport.oNIVLVPO</td>
@@ -290,7 +290,7 @@
                     <td>НИВЛ+КМ</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td colspan="2">@if(dr.oNIVLMask > 0) @dr.oNIVLMask </td>
+                                <td colspan="2">@if(dr.oNIVLMask > 0) @dr.oNIVLMask </td>
                         }
                     }
                     <td>@Model.finalReport.oNIVLMask</td>
@@ -302,7 +302,7 @@
                     <td>Лицевая маска</td>
                      @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td colspan="2">@if(dr.oMask > 0) @dr.oMask </td>
+                                <td colspan="2">@if(dr.oMask > 0) @dr.oMask </td>
                         }
                     }
                     <td>@Model.finalReport.oMask</td>
@@ -330,7 +330,7 @@
                     <td>Беременные</td>
                      @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td colspan="2">@if(dr.pregnant > 0) @dr.pregnant </td>
+                                <td colspan="2">@if(dr.pregnant > 0) @dr.pregnant </td>
                         }
                     }                
                     <td>@Model.finalReport.pregnant</td>
@@ -342,8 +342,8 @@
                     <td>Пациенты из зон отдыха</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.restZone > 0) @dr.restZone </td>
-                            <td>@if (dr.restZoneChildrens > 0) @dr.restZoneChildrens </td>
+                                <td>@if(dr.restZone > 0) @dr.restZone </td>
+                                <td>@if (dr.restZoneChildrens > 0) @dr.restZoneChildrens </td>
                         }
                     }
                     <td>@Model.finalReport.restZone</td>
@@ -355,8 +355,8 @@
                     <td>Инокраевые</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.outRegions > 0) @dr.outRegions </td>
-                            <td>@if (dr.outRegionsChildrens > 0) @dr.outRegionsChildrens </td>
+                                <td>@if(dr.outRegions > 0) @dr.outRegions </td>
+                                <td>@if (dr.outRegionsChildrens > 0) @dr.outRegionsChildrens </td>
                         }
                     }
                     <td>@Model.finalReport.outRegions</td>
@@ -368,8 +368,8 @@
                     <td>Иностранные граждне</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.forein > 0) @dr.forein </td>
-                            <td>@if (dr.foreinChildrens > 0) @dr.foreinChildrens </td>
+                                <td>@if(dr.forein > 0) @dr.forein </td>
+                                <td>@if (dr.foreinChildrens > 0) @dr.foreinChildrens </td>
                         }
                     }
                     <td>@Model.finalReport.forein</td>
@@ -381,8 +381,8 @@
                     <td>Прибывшие из ЛНР, ДНР</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.LNR_DNR > 0) @dr.LNR_DNR </td>
-                            <td>@if (dr.LNR_DNRChildrens > 0) @dr.LNR_DNRChildrens </td>
+                                <td>@if(dr.LNR_DNR > 0) @dr.LNR_DNR </td>
+                                <td>@if (dr.LNR_DNRChildrens > 0) @dr.LNR_DNRChildrens </td>
                         }
                     }
                     <td>@Model.finalReport.LNR_DNR</td>
@@ -394,8 +394,8 @@
                     <td>Поступили переводом из другой МО</td>
                      @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.incomeHospital > 0) @dr.incomeHospital </td>
-                            <td>@if (dr.incomeHospitalChildrens > 0) @dr.incomeHospitalChildrens </td>
+                                <td>@if(dr.incomeHospital > 0) @dr.incomeHospital </td>
+                                <td>@if (dr.incomeHospitalChildrens > 0) @dr.incomeHospitalChildrens </td>
                         }
                     }
                     <td>@Model.finalReport.incomeHospital</td>
@@ -407,8 +407,8 @@
                     <td>Переведены в другое МО</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.outcomeHospital > 0) @dr.outcomeHospital </td>
-                            <td>@if (dr.outcomeHospitalChildrens > 0) @dr.outcomeHospitalChildrens </td>
+                                <td>@if(dr.outcomeHospital > 0) @dr.outcomeHospital </td>
+                                <td>@if (dr.outcomeHospitalChildrens > 0) @dr.outcomeHospitalChildrens </td>
                         }
                     }
                     <td>@Model.finalReport.outcomeHospital</td>
@@ -428,8 +428,8 @@
                     <td>U07.1 COVID-19 </td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.U071 > 0) @dr.U071 </td>
-                            <td>@if (dr.U071Childrens > 0) @dr.U071Childrens </td>
+                                <td>@if(dr.U071 > 0) @dr.U071 </td>
+                                <td>@if (dr.U071Childrens > 0) @dr.U071Childrens </td>
                         }
                     }
                     <td>@Model.finalReport.U071</td>
@@ -441,8 +441,8 @@
                     <td>U07.2 COVID-19 </td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.U072 > 0) @dr.U072 </td>
-                            <td>@if (dr.U072Childrens > 0) @dr.U072Childrens</td>
+                                <td>@if(dr.U072 > 0) @dr.U072 </td>
+                                <td>@if (dr.U072Childrens > 0) @dr.U072Childrens</td>
                         }
                     }
                     <td>@Model.finalReport.U072</td>
@@ -454,8 +454,8 @@
                     <td>ОРИ</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.ORVI > 0) @dr.ORVI </td>
-                            <td>@if (dr.ORVIChildrens > 0) @dr.ORVIChildrens </td>
+                                <td>@if(dr.ORVI > 0) @dr.ORVI </td>
+                                <td>@if (dr.ORVIChildrens > 0) @dr.ORVIChildrens </td>
                         }
                     }
                     <td>@Model.finalReport.ORVI</td>
@@ -467,8 +467,8 @@
                     <td>Грипп</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.grippe > 0) @dr.grippe </td>
-                            <td>@if (dr.grippeChildrens > 0) @dr.grippeChildrens </td>
+                                <td>@if(dr.grippe > 0) @dr.grippe </td>
+                                <td>@if (dr.grippeChildrens > 0) @dr.grippeChildrens </td>
                         }
                     }
                     <td>@Model.finalReport.grippe</td>
@@ -480,8 +480,8 @@
                     <td>Пневмония</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.pneumonia > 0) @dr.pneumonia </td>
-                            <td>@if (dr.pneumoniaChildrens > 0) @dr.pneumoniaChildrens </td>
+                                <td>@if(dr.pneumonia > 0) @dr.pneumonia </td>
+                                <td>@if (dr.pneumoniaChildrens > 0) @dr.pneumoniaChildrens </td>
                         }
                     }
                     <td>@Model.finalReport.pneumonia</td>
@@ -493,8 +493,8 @@
                     <td>ОКИ</td>
                      @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.OKI > 0) @dr.OKI </td>
-                            <td>@if (dr.OKIChildrens > 0) @dr.OKIChildrens </td>
+                                <td>@if(dr.OKI > 0) @dr.OKI </td>
+                                <td>@if (dr.OKIChildrens > 0) @dr.OKIChildrens </td>
                         }
                     }
                     <td>@Model.finalReport.OKI</td>
@@ -506,8 +506,8 @@
                     <td>Менингит, энцефлит, миелит </td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.meningit > 0) @dr.meningit </td>
-                            <td>@if (dr.meningitChildrens > 0) @dr.meningitChildrens </td>
+                                <td>@if(dr.meningit > 0) @dr.meningit </td>
+                                <td>@if (dr.meningitChildrens > 0) @dr.meningitChildrens </td>
                         }
                     }
                     <td>@Model.finalReport.meningit</td>
@@ -519,8 +519,8 @@
                     <td>Сепсис</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.sepsis > 0) @dr.sepsis </td>
-                            <td>@if (dr.sepsisChildren > 0) @dr.sepsisChildren </td>
+                                <td>@if(dr.sepsis > 0) @dr.sepsis </td>
+                                <td>@if (dr.sepsisChildren > 0) @dr.sepsisChildren </td>
                         }
                     }
                     <td>@Model.finalReport.sepsis</td>
@@ -532,8 +532,8 @@
                     <td>Гепатит</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.hepatit > 0) @dr.hepatit </td>
-                            <td>@if (dr.hepatitChildrens > 0) @dr.hepatitChildrens </td>
+                                <td>@if(dr.hepatit > 0) @dr.hepatit </td>
+                                <td>@if (dr.hepatitChildrens > 0) @dr.hepatitChildrens </td>
                         }
                     }
                     <td>@Model.finalReport.hepatit</td>
@@ -545,8 +545,8 @@
                     <td>В-20</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.HIV > 0) @dr.HIV </td>
-                            <td>@if (dr.HIVCildrens > 0) @dr.HIVCildrens</td>
+                                <td>@if(dr.HIV > 0) @dr.HIV </td>
+                                <td>@if (dr.HIVCildrens > 0) @dr.HIVCildrens</td>
                         }
                     }
                     <td>@Model.finalReport.HIV</td>
@@ -558,8 +558,8 @@
                     <td>Прочее</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td>@if(dr.other > 0) @dr.other </td>
-                            <td>@if (dr.HIVCildrens > 0) @dr.otherChildrens</td>
+                                <td>@if(dr.other > 0) @dr.other </td>
+                                <td>@if (dr.HIVCildrens > 0) @dr.otherChildrens</td>
                         }
                     }
                     <td>@Model.finalReport.other</td>
@@ -599,7 +599,7 @@
                     <td>Лица по уходу </td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td colspan="2" class="text-left">@if(dr.care > 0) @dr.care</td>  
+                                <td colspan="2" class="text-left">@if(dr.care > 0) @dr.care</td>  
                         }
                     }
                     <td colspan="3" class="text-center">@Model.finalReport.care</td>
@@ -609,7 +609,7 @@
                     <td>Лица по уходу до 4х лет или детьми инвалидами</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                            <td colspan="2" class="text-left">@if(dr.careDisodered > 0) @dr.careDisodered</td>  
+                                <td colspan="2" class="text-left">@if(dr.careDisodered > 0) @dr.careDisodered</td>  
                         }
                     }
                     <td colspan="3" class="text-center">@Model.finalReport.careDisodered</td>
@@ -618,29 +618,29 @@
                 <tr class="table-secondary">
                     <td>Количество человек в крулосуточном стационаре</td>
                     @{
-                        <td>@(@Model.deseaseSum11 + @Model.depReport11.care)</td>
-                        <td>@Model.deseaseSum11Children</td>
-                        <td>@(@Model.deseaseSum1 + @Model.depReport1.care)</td>
-                        <td>@Model.deseaseSum1Children</td>
-                        <td>@(@Model.deseaseSum3 + @Model.depReport3.care)</td>
-                        <td>@Model.deseaseSum3Children</td>
-                        <td>@(@Model.deseaseSum4 + @Model.depReport4.care)</td>
-                        <td>@Model.deseaseSum4Children</td>
-                        <td>@(@Model.deseaseSum5 + @Model.depReport5.care)</td>
-                        <td>@Model.deseaseSum5Children</td>
-                        <td>@(@Model.deseaseSum6 + @Model.depReport6.care)</td>
-                        <td>@Model.deseaseSum6Children</td>
-                        <td>@(@Model.deseaseSum7 + @Model.depReport7.care)</td>
-                        <td>@Model.deseaseSum7Children</td>
-                        <td>@(@Model.deseaseSum91 + @Model.depReport91.care)</td>
-                        <td>@Model.deseaseSum91Children</td>
-                        <td>@(@Model.deseaseSum90 + @Model.depReport90.care)</td>
-                        <td>@Model.deseaseSum90Children</td>
-                        <td>@(@Model.deseaseSum8 + @Model.depReport8.care)</td>
-                        <td>@Model.deseaseSum8Children</td>
-                        <td>@*(@Model.deseaseSumFinal + Model.finalReport.care)*@</td>
-                        <td>@*Model.deseaseSumFinalChildren*@</td>
-                        <td>@(@Model.deseaseSumFinal + Model.finalReport.care + @Model.deseaseSumFinalChildren)</td>
+                            <td>@(@Model.deseaseSum11 + @Model.depReport11.care)</td>
+                            <td>@Model.deseaseSum11Children</td>
+                            <td>@(@Model.deseaseSum1 + @Model.depReport1.care)</td>
+                            <td>@Model.deseaseSum1Children</td>
+                            <td>@(@Model.deseaseSum3 + @Model.depReport3.care)</td>
+                            <td>@Model.deseaseSum3Children</td>
+                            <td>@(@Model.deseaseSum4 + @Model.depReport4.care)</td>
+                            <td>@Model.deseaseSum4Children</td>
+                            <td>@(@Model.deseaseSum5 + @Model.depReport5.care)</td>
+                            <td>@Model.deseaseSum5Children</td>
+                            <td>@(@Model.deseaseSum6 + @Model.depReport6.care)</td>
+                            <td>@Model.deseaseSum6Children</td>
+                            <td>@(@Model.deseaseSum7 + @Model.depReport7.care)</td>
+                            <td>@Model.deseaseSum7Children</td>
+                            <td>@(@Model.deseaseSum91 + @Model.depReport91.care)</td>
+                            <td>@Model.deseaseSum91Children</td>
+                            <td>@(@Model.deseaseSum90 + @Model.depReport90.care)</td>
+                            <td>@Model.deseaseSum90Children</td>
+                            <td>@(@Model.deseaseSum8 + @Model.depReport8.care)</td>
+                            <td>@Model.deseaseSum8Children</td>
+                            <td>@*(@Model.deseaseSumFinal + Model.finalReport.care)*@</td>
+                            <td>@*Model.deseaseSumFinalChildren*@</td>
+                            <td>@(@Model.deseaseSumFinal + Model.finalReport.care + @Model.deseaseSumFinalChildren)</td>
                      }
                     <td colspan="3" class="bg-transparent "></td>
                 </tr>
@@ -695,35 +695,35 @@
             <div class="row ">
                 @{
                     foreach(DutyDoc doc in Model.depDocs){
-                        <form method="post">
-                            <div class="row pb-2">
-                                <div class="col-4">
-                                    <select class="form-select" asp-for="newDoc.dutyDoc">
-                                        <option selected >@doc.dutyDoc</option>
-                                        @{
+                            <form method="post">
+                                <div class="row pb-2">
+                                    <div class="col-4">
+                                        <select class="form-select" asp-for="newDoc.dutyDoc">
+                                            <option selected >@doc.dutyDoc</option>
+                                            @{
                                             foreach(string d in Model.doctors){
-                                                <option value="@d">@d</option>
+                                                        <option value="@d">@d</option>
                                             }
-                                        }
-                                    </select>
-                                </div> 
-                                <div class="col-2">
-                                    <input type="text" placeholder="Отделения" class="form-control" asp-for="newDoc.departments" value="@doc.departments"/>
-                                </div> 
-                                <div class="col-2 d-none">
-                                    <input type="text" value="@DutyType.Department" class="form-control invisible" asp-for="newDoc.type" />
-                                    <input type="text" value="@doc.Id" class="form-control invisible" asp-for="newDoc.Id" />
+                                            }
+                                        </select>
+                                    </div> 
+                                    <div class="col-2">
+                                        <input type="text" placeholder="Отделения" class="form-control" asp-for="newDoc.departments" value="@doc.departments"/>
+                                    </div> 
+                                    <div class="col-2 d-none">
+                                        <input type="text" value="@DutyType.Department" class="form-control invisible" asp-for="newDoc.type" />
+                                        <input type="text" value="@doc.Id" class="form-control invisible" asp-for="newDoc.Id" />
+                                    </div>
+                                    <div class="col-1 d-print-none">
+                                        <input type="submit" value="&#128465" asp-page-handler="DeleteDoc" asp-route-id="@doc.Id"/>
+                                        <input type="submit" value="&#9998" asp-page-handler="UpdateDoc" />
+                                    </div> 
                                 </div>
-                                <div class="col-1 d-print-none">
-                                    <input type="submit" value="&#128465" asp-page-handler="DeleteDoc" asp-route-id="@doc.Id"/>
-                                    <input type="submit" value="&#9998" asp-page-handler="UpdateDoc" />
-                                </div> 
-                            </div>
-                        </form>
+                            </form>
                     }
                 }
             </div>
-
+            @if(!Model._onlyView){
             <form method="post">
                 <div class="row d-print-none">
                     <div class="col-4">
@@ -731,7 +731,7 @@
                             <option selected disabled>Выбрать дежурного</option>
                             @{
                                 foreach(string d in Model.doctors){
-                                    <option value="@d">@d</option>
+                                        <option value="@d">@d</option>
                                 }
                             }
                         </select>
@@ -748,7 +748,7 @@
                     </div> 
                 </div>
             </form>
-
+            }
             <div class="row pt-4">
                 <div class=" col-5">
                     <h4>ОРИТ</h4>
@@ -758,47 +758,50 @@
             <div class="row">
                 @{
                     foreach(DutyDoc doc in Model.oritDocs){
-                        <form method="post">
-                            <div class="row pb-2">
-                                <div class="col-4">
-                                    <select class="form-select" asp-for="newDoc.dutyDoc">
-                                        <option selected >@doc.dutyDoc</option>
-                                        @{
+                            <form method="post">
+                                <div class="row pb-2">
+                                    <div class="col-4">
+                                        <select class="form-select" asp-for="newDoc.dutyDoc">
+                                            <option selected >@doc.dutyDoc</option>
+                                            @{
                                             foreach(string d in Model.doctors)
                                             {
-                                                <option value="@d">@d</option>
+                                                        <option value="@d">@d</option>
                                             }
-                                        }
-                                    </select>
-                                </div> 
-                                <div class="col-2">
-                                    <input type="text" placeholder="Отделения" class="form-control" asp-for="newDoc.departments" value="@doc.departments"/>
-                                </div> 
-                                <div class="col-2 d-none">
-                                    <input type="text" value="@DutyType.Reanimanion" class="form-control invisible" asp-for="newDoc.type" />
-                                    <input type="text" value="@doc.Id" class="form-control invisible" asp-for="newDoc.Id" />
+                                            }
+                                        </select>
+                                    </div> 
+                                    <div class="col-2">
+                                        <input type="text" placeholder="Отделения" class="form-control" asp-for="newDoc.departments" value="@doc.departments"/>
+                                    </div> 
+                                    <div class="col-2 d-none">
+                                        <input type="text" value="@DutyType.Reanimanion" class="form-control invisible" asp-for="newDoc.type" />
+                                        <input type="text" value="@doc.Id" class="form-control invisible" asp-for="newDoc.Id" />
+                                    </div>
+                                    <div class="col-1 d-print-none">
+                                        <input type="submit" value="&#128465" asp-page-handler="DeleteDoc" asp-route-id="@doc.Id" />
+                                        <input type="submit" value="&#9998" asp-page-handler="UpdateDoc"  />
+                                    </div> 
                                 </div>
-                                <div class="col-1 d-print-none">
-                                    <input type="submit" value="&#128465" asp-page-handler="DeleteDoc" asp-route-id="@doc.Id" />
-                                    <input type="submit" value="&#9998" asp-page-handler="UpdateDoc"  />
-                                </div> 
-                            </div>
                         </form>
                     }
                 }
             </div>
 
-            <form method="post">
-                <div class="row d-print-none">
-                    <div class="col-4">
-                        <select class="form-select" asp-for="newDoc.dutyDoc">
-                            <option selected disabled>Выбрать дежурного</option>
-                            @{
-                                foreach(string d in Model.doctors){
-                                    <option value="@d">@d</option>
+            @if (!Model._onlyView)
+            {
+                <form method="post">
+                    <div class="row d-print-none">
+                        <div class="col-4">
+                            <select class="form-select" asp-for="newDoc.dutyDoc">
+                                <option selected disabled>Выбрать дежурного</option>
+                                @{
+                                    foreach (string d in Model.doctors)
+                                    {
+                                        <option value="@d">@d</option>
+                                    }
                                 }
-                            }
-                        </select>
+                            </select>
 
                     </div> 
                     <div class="col-2">
@@ -813,7 +816,7 @@
                     </div> 
                 </div>
             </form>
-
+            }
              <div class="row pt-4">
                 <div class=" col-5">
                     <h4>Компьютерная томография</h4>
@@ -823,47 +826,49 @@
             <div class="row">
                 @{
                     foreach(DutyDoc doc in Model.ktDocs){
-                        <form method="post">
-                            <div class="row pb-2">
-                                <div class="col-4">
-                                    <select class="form-select" asp-for="newDoc.dutyDoc">
-                                        <option selected >@doc.dutyDoc</option>
-                                        @{
+                            <form method="post">
+                                <div class="row pb-2">
+                                    <div class="col-4">
+                                        <select class="form-select" asp-for="newDoc.dutyDoc">
+                                            <option selected >@doc.dutyDoc</option>
+                                            @{
                                             foreach(string d in Model.doctors)
                                             {
-                                                <option value="@d">@d</option>
+                                                        <option value="@d">@d</option>
                                             }
-                                        }
-                                    </select>
-                                </div> 
-                                <div class="col-2">
-                                    <input type="text" placeholder="Отделения" class="form-control" asp-for="newDoc.departments" value="@doc.departments"/>
-                                </div> 
-                                <div class="col-2 d-none">
-                                    <input type="text" value="@DutyType.Rentgenology" class="form-control invisible" asp-for="newDoc.type" />
-                                    <input type="text" value="@doc.Id" class="form-control invisible" asp-for="newDoc.Id" />
+                                            }
+                                        </select>
+                                    </div> 
+                                    <div class="col-2">
+                                        <input type="text" placeholder="Отделения" class="form-control" asp-for="newDoc.departments" value="@doc.departments"/>
+                                    </div> 
+                                    <div class="col-2 d-none">
+                                        <input type="text" value="@DutyType.Rentgenology" class="form-control invisible" asp-for="newDoc.type" />
+                                        <input type="text" value="@doc.Id" class="form-control invisible" asp-for="newDoc.Id" />
+                                    </div>
+                                    <div class="col-1 d-print-none">
+                                        <input type="submit" value="&#128465" asp-page-handler="DeleteDoc" asp-route-id="@doc.Id" />
+                                        <input type="submit" value="&#9998" asp-page-handler="UpdateDoc" />
+                                    </div> 
                                 </div>
-                                <div class="col-1 d-print-none">
-                                    <input type="submit" value="&#128465" asp-page-handler="DeleteDoc" asp-route-id="@doc.Id" />
-                                    <input type="submit" value="&#9998" asp-page-handler="UpdateDoc" />
-                                </div> 
-                            </div>
                         </form>
                     }
                 }
             </div>
-
-            <form method="post">
-                <div class="row d-print-none">
-                    <div class="col-4">
-                        <select class="form-select" asp-for="newDoc.dutyDoc">
-                            <option selected disabled>Выбрать дежурного</option>
-                            @{
-                                foreach(string d in Model.doctors){
-                                    <option value="@d">@d</option>
+            @if (!Model._onlyView)
+            {
+                <form method="post">
+                    <div class="row d-print-none">
+                        <div class="col-4">
+                            <select class="form-select" asp-for="newDoc.dutyDoc">
+                                <option selected disabled>Выбрать дежурного</option>
+                                @{
+                                    foreach (string d in Model.doctors)
+                                    {
+                                        <option value="@d">@d</option>
+                                    }
                                 }
-                            }
-                        </select>
+                            </select>
                     </div> 
                     <div class="col-2">
                         <input type="text" value="Врач КТ" class="form-control" asp-for="newDoc.departments"/>
@@ -876,7 +881,8 @@
                         <input type="submit"  value="+" asp-page-handler="SaveDoc"/>
                     </div> 
                 </div>
-            </form>           
+            </form> 
+            }          
         </div>
 
         <div class="row pt-5">
@@ -894,70 +900,70 @@
             </div>
             @{
                 foreach(OutcomingPatient patient in Model.patients) {
-                    <form method="post">
-                    <div class="row pb-1 m-0 ">
-                        <div class="col-4">
-                            <input type="text" value="@patient.Name" class="form-control" asp-for="newPatient.Name"/>
-                        </div>
-                            <div class="col-1">
-                                <select class="form-select" asp-for="newPatient.Gender">
-                                    <option selected value="@patient.Gender">@patient.Gender</option>
-                                    @{
-                                        <option value="М">М</option>
-                                        <option value="Ж">Ж</option>
-
-                                    }
-                                </select>
+                        <form method="post">
+                        <div class="row pb-1 m-0 ">
+                            <div class="col-3">
+                                <input type="text" value="@patient.Name" class="form-control" asp-for="newPatient.Name"/>
                             </div>
-                     <div class="col-1">
-                                <input type="number" step="0.1" value="@patient.Age" class="form-control" asp-for="newPatient.Age" />
-                    </div>
-                    <div class="col-1">
-                        <input type="text" value="@patient.Diagnos" class="form-control" asp-for="newPatient.Diagnos"/>
-                    </div>
-                    <div class="col-1">
-                        <select class="form-select" asp-for="newPatient.Shipped">
-                            <option selected >@patient.Shipped</option>
-                            @{
-                                foreach(string s in Model.shipping){
-                                    <option value="@s">@s</option>
-                                }
-                            }
-                        </select>
-                    </div> 
-                    <div class="col-1">
-                        <select class="form-select" asp-for="newPatient.SubmitedFrom">
-                            <option selected>@patient.SubmitedFrom</option>
-                            @{
-                                foreach(string f in Model.submitedFrom){
-                                    <option value="@f">@f</option>
-                                }
-                            }
-                        </select>
-                    </div> 
-                    <div class="col-2">
-                        <select class="form-select" asp-for="newPatient.SubmitedTo">
-                            <option selected>@patient.SubmitedTo</option>
-                            @{
-                                foreach(string t in Model.submitedTo){
-                                    <option value="@t">@t</option>
-                                }
-                            }
-                        </select>
-                    </div> 
-                                <div class="col-1 d-none">
-                                    <input type="text" value="@patient.Id" class="form-control invisible" asp-for="newPatient.Id" />
-                                    <input type="datetime" value="@patient.Date" class="form-control invisible" asp-for="newPatient.Date" />
+                                <div class="col-1">
+                                    <select class="form-select" asp-for="newPatient.Gender">
+                                        <option selected value="@patient.Gender">@patient.Gender</option>
+                                        @{
+                                                <option value="М">М</option>
+                                                <option value="Ж">Ж</option>
+
+                                        }
+                                    </select>
                                 </div>
-                        <div class="col-1 d-print-none">
-                                <input type="submit" value="&#128465" asp-page-handler="DeletePaient" asp-route-id="@patient.Id" />
-                                <input type="submit" value="&#9998" asp-page-handler="UpdatePatient" />
+                         <div class="col-1">
+                                    <input type="number" step="0.1" value="@patient.Age" class="form-control" asp-for="newPatient.Age" />
+                        </div>
+                        <div class="col-2">
+                            <input type="text" value="@patient.Diagnos" class="form-control" asp-for="newPatient.Diagnos"/>
+                        </div>
+                        <div class="col-1">
+                            <select class="form-select" asp-for="newPatient.Shipped">
+                                <option selected >@patient.Shipped</option>
+                                @{
+                                foreach(string s in Model.shipping){
+                                            <option value="@s">@s</option>
+                                }
+                                }
+                            </select>
                         </div> 
-                    </div>
-                    </form>
+                        <div class="col-1">
+                            <select class="form-select" asp-for="newPatient.SubmitedFrom">
+                                <option selected>@patient.SubmitedFrom</option>
+                                @{
+                                foreach(string f in Model.submitedFrom){
+                                            <option value="@f">@f</option>
+                                }
+                                }
+                            </select>
+                        </div> 
+                        <div class="col-2">
+                            <select class="form-select" asp-for="newPatient.SubmitedTo">
+                                <option selected>@patient.SubmitedTo</option>
+                                @{
+                                foreach(string t in Model.submitedTo){
+                                            <option value="@t">@t</option>
+                                }
+                                }
+                            </select>
+                        </div> 
+                                    <div class="col-1 d-none">
+                                        <input type="text" value="@patient.Id" class="form-control invisible" asp-for="newPatient.Id" />
+                                        <input type="datetime" value="@patient.Date" class="form-control invisible" asp-for="newPatient.Date" />
+                                    </div>
+                            <div class="col-1 d-print-none">
+                                    <input type="submit" value="&#128465" asp-page-handler="DeletePaient" asp-route-id="@patient.Id" />
+                                    <input type="submit" value="&#9998" asp-page-handler="UpdatePatient" />
+                            </div> 
+                        </div>
+                        </form>
                 }
             }
-
+            @if(!Model._onlyView){
             <form method="post">
                 <div class="row d-print-none">
                     <div class="col-3">
@@ -968,8 +974,8 @@
                         <select class="form-select" asp-for="newPatient.Gender">
                             <option selected disabled>Пол</option>
                             @{
-                                <option value="М">М</option>
-                                <option value="Ж">Ж</option>
+                                    <option value="М">М</option>
+                                    <option value="Ж">Ж</option>
                                
                             }
                         </select>
@@ -985,7 +991,7 @@
                             <option selected disabled>Доставлен</option>
                             @{
                                 foreach(string s in Model.shipping){
-                                    <option value="@s">@s</option>
+                                        <option value="@s">@s</option>
                                 }
                             }
                         </select>
@@ -995,7 +1001,7 @@
                             <option selected disabled>Направлен</option>
                             @{
                                 foreach(string f in Model.submitedFrom){
-                                    <option value="@f">@f</option>
+                                        <option value="@f">@f</option>
                                 }
                             }
                         </select>
@@ -1005,7 +1011,7 @@
                             <option selected disabled>Переведен</option>
                             @{
                                 foreach(string t in Model.submitedTo){
-                                    <option value="@t">@t</option>
+                                        <option value="@t">@t</option>
                                 }
                             }
                         </select>
@@ -1015,7 +1021,8 @@
                     </div> 
                 </div>
             </form>
-        </div>
+            }
+            </div>
 
         <div class="col-4 pt-3">
             <button class="d-print-none mt-2 action-print">Печать</button>

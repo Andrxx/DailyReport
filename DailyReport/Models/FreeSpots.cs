@@ -44,17 +44,17 @@
         public int sumChildrenS { get; set; }
 
         public int dep1P { get; set; }
-        public int dep11P { get; set; }
-        public int dep2P { get; set; }
-        public int dep3P { get; set; }
-        public int dep4P { get; set; }
-        public int dep5P { get; set; }
-        public int dep6P { get; set; }
-        public int dep7P { get; set; }
-        public int dep8P { get; set; }
-        public int dep90P { get; set; }
-        public int dep91P { get; set; }
-        public int sumP { get; set; }
-        public int sumChildrenP { get; set; }
+        public double dep11P { get; set; }
+        public double dep2P { get; set; }
+        public double dep3P { get; set; }
+        public double dep4P { get; set; }
+        public double dep5P { get; set; }
+        public double dep6P { get; set; }
+        public double dep7P { get; set; }
+        public double dep8P { get; set; }
+        public double dep90P { get; set; }
+        public double dep91P { get; set; }
+        public double sumP { get; set; }
+        public double sumChildrenP { get; set; }
     }
 }

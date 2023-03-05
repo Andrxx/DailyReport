@@ -22,18 +22,7 @@ html {
         text-shadow: none;
     }
 
-   /* table {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-    .table-sm {
-        padding: 0rem, 0.25rem !important;
-        margin: 0 .25rem !important;
-    }*/
-   /* td {
-        padding: 0rem, 0.25rem !important;
-        margin: 0 .25rem !important;
-    }*/
+   
     /*убираем стрелки в полях вводаа формы*/
     /* Chrome, Safari, Edge, Opera */
     input::-webkit-outer-spin-button,

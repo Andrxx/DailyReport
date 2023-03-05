@@ -23,7 +23,7 @@ namespace DailyReport.Pages.Reports
         public List<DepReport> reports { get; private set; } = new();
         public List<DepReport> filteredReports = new List<DepReport>();
         public DateTime actualDate = DateTime.Now, reportDate;//.AddDays(-1);
-
+        public bool _onlyView;
         public int oxygenSum11, oxygenSum91, deseaseSum1, deseaseSum11, deseaseSum2, deseaseSum3, deseaseSum4, deseaseSum5, deseaseSum6, deseaseSum7,
             deseaseSum8, deseaseSum90, deseaseSum91, deseaseSum1Children, deseaseSum11Children, deseaseSum2Children, deseaseSum3Children, deseaseSum4Children,
             deseaseSum5Children, deseaseSum6Children, deseaseSum7Children, deseaseSum8Children, deseaseSum90Children, deseaseSum91Children,
@@ -47,8 +47,9 @@ namespace DailyReport.Pages.Reports
         public List<string> submitedFrom = OutPatientService.GetSubmitedFrom();
         public List<string> submitedTo = OutPatientService.GetSubmitedTo();
 
-        public void OnGet(double dateOffset = 0)
+        public void OnGet(double dateOffset = 0, bool onlyView = false)
         {
+            _onlyView = onlyView;
             actualDate = actualDate.AddDays(dateOffset);
             DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 8, 0, 0);
             DateTime endTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 59, 59).AddDays(1);
