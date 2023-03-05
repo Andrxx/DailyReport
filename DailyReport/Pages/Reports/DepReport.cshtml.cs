@@ -24,10 +24,10 @@ namespace DailyReport.Pages.Reports
         public void OnGet(int depNumber, double dateOffset = 0)
         {
             actualDate = actualDate.AddDays(dateOffset);
-            DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 0, 0);
-            DateTime endTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 6, 59, 59).AddDays(1);
+            DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 8, 0, 0);
+            DateTime endTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 59, 59).AddDays(1);
             //коррекция даты для ночного времени
-            if(actualDate.Hour < 7)
+            if(actualDate.Hour < 8)
             {
                 startTime = startTime.AddDays(-1);
                 endTime = endTime.AddDays(-1);
@@ -63,6 +63,7 @@ namespace DailyReport.Pages.Reports
             {
                 //тест для БД, изменить на создание нового для релиза
                 //_report = reportServise.CreateTest();
+
                 _report = new();
                 _report.depNumber = depNumber;
             }
@@ -71,20 +72,35 @@ namespace DailyReport.Pages.Reports
         public RedirectToPageResult OnPostPrevReport(int depNumber)
         {
             //Reports = context.DepReports.AsNoTracking().ToList();
+
             DateTime lastlDate = actualDate.AddDays(-1);
             DateTime startTime = new DateTime(lastlDate.Year, lastlDate.Month, lastlDate.Day, 8, 0, 0);
             DateTime endTime = new DateTime(lastlDate.Year, lastlDate.Month, lastlDate.Day, 7, 59, 59).AddDays(1);
+            //коррекция даты для ночного времени
+            if (lastlDate.Hour < 8)
+            {
+                startTime = startTime.AddDays(-1);
+                endTime = endTime.AddDays(-1);
+                reportDate = actualDate.AddDays(-1);
+            }
+            //задаем дату отображения на сводке, устнавливть только после коррекции стартовой даты 
+            else { reportDate = actualDate; }
             _report = (from report in context.DepReports
                        where (report.depNumber == depNumber) && (report.date > startTime && report.date < endTime)
-                       select report).FirstOrDefault();
+                       select report).AsNoTracking().FirstOrDefault();
             if (_report == null)
             {
                 return RedirectToPage("DepReport", new { depNumber = depNumber });
             }
             else 
-            { 
-                _report.date = actualDate;
-                return RedirectToPage("DepReport", depNumber);
+            {
+                DepReport newRep = new();
+                newRep = (DepReport)_report.Clone();
+                newRep.date = actualDate;
+                newRep.Id = 0;
+                context.DepReports.Update(newRep);
+                context.SaveChanges();
+                return RedirectToPage("DepReport", new { depNumber = depNumber });
             }  
         }
 
