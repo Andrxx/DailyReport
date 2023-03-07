@@ -28,7 +28,8 @@ namespace DailyReport.Pages.Reports
             deseaseSum8, deseaseSum90, deseaseSum91, deseaseSum1Children, deseaseSum11Children, deseaseSum2Children, deseaseSum3Children, deseaseSum4Children,
             deseaseSum5Children, deseaseSum6Children, deseaseSum7Children, deseaseSum8Children, deseaseSum90Children, deseaseSum91Children,
             deseaseSumFinal, deseaseSumFinalChildren;
-        public int reject, rejectChildren, ambulance, ambulanceChildren, submitOtherHosp, submitOtherHospChildren;
+        public int reject, rejectChildren, ambulance, ambulanceChildren, submitOtherHosp, submitOtherHospChildren, sumReject, 
+            sumAmbulance, sumOther, sumAdults, sumChildren, sumTotal;
         //фактические места в отделениях
         public DepartmentSpots departmentSpots; 
         //свободные места
@@ -264,12 +265,22 @@ namespace DailyReport.Pages.Reports
                             where ((patient.Date > startTime) && (patient.Date < endTime))
                             select patient).ToList();
 
-                //reject = patients.FindAll(p => float.Parse(p.Age) > 18 & p.SubmitedTo == "Отказ").Count();
-                //rejectChildren = patients.FindAll(p => float.Parse(p.Age) < 18 & p.SubmitedTo == "Отказ").Count();
-                //ambulance = patients.FindAll(p => float.Parse(p.Age) > 18 & p.SubmitedTo == "Амбулаторно").Count();
-                //ambulanceChildren = patients.FindAll(p => float.Parse(p.Age) < 18 & p.SubmitedTo == "Амбулаторно").Count();
-                //submitOtherHosp = patients.FindAll(p => float.Parse(p.Age) > 18 & p.SubmitedTo != "Амбулаторно" & p.SubmitedTo != "Отказ").Count();
-                //submitOtherHospChildren = patients.FindAll(p => float.Parse(p.Age) < 18 & p.SubmitedTo != "Амбулаторно" & p.SubmitedTo != "Отказ").Count();
+                //todo исправить возможное отсутствие возрста
+                if (patients != null)
+                {
+                    reject = patients.FindAll(p => int.Parse(p.AgeYears) > 17 & p.SubmitedTo == "Отказ").Count();
+                    rejectChildren = patients.FindAll(p => int.Parse(p.AgeYears) < 18 & p.SubmitedTo == "Отказ").Count();
+                    ambulance = patients.FindAll(p => float.Parse(p.AgeYears) >= 18 & p.SubmitedTo == "Амбулаторно").Count();
+                    ambulanceChildren = patients.FindAll(p => float.Parse(p.AgeYears) < 18 & p.SubmitedTo == "Амбулаторно").Count();
+                    submitOtherHosp = patients.FindAll(p => float.Parse(p.AgeYears) >= 18 & p.SubmitedTo != "Амбулаторно" & p.SubmitedTo != "Отказ").Count();
+                    submitOtherHospChildren = patients.FindAll(p => float.Parse(p.AgeYears) < 18 & p.SubmitedTo != "Амбулаторно" & p.SubmitedTo != "Отказ").Count();
+                    sumReject = reject + rejectChildren;
+                    sumAmbulance = ambulance + ambulanceChildren;
+                    sumOther = submitOtherHosp + submitOtherHospChildren;
+                    sumAdults = reject + ambulance + submitOtherHosp;
+                    sumChildren = rejectChildren + ambulanceChildren + submitOtherHospChildren;
+                    sumTotal = sumAdults + sumChildren;
+                }
             }
             catch
             {
