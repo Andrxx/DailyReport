@@ -69,6 +69,11 @@ namespace DailyReport.Pages.Reports
             }
         }
 
+        /// <summary>
+        /// Метод находит в БД вчерашнюю сводку и перезаписывает ее в БД с сегодняшним числом и новым ИД
+        /// </summary>
+        /// <param name="depNumber"></param>
+        /// <returns></returns>
         public RedirectToPageResult OnPostPrevReport(int depNumber)
         {
             //Reports = context.DepReports.AsNoTracking().ToList();
@@ -94,8 +99,10 @@ namespace DailyReport.Pages.Reports
             }
             else 
             {
+                //новая сущность для БД
                 DepReport newRep = new();
                 newRep = (DepReport)_report.Clone();
+                //меняем дату на текущую и обнуляем ИД для сохранения новой записи в БД
                 newRep.date = actualDate;
                 newRep.Id = 0;
                 context.DepReports.Update(newRep);

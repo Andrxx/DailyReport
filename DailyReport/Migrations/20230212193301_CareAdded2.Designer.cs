@@ -329,6 +329,12 @@ namespace DailyReport.Migrations
                     b.Property<int>("U072Children")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("ambulance")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ambulanceChildren")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("attachedToORIT")
                         .HasColumnType("INTEGER");
 
@@ -506,16 +512,37 @@ namespace DailyReport.Migrations
                     b.Property<int>("presentWithCareChildren")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("reject")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("rejectChildren")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("restZone")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("restZoneChildren")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("sendToMO")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("sendToMOChildren")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("sepsis")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("sepsisChildren")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("sumAdults")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("sumAll")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("sumChild")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -529,7 +556,10 @@ namespace DailyReport.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Age")
+                    b.Property<string>("AgeMonth")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AgeYears")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Date")
