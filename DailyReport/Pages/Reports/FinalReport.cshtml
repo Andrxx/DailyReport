@@ -648,33 +648,34 @@
                 <tr class="table-secondary">
                     <td >Отказ от госпитализации</td>
                     <td colspan="20"></td>
-                    <td><input id="reject" oninput="CountReject()" type="number" name="reject" class="reject" value="0"/></td>
-                    <td><input id="rejectChildren" oninput="CountReject()" type="number" name="rejectChildrens" class="reject" value="0"/> </td>
-                    <td class="text-center" id="sumRej"></td>
+                    <td>@Model.reject</td>
+                    @*<input id="reject" oninput="CountReject()" type="number" name="reject" class="reject" value="0" />*@
+                    <td>@Model.rejectChildren </td>@*<input id="rejectChildren" oninput="CountReject()" type="number" name="rejectChildrens" class="reject" value="0"/>*@
+                    <td class="text-center" id="sumRej">@Model.sumReject</td>
                     <td colspan="3" class="bg-transparent "></td>
                 </tr>
                 <tr class="table-secondary">
                     <td >На амбулаторное лечение</td>
                     <td colspan="20"></td>
-                    <td><input id="ambulance" oninput="CountReject()" type="number" name="existed" class="reject" value="0"/></td>
-                    <td><input id="ambulanceChildren" oninput="CountReject()" type="number" name="existedChildrens" class="reject" value="0"/> </td>
-                    <td class="text-center" id="sumAmb"></td>
+                    <td>@Model.ambulance </td>@*<input id="ambulance" oninput="CountReject()" type="number" name="existed" class="reject" value="0"/>*@
+                    <td>@Model.ambulanceChildren</td>@*<input id="ambulanceChildren" oninput="CountReject()" type="number" name="existedChildrens" class="reject" value="0"/>*@ 
+                    <td class="text-center" id="sumAmb">@Model.sumAmbulance</td>
                     <td colspan="3" class="bg-transparent "></td>
                 </tr>
                 <tr class="table-secondary">
                     <td >В другое МО</td>
                     <td colspan="20"></td>
-                    <td><input id="sendToMO" oninput="CountReject()" type="number" name="existed" class="reject" value="0"/></td>
-                    <td><input id="sendToMOChildren" oninput="CountReject()" type="number" name="existedChildrens" class="reject" value="0"/> </td>
-                    <td  class="text-center" id="sumOth"></td>
+                    <td>@Model.submitOtherHosp</td>@*<input id="sendToMO" oninput="CountReject()" type="number" name="existed" class="reject" value="0"/>*@
+                    <td>@Model.submitOtherHospChildren </td>
+                    <td  class="text-center" id="sumOth">@Model.sumOther</td>
                     <td colspan="3" class="bg-transparent "></td>
                     <tr class="table-secondary">
                 <tr>
                     <td >Всего не госпитализировано</td>
                     <td colspan="20"></td>
-                    <td  class="text-center" id="sumAdults"></td>
-                    <td  class="text-center" id="sumChild"></td>
-                    <td  class="text-center" id="sumAll"></td>
+                    <td  class="text-center" id="sumAdults">@Model.sumAdults</td>
+                    <td  class="text-center" id="sumChild">@Model.sumChildren</td>
+                    <td  class="text-center" id="sumAll">@Model.sumTotal</td>
                     <td colspan="3" class="bg-transparent "></td>
                 </tr>
             </tbody>
@@ -890,9 +891,9 @@
                 <h3>Переводы и отказы</h3>
             </div>
             <div class="row text-end">
-                <div class="col-3 text-start">Пациент</div>
+                <div class="col-2 text-start">Пациент</div>
                 <div class="col-1">Пол</div>
-                <div class="col-1">Возраст</div>
+                <div class="col-2">Возраст</div>
                 <div class="col-2">Диагноз</div>
                 <div class="col-1">Доставлен</div>
                 <div class="col-1">Направлен</div>
@@ -902,7 +903,7 @@
                 foreach(OutcomingPatient patient in Model.patients) {
                         <form method="post">
                         <div class="row pb-1 m-0 ">
-                            <div class="col-3">
+                            <div class="col-2">
                                 <input type="text" value="@patient.Name" class="form-control" asp-for="newPatient.Name"/>
                             </div>
                                 <div class="col-1">
@@ -916,7 +917,12 @@
                                     </select>
                                 </div>
                          <div class="col-1">
-                                    <input type="number" step="0.1" value="@patient.Age" class="form-control" asp-for="newPatient.Age" />
+                                    <input type="number" step="1" value="@patient.AgeYears" class="form-control" asp-for="newPatient.AgeYears" />
+                                    <div>лет</div>
+                        </div>
+                        <div class="col-1">
+                                    <input type="number" step="1" value="@patient.AgeMonth" class="form-control" asp-for="newPatient.AgeMonth" />
+                                    <div>мес</div>
                         </div>
                         <div class="col-2">
                             <input type="text" value="@patient.Diagnos" class="form-control" asp-for="newPatient.Diagnos"/>
@@ -966,7 +972,7 @@
             @if(!Model._onlyView){
             <form method="post">
                 <div class="row d-print-none">
-                    <div class="col-3">
+                    <div class="col-2">
                         <input type="text" placeholder="ФИО пациента" class="form-control" asp-for="newPatient.Name"/>
                         <input type="datetime" value="@Model.reportDate" class="form-control invisible" asp-for="newPatient.Date" />
                     </div>
@@ -980,9 +986,14 @@
                             }
                         </select>
                     </div>
-                    <div class="col-1">
-                        <input type="number" step="0.1" placeholder="Возраст" class="form-control" asp-for="newPatient.Age"/>
-                    </div>
+                        <div class="col-1">
+                            <input type="number"  step="1" value="@Model.newPatient.AgeYears"
+                                   class="form-control d-inline-flex" asp-for="newPatient.AgeYears" />лет                                                    
+                        </div>
+                        <div class="col-1">
+                            <input type="number" step="1" value="@Model.newPatient.AgeMonth" 
+                            class="form-control" asp-for="newPatient.AgeMonth"/> мес
+                        </div>
                     <div class="col-2">
                         <input type="text" placeholder="Диагноз" class="form-control" asp-for="newPatient.Diagnos"/>
                     </div>
