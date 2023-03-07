@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DailyReport.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230212193301_CareAdded2")]
-    partial class CareAdded2
+    [Migration("20230306235856_PatientAgesAdded")]
+    partial class PatientAgesAdded
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

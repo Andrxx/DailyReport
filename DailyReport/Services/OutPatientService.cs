@@ -90,7 +90,8 @@ namespace DailyReport.Services
             if (_patient != null)
             {
                 _patient.Name = patient.Name;
-                _patient.Age = patient.Age;
+                _patient.AgeYears = patient.AgeYears;
+                _patient.AgeMonth = patient.AgeMonth;
                 _patient.Diagnos = patient.Diagnos;
                 _patient.SubmitedFrom = patient.SubmitedFrom;
                 _patient.SubmitedTo = patient.SubmitedTo;
