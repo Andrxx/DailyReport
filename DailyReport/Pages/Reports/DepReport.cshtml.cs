@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
+using System.Linq;
 
 namespace DailyReport.Pages.Reports
 {
@@ -15,6 +16,7 @@ namespace DailyReport.Pages.Reports
         public DepReport _report { get; set; }
         public List<DepReport> Reports { get; private set; } = new();
         public DateTime actualDate = DateTime.Now, reportDate;//.AddDays(-1);
+        public List<string> nurses = new();
         public DepReportModel(ApplicationContext db)
         {
             context = db;
@@ -48,8 +50,6 @@ namespace DailyReport.Pages.Reports
                        where ((report.date > startTime) && (report.date < endTime))
                        select report).FirstOrDefault();
 
-
-            //if(_report.date > )
             //тест 
             //var reps = (from repo in context.DepReports
             //            where (repo.depNumber == depNumber)
@@ -67,6 +67,13 @@ namespace DailyReport.Pages.Reports
                 _report = new();
                 _report.depNumber = depNumber;
             }
+
+            //получаем список медсестер больницы
+            //nurses = (from str in context.Personels
+            //          where str.PersType == "Медсестра"
+            //          orderby str.Name, str.Name.Substring(0, 1)
+            //          select str.Name).ToList();
+                      
         }
 
         /// <summary>

@@ -11,8 +11,6 @@ $(function($){
 });
 
 
-
-
 function CountSum() {
 	let sum = parseInt($("#existed").val()) - parseInt($("#outcome").val()) + parseInt($("#income").val()) -
 		parseInt($("#movedOutDep").val()) + parseInt($("#movedInDep").val()) - parseInt($("#died").val());
@@ -40,3 +38,8 @@ function CountReject() {
 	let sumAll = sumAdults + sumChild;
 	$("#sumAll").html(sumAll);
 }
+
+//function SetNurse() {
+//	//$("#nurseSelect").val = $("#nurseSelect").html;
+//	alert($("#nurseSelect").val);
+//}

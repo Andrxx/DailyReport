@@ -1,7 +1,4 @@
-﻿
-
-using DailyReport.Models;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using DailyReport.Models;
 
 namespace DailyReport.Services
 {
@@ -9,12 +6,11 @@ namespace DailyReport.Services
     {
         static DepartmentSpots departmentSpots;
 
+        //static DepSpotsService()
+        //{
+        //    departmentSpots = ReadSpots(context);
+        //}
 
-        static DepSpotsService()
-        {
-            departmentSpots = CreateSpots();
-
-        }
         /// <summary>
         /// Возвращет список коек отделений. Порядок списка должен соответствовть порядку отделений в сводке
         /// </summary>
@@ -50,7 +46,131 @@ namespace DailyReport.Services
         }
 
         /// <summary>
-        /// Подсчет суммы взрослых мест. Считать после инициализации остальных полей. По текущей политике вся грязная ОРИТ идет во взрослое
+        /// получаем список мест из БД
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        static DepartmentSpots ReadSpots(ApplicationContext context)
+        {
+            DepartmentSpots _departmentSpots = new DepartmentSpots();
+            List<Department> departments = (from dep in context.Departments
+                                          select dep).ToList();
+            try
+            {
+                _departmentSpots.dep1 = departments.Find(p => p.Number == 1).AdultSpotsQuantity;
+                _departmentSpots.dep1Children = departments.Find(p => p.Number == 1).ChildrenSpotsQuantity;
+            }
+            catch
+            {
+                _departmentSpots.dep1 = 0;
+                _departmentSpots.dep1Children = 0;
+            }
+            try
+            {
+                _departmentSpots.dep11 = departments.Find(p => p.Number == 11).AdultSpotsQuantity;
+                _departmentSpots.dep11Children = departments.Find(p => p.Number == 11).ChildrenSpotsQuantity;
+            }
+            catch
+            {
+                _departmentSpots.dep11 = 0;
+                _departmentSpots.dep11Children = 0;
+            }
+            //try
+            //{
+            //    _departmentSpots.dep2 = departments.Find(p => p.Number == 2).AdultSpotsQuantity;
+            //    _departmentSpots.dep2Children = departments.Find(p => p.Number == 2).ChildrenSpotsQuantity;
+            //}
+            //catch
+            //{
+            //    _departmentSpots.dep2 = 0;
+            //    _departmentSpots.dep2Children = 0;
+            //}
+            try
+            {
+                _departmentSpots.dep3 = departments.Find(p => p.Number == 3).AdultSpotsQuantity;
+                _departmentSpots.dep3Children = departments.Find(p => p.Number == 3).ChildrenSpotsQuantity;
+            }
+            catch
+            {
+                _departmentSpots.dep3 = 0;
+                _departmentSpots.dep3Children = 0;
+            }
+            try
+            {
+                _departmentSpots.dep4 = departments.Find(p => p.Number == 4).AdultSpotsQuantity;
+                _departmentSpots.dep4Children = departments.Find(p => p.Number == 4).ChildrenSpotsQuantity;
+            }
+            catch
+            {
+                _departmentSpots.dep4 = 0;
+                _departmentSpots.dep4Children = 0;
+            }
+            try
+            {
+                _departmentSpots.dep5 = departments.Find(p => p.Number == 5).AdultSpotsQuantity;
+                _departmentSpots.dep5Children = departments.Find(p => p.Number == 5).ChildrenSpotsQuantity;
+            }
+            catch
+            {
+                _departmentSpots.dep5 = 0;
+                _departmentSpots.dep5Children = 0;
+            }
+            try
+            {
+                _departmentSpots.dep6 = departments.Find(p => p.Number == 6).AdultSpotsQuantity;
+                _departmentSpots.dep6Children = departments.Find(p => p.Number == 6).ChildrenSpotsQuantity;
+            }
+            catch
+            {
+                _departmentSpots.dep6 = 0;
+                _departmentSpots.dep6Children = 0;
+            }
+            try
+            {
+                _departmentSpots.dep7 = departments.Find(p => p.Number == 7).AdultSpotsQuantity;
+                _departmentSpots.dep7Children = departments.Find(p => p.Number == 7).ChildrenSpotsQuantity;
+            }
+            catch
+            {
+                _departmentSpots.dep7 = 0;
+                _departmentSpots.dep7Children = 0;
+            }
+            try
+            {
+                _departmentSpots.dep8 = departments.Find(p => p.Number == 8).AdultSpotsQuantity;
+                _departmentSpots.dep8Children = departments.Find(p => p.Number == 8).ChildrenSpotsQuantity;
+            }
+            catch
+            {
+                _departmentSpots.dep8 = 0;
+                _departmentSpots.dep8Children = 0;
+            }
+            try
+            {
+                _departmentSpots.dep90 = departments.Find(p => p.Number == 90).AdultSpotsQuantity;
+                _departmentSpots.dep90Children = departments.Find(p => p.Number == 90).ChildrenSpotsQuantity;
+            }
+            catch
+            {
+                _departmentSpots.dep90 = 0;
+                _departmentSpots.dep90Children = 0;
+            }
+            try
+            {
+                _departmentSpots.dep91 = departments.Find(p => p.Number == 91).AdultSpotsQuantity;
+                _departmentSpots.dep91Children = departments.Find(p => p.Number == 91).ChildrenSpotsQuantity;
+            }
+            catch
+            {
+                _departmentSpots.dep91 = 0;
+                _departmentSpots.dep91Children = 0;
+            }
+
+            return _departmentSpots;
+        }
+
+        /// <summary>
+        /// Подсчет суммы взрослых мест. Считать после инициализации остальных полей.
         /// </summary>
         /// <returns></returns>
         public static int CountSum()
@@ -62,7 +182,7 @@ namespace DailyReport.Services
         }
 
         /// <summary>
-        /// Подсчет суммы детских мест. Считать после инициализации остальных полей. По текущей политике вся чистая ОРИТ идет в детское
+        /// Подсчет суммы детских мест. Считать после инициализации остальных полей.
         /// </summary>
         /// <returns></returns>
         public static int CountSumChildren()
@@ -73,13 +193,20 @@ namespace DailyReport.Services
             return sum;
         }
 
-        //места вместе с дневным стационаром
+        /// <summary>
+        /// места вместе с дневным стационаром
+        /// </summary>
+        /// <returns></returns>
         internal static int CountSumOC()
         {
             int sum = CountSum() + departmentSpots.dep8;
             return sum;
         }
 
+        /// <summary>
+        /// места вместе с дневным стационаром
+        /// </summary>
+        /// <returns></returns>
         public static int CountSumOCChildren()
         {
             int sum = CountSumChildren() + departmentSpots.dep8Children;
@@ -87,7 +214,7 @@ namespace DailyReport.Services
         }
         
         /// <summary>
-        /// получаем места после иницилизации в конструкторе
+        /// получаем места после иницилизации в конструкторе - хардкодный метод, для тестов
         /// </summary>
         /// <returns></returns>
         public static DepartmentSpots GetSpots()
@@ -95,6 +222,15 @@ namespace DailyReport.Services
             return departmentSpots;
         }
 
-        
+        /// <summary>
+        /// получаем места из БД после иницилизации в конструкторе
+        /// </summary>
+        /// <returns></returns>
+        public static DepartmentSpots GetSpots(ApplicationContext context)
+        {
+            departmentSpots = ReadSpots(context);
+            return departmentSpots;
+        }
+
     }
 }
