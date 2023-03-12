@@ -12,24 +12,26 @@
                 <tr class="table-primary">
                     <td rowspan="2">@Model.reportDate.ToString("dd.MM.yy")</td>
                     <td colspan="4">1-е ИО</td>
-                    <td colspan="2" rowspan="2">3-е ИО (40) чистая</td>
-                    <td colspan="2" rowspan="2">4-е ИО (30 бюджет) чистая</td>
-                    <td colspan="2" rowspan="2">5-е ИО (55) чистая</td>
-                    <td colspan="2" rowspan="2">6-е ИО (50) чистая</td>
-                    <td colspan="2" rowspan="2">7-е ИО (45) чистая</td>
-                    <td colspan="4">ОРИТ (15)</td>
-                    <td colspan="2" rowspan="2">Дневной стационар (25)</td>
-                    <td colspan="3" rowspan="2">275 стационарных коек</td>
-                    <td colspan="3" rowspan="2">Всего 300 с учетом дневного стационара</td>
+                    <td colspan="2" rowspan="2">3-е ИО</td>
+                    <td colspan="2" rowspan="2">4-е ИО</td>
+                    <td colspan="2" rowspan="2">5-е ИО</td>
+                    <td colspan="2" rowspan="2">6-е ИО</td>
+                    <td colspan="2" rowspan="2">7-е ИО</td>
+                    <td colspan="4">ОРИТ</td>
+                    <td colspan="2" rowspan="2">Дневной стационар</td>
+                    <td colspan="3" rowspan="2">@(@Model.departmentSpots.sum + @Model.departmentSpots.sumChildren) стационарных коек</td>
+                    <td colspan="3" rowspan="2">Всего @(@Model.departmentSpots.sumOC + @Model.departmentSpots.sumOCChildren) с учетом дневного стационара</td>
                 </tr>
                 <tr class="table-primary">
-                    <td colspan ="2">Грязная (18)</td>
-                    <td colspan="2">Чистая (22)</td>
+                    <td colspan ="2">Грязная</td>
+                    <td colspan="2">Чистая</td>
                     <td colspan ="2">Грязная</td>
                     <td colspan="2">Чистая</td>
                 </tr>
                 <tr class="table-secondary align-bottom">
-                    <td>Всего: взрослые 133, детские 142, COVID-19: ВЗР-17, ДЕТ-3</td>
+                    <td>Всего: взрослые @Model.departmentSpots.sum, детские @Model.departmentSpots.sumChildren, 
+                        COVID-19: ВЗР - @(@Model.departmentSpots.dep11 + @Model.departmentSpots.dep91), 
+                        ДЕТ - @(@Model.departmentSpots.dep11Children + @Model.departmentSpots.dep91Children)</td>
                     <td>Взр</td>
                     <td>Дет</td>
                     <td>Взр</td>
@@ -274,7 +276,7 @@
                     <td>@(@Model.finalReport.oNIVL + @Model.finalReport.oNIVLChildren)</td>
                     <td colspan="3" class="bg-transparent "></td>
                 </tr>
-                <tr class="table-success">
+                <tr class="table-success pba-always">
                     <td>НИВЛ+ВПО</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -489,7 +491,7 @@
                     <td>@(@Model.finalReport.pneumonia + @Model.finalReport.pneumoniaChildren)</td>
                     <td colspan="3" class="bg-transparent"></td>
                 </tr>
-                <tr class="table-secondary">
+                <tr class="table-secondary pba-always">
                     <td>ОКИ</td>
                      @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -670,7 +672,7 @@
                     <td  class="text-center" id="sumOth">@Model.sumOther</td>
                     <td colspan="3" class="bg-transparent "></td>
                     <tr class="table-secondary">
-                <tr>
+                <tr class=" pba-always">
                     <td >Всего не госпитализировано</td>
                     <td colspan="20"></td>
                     <td  class="text-center" id="sumAdults">@Model.sumAdults</td>
@@ -681,7 +683,7 @@
             </tbody>
         </table>
 
-        <div class="row pt-5 ">
+        <div class="row pt-5 pt-corr">
             <div class="row">
                 <div class=" col-5">
                     <h3>Дежурная смена</h3>
@@ -767,7 +769,7 @@
                                             @{
                                             foreach(string d in Model.doctors)
                                             {
-                                                        <option value="@d">@d</option>
+                                                <option value="@d">@d</option>
                                             }
                                             }
                                         </select>
@@ -912,12 +914,11 @@
                                         @{
                                                 <option value="М">М</option>
                                                 <option value="Ж">Ж</option>
-
                                         }
                                     </select>
                                 </div>
                          <div class="col-1">
-                                    <input type="number" step="1" value="@patient.AgeYears" class="form-control" asp-for="newPatient.AgeYears" />
+                                    <input type="number" step="1" value="@patient.AgeYears" required class="form-control" asp-for="newPatient.AgeYears" />
                                     <div>лет</div>
                         </div>
                         <div class="col-1">
@@ -973,7 +974,7 @@
             <form method="post">
                 <div class="row d-print-none">
                     <div class="col-2">
-                        <input type="text" placeholder="ФИО пациента" class="form-control" asp-for="newPatient.Name"/>
+                            <input type="text" placeholder="ФИО пациента" class="form-control" asp-for="newPatient.Name" required />
                         <input type="datetime" value="@Model.reportDate" class="form-control invisible" asp-for="newPatient.Date" />
                     </div>
                     <div class="col-1">
@@ -987,7 +988,7 @@
                         </select>
                     </div>
                         <div class="col-1">
-                            <input type="number"  step="1" value="@Model.newPatient.AgeYears"
+                            <input type="number"  step="1" value="@Model.newPatient.AgeYears" required
                                    class="form-control d-inline-flex" asp-for="newPatient.AgeYears" />лет                                                    
                         </div>
                         <div class="col-1">
@@ -1008,7 +1009,7 @@
                         </select>
                     </div> 
                     <div class="col-1">
-                        <select class="form-select" asp-for="newPatient.SubmitedFrom">
+                        <select class="form-select" asp-for="newPatient.SubmitedFrom" required>
                             <option selected disabled>Направлен</option>
                             @{
                                 foreach(string f in Model.submitedFrom){
@@ -1018,7 +1019,7 @@
                         </select>
                     </div> 
                     <div class="col-2">
-                        <select class="form-select" asp-for="newPatient.SubmitedTo">
+                            <select class="form-select" asp-for="newPatient.SubmitedTo" required>
                             <option selected disabled>Переведен</option>
                             @{
                                 foreach(string t in Model.submitedTo){
