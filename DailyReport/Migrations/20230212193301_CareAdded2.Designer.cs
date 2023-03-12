@@ -86,6 +86,9 @@ namespace DailyReport.Migrations
                     b.Property<int>("diedChildrens")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("dutyNurse")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("existed")
                         .HasColumnType("INTEGER");
 
@@ -598,6 +601,7 @@ namespace DailyReport.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PersType")

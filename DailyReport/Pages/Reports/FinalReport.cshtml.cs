@@ -63,7 +63,7 @@ namespace DailyReport.Pages.Reports
             //задаем дату отображения на сводке, устнавливть только после коррекции стартовой даты 
             else { reportDate = actualDate; }
 
-            departmentSpots = DepSpotsService.GetSpots();
+            departmentSpots = DepSpotsService.GetSpots(context);
             departmentSpots.sum = DepSpotsService.CountSum();
             departmentSpots.sumChildren = DepSpotsService.CountSumChildren();
             departmentSpots.sumOC = DepSpotsService.CountSumOC();
