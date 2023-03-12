@@ -33,5 +33,12 @@ namespace DailyReport.Services
                 context.SaveChanges();
             }
         }
+
+        //public static List<string> GetDepNumber(ApplicationContext context)
+        //{
+        //    List<string> depNumbers = new List<string>();
+
+        //}
+
     }
 }
