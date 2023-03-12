@@ -82,31 +82,6 @@ namespace DailyReport.Services
             if (_freeSpots.sum < 0) _freeSpots.sum = 0;
             if (_freeSpots.sumChildren < 0) _freeSpots.sumChildren = 0;
 
-            //_freeSpots.dep1P = (int)((_dRep.Find(p => p.depNumber == 1).present + _dRep.Find(p => p.depNumber == 1).presentChildrens) 
-            //    / (_freeSpots.dep1 + _freeSpots.dep1Children) * 100M);
-            //_freeSpots.dep11P = (double)((_dRep.Find(p => p.depNumber == 11).present + _dRep.Find(p => p.depNumber == 11).presentChildrens) 
-            //    / (_freeSpots.dep11 + _freeSpots.dep11Children) * 100M);
-            //_freeSpots.dep3P = (_dRep.Find(p => p.depNumber == 3).present + _dRep.Find(p => p.depNumber == 3).presentChildrens) 
-            //    / (_freeSpots.dep3 + _freeSpots.dep3Children) * 100;
-            //_freeSpots.dep4P = (_dRep.Find(p => p.depNumber == 4).present + _dRep.Find(p => p.depNumber == 4).presentChildrens) 
-            //    / (_freeSpots.dep4 + _freeSpots.dep4Children) * 100;
-            //_freeSpots.dep5P = (_dRep.Find(p => p.depNumber == 5).present + _dRep.Find(p => p.depNumber == 5).presentChildrens) 
-            //    / (_freeSpots.dep5 + _freeSpots.dep5Children) * 100;
-            //_freeSpots.dep6P = (_dRep.Find(p => p.depNumber == 6).present + _dRep.Find(p => p.depNumber == 6).presentChildrens) 
-            //    / (_freeSpots.dep6 + _freeSpots.dep6Children) * 100;
-            //_freeSpots.dep7P = (_dRep.Find(p => p.depNumber == 7).present + _dRep.Find(p => p.depNumber == 7).presentChildrens) 
-            //    / (_freeSpots.dep7 + _freeSpots.dep7Children) * 100;
-            //_freeSpots.dep8P = (_dRep.Find(p => p.depNumber == 8).present + _dRep.Find(p => p.depNumber == 8).presentChildrens) 
-            //    / (_freeSpots.dep8 + _freeSpots.dep8Children) * 100;
-            //_freeSpots.dep90P = (_dRep.Find(p => p.depNumber == 90).present + _dRep.Find(p => p.depNumber == 90).presentChildrens) 
-            //    / (_freeSpots.dep90 + _freeSpots.dep90Children) * 100;
-            //_freeSpots.dep91P = (_dRep.Find(p => p.depNumber == 91).present + _dRep.Find(p => p.depNumber == 91).presentChildrens) 
-            //    / (_freeSpots.dep91 + _freeSpots.dep91Children) * 100;
-            //_freeSpots.dep1P = (_dRep.Find(p => p.depNumber == 1).present + _dRep.Find(p => p.depNumber == 1).presentChildrens) 
-            //    / (_freeSpots.dep1 + _freeSpots.dep1Children) * 100;
-            //_freeSpots.dep1P = (_dRep.Find(p => p.depNumber == 1).present + _dRep.Find(p => p.depNumber == 1).presentChildrens) 
-            //    / (_freeSpots.dep1 + _freeSpots.dep1Children) * 100;
-
             return _freeSpots;
         }
 

@@ -33,16 +33,16 @@
                         </select>
                     </div>
                     <div class="col-2">
-                        <input type="text" value="@deps.WardQuantity" class="form-control" asp-for="department.WardQuantity" />
+                        <input type="number" value="@deps.WardQuantity" class="form-control" asp-for="department.WardQuantity" />
                     </div>
                     <div class="col-2">
-                        <input type="text" value="@deps.AdultSpotsQuantity" class="form-control" asp-for="department.AdultSpotsQuantity" />
+                        <input type="number" value="@deps.AdultSpotsQuantity" class="form-control" asp-for="department.AdultSpotsQuantity" />
                     </div>
                     <div class="col-2">
-                        <input type="text" value="@deps.ChildrenSpotsQuantity" class="form-control" asp-for="department.ChildrenSpotsQuantity" />
+                        <input type="number" value="@deps.ChildrenSpotsQuantity" class="form-control" asp-for="department.ChildrenSpotsQuantity" />
                     </div>
                     <div class="col-2 d-none">
-                        <input type="text" value="@deps.Id" class="form-control" asp-for="@deps.Id" />
+                        <input type="number" value="@deps.Id" class="form-control invisible" asp-for="department.Id" />
                     </div>
                     <div class="col-1 d-print-none">
                         <input type="submit" value="&#128465" asp-page-handler="DeleteDepartment" asp-route-id="@deps.Id" />
@@ -76,10 +76,10 @@
                 <input type="number" placeholder="Количество палат" class="form-control" asp-for="department.WardQuantity" />
             </div>
             <div class="col-2">
-                <input type="text" placeholder="Взрослые" class="form-control" asp-for="department.AdultSpotsQuantity" />
+                <input type="number" placeholder="Взрослые" class="form-control" asp-for="department.AdultSpotsQuantity" />
             </div>
             <div class="col-2">
-                <input type="text" placeholder="Детские" class="form-control" asp-for="department.ChildrenSpotsQuantity" />
+                <input type="number" placeholder="Детские" class="form-control" asp-for="department.ChildrenSpotsQuantity" />
             </div>
             <div class="col-2">
 
