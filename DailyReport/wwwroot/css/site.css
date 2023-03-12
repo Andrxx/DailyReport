@@ -10,16 +10,18 @@ html {
 
 @media print {
     html, body {
-        font-size: 12px;
+        font-size: 13px;
         height: 297mm;
         width: 210mm;
-        margin: 8mm 0mm 0mm 0mm;
+        margin: 8mm 5mm 5mm 5mm;
     }
 
     *, *:before, *:after {
         color: #000;
         box-shadow: none;
         text-shadow: none;
+        margin: 0;
+        padding: 0;
     }
 
    
@@ -36,12 +38,15 @@ html {
         -moz-appearance: textfield;
         border: 0;
     }
+    .pba-always {
+        page-break-after: always;
+    }
+    
+    /*todo коррекция разрывов для печати*/
+    .pt-corr {
+        padding-top: 10rem !important;
+    }
 }
-
-@page {
-    margin: 0mm 0mm 0mm 0mm;
-}
-
 
 html {
   position: relative;
@@ -54,7 +59,4 @@ body {
 
 .reject {
     max-width: 50px;
-}
-
-.noarrows {
 }

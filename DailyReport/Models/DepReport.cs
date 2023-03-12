@@ -79,6 +79,8 @@ namespace DailyReport.Models
         public int presentWithCare { get; set; }
         public int presentWithCareChildren { get; set; }
 
+        public string? dutyNurse { get; set; }
+
         /// <summary>
         /// подсчет количества больных на кислороде, только по взрослым (в текущей версии детей не сохраняем и не показываем)
         /// </summary>

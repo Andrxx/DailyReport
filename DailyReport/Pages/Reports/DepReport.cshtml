@@ -13,15 +13,17 @@
 }
 
 <div class="container">
+   
     <div class="row">
         <div class="col-4">
             Сводка @msg @zone зона
         </div>
-        <div class="col-4 offset-4" >
+       
+       
+        <div class="col-4 offset-4">
             Дата @Model.reportDate.ToString("dd.MM.yy")
         </div>
     </div>
-
     <form name="repForm" method="post">
         <table class="table mt-2  g-0 d-table table-sm ">
             <thead> 
@@ -116,7 +118,7 @@
                     <td scope="col"><input value="@Model._report.oBrease" type="number" name="oBrease" /></td>
                     <td scope="col"><input value="@Model._report.oBreaseChildrens" type="number" name="oBreaseChildrens" /> </td>
                 </tr> *@
-                @*админ рздел*@
+                @*админ раздел*@
              <tr>
                     <td scope="col">Беременные</td>
                     <td scope="col"><input min="0" value="@Model._report.pregnant" type="number" name="pregnant" asp-for="_report.pregnant"/></td>
@@ -216,10 +218,22 @@
              <tr>
                 <td scope="col">Лица по уходу до 4х лет или с детьми инвалидами</td>
                 <td scope="col" colspan="2"><input min="0" value="@Model._report.careDisodered" type="number" name="careDisodered" asp-for="_report.careDisodered" /></td>
-             </tr>
+             </tr> 
         </table>
+         
+        @*<div class="col-4">
+            <select form="repForm" asp-for="_report.dutyNurse" id="nurseSelect" >
+                <option selected disabled value="2"></option>
+                @{
+                    foreach (string n in Model.nurses)
+                    {
+                        <option value="1">@n</option>
+                    }
+                }
+            </select>
+        </div>*@
 
-        <input class="d-print-none" type="submit" value="Отправить" asp-page-handler="Report" asp-route-depNumber=@Model._report.depNumber />
+        <input class="d-print-none" onclick="SetNurse()" type="submit" value="Отправить" asp-page-handler="Report" asp-route-depNumber=@Model._report.depNumber />
         <input class="d-print-none" type="submit" value="Загрузить предыдущую сводку" asp-page-handler="PrevReport" asp-route-depNumber=@Model._report.depNumber />
     
         </form>
