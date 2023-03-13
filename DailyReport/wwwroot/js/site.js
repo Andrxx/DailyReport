@@ -38,8 +38,3 @@ function CountReject() {
 	let sumAll = sumAdults + sumChild;
 	$("#sumAll").html(sumAll);
 }
-
-//function SetNurse() {
-//	//$("#nurseSelect").val = $("#nurseSelect").html;
-//	alert($("#nurseSelect").val);
-//}
