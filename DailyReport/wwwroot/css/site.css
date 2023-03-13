@@ -24,7 +24,6 @@ html {
         padding: 0;
     }
 
-   
     /*убираем стрелки в полях вводаа формы*/
     /* Chrome, Safari, Edge, Opera */
     input::-webkit-outer-spin-button,
