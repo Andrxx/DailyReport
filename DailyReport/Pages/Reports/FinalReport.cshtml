@@ -909,19 +909,19 @@
             <div class="col-6">
                 <h3>Переводы и отказы</h3>
             </div>
-            <div class="row text-end wth-200">
+            <div class="row text-end min-all">
                 <div class="col-2 text-start">Пациент</div>
                 <div class="col-1">Пол</div>
                 <div class="col-2">Возраст</div>
                 <div class="col-2">Диагноз</div>
                 <div class="col-1">Доставлен</div>
                 <div class="col-1">Направлен</div>
-                <div class="col-2">Переведен</div>
+                <div class="col-2 text-center">Переведен</div>
             </div>
             @{
                 foreach(OutcomingPatient patient in Model.patients) {
-                    <form method="post ">
-                        <div class="row pb-1 m-0">
+                    <form method="post">
+                        <div class="row pb-1 m-0 min-all ">
                             <div class="col-2">
                                 <input type="text" value="@patient.Name" class="form-control" asp-for="newPatient.Name"/>
                             </div>
@@ -954,8 +954,8 @@
                                 }
                                 }
                             </select>
-                        </div> 
-                        <div class="col-1">
+                        </div>
+                            <div class="col-1 text-end">
                             <select class="form-select" asp-for="newPatient.SubmitedFrom">
                                 <option selected>@patient.SubmitedFrom</option>
                                 @{
@@ -965,7 +965,7 @@
                                 }
                             </select>
                         </div> 
-                        <div class="col-2">
+                        <div class="col-2 text-end">
                             <select class="form-select" asp-for="newPatient.SubmitedTo">
                                 <option selected>@patient.SubmitedTo</option>
                                 @{

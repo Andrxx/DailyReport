@@ -69,11 +69,10 @@ namespace DailyReport.Pages.Reports
             }
 
             //получаем список медсестер больницы
-            //nurses = (from str in context.Personels
-            //          where str.PersType == "Медсестра"
-            //          orderby str.Name, str.Name.Substring(0, 1)
-            //          select str.Name).ToList();
-                      
+            nurses = (from str in context.Personels
+                      where str.PersType == "Медсестра"
+                      orderby str.Name, str.Name.Substring(0, 1)
+                      select str.Name).ToList();
         }
 
         /// <summary>
