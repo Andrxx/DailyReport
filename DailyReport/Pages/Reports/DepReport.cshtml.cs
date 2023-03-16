@@ -21,7 +21,7 @@ namespace DailyReport.Pages.Reports
         {
             context = db;
         }
-        public DepReportServise reportServise = new();
+        //public DepReportServise reportServise = new();
 
         public void OnGet(int depNumber, double dateOffset = 0)
         {
@@ -118,11 +118,11 @@ namespace DailyReport.Pages.Reports
             }  
         }
 
-        public RedirectToPageResult OnPostReport(DepReport _report)
+        public IActionResult OnPostReport(DepReport _report)
         {
             context.DepReports.Update(_report);
             context.SaveChanges();
-            return RedirectToPage("DepReport", new { depNumber = _report.depNumber });
+            return RedirectToAction("Get"); // "DepReport", new { depNumber = _report.depNumber });
         }
 
         public void OnPostDelete()

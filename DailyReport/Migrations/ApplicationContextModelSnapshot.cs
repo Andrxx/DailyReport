@@ -122,6 +122,12 @@ namespace DailyReport.Migrations
                     b.Property<int>("incomeHospitalChildrens")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("measles")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("measlesChildren")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("meningit")
                         .HasColumnType("INTEGER");
 
@@ -390,6 +396,12 @@ namespace DailyReport.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("incomeHospitalChildren")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("measles")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("measlesChildren")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("meningit")
