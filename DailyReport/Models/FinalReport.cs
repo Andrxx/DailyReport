@@ -74,6 +74,8 @@
         public int nozSummaryChildren { get; set; }
         public int presentNonDaycare { get; set; }
         public int presentNonDaycareChildren { get; set; }
+        public int measles { get; set; }
+        public int measlesChildren { get; set; }
 
         //уход
         public int care { get; set; }

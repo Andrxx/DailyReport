@@ -72,6 +72,8 @@ namespace DailyReport.Models
         public int otherChildrens { get; set; }
         public int sepsis { get; set; }
         public int sepsisChildren { get; set; }
+        public int measles { get; set; }
+        public int measlesChildren { get; set; }
 
         //уход
         public int care { get; set; }
@@ -96,7 +98,8 @@ namespace DailyReport.Models
         /// <returns></returns>
         public int CountDiseases()
         {
-            int _summary = U071 + U072 + ORVI + pneumonia + OKI + grippe + meningit + hepatit + HIV + other + sepsis;
+            int _summary = U071 + U072 + ORVI + pneumonia + OKI + grippe + meningit + hepatit
+                + HIV + other + sepsis + measles;
             return _summary;
         }
         /// <summary>
@@ -106,7 +109,7 @@ namespace DailyReport.Models
         public int CountDiseasesChildren()
         {
             int _summary = U071Childrens + U072Childrens + ORVIChildrens + grippeChildrens + pneumoniaChildrens + OKIChildrens + meningitChildrens +
-                hepatitChildrens + HIVCildrens + otherChildrens + sepsisChildren;
+                hepatitChildrens + HIVCildrens + otherChildrens + sepsisChildren + measlesChildren;
             return _summary;
         }
         /// <summary>
