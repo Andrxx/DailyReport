@@ -45,7 +45,11 @@ html {
     .pba-always {
         page-break-after: always;
     }
-    
+    .min-all {
+        min-width: 280mm;
+    }
+
+
     /*todo коррекция разрывов для печати*/
     .pt-corr {
         padding-top: 10rem !important;
