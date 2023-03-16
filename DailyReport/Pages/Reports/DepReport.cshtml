@@ -25,7 +25,7 @@
         <table class="table mt-2  g-0 d-table table-sm">
         <thead> 
             <tr>
-                <th scope="col"><input value="@Model._report.Id" type="number" name="id" class="invisible" />  </th>
+                <th scope="col"><input value="@Model._report.Id" type="number" name="id" class="invisible" asp-for="_report.Id" />  </th>
                 <th scope="col">Взрослые</th>
                 <th scope="col">Дети</th>
             </tr>
@@ -183,7 +183,7 @@
                 <td scope="col"><input value="@Model._report.other" type="number" name="other" asp-for="_report.other"/></td>
                 <td scope="col"><input value="@Model._report.otherChildrens" type="number" name="otherChildrens" asp-for="_report.otherChildrens"/> </td>
             </tr>
-    </table>
+        </table>
 
         <input class="d-print-none" type="submit" value="Отправить" asp-page-handler="Report" asp-route-depNumber=@Model._report.depNumber />
         <input class="d-print-none" type="submit" value="Загрузить предыдущую сводку" asp-page-handler="PrevReport" asp-route-depNumber=@Model._report.depNumber />
