@@ -20,7 +20,7 @@
         </div>
        <div class="col-4">
                 <select class="form-select" form="repForm" asp-for="report.dutyNurse">
-                <option  disabled>Выбрать дежурного</option>
+                <option>Выбрать дежурную м/с</option>
                     @{foreach (string nurse in Model.nurses)
                         {
                             <option value="@nurse">@nurse</option>
