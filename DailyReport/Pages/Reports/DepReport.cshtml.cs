@@ -13,7 +13,7 @@ namespace DailyReport.Pages.Reports
     {
         ApplicationContext context;
         [BindProperty(SupportsGet = true)]
-        public DepReport _report { get; set; }
+        public DepReport report { get; set; }
         public List<DepReport> Reports { get; private set; } = new();
         public DateTime actualDate = DateTime.Now, reportDate;//.AddDays(-1);
         public List<string> nurses = new();
@@ -45,7 +45,7 @@ namespace DailyReport.Pages.Reports
             //падает при очистке БД - обработать для очистки и миграций
             //try
             //{
-            _report = (from report in context.DepReports
+            report = (from report in context.DepReports
                        where (report.depNumber == depNumber)
                        where ((report.date > startTime) && (report.date < endTime))
                        select report).FirstOrDefault();
@@ -59,13 +59,13 @@ namespace DailyReport.Pages.Reports
             //}
             //catch { throw new  }
 
-            if (_report == null)
+            if (report == null)
             {
                 //тест для БД, изменить на создание нового для релиза
                 //_report = reportServise.CreateTest();
 
-                _report = new();
-                _report.depNumber = depNumber;
+                report = new();
+                report.depNumber = depNumber;
             }
 
             //получаем список медсестер больницы
@@ -97,10 +97,10 @@ namespace DailyReport.Pages.Reports
             }
             //задаем дату отображения на сводке, устнавливть только после коррекции стартовой даты 
             else { reportDate = actualDate; }
-            _report = (from report in context.DepReports
+            report = (from report in context.DepReports
                        where (report.depNumber == depNumber) && (report.date > startTime && report.date < endTime)
                        select report).AsNoTracking().FirstOrDefault();
-            if (_report == null)
+            if (report == null)
             {
                 return RedirectToPage("DepReport", new { depNumber = depNumber });
             }
@@ -108,7 +108,7 @@ namespace DailyReport.Pages.Reports
             {
                 //новая сущность для БД
                 DepReport newRep = new();
-                newRep = (DepReport)_report.Clone();
+                newRep = (DepReport)report.Clone();
                 //меняем дату на текущую и обнуляем ИД для сохранения новой записи в БД
                 newRep.date = actualDate;
                 newRep.Id = 0;
@@ -126,7 +126,7 @@ namespace DailyReport.Pages.Reports
             }
             context.DepReports.Update(_report);
             context.SaveChanges();
-            return RedirectToAction("Get"); // "DepReport", new { depNumber = _report.depNumber });
+            return RedirectToAction("DepReport", new { depNumber = _report.depNumber });
         }
 
         public void OnPostDelete()
