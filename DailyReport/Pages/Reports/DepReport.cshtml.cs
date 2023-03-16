@@ -126,7 +126,7 @@ namespace DailyReport.Pages.Reports
             }
             context.DepReports.Update(_report);
             context.SaveChanges();
-            return RedirectToAction("DepReport", new { depNumber = _report.depNumber });
+            return RedirectToPage("DepReport", new { depNumber = _report.depNumber });
         }
 
         public void OnPostDelete()
