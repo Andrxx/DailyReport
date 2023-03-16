@@ -13,19 +13,30 @@
 }
 
 <div class="container">
-   
+       <form name="repForm" method="post">
     <div class="row">
         <div class="col-4">
             Сводка @msg @zone зона
         </div>
-       
-       
-        <div class="col-4 offset-4">
+       <div class="col-4">
+                <select class="form-select" form="repForm" asp-for="report.dutyNurse">
+                <option  disabled>Выбрать дежурного</option>
+                    @{foreach (string nurse in Model.nurses)
+                        {
+                            <option value="@nurse">@nurse</option>
+                        }
+                    }
+            </select>
+                <input value="sdsdsdsd"  class="invisible" asp-for="report.dutyNurse" />
+        </div>
+
+            <div class="col-4 ">
+                @*offset-4*@
             Дата @Model.reportDate.ToString("dd.MM.yy")
         </div>
     </div>
-    <form name="repForm" method="post">
-        <table class="table mt-2  g-0 d-table table-sm ">
+
+        <table class="table mt-2 g-0 d-table table-sm ">
             <thead> 
                 <tr>
                     <th scope="col">
@@ -187,7 +198,7 @@
             <tr>
                 <td scope="col">Корь</td>
                 <td scope="col"><input value="@Model.report.measles" type="number" name="measles" asp-for="report.measles"/></td>
-                <td scope="col"><input value="@Model.report.measlesChildren" type="number" name="measlesChildrens" asp-for="report.measlesChildren"/> </td>
+                <td scope="col"><input value="@Model.report.measlesChildren" type="number" name="measlesChildren" asp-for="report.measlesChildren"/> </td>
             </tr>
             <tr>
                 <td scope="col">ОКИ</td>
