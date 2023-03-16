@@ -5,14 +5,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DailyReport.Services
 {
-    public class DepReportServise
+    public static class DepReportServise
     {
-        public DepReport DepReport = new DepReport();
+        public static DepReport DepReport = new DepReport();
 
         /// <summary>
         /// инициализация для отладочных целей
         /// </summary>
-        public DepReport CreateTest()
+        public static DepReport CreateTest()
         {
             //DepReport.Id = 1;
             //DepReport.date = DateTime.Now;//.Date.AddDays(-1);
@@ -86,7 +86,7 @@ namespace DailyReport.Services
         /// </summary>
         /// <param name="dateOffset"></param>
         /// <returns></returns>
-        public DepReport CreateRandomReport(int department, double dateOffset = +2, bool test = true)
+        public static DepReport CreateRandomReport(int department, double dateOffset = 0, bool test = true)
         {
             DepReport report = new();
             if(test) report = CreateTest();
@@ -94,6 +94,7 @@ namespace DailyReport.Services
             report.date = DateTime.Now.AddDays(dateOffset);
             return report;
         }
+
 
 
     }
