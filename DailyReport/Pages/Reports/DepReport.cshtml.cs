@@ -12,7 +12,7 @@ namespace DailyReport.Pages.Reports
     public class DepReportModel : PageModel
     {
         ApplicationContext context;
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public DepReport _report { get; set; }
         public List<DepReport> Reports { get; private set; } = new();
         public DateTime actualDate = DateTime.Now, reportDate;//.AddDays(-1);
