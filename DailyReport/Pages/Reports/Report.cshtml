@@ -1,0 +1,14 @@
+﻿page
+@using DailyReport.Models
+@model DailyReport.Pages.Reports.DepReportModel
+@*{
+    string msg, zone/*, alertMsg = string.Empty*/;
+    if ((Model.dReport.depNumber == 90) || (Model.dReport.depNumber == 91)) msg = "ОРИТ";
+    else if (Model.dReport.depNumber == 8) msg = "Дневной стационар";
+    else if (Model.dReport.depNumber == 11) msg = " 1 отделения";
+    else msg = Model.dReport.depNumber + " отделения";
+    if ((Model.dReport.depNumber == 11) || (Model.dReport.depNumber == 91)) zone = "грязная ";
+    else zone = "чистая ";
+    ViewData["Title"] = "Сводка " + msg;
+}
+*@
