@@ -120,6 +120,10 @@ namespace DailyReport.Pages.Reports
 
         public IActionResult OnPostReport(DepReport _report)
         {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Get");
+            }
             context.DepReports.Update(_report);
             context.SaveChanges();
             return RedirectToAction("Get"); // "DepReport", new { depNumber = _report.depNumber });

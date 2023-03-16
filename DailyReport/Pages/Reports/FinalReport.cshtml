@@ -920,7 +920,7 @@
             </div>
             @{
                 foreach(OutcomingPatient patient in Model.patients) {
-                        <form method="post ">
+                    <form method="post ">
                         <div class="row pb-1 m-0">
                             <div class="col-2">
                                 <input type="text" value="@patient.Name" class="form-control" asp-for="newPatient.Name"/>
@@ -974,24 +974,24 @@
                                 }
                                 }
                             </select>
-                        </div> 
-                                    <div class="col-1 d-none">
-                                        <input type="text" value="@patient.Id" class="form-control invisible" asp-for="newPatient.Id" />
-                                        <input type="datetime" value="@patient.Date" class="form-control invisible" asp-for="newPatient.Date" />
-                                    </div>
+                        </div>
+                            <div class="col-1 d-none">
+                                <input type="text" value="@patient.Id" class="form-control invisible" asp-for="newPatient.Id" />
+                                <input type="datetime" value="@patient.Date" class="form-control invisible" asp-for="newPatient.Date" />
+                            </div>
                             <div class="col-1 d-print-none">
                                     <input type="submit" value="&#128465" asp-page-handler="DeletePaient" asp-route-id="@patient.Id" />
                                     <input type="submit" value="&#9998" asp-page-handler="UpdatePatient" />
                             </div> 
                         </div>
-                        </form>
+                    </form>
                 }
             }
             @if(!Model._onlyView){
             <form method="post">
                 <div class="row d-print-none">
                     <div class="col-2">
-                            <input type="text" placeholder="ФИО пациента" class="form-control" asp-for="newPatient.Name" required />
+                        <input type="text" placeholder="ФИО пациента" class="form-control" asp-for="newPatient.Name" required />
                         <input type="datetime" value="@Model.reportDate" class="form-control invisible" asp-for="newPatient.Date" />
                     </div>
                     <div class="col-1">
