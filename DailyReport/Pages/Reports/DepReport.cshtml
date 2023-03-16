@@ -230,20 +230,15 @@
              </tr> 
         </table>
          
-        @*<div class="col-4">
-            <select form="repForm" asp-for="_report.dutyNurse" id="nurseSelect" >
-                <option selected disabled value="2"></option>
-                @{
-                    foreach (string n in Model.nurses)
-                    {
-                        <option value="1">@n</option>
-                    }
-                }
-            </select>
-        </div>*@
 
-        <input class="d-print-none" type="submit" value="Отправить" asp-page-handler="Report" asp-route-depNumber=@Model._report.depNumber />
-        <input class="d-print-none" type="submit" value="Загрузить предыдущую сводку" asp-page-handler="PrevReport" asp-route-depNumber=@Model._report.depNumber />
+        <input class="d-print-none" type="submit" 
+        value="Отправить" asp-page-handler="Report" 
+        asp-route-depNumber=@Model._report.depNumber />
+        
+        <input class="d-print-none" type="submit" 
+        value="Загрузить предыдущую сводку" 
+        asp-page-handler="PrevReport" 
+        asp-route-depNumber=@Model._report.depNumber />
     
         </form>
     <button class="d-print-none mt-2 action-print">Печать</button>
