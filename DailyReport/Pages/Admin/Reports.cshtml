@@ -11,16 +11,24 @@
         <div class="row">
             <div class="col-2">
                 @rep.Id.ToString()
-                @rep.depNumber.ToString()
+                отд-@rep.depNumber.ToString()
             </div>
-        
+                <div class="col-4">
+                    б-@rep.existed.ToString();
+                    п-@rep.income.ToString();
+                    в-@rep.outcome.ToString();
+                    c-@rep.present.ToString();
+
+                    бд-@rep.existedChildrens.ToString();          
+                    пд-@rep.incomeChildrens.ToString();
+                    вд-@rep.outcomeChildrens.ToString();
+                    cд- @rep.presentChildrens.ToString();
+
+                </div>
             <div class="col-2">
-                @rep.present.ToString()
+                    @rep.date.ToString("dd.MM.yy HH:mm:ss")
             </div>
-            <div class="col-2">
-                @rep.date.ToString()
-            </div>
-            <div class="col-2">
+            <div class="col-1">
                 <input type="submit" value="&#128465" asp-page-handler="DeleteReport" asp-route-id="@rep.Id" />
             </div>
 
