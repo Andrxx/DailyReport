@@ -216,7 +216,7 @@
                     <td>@Model.finalReport.presentChildren</td>
                     <td>@(@Model.finalReport.present + @Model.finalReport.presentChildren)</td>
                     <td>@(@Model.finalReport.present + @Model.depReport8.present)</td>
-                    <td>@(@Model.finalReport.pregnantChildren + @Model.depReport8.presentChildrens)</td>
+                    <td>@(@Model.finalReport.presentChildren + @Model.depReport8.presentChildrens)</td>
                     <td>@(@Model.finalReport.present + @Model.depReport8.present + 
                         @Model.finalReport.presentChildren + @Model.depReport8.presentChildrens)</td>
                 </tr>
@@ -257,7 +257,8 @@
                     <td class="fw-bold">ИВЛ</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                                <td colspan="2">@if(dr.oIVL > 0) @dr.oIVL </td>
+                                <td >@if(dr.oIVL > 0) @dr.oIVL </td>
+                                <td >@if(dr.oIVLChildrens > 0) @dr.oIVLChildrens</td>
                         }
                     }
                     <td >@Model.finalReport.oIVL</td>
@@ -269,7 +270,8 @@
                     <td class="fw-bold">НИВЛ </td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                                <td colspan="2">@if(dr.oNIVL > 0) @dr.oNIVL </td>
+                                <td >@if(dr.oNIVL > 0) @dr.oNIVL </td>
+                                <td >@if(dr.oNIVLChildrens > 0) @dr.oNIVLChildrens</td>
                         }
                     }
                     <td>@Model.finalReport.oNIVL</td>
@@ -281,7 +283,8 @@
                     <td class="fw-bold">НИВЛ+ВПО</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                                <td colspan="2">@if(dr.oNIVLVPO > 0) @dr.oNIVLVPO </td>
+                                <td >@if(dr.oNIVLVPO > 0) @dr.oNIVLVPO </td>
+                                <td >@if(dr.oNIVLVPOChildrens > 0) @dr.oNIVLVPOChildrens </td>
                         }
                     }
                     <td>@Model.finalReport.oNIVLVPO</td>
@@ -293,7 +296,8 @@
                     <td class="fw-bold">НИВЛ+КМ</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                                <td colspan="2">@if(dr.oNIVLMask > 0) @dr.oNIVLMask </td>
+                                <td >@if(dr.oNIVLMask > 0) @dr.oNIVLMask </td>
+                                <td >@if(dr.oNIVLMaskChildrens > 0) @dr.oNIVLMaskChildrens </td>
                         }
                     }
                     <td>@Model.finalReport.oNIVLMask</td>
@@ -305,7 +309,8 @@
                     <td class="fw-bold">Лицевая маска</td>
                      @{
                         foreach(DepReport dr in Model.filteredReports){
-                                <td colspan="2">@if(dr.oMask > 0) @dr.oMask </td>
+                                <td >@if(dr.oMask > 0) @dr.oMask </td>
+                                <td >@if(dr.oMaskChildren > 0) @dr.oMaskChildren </td>
                         }
                     }
                     <td>@Model.finalReport.oMask</td>
