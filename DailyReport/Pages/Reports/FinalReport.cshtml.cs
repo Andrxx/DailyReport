@@ -186,7 +186,7 @@ namespace DailyReport.Pages.Reports
                 finalReport.pneumonia += _rep.pneumonia;
                 finalReport.pneumoniaChildren += _rep.pneumoniaChildrens;
                 finalReport.measles += _rep.measles;
-                finalReport.measles += _rep.measlesChildren;
+                finalReport.measlesChildren += _rep.measlesChildren;
                 finalReport.OKI += _rep.OKI;
                 finalReport.OKIChildren += _rep.OKIChildrens;
                 finalReport.meningit += _rep.meningit;
