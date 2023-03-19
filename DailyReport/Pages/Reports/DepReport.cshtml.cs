@@ -121,7 +121,7 @@ namespace DailyReport.Pages.Reports
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Get");
+                return RedirectToPage("DepReport", new { depNumber = _report.depNumber });
             }
             context.DepReports.Update(_report);
             context.SaveChanges();
