@@ -243,13 +243,13 @@
          
 
         <input class="d-print-none" type="submit" 
-        value="Соранить" asp-page-handler="Report" 
+        value="Сохранить" asp-page-handler="Report" 
         asp-route-depNumber=@Model.report.depNumber />
         
-        <input class="d-print-none" type="submit" 
+      @*  <input class="d-print-none" type="submit" 
         value="Загрузить предыдущую сводку" 
         asp-page-handler="PrevReport" 
-        asp-route-depNumber=@Model.report.depNumber />
+        asp-route-depNumber=@Model.report.depNumber /> *@
     
         </form>
     <button class="d-print-none mt-2 action-print">Печать</button>

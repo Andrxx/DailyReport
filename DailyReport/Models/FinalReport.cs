@@ -100,7 +100,7 @@
         /// <returns></returns>
         public int CountDiseases()
         {
-            int _summary = U071 + U072 + ORVI + grippe + pneumonia + OKI + meningit + hepatit + HIV + other + sepsis;
+            int _summary = U071 + U072 + ORVI + grippe + pneumonia + OKI + meningit + hepatit + HIV + other + sepsis + measles;
             return _summary;
         }
         /// <summary>
@@ -110,7 +110,7 @@
         public int CountDiseasesChildren()
         {
             int _summary = U071Children + U072Children + ORVIChildren + grippeChildren + pneumoniaChildren + OKIChildren + meningitChildren +
-                hepatitChildren + HIVCildren + otherChildren + sepsisChildren;
+                hepatitChildren + HIVCildren + otherChildren + sepsisChildren + measlesChildren;
             return _summary;
         }
 
