@@ -24,7 +24,7 @@ namespace DailyReport.Pages.Reports
         public List<DepReport> filteredReports = new List<DepReport>();
         public DateTime actualDate = DateTime.Now, reportDate;//.AddDays(-1);
         public bool _onlyView;
-        public int oxygenSum11, oxygenSum91, deseaseSum1, deseaseSum11, deseaseSum2, deseaseSum3, deseaseSum4, deseaseSum5, deseaseSum6, deseaseSum7,
+        public int oxygenSum11, oxygenSum91, oxygenSum90, deseaseSum1, deseaseSum11, deseaseSum2, deseaseSum3, deseaseSum4, deseaseSum5, deseaseSum6, deseaseSum7,
             deseaseSum8, deseaseSum90, deseaseSum91, deseaseSum1Children, deseaseSum11Children, deseaseSum2Children, deseaseSum3Children, deseaseSum4Children,
             deseaseSum5Children, deseaseSum6Children, deseaseSum7Children, deseaseSum8Children, deseaseSum90Children, deseaseSum91Children,
             deseaseSumFinal, deseaseSumFinalChildren;
@@ -206,6 +206,8 @@ namespace DailyReport.Pages.Reports
 
             oxygenSum11 = depReport11.CountO2();
             oxygenSum91 = depReport91.CountO2();
+            oxygenSum90 = depReport90.CountO2();
+
             deseaseSum1 = depReport1.CountDiseases();
             deseaseSum11 = depReport11.CountDiseases();
             deseaseSum2 = depReport2.CountDiseases();

@@ -23,6 +23,10 @@ html {
         margin: 0;
         padding: 0;
     }
+    * {
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
 
     th, td {
         padding: 0px; /* Поля вокруг содержимого таблицы */
@@ -68,3 +72,4 @@ body {
 .reject {
     max-width: 50px;
 }
+
