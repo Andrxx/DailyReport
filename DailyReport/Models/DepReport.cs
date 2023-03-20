@@ -84,7 +84,7 @@ namespace DailyReport.Models
         public string? dutyNurse { get; set; }
 
         /// <summary>
-        /// подсчет количества больных на кислороде, только по взрослым (считаем и детей и взрослых)
+        /// подсчет количества больных на кислороде (считаем и детей и взрослых)
         /// </summary>
         /// <returns></returns>
         public int CountO2()
