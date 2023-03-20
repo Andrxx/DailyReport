@@ -69,7 +69,15 @@ body {
   margin-bottom: 60px;
 }
 
+th, td {
+    padding: 0px; /* Поля вокруг содержимого таблицы */
+    border: 1px solid black !important; /* Параметры рамки */
+}
+
 .reject {
     max-width: 50px;
 }
 
+.border-transparent {
+    border-color: white !important;
+}

@@ -220,7 +220,7 @@
                     <td>@(@Model.finalReport.present + @Model.depReport8.present + 
                         @Model.finalReport.presentChildren + @Model.depReport8.presentChildrens)</td>
                 </tr>
-                <tr class="table-secondary">
+                <tr class="table-secondary border-transparent">
                     <td class="fw-bold">Свободные места</td>
                     <td colspan="2">@(@Model.freeSpots.dep11S @*+ @Model.freeSpots.dep11Children*@)</td>
                     <td colspan="2">@(@Model.freeSpots.dep1S @*+ @Model.freeSpots.dep1Children*@)</td>
@@ -253,7 +253,7 @@
                     <td>@(@Model.freeSpots.sum + @Model.freeSpots.sumChildren)</td>
                 </tr>*@
                 
-                <tr>
+                <tr class="border-transparent">
                     <td class="fw-bold">ИВЛ</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -266,7 +266,7 @@
                     <td >@(@Model.finalReport.oIVL + @Model.finalReport.oIVLChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">НИВЛ </td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -279,7 +279,7 @@
                     <td>@(@Model.finalReport.oNIVL + @Model.finalReport.oNIVLChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="pba-always">
+                <tr class="pba-always border-transparent">
                     <td class="fw-bold">НИВЛ+ВПО</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -292,7 +292,7 @@
                     <td>@(@Model.finalReport.oNIVLVPO + @Model.finalReport.oNIVLVPOChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">НИВЛ+КМ</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -305,7 +305,7 @@
                     <td>@(@Model.finalReport.oNIVLMask + @Model.finalReport.oNIVLMaskChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">Лицевая маска</td>
                      @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -318,7 +318,7 @@
                     <td>@(@Model.finalReport.oMask + @Model.finalReport.oMaskChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="table-warning">
+                <tr class="table-warning border-transparent">
                     <td class="fw-bold">Количество пациентов на кислороде</td>
                     <td colspan="2">@Model.oxygenSum11</td>
                     <td colspan="2"></td>
@@ -334,7 +334,7 @@
                     <td>@(@Model.oxygenSum11 + @Model.oxygenSum91 + @Model.oxygenSum90)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent ">
                     <td class="fw-bold">Беременные</td>
                      @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -346,7 +346,7 @@
                     <td>@(@Model.finalReport.pregnant + @Model.finalReport.pregnantChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">Пациенты из зон отдыха</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -359,7 +359,7 @@
                     <td>@(@Model.finalReport.restZone + @Model.finalReport.restZoneChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">Инокраевые</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -372,7 +372,7 @@
                     <td>@(@Model.finalReport.outRegions + @Model.finalReport.outRegionsChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">Иностранные граждне</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -385,7 +385,7 @@
                     <td>@(@Model.finalReport.forein + @Model.finalReport.foreinChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">Прибывшие из ЛНР, ДНР</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -398,7 +398,7 @@
                     <td>@(@Model.finalReport.LNR_DNR + @Model.finalReport.LNR_DNRChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">Поступили переводом из другой МО</td>
                      @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -411,7 +411,7 @@
                     <td>@(@Model.finalReport.incomeHospital + @Model.finalReport.incomeHospitalChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">Переведены в другое МО</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -427,12 +427,12 @@
                 
                 @*НОЗООЛОГИИ *@
 
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold"><b>Нозологии</b></td>
                     <td colspan="23"></td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="table-secondary">
+                <tr class="table-secondary border-transparent">
                     <td class="fw-bold">U07.1 COVID-19 </td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -445,7 +445,7 @@
                     <td>@(@Model.finalReport.U071 + @Model.finalReport.U071Children)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="table-secondary">
+                <tr class="table-secondary border-transparent">
                     <td class="fw-bold">U07.2 COVID-19 </td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -458,7 +458,7 @@
                     <td>@(@Model.finalReport.U072 + @Model.finalReport.U072Children)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">ОРИ</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -471,7 +471,7 @@
                     <td>@(@Model.finalReport.ORVI + @Model.finalReport.ORVIChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                 <tr class="">
+                 <tr class="border-transparent">
                     <td class="fw-bold">Пневмония</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -484,7 +484,7 @@
                     <td>@(@Model.finalReport.pneumonia + @Model.finalReport.pneumoniaChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">Грипп</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -498,7 +498,7 @@
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
 
-                 <tr class="table-secondary pba-always">
+                 <tr class="table-secondary pba-always border-transparent">
                     <td class="fw-bold">Корь</td>
                      @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -512,7 +512,7 @@
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
 
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">ОКИ</td>
                      @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -525,7 +525,7 @@
                     <td>@(@Model.finalReport.OKI + @Model.finalReport.OKIChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">Менингит, энцефлит, миелит </td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -538,7 +538,7 @@
                     <td>@(@Model.finalReport.meningit + @Model.finalReport.meningitChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">Сепсис</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -551,7 +551,7 @@
                     <td>@(@Model.finalReport.sepsis + @Model.finalReport.sepsisChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">Гепатит</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -564,7 +564,7 @@
                     <td>@(@Model.finalReport.hepatit + @Model.finalReport.hepatitChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">В-20</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -577,7 +577,7 @@
                     <td>@(@Model.finalReport.HIV + @Model.finalReport.HIVCildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">Прочее</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -590,7 +590,7 @@
                     <td>@(@Model.finalReport.other + @Model.finalReport.otherChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="table-primary fw-bold">
+                <tr class="table-primary fw-bold border-transparent">
                     <td >Итого</td>
                     <td>@Model.deseaseSum11</td>
                     <td>@Model.deseaseSum11Children</td>
@@ -618,7 +618,7 @@
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
                 
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">Лица по уходу </td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -628,7 +628,7 @@
                     <td colspan="3" class="text-center">@Model.finalReport.care</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">Лица по уходу до 4х лет или детьми инвалидами</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -638,7 +638,7 @@
                     <td colspan="3" class="text-center">@Model.finalReport.careDisodered</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="table-secondary">
+                <tr class="table-secondary border-transparent">
                     <td class="fw-bold">Количество человек в крулосуточном стационаре</td>
                     @{
                             <td>@(@Model.deseaseSum11 + @Model.depReport11.care)</td>
@@ -668,7 +668,7 @@
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
                 
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">Отказ от госпитализации</td>
                     <td colspan="20"></td>
                     <td>@Model.reject</td>
@@ -677,7 +677,7 @@
                     <td class="text-center" id="sumRej">@Model.sumReject</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">На амбулаторное лечение</td>
                     <td colspan="20"></td>
                     <td>@Model.ambulance </td>@*<input id="ambulance" oninput="CountReject()" type="number" name="existed" class="reject" value="0"/>*@
@@ -685,16 +685,16 @@
                     <td class="text-center" id="sumAmb">@Model.sumAmbulance</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="">
+                <tr class="border-transparent">
                     <td class="fw-bold">В другую МО</td>
                     <td colspan="20"></td>
                     <td>@Model.submitOtherHosp</td>@*<input id="sendToMO" oninput="CountReject()" type="number" name="existed" class="reject" value="0"/>*@
                     <td>@Model.submitOtherHospChildren </td>
                     <td  class="text-center" id="sumOth">@Model.sumOther</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
-                    <tr class="table-secondary">
+                    
 
-                <tr class="table-secondary pba-always">
+                <tr class="table-secondary pba-always border-transparent">
                     <td class="fw-bold">Всего не госпитализировано</td>
                     <td colspan="20"></td>
                     <td  class="text-center" id="sumAdults">@Model.sumAdults</td>
@@ -720,7 +720,7 @@
             <div class="row ">
                 @{
                     foreach(DutyDoc doc in Model.depDocs){
-                            <form method="post">
+                        <form method="post pba-always">
                                 <div class="row pb-2">
                                     <div class="col-4">
                                         <select class="form-select" asp-for="newDoc.dutyDoc">
@@ -749,7 +749,7 @@
                 }
             </div>
             @if(!Model._onlyView){
-            <form method="post">
+                <form method="post pba-always">
                 <div class="row d-print-none">
                     <div class="col-4">
                         <select class="form-select" asp-for="newDoc.dutyDoc">
@@ -774,13 +774,13 @@
                 </div>
             </form>
             }
-            <div class="row pt-4">
+            <div class="row pt-4 pba-always">
                 <div class=" col-5">
-                    <h4>ОРИТ</h4>
+                    <h4 class="pba-always">ОРИТ</h4>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row pba-always">
                 @{
                     foreach(DutyDoc doc in Model.oritDocs){
                             <form method="post">
@@ -815,7 +815,7 @@
 
             @if (!Model._onlyView)
             {
-                <form method="post">
+                <form method="post pba-always">
                     <div class="row d-print-none">
                         <div class="col-4">
                             <select class="form-select" asp-for="newDoc.dutyDoc">
@@ -842,16 +842,16 @@
                 </div>
             </form>
             }
-             <div class="row pt-4">
+             <div class="row pt-4 pba-always">
                 <div class=" col-5">
                     <h4>Компьютерная томография</h4>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row pba-always">
                 @{
                     foreach(DutyDoc doc in Model.ktDocs){
-                            <form method="post">
+                            <form method="post ">
                                 <div class="row pb-2">
                                     <div class="col-4">
                                         <select class="form-select" asp-for="newDoc.dutyDoc">
@@ -882,7 +882,7 @@
             </div>
             @if (!Model._onlyView)
             {
-                <form method="post">
+                <form method="post pba-always">
                     <div class="row d-print-none">
                         <div class="col-4">
                             <select class="form-select" asp-for="newDoc.dutyDoc">
@@ -910,7 +910,7 @@
             }          
         </div>
 
-        <div class="row pt-5">
+        <div class="row pt-5 pba-always">
             <div class="col-6">
                 <h3>Переводы и отказы</h3>
             </div>
