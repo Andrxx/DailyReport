@@ -28,10 +28,10 @@ html {
         color-adjust: exact !important;
     }
 
-    th, td {
-        padding: 0px; /* Поля вокруг содержимого таблицы */
-        border: 2px solid black !important; /* Параметры рамки */
-    }
+    /*th, td {
+        padding: 0px;*/ /* Поля вокруг содержимого таблицы */
+        /*border: 2px solid black !important;*/ /* Параметры рамки */
+    /*}*/
 
     /*убираем стрелки в полях вводаа формы*/
     /* Chrome, Safari, Edge, Opera */
@@ -71,7 +71,7 @@ body {
 
 th, td {
     padding: 0px; /* Поля вокруг содержимого таблицы */
-    border: 1px solid black !important; /* Параметры рамки */
+    border: 2px solid black !important; /* Параметры рамки */
 }
 
 .reject {
@@ -79,5 +79,6 @@ th, td {
 }
 
 .border-transparent {
-    border-color: white !important;
+    border: 0px;
+    /*border-color: white;*/
 }
