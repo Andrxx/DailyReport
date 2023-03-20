@@ -28,6 +28,10 @@ html {
         color-adjust: exact !important;
     }
 
+    .bg-darkgrey {
+        background-color: darkgrey !important;
+    }
+
     /*th, td {
         padding: 0px;*/ /* Поля вокруг содержимого таблицы */
         /*border: 2px solid black !important;*/ /* Параметры рамки */

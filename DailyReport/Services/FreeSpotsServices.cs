@@ -48,10 +48,11 @@ namespace DailyReport.Services
                 _freeSpots.dep91Children = _ds.dep91Children - _dRep.Find(p => p.depNumber == 91).presentChildrens;
             
                 _freeSpots.sum = _freeSpots.dep1 + _freeSpots.dep11 + _freeSpots.dep3 + _freeSpots.dep4 + _freeSpots.dep5
-                    + _freeSpots.dep6 + _freeSpots.dep7 + _freeSpots.dep8 + _freeSpots.dep90 + _freeSpots.dep91;
+                    + _freeSpots.dep6 + _freeSpots.dep7  + _freeSpots.dep90 + _freeSpots.dep91; //+ _freeSpots.dep8
+
                 _freeSpots.sumChildren = _freeSpots.dep1Children + _freeSpots.dep11Children + _freeSpots.dep3Children +
                     _freeSpots.dep4Children + _freeSpots.dep5Children + _freeSpots.dep6Children + _freeSpots.dep7Children +
-                    _freeSpots.dep8Children + _freeSpots.dep90Children + _freeSpots.dep91Children;
+                     _freeSpots.dep90Children + _freeSpots.dep91Children; //_freeSpots.dep8Children +
 
             //считаем сумму мест в отделении для сводки 
             _freeSpots.dep1S = _freeSpots.dep1 + _freeSpots.dep1Children;
