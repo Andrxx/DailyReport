@@ -123,6 +123,7 @@ namespace DailyReport.Pages.Reports
             {
                 return RedirectToPage("DepReport", new { depNumber = _report.depNumber });
             }
+            _report.dutyNurse = Request.Form["report.dutyNurse"];
             context.DepReports.Update(_report);
             context.SaveChanges();
             return RedirectToPage("DepReport", new { depNumber = _report.depNumber });

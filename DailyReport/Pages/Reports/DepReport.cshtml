@@ -19,7 +19,7 @@
             Сводка @msg @zone зона
         </div>
        <div class="col-4">
-                <select class="form-select" form="repForm" asp-for="report.dutyNurse">
+                <select class="form-select" id="dutyNurse" form="repForm" asp-for="report.dutyNurse">
                 <option>Выбрать дежурную м/с</option>
                     @{foreach (string nurse in Model.nurses)
                         {
@@ -27,7 +27,7 @@
                         }
                     }
             </select>
-                <input value="sdsdsdsd"  class="invisible" asp-for="report.dutyNurse" />
+                @*<input value="sdsdsdsd"  class="invisible" asp-for="report.dutyNurse" />*@
         </div>
 
             <div class="col-4 ">

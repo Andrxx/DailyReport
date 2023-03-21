@@ -35,6 +35,7 @@ namespace DailyReport.Services
             submiedFrom.Add("ГБ4");
             submiedFrom.Add("ГБ5");
             submiedFrom.Add("ГБ8");
+            submiedFrom.Add("ЦОМиД");
             submiedFrom.Add("ККБ4");
             submiedFrom.Add("ПТД");
             submiedFrom.Add("Наркодиспансер");
