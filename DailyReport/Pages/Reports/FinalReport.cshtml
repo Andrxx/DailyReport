@@ -720,7 +720,7 @@
             <div class="row ">
                 @{
                     foreach(DutyDoc doc in Model.depDocs){
-                        <form method="post pba-always">
+                        <form method="post">
                                 <div class="row pb-2">
                                     <div class="col-4">
                                         <select class="form-select" asp-for="newDoc.dutyDoc">
@@ -749,7 +749,7 @@
                 }
             </div>
             @if(!Model._onlyView){
-                <form method="post pba-always">
+                <form method="post">
                 <div class="row d-print-none">
                     <div class="col-4">
                         <select class="form-select" asp-for="newDoc.dutyDoc">
@@ -780,7 +780,7 @@
                 </div>
             </div>
 
-            <div class="row pba-always">
+            <div class="row">
                 @{
                     foreach(DutyDoc doc in Model.oritDocs){
                             <form method="post">
@@ -815,7 +815,7 @@
 
             @if (!Model._onlyView)
             {
-                <form method="post pba-always">
+                <form method="post">
                     <div class="row d-print-none">
                         <div class="col-4">
                             <select class="form-select" asp-for="newDoc.dutyDoc">
@@ -851,7 +851,7 @@
             <div class="row pba-always">
                 @{
                     foreach(DutyDoc doc in Model.ktDocs){
-                            <form method="post ">
+                            <form method="post">
                                 <div class="row pb-2">
                                     <div class="col-4">
                                         <select class="form-select" asp-for="newDoc.dutyDoc">
@@ -882,7 +882,7 @@
             </div>
             @if (!Model._onlyView)
             {
-                <form method="post pba-always">
+                <form method="post">
                     <div class="row d-print-none">
                         <div class="col-4">
                             <select class="form-select" asp-for="newDoc.dutyDoc">
