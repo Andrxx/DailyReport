@@ -89,7 +89,7 @@ namespace DailyReport.Migrations
                     b.Property<int>("existed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("existedChildrens")
+                    b.Property<int>("existedChildren")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("forein")
@@ -186,6 +186,12 @@ namespace DailyReport.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("otherChildrens")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("otherUkrane")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("otherUkraneChildren")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("outRegions")
@@ -474,6 +480,12 @@ namespace DailyReport.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("otherChildren")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("otherUkrane")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("otherUkraneChildren")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("outRegions")

@@ -42,6 +42,8 @@
         public int foreinChildren { get; set; }
         public int LNR_DNR { get; set; }
         public int LNR_DNRChildren { get; set; }
+        public int otherUkrane { get; set; }
+        public int otherUkraneChildren { get; set; }
         public int incomeHospital { get; set; }
         public int incomeHospitalChildren { get; set; }
         public int outcomeHospital { get; set; }

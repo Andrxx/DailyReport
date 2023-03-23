@@ -27,7 +27,7 @@ namespace DailyReport.Pages.Reports
         public int oxygenSum11, oxygenSum91, oxygenSum90, deseaseSum1, deseaseSum11, deseaseSum2, deseaseSum3, deseaseSum4, deseaseSum5, deseaseSum6, deseaseSum7,
             deseaseSum8, deseaseSum90, deseaseSum91, deseaseSum1Children, deseaseSum11Children, deseaseSum2Children, deseaseSum3Children, deseaseSum4Children,
             deseaseSum5Children, deseaseSum6Children, deseaseSum7Children, deseaseSum8Children, deseaseSum90Children, deseaseSum91Children,
-            deseaseSumFinal, deseaseSumFinalChildren;
+            deseaseSumFinal, deseaseSumFinalChildren, UkraneSum, UkraneSumChildren;
         public int reject, rejectChildren, ambulance, ambulanceChildren, submitOtherHosp, submitOtherHospChildren, sumReject, 
             sumAmbulance, sumOther, sumAdults, sumChildren, sumTotal;
         //фактические места в отделениях
@@ -137,7 +137,7 @@ namespace DailyReport.Pages.Reports
             foreach (DepReport _rep in filteredReports)
             {
                 finalReport.existed += _rep.existed;
-                finalReport.existedChildren += _rep.existedChildrens;
+                finalReport.existedChildren += _rep.existedChildren;
                 finalReport.income += _rep.income;
                 finalReport.incomeChildren += _rep.incomeChildrens;
                 finalReport.outcome += _rep.outcome;
@@ -171,6 +171,8 @@ namespace DailyReport.Pages.Reports
                 finalReport.forein += _rep.foreinChildrens;
                 finalReport.LNR_DNR += _rep.LNR_DNR;
                 finalReport.LNR_DNRChildren += _rep.LNR_DNRChildrens;
+                finalReport.otherUkrane += _rep.otherUkrane;
+                finalReport.otherUkraneChildren += _rep.otherUkraneChildren;
                 finalReport.incomeHospital += _rep.incomeHospital;
                 finalReport.incomeHospitalChildren += _rep.incomeHospitalChildrens;
                 finalReport.outcomeHospital += _rep.outcomeHospital;
@@ -232,6 +234,7 @@ namespace DailyReport.Pages.Reports
             deseaseSum91Children = depReport91.CountDiseasesChildren();
             deseaseSumFinal = finalReport.CountDiseases();
             deseaseSumFinalChildren = finalReport.CountDiseasesChildren();
+
 
             //список доступных докторов стационара
             doctors = DutyServices.GetDoctorsList(context);
