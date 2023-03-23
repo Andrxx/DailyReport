@@ -34,6 +34,7 @@ html {
 
     /*th, td {
         padding: 0px;*/ /* Поля вокруг содержимого таблицы */
+        /*margin: 0px;*/
         /*border: 2px solid black !important;*/ /* Параметры рамки */
     /*}*/
 
@@ -61,10 +62,16 @@ html {
         min-width: 280mm;
     }
 
-
     /*todo коррекция разрывов для печати*/
     .pt-corr {
-        padding-top: 20rem !important;
+        height: 10rem !important;
+        display: block !important;
+    }
+    .print-m-p-0 {
+        padding-bottom: 0px !important;
+        padding-top: 0px !important;
+        margin-bottom: 0px !important;
+        margin-top: 0px !important;
     }
 }
 
@@ -89,4 +96,9 @@ th, td {
 .border-transparent {
     border: 0px;
     /*border-color: white;*/
+}
+
+.pt-corr {
+    height: 0rem;
+    display: none;
 }
