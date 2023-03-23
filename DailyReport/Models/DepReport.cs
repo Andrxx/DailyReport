@@ -136,7 +136,7 @@ namespace DailyReport.Models
         /// Считаем детей из Украины
         /// </summary>
         /// <returns></returns>
-        public int CountUcraneChildren()
+        public int CountUkraneChildren()
         {
             return LNR_DNRChildrens + otherUkraneChildren;
         }
