@@ -53,6 +53,10 @@ html {
     .pba-always {
         page-break-after: always;
     }
+
+    .pba-never {
+        page-break-after: avoid;
+    }
     .min-all {
         min-width: 280mm;
     }
