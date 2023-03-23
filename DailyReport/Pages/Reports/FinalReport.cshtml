@@ -386,7 +386,7 @@
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
                 <tr class="border-transparent">
-                    <td class="fw-bold">Прибывшие из ЛНР, ДНР</td>
+                    <td class="fw-bold">Прибывшие из присоединенных областей (ЛНР, ДНР, ХО, ЗО)</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
                                 <td>@if(dr.LNR_DNR > 0) @dr.LNR_DNR </td>
@@ -951,34 +951,37 @@
                             <input type="text" value="@patient.Diagnos" class="form-control" asp-for="newPatient.Diagnos"/>
                         </div>
                         <div class="col-1">
-                            <select class="form-select" asp-for="newPatient.Shipped">
+                                <input type="text" value="@patient.Shipped" class="form-control" asp-for="newPatient.Shipped" />
+                            @*<select class="form-select" asp-for="newPatient.Shipped">
                                 <option selected >@patient.Shipped</option>
                                 @{
                                 foreach(string s in Model.shipping){
                                             <option value="@s">@s</option>
                                 }
                                 }
-                            </select>
+                            </select>*@
                         </div>
                             <div class="col-1 text-end">
-                            <select class="form-select" asp-for="newPatient.SubmitedFrom">
+                            <input type="text" value="@patient.SubmitedFrom" class="form-control" asp-for="newPatient.SubmitedFrom"/>
+                            @*<select class="form-select" asp-for="newPatient.SubmitedFrom">
                                 <option selected>@patient.SubmitedFrom</option>
                                 @{
                                 foreach(string f in Model.submitedFrom){
                                             <option value="@f">@f</option>
                                 }
                                 }
-                            </select>
+                            </select>*@
                         </div> 
                         <div class="col-2 text-end">
-                            <select class="form-select" asp-for="newPatient.SubmitedTo">
+                            <input type="text" value="@patient.SubmitedTo" class="form-control" asp-for="newPatient.SubmitedTo"/>
+                            @*<select class="form-select" asp-for="newPatient.SubmitedTo">
                                 <option selected>@patient.SubmitedTo</option>
                                 @{
                                 foreach(string t in Model.submitedTo){
                                             <option value="@t">@t</option>
                                 }
                                 }
-                            </select>
+                            </select>*@
                         </div>
                             <div class="col-1 d-none">
                                 <input type="text" value="@patient.Id" class="form-control invisible" asp-for="newPatient.Id" />
@@ -1021,34 +1024,37 @@
                         <input type="text" placeholder="Диагноз" class="form-control" asp-for="newPatient.Diagnos"/>
                     </div>
                     <div class="col-1">
-                        <select class="form-select" asp-for="newPatient.Shipped">
+                            <input type="text" placeholder="Доставлен" class="form-control" asp-for="newPatient.Shipped" />
+                       @* <select class="form-select" asp-for="newPatient.Shipped">
                             <option selected disabled>Доставлен</option>
                             @{
                                 foreach(string s in Model.shipping){
                                         <option value="@s">@s</option>
                                 }
                             }
-                        </select>
+                        </select>*@
                     </div> 
                     <div class="col-1">
-                        <select class="form-select" asp-for="newPatient.SubmitedFrom" required>
+                        <input type="text" placeholder="Направлен" class="form-control" asp-for="newPatient.SubmitedFrom"/>
+                            @* <select class="form-select" asp-for="newPatient.SubmitedFrom" required>
                             <option selected disabled>Направлен</option>
                             @{
                                 foreach(string f in Model.submitedFrom){
                                         <option value="@f">@f</option>
                                 }
                             }
-                        </select>
+                        </select>*@
                     </div> 
                     <div class="col-2">
-                            <select class="form-select" asp-for="newPatient.SubmitedTo" required>
+                        <input type="text" placeholder="Переведен" class="form-control" asp-for="newPatient.SubmitedTo"/>
+                           @* <select class="form-select" asp-for="newPatient.SubmitedTo" required>
                             <option selected disabled>Переведен</option>
                             @{
                                 foreach(string t in Model.submitedTo){
                                         <option value="@t">@t</option>
                                 }
                             }
-                        </select>
+                        </select>*@
                     </div> 
                     <div class="col-1">
                         <input type="submit" value="+" asp-page-handler="SavePatients" />
