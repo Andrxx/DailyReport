@@ -51,7 +51,7 @@
             <tr>
                 <td scope="col">Состояло</td>
                 <td scope="col"><input min="0" id="existed" oninput="CountSum()" value="@Model.report.existed" type="number" name="existed" asp-for="report.existed" /></td>
-                <td scope="col"><input min="0" id="existedChildrens" oninput="CountSumChildrens()" value="@Model.report.existedChildrens" type="number" name="existedChildrens" asp-for="report.existedChildrens" /> </td>
+                <td scope="col"><input min="0" id="existedChildren" oninput="CountSumChildrens()" value="@Model.report.existedChildren" type="number" name="existedChildren" asp-for="report.existedChildren" /> </td>
 
             </tr>
              <tr>
@@ -158,6 +158,11 @@
                 <td scope="col">Прибывшие из присоединенных областей (ЛНР, ДНР, ХО, ЗО)</td>
                 <td scope="col"><input min="0" value="@Model.report.LNR_DNR" type="number" name="LNR_DNR" asp-for="report.LNR_DNR"/></td>
                 <td scope="col"><input min="0" value="@Model.report.LNR_DNRChildrens" type="number" name="LNR_DNRChildrens" asp-for="report.LNR_DNRChildrens"/> </td>
+            </tr>
+            <tr>
+                <td scope="col">Прибывшие из остальных областей Украины</td>
+                <td scope="col"><input min="0" value="@Model.report.otherUkrane" type="number" name="otherUkrane" asp-for="report.otherUkrane" /></td>
+                <td scope="col"><input min="0" value="@Model.report.otherUkraneChildren" type="number" name="otherUkraneChildren" asp-for="report.otherUkraneChildren" /> </td>
             </tr>
             <tr>
                 <td scope="col">Поступили из другой МО</td>

@@ -95,16 +95,16 @@
                     @{
                         foreach(DepReport dr in Model.filteredReports){
                                 <td>@if(dr.existed > 0) {@dr.existed}</td>
-                                <td>@if(dr.existedChildrens > 0) {@dr.existedChildrens}</td>
+                                <td>@if(dr.existedChildren > 0) {@dr.existedChildren}</td>
                         }
                     }
                     <td>@Model.finalReport.existed</td>
                     <td>@Model.finalReport.existedChildren</td>
                     <td>@(@Model.finalReport.existed + @Model.finalReport.existedChildren)</td>
                     <td>@(@Model.finalReport.existed + @Model.depReport8.existed)</td>
-                    <td>@(@Model.finalReport.existedChildren + @Model.depReport8.existedChildrens)</td>
+                    <td>@(@Model.finalReport.existedChildren + @Model.depReport8.existedChildren)</td>
                     <td>@(@Model.finalReport.existed + @Model.depReport8.existed + 
-                        @Model.finalReport.existedChildren + @Model.depReport8.existedChildrens)</td>
+                        @Model.finalReport.existedChildren + @Model.depReport8.existedChildren)</td>
                 </tr>
                 <tr class="">
                     <td class="fw-bold">Поступило</td>
@@ -396,6 +396,19 @@
                     <td>@Model.finalReport.LNR_DNR</td>
                     <td>@Model.finalReport.LNR_DNRChildren</td>
                     <td>@(@Model.finalReport.LNR_DNR + @Model.finalReport.LNR_DNRChildren)</td>
+                    <td colspan="3" class="bg-transparent border-0"></td>
+                </tr>
+                <tr class="border-transparent">
+                    <td class="fw-bold">Прибывшие из иных территорий Украины</td>
+                    @{
+                        foreach(DepReport dr in Model.filteredReports){
+                                <td>@if(dr.otherUkrane > 0) @dr.otherUkrane</td>
+                                <td>@if (dr.otherUkraneChildren > 0) @dr.otherUkraneChildren</td>
+                        }
+                    }
+                    <td>@Model.finalReport.otherUkrane</td>
+                    <td>@Model.finalReport.otherUkraneChildren</td>
+                    <td>@(@Model.finalReport.otherUkrane + @Model.finalReport.otherUkraneChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
                 <tr class="border-transparent">
