@@ -8,7 +8,7 @@ namespace DailyReport.Models
         public DateTime date { get; set; } = DateTime.Now;//.AddDays(-1);
         public int depNumber { get; set; }
         public int existed { get; set; }
-        public int existedChildrens { get; set; }
+        public int existedChildren { get; set; }
         public int income { get; set; }
         public int incomeChildrens { get; set; }
         public int outcome { get; set; }
@@ -45,6 +45,8 @@ namespace DailyReport.Models
         public int foreinChildrens { get; set; }
         public int LNR_DNR { get; set; }
         public int LNR_DNRChildrens { get; set; }
+        public int otherUkrane { get; set; }
+        public int otherUkraneChildren { get; set; }
         public int incomeHospital { get; set; }
         public int incomeHospitalChildrens { get; set; }
         public int outcomeHospital { get; set; }
@@ -121,6 +123,24 @@ namespace DailyReport.Models
             int _summary = present + care;
             return _summary;
         }
+
+        /// <summary>
+        /// Считаем взрослых из Украины
+        /// </summary>
+        /// <returns></returns>
+        public int CountUcrane()
+        {
+            return LNR_DNR + otherUkrane;
+        }
+        /// <summary>
+        /// Считаем детей из Украины
+        /// </summary>
+        /// <returns></returns>
+        public int CountUcraneChildren()
+        {
+            return LNR_DNRChildrens + otherUkraneChildren;
+        }
+
 
         public object Clone()
         {

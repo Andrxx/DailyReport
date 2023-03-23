@@ -18,7 +18,7 @@ namespace DailyReport.Services
             //DepReport.date = DateTime.Now;//.Date.AddDays(-1);
             //DepReport.depNumber = 1;
             DepReport.existed = 1;
-            DepReport.existedChildrens = 1;
+            DepReport.existedChildren = 1;
             DepReport.income = 1;
             DepReport.incomeChildrens = 1;
             DepReport.outcome = 1;
