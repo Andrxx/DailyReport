@@ -6,7 +6,6 @@ namespace DailyReport.Models
     {
         public int Id { get; set; }
         public DateTime date { get; set; } = DateTime.Now;//.AddDays(-1);
-        //[Range(0 , 7)]
         public int depNumber { get; set; }
         public int existed { get; set; }
         public int existedChildrens { get; set; }
