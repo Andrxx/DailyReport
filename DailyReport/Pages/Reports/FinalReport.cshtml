@@ -7,7 +7,7 @@
 
 <div class="container">
     <div class="row" >
-        <table class="table m-0 p-0 table-bordered border-dark text-center">
+        <table class="table m-0 p-0 table-bordered border-dark text-center align-text-bottom">
             <tbody>
                 <tr class="table-primary fw-bold">
                     <td rowspan="2">@Model.reportDate.ToString("dd.MM.yy")</td>
@@ -711,7 +711,7 @@
                     <td class="text-center" id="sumAmb">@Model.sumAmbulance</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="border-transparent">
+                <tr class="border-transparent pba-never">
                     <td class="fw-bold">В другую МО</td>
                     <td colspan="20"></td>
                     <td>@Model.submitOtherHosp</td>@*<input id="sendToMO" oninput="CountReject()" type="number" name="existed" class="reject" value="0"/>*@
@@ -719,7 +719,7 @@
                     <td  class="text-center" id="sumOth">@Model.sumOther</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="table-secondary border-transparent">
+                <tr class="table-secondary border-transparent pba-never">
                     <td class="fw-bold">Всего не госпитализировано</td>
                     <td colspan="20"></td>
                     <td  class="text-center" id="sumAdults">@Model.sumAdults</td>
