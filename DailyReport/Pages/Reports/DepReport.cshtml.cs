@@ -105,15 +105,33 @@ namespace DailyReport.Pages.Reports
             }
             else 
             {
-                //новая сущность для БД
-                DepReport newRep = new();
-                newRep = (DepReport)report.Clone();
-                //меняем дату на текущую и обнуляем ИД для сохранения новой записи в БД
-                newRep.date = actualDate;
-                newRep.Id = 0;
-                context.DepReports.Update(newRep);
-                context.SaveChanges();
-                return RedirectToPage("DepReport", new { depNumber = depNumber });
+                //ищем запись сегодняшней даты 
+                var curentReport = (from report in context.DepReports
+                          where (report.depNumber == depNumber) && (report.date > startTime.AddDays(1) && report.date < endTime.AddDays(1))
+                          select report).AsNoTracking().FirstOrDefault();
+                if (curentReport == null)
+                {
+                    //новая сущность для БД
+                    DepReport newRep = new();
+                    newRep = (DepReport)report.Clone();
+                    //меняем дату на текущую и обнуляем ИД для сохранения новой записи в БД
+                    newRep.date = actualDate;
+                    newRep.Id = 0;
+                    context.DepReports.Update(newRep);
+                    context.SaveChanges();
+                    return RedirectToPage("DepReport", new { depNumber = depNumber });
+                }
+                //если имеется запись с текущей датой, перезаписывем ее предыдущей записью, оставляя текущее ИД и дату
+                else
+                {
+                    int id = curentReport.Id;
+                    curentReport = report;
+                    curentReport.Id = id;
+                    curentReport.date = actualDate;
+                    context.DepReports.Update(curentReport);
+                    context.SaveChanges();
+                    return RedirectToPage("DepReport", new { depNumber = depNumber });
+                }
             }  
         }
 
