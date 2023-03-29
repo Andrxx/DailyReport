@@ -41,7 +41,7 @@ namespace DailyReport.Services
         }
 
         /// <summary>
-        /// Получаем список персонала из БД, null если пусто
+        /// Получаем список врачей из БД, null если пусто
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
@@ -62,7 +62,6 @@ namespace DailyReport.Services
             }
             return _doctors;
         }
-
 
         public static void AddDutyDoc(DutyDoc dutyDoc, ApplicationContext context)
         {
@@ -91,11 +90,49 @@ namespace DailyReport.Services
             }   
         }
 
-        //static List<DutyDoc> ConvertPersToDoc(List<Personel> personels) 
-        //{ 
+        /// <summary>
+        /// Получаем список медсестер из БД персонала, получаем имя и номер телефона
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static List<DutyNurse> GetNursesList(ApplicationContext context)
+        {
+            List<Personel> personels = new();
+            List<DutyNurse> nurses = new();
+            try
+            {
+                personels = (from personel in context.Personels
+                             where (personel.PersType == "Медсестра")
+                             select personel).ToList();
+            }
+            catch { }
+            foreach (Personel p in personels)
+            {
+                nurses.Add(new DutyNurse { name = p.Name, Phone = p.Phone});
+            }
+            return nurses;
+        }
 
-        //    List<DutyDoc> docs = new List<DutyDoc>();
-        //    return docs;
-        //}
+        public static void DeleteDutyNurse(int id, ApplicationContext context)
+        {
+            DutyNurse _nurse = (from nurse in context.DutyNurses
+                            where (nurse.Id == id)
+                            select nurse).FirstOrDefault();
+            if (_nurse != null) context.DutyNurses.Remove(_nurse);
+            context.SaveChanges();
+        }
+        public static void UpdateDutyNurse(DutyNurse nurse, ApplicationContext context)
+        {
+            DutyNurse _nurse = (from d in context.DutyNurses
+                              where (d.Id == nurse.Id)
+                            select d).FirstOrDefault();
+            if (_nurse != null)
+            {
+                _nurse.name = nurse.name;
+                _nurse.department = nurse.department;
+                _nurse.Phone = nurse.Phone;
+                context.SaveChanges();
+            }
+        }
     }
 }

@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="Pages\FireReport\" />
   </ItemGroup>
 
 </Project>
