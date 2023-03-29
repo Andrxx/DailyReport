@@ -275,12 +275,14 @@ namespace DailyReport.Pages.Reports
                 //todo исправить возможное отсутствие возрста
                 if (patients != null)
                 {
-                    reject = patients.FindAll(p => int.Parse(p.AgeYears) > 17 & p.SubmitedTo == "Отказ").Count();
-                    rejectChildren = patients.FindAll(p => int.Parse(p.AgeYears) < 18 & p.SubmitedTo == "Отказ").Count();
-                    ambulance = patients.FindAll(p => float.Parse(p.AgeYears) >= 18 & p.SubmitedTo == "Амбулаторно").Count();
-                    ambulanceChildren = patients.FindAll(p => float.Parse(p.AgeYears) < 18 & p.SubmitedTo == "Амбулаторно").Count();
-                    submitOtherHosp = patients.FindAll(p => float.Parse(p.AgeYears) >= 18 & p.SubmitedTo != "Амбулаторно" & p.SubmitedTo != "Отказ").Count();
-                    submitOtherHospChildren = patients.FindAll(p => float.Parse(p.AgeYears) < 18 & p.SubmitedTo != "Амбулаторно" & p.SubmitedTo != "Отказ").Count();
+                    reject = patients.FindAll(p => int.Parse(p.AgeYears) > 17 & p.SubmitedTo.ToLower().Trim() == "отказ").Count();
+                    rejectChildren = patients.FindAll(p => int.Parse(p.AgeYears) < 18 & p.SubmitedTo.ToLower().Trim() == "отказ").Count();
+                    ambulance = patients.FindAll(p => float.Parse(p.AgeYears) >= 18 & p.SubmitedTo.ToLower().Trim() == "амбулаторно").Count();
+                    ambulanceChildren = patients.FindAll(p => float.Parse(p.AgeYears) < 18 & p.SubmitedTo.ToLower().Trim() == "амбулаторно").Count();
+                    submitOtherHosp = patients.FindAll(p => float.Parse(p.AgeYears) >= 18 & p.SubmitedTo.ToLower().Trim() != "амбулаторно" 
+                        & p.SubmitedTo.ToLower().Trim() != "отказ").Count();
+                    submitOtherHospChildren = patients.FindAll(p => float.Parse(p.AgeYears) < 18 & p.SubmitedTo.ToLower().Trim() != "амбулаторно"
+                        & p.SubmitedTo.ToLower().Trim() != "отказ").Count();
                     sumReject = reject + rejectChildren;
                     sumAmbulance = ambulance + ambulanceChildren;
                     sumOther = submitOtherHosp + submitOtherHospChildren;
