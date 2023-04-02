@@ -53,6 +53,7 @@ namespace DailyReport.Services
             {
                 personels = (from personel in context.Personels
                             where (personel.PersType == "Врач")
+                            orderby personel.Name, personel.Name.Substring(0, 1)
                             select personel).ToList();
             }
             catch { }
@@ -101,8 +102,9 @@ namespace DailyReport.Services
             try
             {
                 nurses = (from personel in context.Personels
-                             where (personel.PersType == "Медсестра")
-                             select personel).ToList();
+                          where (personel.PersType == "Медсестра")
+                          orderby personel.Name, personel.Name.Substring(0, 1)
+                          select personel).ToList();
             }
             catch { }
             return nurses;

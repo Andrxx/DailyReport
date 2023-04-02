@@ -2,7 +2,7 @@
 @using DailyReport.Models
 @model DailyReport.Pages.Reports.DepReportModel
 @{
-    string msg, zone/*, alertMsg = string.Empty*/;
+    string msg, zone;
     if ((Model.report.depNumber == 90) || (Model.report.depNumber == 91)) msg = "ОРИТ";
     else if (Model.report.depNumber == 8) msg = "Дневной стационар";
     else if (Model.report.depNumber == 11) msg = " 1 отделения";

@@ -2,6 +2,12 @@
 @using DailyReport.Models
 @model DailyReport.Pages.FireReport.FireReportModel
 @{
+    string msg;
+    if ((Model.departmentNumber == 90) || (Model.departmentNumber == 91)) msg = "ОРИТ";
+    else if (Model.departmentNumber == 8) msg = "Дневной стационар";
+    else if (Model.departmentNumber == 11) msg = " 1 отделения";
+    else msg = Model.departmentNumber + " отделения";
+    ViewData["Title"] = "Пожарная сводка " + msg;
 }
 
 <form method="post">
