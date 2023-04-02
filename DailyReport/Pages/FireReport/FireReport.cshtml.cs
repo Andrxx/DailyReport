@@ -26,7 +26,7 @@ namespace DailyReport.Pages.FireReport
         public void OnGet(int depNumber)
         {
             departmentNumber = depNumber;
-            dutyNurses = DutyServices.GetDutyNurses(context);
+            dutyNurses = DutyServices.GetDutyNurses(depNumber, context);
             nursesList = DutyServices.GetNursesList(context);
         }
 
