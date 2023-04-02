@@ -21,7 +21,8 @@ namespace DailyReport.Pages.Admin
         public void OnGet()
         {
             personels = (from pers in context.Personels
-                        select pers).ToList();
+                         orderby pers.Name, pers.Name.Substring(0, 1)
+                         select pers).ToList();
         }
 
         public IActionResult OnPostSavePersonel(Personel newPersonel)
