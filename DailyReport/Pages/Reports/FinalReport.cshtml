@@ -983,7 +983,6 @@
                                 </div>
                                 <div class="col-1">
                                             <input type="number" step="1" value="@patient.AgeMonth" class="form-control" asp-for="newPatient.AgeMonth" />
-                                            <div>мес</div>
                                 </div>
                                 <div class="col-2">
                                     <input type="text" value="@patient.Diagnos" class="form-control" asp-for="newPatient.Diagnos"/>
@@ -1055,8 +1054,8 @@
                                    class="form-control d-inline-flex" asp-for="newPatient.AgeYears" />лет                                                    
                         </div>
                         <div class="col-1">
-                            <input type="number" step="1" value="@Model.newPatient.AgeMonth" 
-                            class="form-control" asp-for="newPatient.AgeMonth"/> мес
+                            <input type="text" step="1" value="@Model.newPatient.AgeMonth" 
+                            class="form-control" asp-for="newPatient.AgeMonth"/>
                         </div>
                     <div class="col-2">
                         <input type="text" placeholder="Диагноз" class="form-control" asp-for="newPatient.Diagnos"/>
@@ -1084,7 +1083,7 @@
                         </select>*@
                     </div> 
                     <div class="col-2">
-                        <input type="text" placeholder="Переведен" class="form-control" asp-for="newPatient.SubmitedTo"/>
+                        <input type="text" placeholder="Переведен" class="form-control" asp-for="newPatient.SubmitedTo" required/>
                            @* <select class="form-select" asp-for="newPatient.SubmitedTo" required>
                             <option selected disabled>Переведен</option>
                             @{
