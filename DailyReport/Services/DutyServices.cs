@@ -120,13 +120,28 @@ namespace DailyReport.Services
             try
             {
                 nurses = (from n in context.DutyNurses
-                          //where (n.PersType == "Медсестра")
                           select n).ToList();
             }
             catch { }
             return nurses;
         }
-
+        /// <summary>
+        /// получаем список дежурных медсестер заданного отделения
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static List<DutyNurse> GetDutyNurses(int depNmber, ApplicationContext context)
+        {
+            List<DutyNurse> nurses = new();
+            try
+            {
+                nurses = (from n in context.DutyNurses
+                          where (n.department == depNmber)
+                          select n).ToList();
+            }
+            catch { }
+            return nurses;
+        }
         public static List<Tuple<string, string>> GetNursesInfo(ApplicationContext context)
         {
             List<Personel> personels = new();

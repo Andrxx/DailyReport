@@ -17,7 +17,6 @@ namespace DailyReport.Pages.Admin
         public List<string> PType = PersonelServices.GetPType();
         public List<string> DepsList = PersonelServices.GetDepartment();
 
-
         public void OnGet()
         {
             personels = (from pers in context.Personels
