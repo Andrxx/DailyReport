@@ -11,6 +11,6 @@
         public string? Diagnos { get; set; }
         public string? SubmitedFrom { get; set; }
         public string? SubmitedTo { get; set; }
-        public DateTime Date { get; set; } //= DateTime.Now.Date.AddDays(-1);
+        public DateTime Date { get; set; }
     }
 }
