@@ -299,6 +299,29 @@ namespace DailyReport.Migrations
                     b.ToTable("DutyDocs");
                 });
 
+            modelBuilder.Entity("DailyReport.Models.DutyNurse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("department")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("dutyDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DutyNurses");
+                });
+
             modelBuilder.Entity("DailyReport.Models.FinalReport", b =>
                 {
                     b.Property<int>("Id")
