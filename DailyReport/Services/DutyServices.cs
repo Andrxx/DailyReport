@@ -91,14 +91,44 @@ namespace DailyReport.Services
         }
 
         /// <summary>
-        /// Получаем список медсестер из БД персонала, получаем имя и номер телефона
+        /// Получаем список медсестер из БД персонала
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static List<DutyNurse> GetNursesList(ApplicationContext context)
+        public static List<Personel> GetNursesList(ApplicationContext context)
+        {
+            List<Personel> nurses = new();
+            try
+            {
+                nurses = (from personel in context.Personels
+                             where (personel.PersType == "Медсестра")
+                             select personel).ToList();
+            }
+            catch { }
+            return nurses;
+        }
+        /// <summary>
+        /// Получаем список дежурных медсестер
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static List<DutyNurse> GetDutyNurses(ApplicationContext context)
+        {
+            List<DutyNurse> nurses = new();
+            try
+            {
+                nurses = (from n in context.DutyNurses
+                          //where (n.PersType == "Медсестра")
+                          select n).ToList();
+            }
+            catch { }
+            return nurses;
+        }
+
+        public static List<Tuple<string, string>> GetNursesInfo(ApplicationContext context)
         {
             List<Personel> personels = new();
-            List<DutyNurse> nurses = new();
+            List<Tuple<string, string>> nurses = new();
             try
             {
                 personels = (from personel in context.Personels
@@ -108,11 +138,17 @@ namespace DailyReport.Services
             catch { }
             foreach (Personel p in personels)
             {
-                nurses.Add(new DutyNurse { name = p.Name, Phone = p.Phone});
+                if (p.Phone == null) p.Phone = "";
+                nurses.Add(new Tuple<string, string>(p.Name, p.Phone));
             }
             return nurses;
         }
 
+        public static void AddDutyNurse(DutyNurse nurse, ApplicationContext context)
+        {
+            context.DutyNurses.Add(nurse);
+            context.SaveChanges();
+        }
         public static void DeleteDutyNurse(int id, ApplicationContext context)
         {
             DutyNurse _nurse = (from nurse in context.DutyNurses

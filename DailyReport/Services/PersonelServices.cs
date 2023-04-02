@@ -64,6 +64,24 @@ namespace DailyReport.Services
             }
         }
 
+        /// <summary>
+        /// находим сотрудника по имени
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static Personel GetPersonelByName(string name, ApplicationContext context)
+        {
+            return (from p in context.Personels
+                    where p.Name == name
+                    select p).FirstOrDefault();
+        }
 
+        public static Personel GetPersonelById(int id, ApplicationContext context)
+        {
+            return (from p in context.Personels
+                    where p.Id == id
+                    select p).FirstOrDefault();
+        }
     }
 }
