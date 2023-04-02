@@ -1,7 +1,51 @@
 ﻿@page
+@using DailyReport.Models
 @model DailyReport.Pages.FireReport.FireReportModel
 @{
 }
 
 
-Fire Report
+<div class="row">
+    <div class="col-5">Дежурная медсестра</div>
+    <div class="col-3">Телефон</div>
+    <div class="col-2">Отделение</div>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">
+            <select class="form-select" asp-for="DutyNurse.name">
+                <option selected disabled>Выбрать дежурную медсестру</option>
+                @{
+                    foreach (Personel nurse in Model.nursesList)
+                    {
+                        <option value="@nurse.Name">@nurse.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-2">
+            <input type="submit" value="+" asp-page-handler="SaveNurse" />
+        </div>
+        <div class="col-2 invisible">
+            <input type="int" value="@Model.departmentNumber" class="form-control invisible" asp-for="DutyNurse.department" />
+            <input type="datetime" value="@DateTime.Now" class="form-control invisible" asp-for="DutyNurse.dutyDate" />
+        </div>
+    </div>
+</form>
+
+@{
+    foreach (DutyNurse dutyNurse in Model.dutyNurses){
+        <form method="post">
+            <div class="row">
+                <div class="col-5">@dutyNurse.name</div>
+                <div class="col-3">@dutyNurse.Phone</div>
+                <div class="col-2">@dutyNurse.ToDepName()</div>
+                <div class="col-1">
+                    <input type="submit" value="&#128465" asp-page-handler="DeleteNurse" asp-route-id="@dutyNurse.Id" />
+                </div>
+            </div>
+        </form>
+    }
+}
+
+

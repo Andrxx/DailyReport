@@ -18,8 +18,8 @@
             <form method="post">
                 <div class="row pt-2">
                     <div class="col-2">
-                        <select class="form-select" value="@deps.Number" asp-for="department.Number">
-                            <option selected value="@deps.Number"></option>
+                        <select class="form-select" value="@deps.Number"  asp-for="department.Number">
+                            <option selected value="@deps.Number">@deps.ToDepName()</option>
                             <option value="1">Первое</option>
                             <option value="11">Первое грязная зона</option>
                             <option value="3">Третье</option>
