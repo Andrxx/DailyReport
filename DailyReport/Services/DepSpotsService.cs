@@ -6,11 +6,6 @@ namespace DailyReport.Services
     {
         static DepartmentSpots departmentSpots;
 
-        //static DepSpotsService()
-        //{
-        //    departmentSpots = ReadSpots(context);
-        //}
-
         /// <summary>
         /// Возвращет список коек отделений. Порядок списка должен соответствовть порядку отделений в сводке
         /// </summary>

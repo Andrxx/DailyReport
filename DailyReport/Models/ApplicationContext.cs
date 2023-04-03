@@ -19,6 +19,7 @@ namespace DailyReport.Models
         public DbSet<Personel> Personels { get; set; } = null!;
         public DbSet<Department> Departments { get; set; } = null!;
         public DbSet<DutyNurse> DutyNurses { get; set; } = null!;
+        public DbSet<FireReport> FireReports { get; set; } = null!;
 
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //    => options.UseSqlite(@"Data Source=departmentsdb.db");
