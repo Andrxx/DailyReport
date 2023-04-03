@@ -123,14 +123,6 @@ namespace DailyReport.Services
             if (_report != null) filteredReports.Add(_report);
             else filteredReports.Add(new FireReport { DepNumber = 90, Date = DateTime.Now });
 
-            //лаборатория - по умолчанию 2 сотрудника
-            _report = reports.Find(p => p.DepNumber == 21);
-            if (_report != null) filteredReports.Add(_report);
-            else filteredReports.Add(new FireReport { DepNumber = 21, Personel = 2, Date = DateTime.Now });
-
-            //тех.персонал и охрана - не редактируется, добавляем 14 сотрудников
-            filteredReports.Add(new FireReport { DepNumber = 102, Personel = 10, Date = DateTime.Now });
-
             return filteredReports;
         }
 

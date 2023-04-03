@@ -4,6 +4,7 @@ using DailyReport.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Cryptography;
+using System.Composition;
 
 namespace DailyReport.Services
 {
@@ -110,16 +111,25 @@ namespace DailyReport.Services
             return nurses;
         }
         /// <summary>
-        /// Получаем список дежурных медсестер
+        /// Получаем список дежурных медсестер с текущей датой
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
         public static List<DutyNurse> GetDutyNurses(ApplicationContext context)
         {
+            DateTime actualDate = DateTime.Now;
+            DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 8, 0, 0);
+            DateTime endTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 59, 59).AddDays(1);
+            if (actualDate.Hour < 8)
+            {
+                startTime = startTime.AddDays(-1);
+                endTime = endTime.AddDays(-1);
+            }
             List<DutyNurse> nurses = new();
             try
             {
                 nurses = (from n in context.DutyNurses
+                          where ((n.dutyDate > startTime) && (n.dutyDate < endTime))
                           select n).ToList();
             }
             catch { }
@@ -132,11 +142,19 @@ namespace DailyReport.Services
         /// <returns></returns>
         public static List<DutyNurse> GetDutyNurses(int depNmber, ApplicationContext context)
         {
+            DateTime actualDate = DateTime.Now;
+            DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 8, 0, 0);
+            DateTime endTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 59, 59).AddDays(1);
+            if (actualDate.Hour < 8)
+            {
+                startTime = startTime.AddDays(-1);
+                endTime = endTime.AddDays(-1);
+            }
             List<DutyNurse> nurses = new();
             try
             {
                 nurses = (from n in context.DutyNurses
-                          where (n.department == depNmber)
+                          where (n.department == depNmber) && ((n.dutyDate > startTime) && (n.dutyDate < endTime))
                           select n).ToList();
             }
             catch { }

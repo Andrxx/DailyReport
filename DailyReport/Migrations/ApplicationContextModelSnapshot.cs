@@ -308,8 +308,8 @@ namespace DailyReport.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("department")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("department")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("dutyDate")
                         .HasColumnType("TEXT");
@@ -595,6 +595,35 @@ namespace DailyReport.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FinalReports");
+                });
+
+            modelBuilder.Entity("DailyReport.Models.FireReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Adult")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Care")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Children")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DepNumber")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Personel")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FireReports");
                 });
 
             modelBuilder.Entity("DailyReport.Models.OutcomingPatient", b =>
