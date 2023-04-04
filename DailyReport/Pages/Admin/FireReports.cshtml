@@ -1,0 +1,43 @@
+﻿@page
+@model DailyReport.Pages.Admin.FireReportsModel
+@{
+}
+<div class="container">
+    <div class="row ">
+        <div class="col-2"> <h4>ОТД</h4></div>
+    <div class="col-2"> <h4>Взрослых</h4></div>
+    <div class="col-2"><h4>Детей</h4></div>
+    <div class="col-2"><h4>По уходу</h4></div>
+    <div class="col-2"><h4>Сотрудников</h4></div>
+    <div class="col-2"><h4>Дата и время</h4></div>
+    </div>
+
+    @foreach (Models.FireReport rep in Model.reports)
+    {
+        <form method="post">
+            <div class="row">
+                <div class="col-2">
+                    @rep.ToDepName().
+                </div>
+                <div class="col-2">
+                   @rep.Adult
+                </div>
+                <div class="col-2">
+                    @rep.Children
+                </div>
+                <div class="col-2">
+                    @rep.Care
+                </div>
+                <div class="col-2">
+                    @rep.Personel
+                </div>
+                <div class="col-2">
+                    @rep.Date.ToString("dd.MM.yy HH:mm:ss")
+                    <input type="submit" value="&#128465" asp-page-handler="DeleteReport" asp-route-id="@rep.Id" />
+                </div>
+                
+               
+            </div>
+        </form>
+    }
+</div>
