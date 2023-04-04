@@ -39,7 +39,6 @@
                     {
                         name = "Четвертое отделение";
                         return name;
-
                     }
                 case 5:
                     {
@@ -65,13 +64,21 @@
                     {
                         name = "ОРИТ";
                         return name;
-
                     }
                 case 91:
                     {
                         name = "ОРИТ грязная зона";
                         return name;
-
+                    }
+                case 21:
+                    {
+                        name = "Лаборатория";
+                        return name;
+                    }
+                case 102:
+                    {
+                        name = "Охрана и тех.персонал";
+                        return name;
                     }
                 default:
                     {
