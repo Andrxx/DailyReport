@@ -69,7 +69,16 @@
                     {
                         name = "ОРИТ грязная зона";
                         return name;
-
+                    }
+                case 21:
+                    {
+                        name = "Лаборатория";
+                        return name;
+                    }
+                case 102:
+                    {
+                        name = "Охрана и тех.персонал";
+                        return name;
                     }
                 default:
                     {
