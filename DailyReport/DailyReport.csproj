@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\FireReport\FireSumReport.cshtml.cs\**" />
+    <Compile Remove="Pages\FireReport\FireSumReport.cshtml\**" />
+    <Content Remove="Pages\FireReport\FireSumReport.cshtml.cs\**" />
+    <Content Remove="Pages\FireReport\FireSumReport.cshtml\**" />
+    <EmbeddedResource Remove="Pages\FireReport\FireSumReport.cshtml.cs\**" />
+    <EmbeddedResource Remove="Pages\FireReport\FireSumReport.cshtml\**" />
+    <None Remove="Pages\FireReport\FireSumReport.cshtml.cs\**" />
+    <None Remove="Pages\FireReport\FireSumReport.cshtml\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Models\DutyNurse.cs~RF27fb846b.TMP" />
   </ItemGroup>
 
