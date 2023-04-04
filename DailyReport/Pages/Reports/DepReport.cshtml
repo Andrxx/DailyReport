@@ -72,7 +72,7 @@
             <tr>
                 <td scope="col">Выбыло</td>
                 @if ((Model.report.depNumber == 90) || (Model.report.depNumber == 91)){
-                    <td scope="col"><input required min="0" id="outcome" oninput="CountSum()" disabled value="@Model.report.outcome" type="number" name="outcome" asp-for="report.outcome" /></td>
+                    <td scope="col"><input required min="0" id="outcome"  oninput="CountSum()" disabled value="@Model.report.outcome" type="number" name="outcome" asp-for="report.outcome" /></td>
                     <td scope="col"><input required min="0" id="outcomeChildrens" oninput="CountSumChildrens()" disabled value="@Model.report.outcomeChildrens" type="number" name="outcomeChildrens" asp-for="report.outcomeChildrens" /> </td>
                 }
                 else{
@@ -82,8 +82,14 @@
             </tr> 
             <tr>
                 <td scope="col">Прикреплено в ОРИТ</td>
-                <td scope="col"><input required min="0" value="@Model.report.attachedToORIT" type="number" name="attachedToORIT" asp-for="report.attachedToORIT" /></td>
-                <td scope="col"><input required min="0" value="@Model.report.attachedToORITCildrens" type="number" name="attachedToORITCildrens" asp-for="report.attachedToORITCildrens"/> </td>
+                @if ((Model.report.depNumber == 90) || (Model.report.depNumber == 91)){
+                    <td scope="col"><input required min="0" disabled value="@Model.report.attachedToORIT" type="number" name="attachedToORIT" asp-for="report.attachedToORIT" /></td>
+                    <td scope="col"><input required min="0" disabled value="@Model.report.attachedToORITCildrens" type="number" name="attachedToORITCildrens" asp-for="report.attachedToORITCildrens" /> </td>
+                }
+                else{
+                    <td scope="col"><input required min="0" value="@Model.report.attachedToORIT" type="number" name="attachedToORIT" asp-for="report.attachedToORIT" /></td>
+                    <td scope="col"><input required min="0" value="@Model.report.attachedToORITCildrens" type="number" name="attachedToORITCildrens" asp-for="report.attachedToORITCildrens"/> </td>
+                }
             </tr>
             <tr>
                 <td scope="col">Переведено из отделения</td>
