@@ -68,11 +68,18 @@ namespace DailyReport.Pages.Reports
                 report.depNumber = depNumber;
             }
 
+            try
+            {
+                report.dutyNurse = DutyServices.GetDutyNurses( depNumber, context).FirstOrDefault().name;
+            }
+            catch { }
             //получаем список медсестер больницы
-            nurses = (from str in context.Personels
-                      where str.PersType == "Медсестра"
-                      orderby str.Name, str.Name.Substring(0, 1)
-                      select str.Name).ToList();
+            //nurses = (from str in context.Personels
+            //          where str.PersType == "Медсестра"
+            //          orderby str.Name, str.Name.Substring(0, 1)
+            //          select str.Name).ToList();
+
+
         }
 
         /// <summary>
