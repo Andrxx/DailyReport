@@ -13,21 +13,22 @@
 }
 
 <div class="container">
-       <form name="repForm" method="post">
+    <form name="repForm" method="post">
         <div class="row">
             <div class="col-4">
                 Сводка @msg @zone зона
             </div>
-       <div class="col-4">
-                <select class="form-select" id="dutyNurse" form="repForm" asp-for="report.dutyNurse">
+            <div class="col-4">
+                Дежурная м/с: @Model.report.dutyNurse
+               @* <select class="form-select" id="dutyNurse" form="repForm" asp-for="report.dutyNurse">
                 <option>Выбрать дежурную м/с</option>
                     @{foreach (string nurse in Model.nurses)
                         {
                             <option value="@nurse">@nurse</option>
                         }
                     }
-            </select>
-                @*<input value="sdsdsdsd"  class="invisible" asp-for="report.dutyNurse" />*@
+                    </select>
+                <input value="sdsdsdsd"  class="invisible" asp-for="report.dutyNurse" />*@
         </div>
 
             <div class="col-4 ">
