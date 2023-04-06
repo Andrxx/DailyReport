@@ -129,7 +129,7 @@ namespace DailyReport.Services
             else filteredReports.Add(new FireReport { DepNumber = 21, Personel = 2, Date = DateTime.Now });
 
             //тех.персонал и охрана - не редактируется, добавляем 14 сотрудников
-            filteredReports.Add(new FireReport { DepNumber = 102, Personel = 14, Date = DateTime.Now });
+            filteredReports.Add(new FireReport { DepNumber = 102, Personel = 10, Date = DateTime.Now });
 
             return filteredReports;
         }
