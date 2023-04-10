@@ -14,7 +14,7 @@ namespace DailyReport.Pages.Reports
         public FinalReport finalReport;
         public List<FinalReport> finalReports;
         public DepReport depReport1, depReport11, depReport2, depReport3, depReport4, depReport5,
-            depReport6, depReport7, depReport8, depReport90, depReport91;
+            depReport6, depReport7, depReport8, depReport90, depReport91, depReport81, depReport82;
         ApplicationContext context;
         public FinalReportModel(ApplicationContext db)
         {
@@ -73,6 +73,7 @@ namespace DailyReport.Pages.Reports
             //_rep = context.DepReports.AsNoTracking().ToList();
             //finalReports = context.FinalReports.AsNoTracking().ToList();
 
+            //Получаем список актуальных сводок из БД
             try
             {
                 reports = (from report in context.DepReports
@@ -83,7 +84,7 @@ namespace DailyReport.Pages.Reports
             {
                 reports = new();
             }
-           
+           //Передаем сводки из списка в переменные
 #pragma warning disable CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
             depReport1 = reports.Find(p => p.depNumber == 1);
             depReport11 = reports.Find(p => p.depNumber == 11);
@@ -96,10 +97,12 @@ namespace DailyReport.Pages.Reports
             depReport8 = reports.Find(p => p.depNumber == 8);
             depReport90 = reports.Find(p => p.depNumber == 90);
             depReport91 = reports.Find(p => p.depNumber == 91);
+            depReport81 = reports.Find(p => p.depNumber == 81);
+            depReport82 = reports.Find(p => p.depNumber == 82);
 
-             //_finalReport = (from report in context.FinalReports
-             //                where report.date.Date == actualDate
-             //               select report).FirstOrDefault();
+            //_finalReport = (from report in context.FinalReports
+            //                where report.date.Date == actualDate
+            //               select report).FirstOrDefault();
 #pragma warning restore CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
             if (depReport1 == null) depReport1 = new();
             if (depReport11 == null) depReport11 = new();
@@ -112,7 +115,8 @@ namespace DailyReport.Pages.Reports
             if (depReport8 == null) depReport8 = new();
             if (depReport91 == null) depReport91 = new();
             if (depReport90 == null) depReport90 = new();
-            
+            if (depReport81 == null) depReport81 = new();
+            if (depReport82 == null) depReport82 = new();
 
             if (finalReport == null) finalReport = new();
 

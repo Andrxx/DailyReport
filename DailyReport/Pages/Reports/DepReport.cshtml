@@ -4,6 +4,8 @@
 @{
     string msg, zone;
     if ((Model.report.depNumber == 90) || (Model.report.depNumber == 91)) msg = "ОРИТ";
+    else if (Model.report.depNumber == 81) msg = "клинико-диагностическое отделение";
+    else if (Model.report.depNumber == 82) msg = "платные услуги";
     else if (Model.report.depNumber == 8) msg = "Дневной стационар";
     else if (Model.report.depNumber == 11) msg = " 1 отделения";
     else msg = Model.report.depNumber + " отделения";
@@ -12,257 +14,288 @@
     ViewData["Title"] = "Сводка " + msg;
 }
 
-<div class="container">
-    <form name="repForm" method="post">
-        <div class="row">
-            <div class="col-4">
-                Сводка @msg @zone зона
+@{
+    if ((Model.report.depNumber == 81) || (Model.report.depNumber == 82))
+    {
+        <form name="repForm" method="post">
+            <div class="row">
+                <div class="col-4">
+                    Сводка @msg
+                </div>
+                <div class="col-4 offset-4">
+                    @**@
+                    Дата @Model.reportDate.ToString("dd.MM.yy")
+                </div>
             </div>
-            <div class="col-4">
-                Дежурная м/с: @Model.report.dutyNurse
-               @* <select class="form-select" id="dutyNurse" form="repForm" asp-for="report.dutyNurse">
-                <option>Выбрать дежурную м/с</option>
-                    @{foreach (string nurse in Model.nurses)
-                        {
-                            <option value="@nurse">@nurse</option>
-                        }
-                    }
-                    </select>
-                <input value="sdsdsdsd"  class="invisible" asp-for="report.dutyNurse" />*@
-        </div>
-
-            <div class="col-4 ">
-                @*offset-4*@
-            Дата @Model.reportDate.ToString("dd.MM.yy")
-        </div>
-        </div>
-
-        <input class="d-print-none" type="submit"
-               value="Загрузить предыдущую сводку"
-               asp-page-handler="PrevReport"
-               asp-route-depNumber=@Model.report.depNumber />
-        <table class="table mt-2 g-0 d-table table-sm ">
-            <thead> 
+            <table class="table mt-2 g-0 d-table table-sm ">
+                <thead> 
+                    <tr>
+                        <th scope="col">
+                            <input value="@Model.report.Id" type="number" name="id" class="invisible" asp-for="report.Id"/>
+                            <input value="@Model.report.date" name="date" type="datetime" class="invisible" asp-for="report.date" />
+                        </th>
+                        <th scope="col">Взрослые</th>
+                    </tr>
+                </thead>
                 <tr>
-                    <th scope="col">
-                        <input value="@Model.report.Id" type="number" name="id" class="invisible" asp-for="report.Id"/>
-                        <input value="@Model.report.date" name="date" type="datetime" class="invisible" asp-for="report.date" />
-                    </th>
-                    <th scope="col">Взрослые</th>
-                    <th scope="col">Дети</th>
-                    
+                    <td scope="col">Обратилось</td>
+                    <td scope="col"><input required min="0" id="present" value="@Model.report.present" type="number" name="present" asp-for="report.present" /></td>
                 </tr>
-            </thead>
-            <tr>
-                <td scope="col">Состояло</td>
-                <td scope="col"><input required min="0" id="existed" oninput="CountSum()" value="@Model.report.existed" type="number" name="existed" asp-for="report.existed" /></td>
-                <td scope="col"><input required min="0" id="existedChildren" oninput="CountSumChildrens()" value="@Model.report.existedChildren" type="number" name="existedChildren" asp-for="report.existedChildren" /> </td>
+            </table>
+            <input class="d-print-none" type="submit" value="Сохранить" asp-page-handler="Report" asp-route-depNumber=@Model.report.depNumber />
+        </form>
+    }
 
-            </tr>
-             <tr>
-                <td scope="col">Поступило</td>
-                @if ((Model.report.depNumber == 90) || (Model.report.depNumber == 91)){
-                    <td scope="col"><input required min="0" id="income" disabled oninput="CountSum()" value="@Model.report.income" type="number" name="income" asp-for="report.income" /></td>
-                    <td scope="col"><input required min="0" id="incomeChildrens" disabled oninput="CountSumChildrens()" value="@Model.report.incomeChildrens" type="number" name="incomeChildrens" asp-for="report.incomeChildrens" /> </td>
-                }
-                else{
-                    <td scope="col"><input required min="0" id="income"  oninput="CountSum()" value="@Model.report.income" type="number" name="income" asp-for="report.income"/></td>
-                    <td scope="col"><input required min="0" id="incomeChildrens" oninput="CountSumChildrens()" value="@Model.report.incomeChildrens" type="number" name="incomeChildrens" asp-for="report.incomeChildrens" /> </td>
-                }
-             </tr>
-            <tr>
-                <td scope="col">Выбыло</td>
-                @if ((Model.report.depNumber == 90) || (Model.report.depNumber == 91)){
-                    <td scope="col"><input required min="0" id="outcome"  oninput="CountSum()" disabled value="@Model.report.outcome" type="number" name="outcome" asp-for="report.outcome" /></td>
-                    <td scope="col"><input required min="0" id="outcomeChildrens" oninput="CountSumChildrens()" disabled value="@Model.report.outcomeChildrens" type="number" name="outcomeChildrens" asp-for="report.outcomeChildrens" /> </td>
-                }
-                else{
-                    <td scope="col"><input required min="0" id="outcome" oninput="CountSum()"  value="@Model.report.outcome" type="number" name="outcome" asp-for="report.outcome" /></td>
-                    <td scope="col"><input required min="0" id="outcomeChildrens" oninput="CountSumChildrens()"  value="@Model.report.outcomeChildrens" type="number" name="outcomeChildrens" asp-for="report.outcomeChildrens" /> </td>
-                }
-            </tr> 
-            <tr>
-                <td scope="col">Прикреплено в ОРИТ</td>
-                @if ((Model.report.depNumber == 90) || (Model.report.depNumber == 91)){
-                    <td scope="col"><input required min="0" disabled value="@Model.report.attachedToORIT" type="number" name="attachedToORIT" asp-for="report.attachedToORIT" /></td>
-                    <td scope="col"><input required min="0" disabled value="@Model.report.attachedToORITCildrens" type="number" name="attachedToORITCildrens" asp-for="report.attachedToORITCildrens" /> </td>
-                }
-                else{
-                    <td scope="col"><input required min="0" value="@Model.report.attachedToORIT" type="number" name="attachedToORIT" asp-for="report.attachedToORIT" /></td>
-                    <td scope="col"><input required min="0" value="@Model.report.attachedToORITCildrens" type="number" name="attachedToORITCildrens" asp-for="report.attachedToORITCildrens"/> </td>
-                }
-            </tr>
-            <tr>
-                <td scope="col">Переведено из отделения</td>
-                <td scope="col"><input required min="0" id="movedOutDep" oninput="CountSum()" value="@Model.report.movedOutDep" type="number" name="movedOutDep" asp-for="report.movedOutDep" /></td>
-                <td scope="col"><input required min="0" id="movedOutDepChildrens" oninput="CountSumChildrens()" value="@Model.report.movedOutDepChildrens" type="number" name="movedOutDepChildrens" asp-for="report.movedOutDepChildrens" /> </td>
-            </tr>
-            <tr>
-                <td scope="col">Переведено в отделение</td>
-                <td scope="col"><input required min="0" id="movedInDep" oninput="CountSum()" value="@Model.report.movedInDep" type="number" name="movedInDep" asp-for="report.movedInDep" /></td>
-                <td scope="col"><input required min="0" id="movedInDepChildrens" oninput="CountSumChildrens()" value="@Model.report.movedInDepChildrens" type="number" name="movedInDepChildrens" asp-for="report.movedInDepChildrens" /> </td>
-            </tr>
-            <tr>
-                <td scope="col">Умерло</td>
-                <td scope="col"><input required min="0" id="died" oninput="CountSum()" value="@Model.report.died" type="number" name="died" asp-for="report.died" /></td>
-                <td scope="col"><input required min="0" id="diedChildrens" oninput="CountSumChildrens()" value="@Model.report.diedChildrens" type="number" name="diedChildrens" asp-for="report.diedChildrens" /> </td>
-            </tr>
-            <tr>
-                <td scope="col">Состоит</td>
-                <td scope="col"><input required min="0" id="present" value="@Model.report.present" type="number" name="present" asp-for="report.present" /></td>
-                <td scope="col"><input required min="0" id="presentChildrens"  value="@Model.report.presentChildrens" type="number" name="presentChildrens" asp-for="report.presentChildrens" /> </td>
-            </tr>
-            
-            @*раздел кислорода*@
-            <tr>
-                <td scope="col">ИВЛ</td>
-                <td scope="col"><input required min="0" value="@Model.report.oIVL" type="number" name="oIVL" asp-for="report.oIVL" /></td>
-                <td scope="col"><input required min="0" value="@Model.report.oIVLChildrens" type="number" name="oIVLChildrens" asp-for="report.oIVLChildrens"/> </td>
-            </tr>
-            <tr>
-                <td scope="col">НИВЛ</td>
-                <td scope="col"><input required min="0" value="@Model.report.oNIVL" type="number" name="oNIVL" asp-for="report.oNIVL" /></td>
-                <td scope="col"><input required min="0" value="@Model.report.oNIVLChildrens" type="number" name="oNIVLChildrens" /> </td>
-            </tr>
-            <tr>
-                <td scope="col">НИВЛ+ВПО</td>
-                <td scope="col"><input required min="0" value="@Model.report.oNIVLVPO" type="number" name="oNIVLVPO" asp-for="report.oNIVLVPO"/></td>
-                <td scope="col"><input required min="0" value="@Model.report.oNIVLVPOChildrens" type="number" name="oNIVLVPOChildrens" /> </td>
-            </tr>
-            <tr>
-                <td scope="col">НИВЛ+КМ</td>
-                <td scope="col"><input required min="0" value="@Model.report.oNIVLMask" type="number" name="oNIVLMask" asp-for="report.oNIVLMask"/></td>
-                <td scope="col"><input required min="0" value="@Model.report.oNIVLMaskChildrens" type="number" name="oNIVLMaskChildrens" /> </td>
-            </tr>
-            <tr>
-                <td scope="col">Лицевая маска</td>
-                <td scope="col"><input required min="0" value="@Model.report.oMask" type="number" name="oMask" asp-for="report.oMask"/></td>
-                <td scope="col"><input required min="0" value="@Model.report.oMaskChildren" type="number" name="oMaskChildren" /> </td>
-            </tr>
-                @* <tr>
+    else
+    {
+        <div class="container">
+            <form name="repForm" method="post">
+                <div class="row">
+                    <div class="col-4">
+                        Сводка @msg @zone зона
+                    </div>
+                    <div class="col-4">
+                        Дежурная м/с: @Model.report.dutyNurse
+                    </div>
+
+                    <div class="col-4 ">
+                        @*offset-4*@
+                        Дата @Model.reportDate.ToString("dd.MM.yy")
+                    </div>
+                </div>
+
+                <input class="d-print-none" type="submit" value="Загрузить предыдущую сводку" asp-page-handler="PrevReport" asp-route-depNumber=@Model.report.depNumber />
+                <table class="table mt-2 g-0 d-table table-sm ">
+                    <thead> 
+                        <tr>
+                            <th scope="col">
+                                <input value="@Model.report.Id" type="number" name="id" class="invisible" asp-for="report.Id"/>
+                                <input value="@Model.report.date" name="date" type="datetime" class="invisible" asp-for="report.date" />
+                            </th>
+                            <th scope="col">Взрослые</th>
+                            <th scope="col">Дети</th>
+
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td scope="col">Состояло</td>
+                        <td scope="col"><input required min="0" id="existed" oninput="CountSum()" value="@Model.report.existed" type="number" name="existed" asp-for="report.existed" /></td>
+                        <td scope="col"><input required min="0" id="existedChildren" oninput="CountSumChildrens()" value="@Model.report.existedChildren" type="number" name="existedChildren" asp-for="report.existedChildren" /> </td>
+
+                    </tr>
+                    <tr>
+                        <td scope="col">Поступило</td>
+                        @if ((Model.report.depNumber == 90) || (Model.report.depNumber == 91))
+                        {
+                            <td scope="col"><input required min="0" id="income" disabled oninput="CountSum()" value="@Model.report.income" type="number" name="income" asp-for="report.income" /></td>
+                            <td scope="col"><input required min="0" id="incomeChildrens" disabled oninput="CountSumChildrens()" value="@Model.report.incomeChildrens" type="number" name="incomeChildrens" asp-for="report.incomeChildrens" /> </td>
+                        }
+                        else
+                        {
+                            <td scope="col"><input required min="0" id="income"  oninput="CountSum()" value="@Model.report.income" type="number" name="income" asp-for="report.income"/></td>
+                            <td scope="col"><input required min="0" id="incomeChildrens" oninput="CountSumChildrens()" value="@Model.report.incomeChildrens" type="number" name="incomeChildrens" asp-for="report.incomeChildrens" /> </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td scope="col">Выбыло</td>
+                        @if ((Model.report.depNumber == 90) || (Model.report.depNumber == 91))
+                        {
+                            <td scope="col"><input required min="0" id="outcome"  oninput="CountSum()" disabled value="@Model.report.outcome" type="number" name="outcome" asp-for="report.outcome" /></td>
+                            <td scope="col"><input required min="0" id="outcomeChildrens" oninput="CountSumChildrens()" disabled value="@Model.report.outcomeChildrens" type="number" name="outcomeChildrens" asp-for="report.outcomeChildrens" /> </td>
+                        }
+                        else
+                        {
+                            <td scope="col"><input required min="0" id="outcome" oninput="CountSum()"  value="@Model.report.outcome" type="number" name="outcome" asp-for="report.outcome" /></td>
+                            <td scope="col"><input required min="0" id="outcomeChildrens" oninput="CountSumChildrens()"  value="@Model.report.outcomeChildrens" type="number" name="outcomeChildrens" asp-for="report.outcomeChildrens" /> </td>
+                        }
+                    </tr> 
+                    <tr>
+                        <td scope="col">Прикреплено в ОРИТ</td>
+                        @if ((Model.report.depNumber == 90) || (Model.report.depNumber == 91))
+                        {
+                            <td scope="col"><input required min="0" disabled value="@Model.report.attachedToORIT" type="number" name="attachedToORIT" asp-for="report.attachedToORIT" /></td>
+                            <td scope="col"><input required min="0" disabled value="@Model.report.attachedToORITCildrens" type="number" name="attachedToORITCildrens" asp-for="report.attachedToORITCildrens" /> </td>
+                        }
+                        else
+                        {
+                            <td scope="col"><input required min="0" value="@Model.report.attachedToORIT" type="number" name="attachedToORIT" asp-for="report.attachedToORIT" /></td>
+                            <td scope="col"><input required min="0" value="@Model.report.attachedToORITCildrens" type="number" name="attachedToORITCildrens" asp-for="report.attachedToORITCildrens"/> </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td scope="col">Переведено из отделения</td>
+                        <td scope="col"><input required min="0" id="movedOutDep" oninput="CountSum()" value="@Model.report.movedOutDep" type="number" name="movedOutDep" asp-for="report.movedOutDep" /></td>
+                        <td scope="col"><input required min="0" id="movedOutDepChildrens" oninput="CountSumChildrens()" value="@Model.report.movedOutDepChildrens" type="number" name="movedOutDepChildrens" asp-for="report.movedOutDepChildrens" /> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Переведено в отделение</td>
+                        <td scope="col"><input required min="0" id="movedInDep" oninput="CountSum()" value="@Model.report.movedInDep" type="number" name="movedInDep" asp-for="report.movedInDep" /></td>
+                        <td scope="col"><input required min="0" id="movedInDepChildrens" oninput="CountSumChildrens()" value="@Model.report.movedInDepChildrens" type="number" name="movedInDepChildrens" asp-for="report.movedInDepChildrens" /> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Умерло</td>
+                        <td scope="col"><input required min="0" id="died" oninput="CountSum()" value="@Model.report.died" type="number" name="died" asp-for="report.died" /></td>
+                        <td scope="col"><input required min="0" id="diedChildrens" oninput="CountSumChildrens()" value="@Model.report.diedChildrens" type="number" name="diedChildrens" asp-for="report.diedChildrens" /> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Состоит</td>
+                        <td scope="col"><input required min="0" id="present" value="@Model.report.present" type="number" name="present" asp-for="report.present" /></td>
+                        <td scope="col"><input required min="0" id="presentChildrens"  value="@Model.report.presentChildrens" type="number" name="presentChildrens" asp-for="report.presentChildrens" /> </td>
+                    </tr>
+
+                    @*раздел кислорода*@
+                    <tr>
+                        <td scope="col">ИВЛ</td>
+                        <td scope="col"><input required min="0" value="@Model.report.oIVL" type="number" name="oIVL" asp-for="report.oIVL" /></td>
+                        <td scope="col"><input required min="0" value="@Model.report.oIVLChildrens" type="number" name="oIVLChildrens" asp-for="report.oIVLChildrens"/> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">НИВЛ</td>
+                        <td scope="col"><input required min="0" value="@Model.report.oNIVL" type="number" name="oNIVL" asp-for="report.oNIVL" /></td>
+                        <td scope="col"><input required min="0" value="@Model.report.oNIVLChildrens" type="number" name="oNIVLChildrens" /> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">НИВЛ+ВПО</td>
+                        <td scope="col"><input required min="0" value="@Model.report.oNIVLVPO" type="number" name="oNIVLVPO" asp-for="report.oNIVLVPO"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.oNIVLVPOChildrens" type="number" name="oNIVLVPOChildrens" /> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">НИВЛ+КМ</td>
+                        <td scope="col"><input required min="0" value="@Model.report.oNIVLMask" type="number" name="oNIVLMask" asp-for="report.oNIVLMask"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.oNIVLMaskChildrens" type="number" name="oNIVLMaskChildrens" /> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Лицевая маска</td>
+                        <td scope="col"><input required min="0" value="@Model.report.oMask" type="number" name="oMask" asp-for="report.oMask"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.oMaskChildren" type="number" name="oMaskChildren" /> </td>
+                    </tr>
+                    @* <tr>
                 <td scope="col">Спонтанное дыхание</td>
                     <td scope="col"><input value="@Model._report.oBrease" type="number" name="oBrease" /></td>
                     <td scope="col"><input value="@Model._report.oBreaseChildrens" type="number" name="oBreaseChildrens" /> </td>
                 </tr> *@
-                @*админ раздел*@
-             <tr>
-                    <td scope="col">Беременные</td>
-                    <td scope="col"><input required min="0" value="@Model.report.pregnant" type="number" name="pregnant" asp-for="report.pregnant"/></td>
-                    <td scope="col"><input required min="0" value="@Model.report.pregnantChildrens" type="number" name="pregnantChildrens"/> </td>
-            </tr>
-            <tr>
-                <td scope="col">Пациенты из зон отдыха</td>
-                <td scope="col"><input required min="0" value="@Model.report.restZone" type="number" name="restZone" asp-for="report.restZone"/></td>
-                <td scope="col"><input required min="0" value="@Model.report.restZoneChildrens" type="number" name="restZoneChildrens" asp-for="report.restZoneChildrens"/> </td>
-            </tr>
-            <tr>
-                <td scope="col">Инокраевые</td>
-                <td scope="col"><input required min="0" value="@Model.report.outRegions" type="number" name="outRegions" asp-for="report.outRegions" /></td>
-                <td scope="col"><input required min="0" value="@Model.report.outRegionsChildrens" type="number" name="outRegionsChildrens" asp-for="report.outRegionsChildrens"/> </td>
-            </tr>
-            <tr>
-                <td scope="col">Иностранные граждане</td>
-                <td scope="col"><input required min="0" value="@Model.report.forein" type="number" name="forein" asp-for="report.forein"/></td>
-                <td scope="col"><input required min="0" value="@Model.report.foreinChildrens" type="number" name="foreinChildrens" asp-for="report.foreinChildrens"/> </td>
-            </tr>
-            <tr>
-                <td scope="col">Прибывшие из присоединенных областей (ЛНР, ДНР, ХО, ЗО)</td>
-                <td scope="col"><input required min="0" value="@Model.report.LNR_DNR" type="number" name="LNR_DNR" asp-for="report.LNR_DNR"/></td>
-                <td scope="col"><input required min="0" value="@Model.report.LNR_DNRChildrens" type="number" name="LNR_DNRChildrens" asp-for="report.LNR_DNRChildrens"/> </td>
-            </tr>
-            <tr>
-                <td scope="col">Прибывшие из остальных областей Украины</td>
-                <td scope="col"><input required min="0" value="@Model.report.otherUkrane" type="number" name="otherUkrane" asp-for="report.otherUkrane" /></td>
-                <td scope="col"><input required min="0" value="@Model.report.otherUkraneChildren" type="number" name="otherUkraneChildren" asp-for="report.otherUkraneChildren" /> </td>
-            </tr>
-            <tr>
-                <td scope="col">Поступили из другой МО</td>
-                <td scope="col"><input required min="0" value="@Model.report.incomeHospital" type="number" name="incomeHospital" asp-for="report.incomeHospital"/></td>
-                <td scope="col"><input required min="0" value="@Model.report.incomeHospitalChildrens" type="number" name="incomeHospitalChildrens" asp-for="report.incomeHospitalChildrens"/> </td>
-            </tr>
-            <tr>
-                <td scope="col">Переведены в другую МО</td>
-                <td scope="col"><input required min="0" value="@Model.report.outcomeHospital" type="number" name="outcomeHospital" asp-for="report.outcomeHospital"/></td>
-                <td scope="col"><input required min="0" value="@Model.report.outcomeHospitalChildrens" type="number" name="outcomeHospitalChildrens" asp-for="report.outcomeHospitalChildrens"/> </td>
-            </tr>
-            @*Нозоологии*@
-            <tr>
-                <td scope="col">U 07.1 Covid-19</td>
-                <td scope="col"><input required min="0" value="@Model.report.U071" type="number" name="U071" asp-for="report.U071"/></td>
-                <td scope="col"><input required min="0" value="@Model.report.U071Childrens" type="number" name="U071Childrens" asp-for="report.U071Childrens"/> </td>
-            </tr>
-            <tr>
-                <td scope="col">U 07.2 Covid-19</td>
-                <td scope="col"><input required min="0" value="@Model.report.U072" type="number" name="U072" asp-for="report.U072" /></td>
-                <td scope="col"><input required min="0" value="@Model.report.U072Childrens" type="number" name="U072Childrens" asp-for="report.U072Childrens"/> </td>
-            </tr>
-            <tr>
-                <td scope="col">ОРИ</td>
-                <td scope="col"><input required min="0" value="@Model.report.ORVI" type="number" name="ORVI" asp-for="report.ORVI" /></td>
-                <td scope="col"><input required min="0" value="@Model.report.ORVIChildrens" type="number" name="ORVIChildrens" asp-for="report.ORVIChildrens"/> </td>
-            </tr>
-            <tr>
-                <td scope="col">Пневмония</td>
-                <td scope="col"><input required min="0" value="@Model.report.pneumonia" type="number" name="pneumonia" asp-for="report.pneumonia"/></td>
-                <td scope="col"><input required min="0" value="@Model.report.pneumoniaChildrens" type="number" name="pneumoniaChildrens" asp-for="report.pneumoniaChildrens"/> </td>
-            </tr>
-            <tr>
-                <td scope="col">Грипп</td>
-                <td scope="col"><input required min="0" value="@Model.report.grippe" type="number" name="grippe" asp-for="report.grippe" /></td>
-                <td scope="col"><input required min="0" value="@Model.report.grippeChildrens" type="number" name="grippeChildrens" asp-for="report.grippeChildrens" /> </td>
-            </tr>
-            <tr>
-                <td scope="col">Корь</td>
-                <td scope="col"><input required min="0" value="@Model.report.measles" type="number" name="measles" asp-for="report.measles"/></td>
-                <td scope="col"><input required min="0" value="@Model.report.measlesChildren" type="number" name="measlesChildren" asp-for="report.measlesChildren" /> </td>
-            </tr>
-            <tr>
-                <td scope="col">ОКИ</td>
-                <td scope="col"><input required min="0" value="@Model.report.OKI" type="number" name="OKI" asp-for="report.OKI"/></td>
-                <td scope="col"><input required min="0" value="@Model.report.OKIChildrens" type="number" name="OKIChildrens" asp-for="report.OKIChildrens" /> </td>
-            </tr>
-            <tr>
-                <td scope="col">Менингит, энцефалит, миелит</td>
-                <td scope="col"><input required min="0" value="@Model.report.meningit" type="number" name="meningit" asp-for="report.meningit"/></td>
-                <td scope="col"><input required min="0" value="@Model.report.meningitChildrens" type="number" name="meningitChildrens" asp-for="report.meningitChildrens"/> </td>
-            </tr>
-            <tr>
-                <td scope="col">Сепсис</td>
-                <td scope="col"><input required min="0" value="@Model.report.sepsis" type="number" name="sepsis" asp-for="report.sepsis"/></td>
-                <td scope="col"><input required min="0" value="@Model.report.sepsisChildren" type="number" name="sepsisChildren" asp-for="report.sepsisChildren"/> </td>
-            </tr>
-            <tr>
-                <td scope="col">Гепатит</td>
-                <td scope="col"><input required min="0" value="@Model.report.hepatit" type="number" name="hepatit" asp-for="report.hepatit"/></td>
-                <td scope="col"><input required min="0" value="@Model.report.hepatitChildrens" type="number" name="hepatitChildrens" asp-for="report.hepatitChildrens"/> </td>
-            </tr>
-            <tr>
-                <td scope="col">В-20</td>
-                <td scope="col"><input required min="0" value="@Model.report.HIV" type="number" name="HIV" asp-for="report.HIV"/></td>
-                <td scope="col"><input required min="0" value="@Model.report.HIVCildrens" type="number" name="HIVCildrens" asp-for="report.HIVCildrens"/> </td>
-            </tr>
-            <tr>
-                <td scope="col">Прочие</td>
-                <td scope="col"><input required min="0" value="@Model.report.other" type="number" name="other" asp-for="report.other"/></td>
-                <td scope="col"><input required min="0" value="@Model.report.otherChildrens" type="number" name="otherChildrens" asp-for="report.otherChildrens"/> </td>
-            </tr>
-            <tr>
-                <td scope="col">Лица по уходу (общее количество)</td>
-                <td scope="col" ><input required min="0" value="@Model.report.care" type="number" name="care" asp-for="report.care" /></td>
-                <td scope="col" class="d-print-none">В этом поле указывать всех по уходу, и до 4х лет и старше!!!</td>
-             </tr>
-             <tr>
-                <td scope="col">Лица по уходу до 4х лет или с детьми инвалидами</td>
-                <td scope="col" colspan="2"><input required min="0" value="@Model.report.careDisodered" type="number" name="careDisodered" asp-for="report.careDisodered" /></td>
-             </tr> 
-        </table>
+                    @*админ раздел*@
+                    <tr>
+                        <td scope="col">Беременные</td>
+                        <td scope="col"><input required min="0" value="@Model.report.pregnant" type="number" name="pregnant" asp-for="report.pregnant"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.pregnantChildrens" type="number" name="pregnantChildrens"/> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Пациенты из зон отдыха</td>
+                        <td scope="col"><input required min="0" value="@Model.report.restZone" type="number" name="restZone" asp-for="report.restZone"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.restZoneChildrens" type="number" name="restZoneChildrens" asp-for="report.restZoneChildrens"/> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Инокраевые</td>
+                        <td scope="col"><input required min="0" value="@Model.report.outRegions" type="number" name="outRegions" asp-for="report.outRegions" /></td>
+                        <td scope="col"><input required min="0" value="@Model.report.outRegionsChildrens" type="number" name="outRegionsChildrens" asp-for="report.outRegionsChildrens"/> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Иностранные граждане</td>
+                        <td scope="col"><input required min="0" value="@Model.report.forein" type="number" name="forein" asp-for="report.forein"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.foreinChildrens" type="number" name="foreinChildrens" asp-for="report.foreinChildrens"/> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Прибывшие из присоединенных областей (ЛНР, ДНР, ХО, ЗО)</td>
+                        <td scope="col"><input required min="0" value="@Model.report.LNR_DNR" type="number" name="LNR_DNR" asp-for="report.LNR_DNR"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.LNR_DNRChildrens" type="number" name="LNR_DNRChildrens" asp-for="report.LNR_DNRChildrens"/> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Прибывшие из остальных областей Украины</td>
+                        <td scope="col"><input required min="0" value="@Model.report.otherUkrane" type="number" name="otherUkrane" asp-for="report.otherUkrane" /></td>
+                        <td scope="col"><input required min="0" value="@Model.report.otherUkraneChildren" type="number" name="otherUkraneChildren" asp-for="report.otherUkraneChildren" /> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Поступили из другой МО</td>
+                        <td scope="col"><input required min="0" value="@Model.report.incomeHospital" type="number" name="incomeHospital" asp-for="report.incomeHospital"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.incomeHospitalChildrens" type="number" name="incomeHospitalChildrens" asp-for="report.incomeHospitalChildrens"/> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Переведены в другую МО</td>
+                        <td scope="col"><input required min="0" value="@Model.report.outcomeHospital" type="number" name="outcomeHospital" asp-for="report.outcomeHospital"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.outcomeHospitalChildrens" type="number" name="outcomeHospitalChildrens" asp-for="report.outcomeHospitalChildrens"/> </td>
+                    </tr>
+                    @*Нозоологии*@
+                    <tr>
+                        <td scope="col">U 07.1 Covid-19</td>
+                        <td scope="col"><input required min="0" value="@Model.report.U071" type="number" name="U071" asp-for="report.U071"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.U071Childrens" type="number" name="U071Childrens" asp-for="report.U071Childrens"/> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">U 07.2 Covid-19</td>
+                        <td scope="col"><input required min="0" value="@Model.report.U072" type="number" name="U072" asp-for="report.U072" /></td>
+                        <td scope="col"><input required min="0" value="@Model.report.U072Childrens" type="number" name="U072Childrens" asp-for="report.U072Childrens"/> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">ОРИ</td>
+                        <td scope="col"><input required min="0" value="@Model.report.ORVI" type="number" name="ORVI" asp-for="report.ORVI" /></td>
+                        <td scope="col"><input required min="0" value="@Model.report.ORVIChildrens" type="number" name="ORVIChildrens" asp-for="report.ORVIChildrens"/> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Пневмония</td>
+                        <td scope="col"><input required min="0" value="@Model.report.pneumonia" type="number" name="pneumonia" asp-for="report.pneumonia"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.pneumoniaChildrens" type="number" name="pneumoniaChildrens" asp-for="report.pneumoniaChildrens"/> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Грипп</td>
+                        <td scope="col"><input required min="0" value="@Model.report.grippe" type="number" name="grippe" asp-for="report.grippe" /></td>
+                        <td scope="col"><input required min="0" value="@Model.report.grippeChildrens" type="number" name="grippeChildrens" asp-for="report.grippeChildrens" /> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Корь</td>
+                        <td scope="col"><input required min="0" value="@Model.report.measles" type="number" name="measles" asp-for="report.measles"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.measlesChildren" type="number" name="measlesChildren" asp-for="report.measlesChildren" /> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">ОКИ</td>
+                        <td scope="col"><input required min="0" value="@Model.report.OKI" type="number" name="OKI" asp-for="report.OKI"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.OKIChildrens" type="number" name="OKIChildrens" asp-for="report.OKIChildrens" /> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Менингит, энцефалит, миелит</td>
+                        <td scope="col"><input required min="0" value="@Model.report.meningit" type="number" name="meningit" asp-for="report.meningit"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.meningitChildrens" type="number" name="meningitChildrens" asp-for="report.meningitChildrens"/> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Сепсис</td>
+                        <td scope="col"><input required min="0" value="@Model.report.sepsis" type="number" name="sepsis" asp-for="report.sepsis"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.sepsisChildren" type="number" name="sepsisChildren" asp-for="report.sepsisChildren"/> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Гепатит</td>
+                        <td scope="col"><input required min="0" value="@Model.report.hepatit" type="number" name="hepatit" asp-for="report.hepatit"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.hepatitChildrens" type="number" name="hepatitChildrens" asp-for="report.hepatitChildrens"/> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">В-20</td>
+                        <td scope="col"><input required min="0" value="@Model.report.HIV" type="number" name="HIV" asp-for="report.HIV"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.HIVCildrens" type="number" name="HIVCildrens" asp-for="report.HIVCildrens"/> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Прочие</td>
+                        <td scope="col"><input required min="0" value="@Model.report.other" type="number" name="other" asp-for="report.other"/></td>
+                        <td scope="col"><input required min="0" value="@Model.report.otherChildrens" type="number" name="otherChildrens" asp-for="report.otherChildrens"/> </td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Лица по уходу (общее количество)</td>
+                        <td scope="col" ><input required min="0" value="@Model.report.care" type="number" name="care" asp-for="report.care" /></td>
+                        <td scope="col" class="d-print-none">В этом поле указывать всех по уходу, и до 4х лет и старше!!!</td>
+                    </tr>
+                    <tr>
+                        <td scope="col">Лица по уходу до 4х лет или с детьми инвалидами</td>
+                        <td scope="col" colspan="2"><input required min="0" value="@Model.report.careDisodered" type="number" name="careDisodered" asp-for="report.careDisodered" /></td>
+                    </tr> 
+                </table>
 
-        <input class="d-print-none" type="submit" 
+                <input class="d-print-none" type="submit" 
         value="Сохранить" asp-page-handler="Report" 
         asp-route-depNumber=@Model.report.depNumber />
-        
-    
-        </form>
-    <button class="d-print-none mt-2 action-print">Печать</button>
 
-</div>
+
+            </form>
+
+            <button class="d-print-none mt-2 action-print">Печать</button>
+
+        </div>
+    }
+}
