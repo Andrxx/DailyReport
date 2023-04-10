@@ -70,7 +70,8 @@ namespace DailyReport.Pages.Reports
 
             try
             {
-                report.dutyNurse = DutyServices.GetDutyNurses( depNumber, context).FirstOrDefault().name;
+                DutyNurse dn = DutyServices.GetDutyNurses(depNumber, context).FirstOrDefault();
+                if(dn != null) report.dutyNurse = dn.name;
             }
             catch { }
             //получаем список медсестер больницы

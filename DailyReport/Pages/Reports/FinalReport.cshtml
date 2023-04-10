@@ -701,7 +701,21 @@
                                     <td>@(@Model.deseaseSumFinal + Model.finalReport.care + @Model.deseaseSumFinalChildren)</td>
                      }
                     <td colspan="3" class="bg-transparent border-0"></td>
-                </tr>           
+                </tr>
+
+                <tr class="border-transparent print-m-p-0">
+                    <td class="fw-bold">Обратившиеся в КДО</td>
+                    <td colspan="22"></td>
+                    <td class="text-center bg-secondary" id="kdo">@Model.depReport81.present</td>
+                    <td colspan="3" class="bg-transparent border-0"></td>
+                </tr>
+                <tr class="border-transparent print-m-p-0">
+                    <td class="fw-bold">Платные услуги</td>
+                    <td colspan="22"></td>
+                    <td class="text-center bg-secondary" id="">@Model.depReport82.present</td>
+                    <td colspan="3" class="bg-transparent border-0"></td>
+                </tr>
+
                 <tr class="border-transparent print-m-p-0">
                     <td class="fw-bold">Отказ от госпитализации</td>
                     <td colspan="20"></td>
