@@ -2,144 +2,146 @@
 @using DailyReport.Models
 @model DailyReport.Pages.FireReport.FireSumReportModel
 @{
+    ViewData["Title"] = "Пожарная сводка";
 }
 <div class="row">
-    <h2>Дежурная смена на @DateTime.Now.ToString("dd.MM.yy")</h2>
+    <h2>Дежурные медсестры на @DateTime.Now.ToString("dd.MM.yy")</h2>
 </div>
-<div class="row text-center fw-weight-lighter">
+<div class="row fw-bold pt-1">
     <h4>Первое отделение</h4>
 </div>
 <div class="row">
     <div class="row fw-weight-lighter">
-        <div class="col-5 fe"> <h5>Дежурная медсестра</h5></div>
+        <div class="col-5 offset-1"> <h5>Ф.И.О.</h5></div>
         <div class="col-3"><h5>Телефон</h5></div>
 
     </div>
     @{
         foreach (DutyNurse dutyNurse in Model.dutyNurses1)
         {
-            <div class="row border-bottom fw-bold">
-                    <div class="col-5">@dutyNurse.name</div>
-                    <div class="col-3">@dutyNurse.Phone</div>
+            <div class="row border-bottom">
+                <div class="col-5 offset-1">@dutyNurse.name</div>
+                <div class="col-3">@dutyNurse.Phone</div>
             </div>
         }
     }
 </div>
-<div class="row text-center fw-weight-lighter">
+<div class="row fw-bold pt-2">
     <h4>Третье отделение</h4>
 </div>
 <div class="row">
-    <div class="row fw-weight-lighter">
-        <div class="col-5"> <h5>Дежурная медсестра</h5></div>
+    <div class="row ">
+        <div class="col-5 offset-1"> <h5>Ф.И.О.</h5></div>
         <div class="col-3"><h5>Телефон</h5></div>
 
     </div>
     @{
         foreach (DutyNurse dutyNurse in Model.dutyNurses3)
         {
-            <div class="row border-bottom fw-bold">
-                <div class="col-5">@dutyNurse.name</div>
+            <div class="row border-bottom ">
+                <div class="col-5 offset-1">@dutyNurse.name</div>
                 <div class="col-3">@dutyNurse.Phone</div>
             </div>
         }
     }
 </div>
-<div class="row text-center fw-weight-lighter">
+<div class="row fw-bold pt-2">
     <h4>Четвертое отделение</h4>
 </div>
 <div class="row">
     <div class="row fw-weight-lighter">
-        <div class="col-5"> <h5>Дежурная медсестра</h5></div>
+        <div class="col-5 offset-1"> <h5>Ф.И.О.</h5></div>
         <div class="col-3"><h5>Телефон</h5></div>
 
     </div>
     @{
         foreach (DutyNurse dutyNurse in Model.dutyNurses4)
         {
-            <div class="row border-bottom fw-bold">
-                <div class="col-5">@dutyNurse.name</div>
+            <div class="row border-bottom">
+                <div class="col-5 offset-1">@dutyNurse.name</div>
                 <div class="col-3">@dutyNurse.Phone</div>
             </div>
         }
     }
 </div>
-<div class="row text-center fw-weight-lighter">
+<div class="row fw-bold pt-2">
     <h4>Пятое отделение</h4>
 </div>
 <div class="row">
     <div class="row fw-weight-lighter ">
-        <div class="col-5"> <h5>Дежурная медсестра</h5></div>
+        <div class="col-5 offset-1"> <h5>Ф.И.О.</h5></div>
         <div class="col-3"><h5>Телефон</h5></div>
 
     </div>
     @{
         foreach (DutyNurse dutyNurse in Model.dutyNurses5)
         {
-            <div class="row border-bottom fw-bold">
-                <div class="col-5">@dutyNurse.name</div>
+            <div class="row border-bottom">
+                <div class="col-5 offset-1">@dutyNurse.name</div>
                 <div class="col-3">@dutyNurse.Phone</div>
             </div>
         }
     }
 </div>
-<div class="row text-center fw-weight-lighter">
+<div class="row fw-bold pt-2">
     <h4>Шестое отделение</h4>
 </div>
 <div class="row">
     <div class="row fw-weight-lighter">
-        <div class="col-5"> <h5>Дежурная медсестра</h5></div>
+        <div class="col-5 offset-1"> <h5>Ф.И.О.</h5></div>
         <div class="col-3"><h5>Телефон</h5></div>
 
     </div>
     @{
         foreach (DutyNurse dutyNurse in Model.dutyNurses6)
         {
-            <div class="row border-bottom fw-bold">
-                <div class="col-5">@dutyNurse.name</div>
+            <div class="row border-bottom">
+                <div class="col-5 offset-1">@dutyNurse.name</div>
                 <div class="col-3">@dutyNurse.Phone</div>
             </div>
         }
     }
 </div>
-<div class="row text-center fw-weight-lighter">
+<div class="row fw-bold pt-2">
     <h4>Седьмое отделение</h4>
 </div>
 <div class="row">
-    <div class="row fw-weight-lighter">
-        <div class="col-5"> <h5>Дежурная медсестра</h5></div>
+    <div class="row">
+        <div class="col-5 offset-1"> <h5>Ф.И.О.</h5></div>
         <div class="col-3"><h5>Телефон</h5></div>
 
     </div>
     @{
         foreach (DutyNurse dutyNurse in Model.dutyNurses7)
         {
-            <div class="row border-bottom fw-bold">
-                <div class="col-5">@dutyNurse.name</div>
+            <div class="row border-bottom">
+                <div class="col-5 offset-1">@dutyNurse.name</div>
                 <div class="col-3">@dutyNurse.Phone</div>
             </div>
         }
     }
 </div>
-<div class="row text-center fw-weight-lighter">
+<div class="row fw-bold pt-2">
     <h4>ОРИТ</h4>
 </div>
 <div class="row">
     <div class="row fw-weight-lighter">
-        <div class="col-5"> <h5>Дежурная медсестра</h5></div>
+        <div class="col-5 offset-1"> <h5>Ф.И.О.</h5></div>
         <div class="col-3"><h5>Телефон</h5></div>
 
     </div>
     @{
         foreach (DutyNurse dutyNurse in Model.dutyNurses90)
         {
-            <div class="row border-bottom fw-bold">
-                <div class="col-5">@dutyNurse.name</div>
+            <div class="row border-bottom">
+                <div class="col-5 offset-1">@dutyNurse.name</div>
                 <div class="col-3">@dutyNurse.Phone</div>
             </div>
         }
     }
 </div>
 
+<div class="container d-print-none">
 <div class="row">
     <h2>Пожарная сводка</h2>
 </div>
@@ -169,3 +171,5 @@
         </div>
     }
 }
+    <button class="d-print-none mt-2 action-print">Печать</button>
+</div>
