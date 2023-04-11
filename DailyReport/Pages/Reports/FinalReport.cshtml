@@ -533,7 +533,7 @@
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
 
-                <tr class="table-secondary  border-transparent">
+                <tr class="table-secondary  border-transparent print-m-p-0">
                     <td class="fw-bold">Корь</td>
                      @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -704,34 +704,34 @@
                 </tr>
 
                 <tr class="border-transparent print-m-p-0">
-                    <td class="fw-bold">Обратившиеся в КДО</td>
-                    <td colspan="22"></td>
-                    <td class="text-center bg-secondary" id="kdo">@Model.depReport81.present</td>
-                    <td colspan="3" class="bg-transparent border-0"></td>
+                    <td class="fw-bold print-m-p-0">Обратившиеся в КДО</td>
+                    <td colspan="22" class="print-m-p-0"></td>
+                    <td class="text-center bg-light print-m-p-0" id="kdo">@Model.depReport81.present</td>
+                    <td colspan="3" class="bg-transparent border-0 print-m-p-0"></td>
                 </tr>
                 <tr class="border-transparent print-m-p-0">
-                    <td class="fw-bold">Платные услуги</td>
-                    <td colspan="22"></td>
-                    <td class="text-center bg-secondary" id="">@Model.depReport82.present</td>
-                    <td colspan="3" class="bg-transparent border-0"></td>
+                    <td class="fw-bold print-m-p-0">Платные услуги</td>
+                    <td colspan="22" class="print-m-p-0"></td>
+                    <td class="text-center bg-light print-m-p-0" id="">@Model.depReport82.present</td>
+                    <td colspan="3" class="bg-transparent print-m-p-0 border-0"></td>
                 </tr>
 
                 <tr class="border-transparent print-m-p-0">
-                    <td class="fw-bold">Отказ от госпитализации</td>
-                    <td colspan="20"></td>
-                    <td>@Model.reject</td>
+                    <td class="fw-bold print-m-p-0">Отказ от госпитализации</td>
+                    <td colspan="20" class="print-m-p-0"></td>
+                    <td  class="print-m-p-0">@Model.reject</td>
                     @*<input id="reject" oninput="CountReject()" type="number" name="reject" class="reject" value="0" />*@
-                    <td>@Model.rejectChildren </td>@*<input id="rejectChildren" oninput="CountReject()" type="number" name="rejectChildrens" class="reject" value="0"/>*@
-                    <td class="text-center" id="sumRej">@Model.sumReject</td>
-                    <td colspan="3" class="bg-transparent border-0"></td>
+                    <td class="print-m-p-0">@Model.rejectChildren </td>@*<input id="rejectChildren" oninput="CountReject()" type="number" name="rejectChildrens" class="reject" value="0"/>*@
+                    <td class="text-center print-m-p-0" id="sumRej">@Model.sumReject</td>
+                    <td colspan="3" class="bg-transparent border-0 print-m-p-0"></td>
                 </tr>
                 <tr class="border-transparent print-m-p-0">
                     <td class="fw-bold">На амбулаторное лечение</td>
                     <td colspan="20"></td>
-                    <td>@Model.ambulance </td>@*<input id="ambulance" oninput="CountReject()" type="number" name="existed" class="reject" value="0"/>*@
-                    <td>@Model.ambulanceChildren</td>@*<input id="ambulanceChildren" oninput="CountReject()" type="number" name="existedChildrens" class="reject" value="0"/>*@ 
-                    <td class="text-center" id="sumAmb">@Model.sumAmbulance</td>
-                    <td colspan="3" class="bg-transparent border-0"></td>
+                    <td class="print-m-p-0">@Model.ambulance </td>@*<input id="ambulance" oninput="CountReject()" type="number" name="existed" class="reject" value="0"/>*@
+                    <td class="print-m-p-0">@Model.ambulanceChildren</td>@*<input id="ambulanceChildren" oninput="CountReject()" type="number" name="existedChildrens" class="reject" value="0"/>*@ 
+                    <td class="text-center print-m-p-0" id="sumAmb">@Model.sumAmbulance</td>
+                    <td colspan="3" class="bg-transparent border-0 print-m-p-0"></td>
                 </tr>
                 <tr class="border-transparent pba-never print-m-p-0">
                     <td class="fw-bold">В другую МО</td>
