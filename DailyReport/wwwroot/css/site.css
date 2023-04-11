@@ -64,7 +64,7 @@ html {
 
     /*todo коррекция разрывов для печати*/
     .pt-corr {
-        height: 10rem !important;
+        height: 7rem !important;
         display: block !important;
     }
     .print-m-p-0 {
