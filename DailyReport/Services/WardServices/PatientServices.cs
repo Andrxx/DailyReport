@@ -12,7 +12,7 @@ namespace DailyReport.Services.WardServices
             Patient patient = new();
 
             patient.Id = id;
-            patient.WardNumber = random.Next(1, 4);
+            patient.WardNumber = random.Next(1, 5);
             patient.Name = "John Doe";
             patient.Male = booleanGenerator.NextBoolean() ? "М" : "Ж";
             patient.Age = random.Next(1, 80);
@@ -30,12 +30,10 @@ namespace DailyReport.Services.WardServices
         public class BooleanGenerator
         {
             Random rnd;
-
             public BooleanGenerator()
             {
                 rnd = new Random();
             }
-
             public bool NextBoolean()
             {
                 return rnd.Next(0, 2) == 1;
