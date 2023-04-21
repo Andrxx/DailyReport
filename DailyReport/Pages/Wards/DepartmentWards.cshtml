@@ -7,14 +7,25 @@
 @{
     foreach (Ward ward in Model.wards)
     {
+        @if(ward.IsDirtyZone){}
         <div class="row">
             Палата @ward.Number
         </div>
-        for(int i = 0; i < ward.Capacity; i++){
+
+        foreach(Patient patient in ward.PatientsInWard){
             <form method="post">
-                <div class="row">
+                <div class={@ward.CanPut ? 'ward-open row' : 'ward-close row' }>
                     <div class="col-3">
-                        
+                        @patient.Name
+                    </div>
+                    <div class="col-2">
+                        @patient.Age лет, @patient.AgeMonts мес
+                    </div>
+                    <div class="col-2">
+                        @patient.Diagnos
+                    </div>
+                    <div class="col-2">
+                        @patient.Male
                     </div>
                 </div> 
             </form>
