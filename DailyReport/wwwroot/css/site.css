@@ -102,3 +102,15 @@ th, td {
     height: 0rem;
     display: none;
 }
+.ward-open {
+    background-color: green !important
+}
+
+.ward-close {
+    background-color:red !important
+}
+
+.ward-dirty {
+    border:2px, solid;
+    border-color:orangered;
+}
