@@ -12,7 +12,7 @@ namespace DailyReport.Services.WardServices
             Patient patient = new();
 
             patient.Id = id;
-            patient.WardNumber = random.Next(1, 5);
+            //patient.WardNumber = random.Next(1, 5);
             patient.Name = "John Doe";
             patient.Male = booleanGenerator.NextBoolean() ? "М" : "Ж";
             patient.Age = random.Next(1, 80);

@@ -7,29 +7,74 @@
 @{
     foreach (Ward ward in Model.wards)
     {
-        @if(ward.IsDirtyZone){}
-        <div class="row">
-            Палата @ward.Number
-        </div>
+        string dirtyStyle = ward.IsDirtyZone ? "ward-dirty" : "";
+        int counter = ward.Capacity > ward.PatientsInWard.Count ? ward.Capacity : ward.PatientsInWard.Count;
+        <div class="container mt-1 @dirtyStyle">
+            <div class="row ward-header">
+                Палата @ward.Number
+                @{
+                    string style = ward.CanPut ? "ward-open" : "ward-close";
+                }
+            </div>
 
-        foreach(Patient patient in ward.PatientsInWard){
+            @for(int i = 0; i < counter; i++){
+                if (i < ward.PatientsInWard.Count)
+                {
+                    <form method="post">
+                        <div class="row @style">
+                            <div class="col-3">
+                                <input value="@ward.PatientsInWard[i].Name" type="text" name="name" class="" />
+                            </div>
+                            <div class="col-2">
+                                    <input value="@ward.PatientsInWard[i].Age лет" type="text" name="" class=""  />
+                            </div>
+                            <div class="col-2">
+                                <input value="@ward.PatientsInWard[i].Diagnos" type="text" name="" class="" />
+                            </div>
+                            <div class="col-3">
+                                @ward.PatientsInWard[i].Name
+                            </div>
+                        </div>
+                    </form>
+                }
+                else {
+                    <div class="row @style">
+                        <div class="col-3">
+                            <input value="" type="text" name="name" class="" placeholder="ФИО пациента" />
+                        </div>
+                        <div class="col-2">
+                            <input value="" type="text" name="" class="" placeholder="Возраст" />
+
+                        </div>
+                        <div class="col-2">
+                            <input value="" type="text" name="" class="" />
+                        </div>
+                        <div class="col-3">
+                            
+                        </div>
+                    </div>
+                }
+            }
+
+        @*foreach(Patient patient in ward.PatientsInWard){
             <form method="post">
-                <div class={@ward.CanPut ? 'ward-open row' : 'ward-close row' }>
+                <div class="row @style">
+                    <div class="col-3">
+                            <input value="@patient.Name" type="text" name="name" class=""  />
+                    </div>
+                    <div class="col-2">
+                            <input value="@patient.Age лет" type="text" name="" class=""  />
+                          
+                    </div>
+                    <div class="col-2">
+                            <input value="@patient.Diagnos" type="text" name="" class="" />
+                    </div>
                     <div class="col-3">
                         @patient.Name
                     </div>
-                    <div class="col-2">
-                        @patient.Age лет, @patient.AgeMonts мес
-                    </div>
-                    <div class="col-2">
-                        @patient.Diagnos
-                    </div>
-                    <div class="col-2">
-                        @patient.Male
-                    </div>
                 </div> 
             </form>
-        }
-        
+        }*@
+        </div>
     }
 }
