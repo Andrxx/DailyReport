@@ -160,24 +160,7 @@ namespace DailyReport.Services
             catch { }
             return nurses;
         }
-        public static List<Tuple<string, string>> GetNursesInfo(ApplicationContext context)
-        {
-            List<Personel> personels = new();
-            List<Tuple<string, string>> nurses = new();
-            try
-            {
-                personels = (from personel in context.Personels
-                             where (personel.PersType == "Медсестра")
-                             select personel).ToList();
-            }
-            catch { }
-            foreach (Personel p in personels)
-            {
-                if (p.Phone == null) p.Phone = "";
-                nurses.Add(new Tuple<string, string>(p.Name, p.Phone));
-            }
-            return nurses;
-        }
+       
 
         public static void AddDutyNurse(DutyNurse nurse, ApplicationContext context)
         {

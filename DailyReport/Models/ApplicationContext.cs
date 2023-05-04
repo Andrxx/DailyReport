@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using DailyReport.Models;
+using DailyReport.Models.WardsModels;
 
 namespace DailyReport.Models
 {
@@ -20,12 +21,11 @@ namespace DailyReport.Models
         public DbSet<Department> Departments { get; set; } = null!;
         public DbSet<DutyNurse> DutyNurses { get; set; } = null!;
         public DbSet<FireReport> FireReports { get; set; } = null!;
+        public DbSet<Ward> Wards { get; set; } = null!;
+        public DbSet<Patient> Patients  { get; set; } = null!;
 
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //    => options.UseSqlite(@"Data Source=departmentsdb.db");
-
-
-
 
     }
 }
