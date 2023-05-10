@@ -58,8 +58,8 @@ namespace DailyReport.Services.WardServices
         {
             Ward ward = new Ward();
             ward = (from w in context.Wards
-                     where ward.Id == id
-                     select ward).FirstOrDefault();
+                     where w.Id == id
+                     select w).FirstOrDefault();
             return ward;
         }
 
@@ -77,6 +77,17 @@ namespace DailyReport.Services.WardServices
                 newWard.IsDirtyZone = ward.IsDirtyZone;
                 newWard.CanPut = ward.CanPut;
                 newWard.Number = ward.Number;
+                context.SaveChanges();
+            }
+        }
+
+        public static void DeleteWard(ApplicationContext context, int id)
+        {
+
+            Ward ward = GetWardById(context, id);
+            if (ward != null)
+            {
+                context.Wards.Remove(ward);
                 context.SaveChanges();
             }
         }

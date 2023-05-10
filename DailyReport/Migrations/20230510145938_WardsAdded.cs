@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DailyReport.Migrations
 {
     /// <inheritdoc />
-    public partial class WardPatientAdded : Migration
+    public partial class WardsAdded : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,6 +17,7 @@ namespace DailyReport.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Department = table.Column<int>(type: "INTEGER", nullable: false),
                     WardNumber = table.Column<string>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Male = table.Column<string>(type: "TEXT", nullable: false),
