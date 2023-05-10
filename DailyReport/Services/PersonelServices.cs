@@ -16,6 +16,10 @@ namespace DailyReport.Services
             return PType;
         }
 
+        /// <summary>
+        /// получаем список отделений - фиксированный список из кода
+        /// </summary>
+        /// <returns></returns>
         public static List<string> GetDepartment()
         {
             List<string> Department = new();

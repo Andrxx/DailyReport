@@ -2,20 +2,43 @@
 @using DailyReport.Models.WardsModels
 @model DailyReport.Pages.Wards.DepartmentWardsModel
 @{
+    ViewData["Title"] = "Управление палатами";
 }
 
 @{
     foreach (Ward ward in Model.wards)
     {
         string dirtyStyle = ward.IsDirtyZone ? "ward-dirty" : "";
+       
         int counter = ward.Capacity > ward.PatientsInWard.Count ? ward.Capacity : ward.PatientsInWard.Count;
         <div class="container mt-1 @dirtyStyle">
-            <div class="row ward-header">
-                Палата @ward.Number
-                @{
-                    string style = ward.CanPut ? "ward-open" : "ward-close";
-                }
+            @{
+                string style = ward.CanPut ? "ward-open" : "ward-close";
+            }
+        <form method="post">   
+            <div class="row ward-header"> 
+                <div class="col-2">
+                    Палата @ward.Number
+                </div>
+                <div class="form-check form-switch col-2">
+                    <input class="form-check-input" type="checkbox" asp-for="@ward.IsDirtyZone" >
+                    <label class="form-check-label" for="">Грязная зона</label>
+                </div>
+                    <div class="form-check form-switch col-2">
+                        <input class="form-check-input" value="@ward.CanPut" type="checkbox" asp-for="@ward.CanPut">
+                        <label class="form-check-label" for="">Палата открыта</label>
+                    </div>
+                <div class ="d-none col-1">
+                    <input type="text" value="@ward.Number" asp-for="@ward.Number" />
+                    <input  type="number" value="@ward.Capacity" asp-for="@ward.Capacity" />
+                    <input type="number" value="@ward.Department" asp-for="@ward.Department" />
+                    <input type="number" value="@ward.Id" asp-for="@ward.Id" />
+                </div>
+                    <div class="col-1">
+                        <input type="submit" value="&#9998" asp-page-handler="UpdateWard" />
+                    </div>
             </div>
+        </form>
 
             @for(int i = 0; i < counter; i++){
                 if (i < ward.PatientsInWard.Count)
@@ -38,43 +61,21 @@
                     </form>
                 }
                 else {
-                    <div class="row @style">
-                        <div class="col-3">
-                            <input value="" type="text" name="name" class="" placeholder="ФИО пациента" />
+                    <form method="post">
+                        <div class="row @style">
+                            <div class="col-2">
+                                <input type="text" placeholder="ФИО пациента" asp-for="@Model.newPatient.Name" />
+                            </div>
+                            <div class="col-1">
+                                <input type="number" placeholder="Лет" asp-for="@Model.newPatient.Age" />
+                            </div>
+                            <div class="col-1">
+                                <input type="number" placeholder="Мес" asp-for="@Model.newPatient.AgeMonts" />
+                            </div>
                         </div>
-                        <div class="col-2">
-                            <input value="" type="text" name="" class="" placeholder="Возраст" />
-
-                        </div>
-                        <div class="col-2">
-                            <input value="" type="text" name="" class="" />
-                        </div>
-                        <div class="col-3">
-                            
-                        </div>
-                    </div>
+                    </form>
                 }
-            }
-
-        @*foreach(Patient patient in ward.PatientsInWard){
-            <form method="post">
-                <div class="row @style">
-                    <div class="col-3">
-                            <input value="@patient.Name" type="text" name="name" class=""  />
-                    </div>
-                    <div class="col-2">
-                            <input value="@patient.Age лет" type="text" name="" class=""  />
-                          
-                    </div>
-                    <div class="col-2">
-                            <input value="@patient.Diagnos" type="text" name="" class="" />
-                    </div>
-                    <div class="col-3">
-                        @patient.Name
-                    </div>
-                </div> 
-            </form>
-        }*@
+            }      
         </div>
     }
 }

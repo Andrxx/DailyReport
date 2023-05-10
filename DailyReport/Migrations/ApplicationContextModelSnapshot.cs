@@ -700,6 +700,9 @@ namespace DailyReport.Migrations
                     b.Property<int?>("AgeMonts")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Department")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Diagnos")
                         .IsRequired()
                         .HasColumnType("TEXT");
