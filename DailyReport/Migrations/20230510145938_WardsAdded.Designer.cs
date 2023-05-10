@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DailyReport.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230503005423_WardPatientAdded")]
-    partial class WardPatientAdded
+    [Migration("20230510145938_WardsAdded")]
+    partial class WardsAdded
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -701,6 +701,9 @@ namespace DailyReport.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("AgeMonts")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Department")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Diagnos")

@@ -37,3 +37,7 @@ function CountReject() {
 	let sumAll = sumAdults + sumChild;
 	$("#sumAll").html(sumAll);
 }
+
+//function sbmt() {
+//	this.submit();
+//}
