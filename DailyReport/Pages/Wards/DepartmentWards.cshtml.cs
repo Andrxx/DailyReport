@@ -9,10 +9,14 @@ namespace DailyReport.Pages.Wards
     public class DepartmentWardsModel : PageModel
     {
         ApplicationContext context;
-        public List<Ward> wards = new();
+        [BindProperty]
+        public Ward ward { get; set; }
+        [BindProperty]
+        public List<Ward> wards { get; set; } = new();
         [BindProperty]
         public Patient newPatient { get; set; } = new();
-        public List<Patient> patients = new();
+        [BindProperty]
+        public List<Patient> patients { get; set; } = new();
         public DepartmentWardsModel(ApplicationContext db)
         {
             context = db;
@@ -39,6 +43,9 @@ namespace DailyReport.Pages.Wards
             //patients.Add(PatientServices.CreateTestPatient(10, false, false, false, false));
             //patients.Add(PatientServices.CreateTestPatient(11, false, false, false, false));
 
+
+            patients = PatientServices.GetPatientsByDepartment(context, depNumber);
+
             //добавление пациентов в палаты, сохраняем в неотслеживаемое в БД поле
             foreach (Ward ward in wards)
             {
@@ -48,7 +55,7 @@ namespace DailyReport.Pages.Wards
                 }
             }
 
-            //определяем доступность палаты в соответствии со статусом пациента
+            ////определяем доступность палаты в соответствии со статусом пациента
             foreach (Ward ward in wards)
             {
                 foreach (Patient patient in ward.PatientsInWard)
@@ -58,7 +65,7 @@ namespace DailyReport.Pages.Wards
             }
         }
 
-        public IActionResult OnPostUpdateWard(Ward ward)
+        public IActionResult OnPostUpdateWard()
         {
             //TODO - приходит ошибка формы, почему?
             //if (!ModelState.IsValid)
@@ -69,15 +76,38 @@ namespace DailyReport.Pages.Wards
             return RedirectToPage("DepartmentWards", new { depNumber = ward.Department });
         }
 
-        public IActionResult OnPostAddPatient(Patient patient)
+        public IActionResult OnPostAddPatient()
         {
             if (!ModelState.IsValid)
-            {
-                return RedirectToPage("DepartmentWards", new { depNumber = patient.Department });
-            }
-            PatientServices.AddPatient(context, patient);
+            //{
+            //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
+            //}
+            PatientServices.AddPatient(context, newPatient);
 
-            return RedirectToPage("DepartmentWards", new { depNumber = patient.Department });
+            return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
+        }
+
+        public IActionResult OnPostUpdatePatient()
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
+            //}
+
+            PatientServices.UpdatePatient(context, newPatient);
+
+            return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
+        }
+
+        public IActionResult OnPostDeletePatient()
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
+            //}
+            PatientServices.DeletePatient(context, newPatient.Id);
+
+            return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
         }
     }
 }
