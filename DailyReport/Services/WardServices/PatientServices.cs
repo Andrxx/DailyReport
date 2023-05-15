@@ -64,24 +64,24 @@ namespace DailyReport.Services.WardServices
         /// Обновляем пациента
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="patient"></param>
-        public static void UpdatePatient(ApplicationContext context, Patient patient)
+        /// <param name="newPatient"></param>
+        public static void UpdatePatient(ApplicationContext context, Patient newPatient)
         {
-            Patient newPatient = GetPatientsById(context, patient.Id);
-            if(newPatient != null)
+            Patient patient = GetPatientsById(context, newPatient.Id);
+            if(patient != null)
             {
-                newPatient.HospitalisationDate = patient.HospitalisationDate;
-                newPatient.Name = patient.Name;
-                newPatient.WardNumber = patient.WardNumber;
-                newPatient.Department = patient.Department;
-                newPatient.Diagnos = patient.Diagnos;
-                newPatient.IsDisodered = patient.IsDisodered;
-                newPatient.HasCareRisk = patient.HasCareRisk;
-                newPatient.HasRash = patient.HasRash;
-                newPatient.IsUntochable = patient.IsUntochable;
-                newPatient.Age = patient.Age;
-                newPatient.AgeMonts = patient.AgeMonts;
-                newPatient.Male = patient.Male;
+                patient.HospitalisationDate = newPatient.HospitalisationDate;
+                patient.Name = newPatient.Name;
+                patient.WardNumber = newPatient.WardNumber;
+                patient.Department = newPatient.Department;
+                patient.Diagnos = newPatient.Diagnos;
+                patient.IsDisodered = newPatient.IsDisodered;
+                patient.HasCareRisk = newPatient.HasCareRisk;
+                patient.HasRash = newPatient.HasRash;
+                patient.IsUntochable = newPatient.IsUntochable;
+                patient.Age = newPatient.Age;
+                patient.AgeMonts = newPatient.AgeMonts;
+                patient.Male = newPatient.Male;
                 context.SaveChanges();
             }
             

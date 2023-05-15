@@ -92,6 +92,10 @@ th, td {
 .reject {
     max-width: 50px;
 }
+.m-width-100 {
+    max-width: 100px;
+}
+
 
 .border-transparent {
     border: 0px;
@@ -116,5 +120,5 @@ th, td {
 }
 
 .ward-dirty {
-    border: 3px double #031fff; 
+    border: 3px solid black; 
 }
