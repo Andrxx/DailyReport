@@ -36,6 +36,22 @@ namespace DailyReport.Services.WardServices
         }
 
         /// <summary>
+        /// Получаем список пацинтов по номеру отделения и палаты
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="depNumber"></param>
+        /// <param name="wardNumber"></param>
+        /// <returns></returns>
+        public static List<Patient> GetPatientsByDepartmentAndWard(ApplicationContext context, int depNumber, string wardNumber)
+        {
+            List<Patient> patients = new List<Patient>();
+            patients = (from p in context.Patients
+                        where p.Department == depNumber && p.WardNumber == wardNumber
+                        select p).ToList();
+            return patients;
+        }
+
+        /// <summary>
         /// Выбор пациента по ИД
         /// </summary>
         /// <param name="context"></param>
@@ -81,6 +97,7 @@ namespace DailyReport.Services.WardServices
                 patient.IsUntochable = newPatient.IsUntochable;
                 patient.Age = newPatient.Age;
                 patient.AgeMonts = newPatient.AgeMonts;
+                patient.sAge = newPatient.sAge;
                 patient.Male = newPatient.Male;
                 context.SaveChanges();
             }

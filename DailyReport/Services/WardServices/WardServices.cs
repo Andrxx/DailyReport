@@ -34,7 +34,7 @@ namespace DailyReport.Services.WardServices
         }
 
         /// <summary>
-        /// получаем палаты для заданного отделения и сортируем по имени палаты
+        /// получаем палаты для заданного отделения и сортируем по имени палаты, сортировка по номеру
         /// </summary>
         /// <param name="context"></param>
         /// <param name="depNumber"></param>
@@ -44,7 +44,7 @@ namespace DailyReport.Services.WardServices
             List<Ward> wards = new List<Ward>();
             wards = (from ward in context.Wards
                      where ward.Department == depNumber
-                     orderby ward.Number, ward.Number.Substring(0, 1)
+                     //orderby ward.Number /* ward.Number.Substring(0, 1)*/
                      select ward).ToList();
             return wards;
         }

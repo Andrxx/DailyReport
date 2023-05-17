@@ -1,0 +1,53 @@
+﻿@page
+@using DailyReport.Models.WardsModels
+@model DailyReport.Pages.Admin.PatientsListModel
+@{
+}
+
+@{
+    foreach (Patient patient in Model.patients){
+
+    <form method="post">
+        
+        <div class="row">
+            <div class="col-2">
+                    @patient.Department :
+                    @patient.Name
+            </div>
+            <div class="col-2">
+                    @patient.sAge :
+                    @patient.Age :
+                    @patient.AgeMonts
+
+            </div>
+            @*<div class="col-1">
+        <input class="m-width-100" type="number" value="@ward.PatientsInWard[i].Age" placeholder="Лет" asp-for="@Model.newPatient.Age" />
+        </div>
+        <div class="col-1">
+        <input class="m-width-100" type="number" value="@ward.PatientsInWard[i].AgeMonts" placeholder="Мес" asp-for="@Model.newPatient.AgeMonts" />
+        </div>*@
+            <div class="col-1">
+                    @patient.Male
+            </div>
+            <div class="col-1">
+                    @patient.Diagnos
+            </div>
+            <div class="col-1 ">
+                    @patient.HospitalisationDate.ToString("dd.MM.yy")
+            </div>
+            <div class="col-1 ">
+                @patient.HasRash
+            </div>
+            <div class="col-1">
+                    @patient.HasCareRisk
+            </div>
+            <div class="col-1">
+                @patient.IsUntochable
+            </div>
+            <div class="col-1 ">
+                <input type="submit" value="&#128465" asp-page-handler="DeletePatient" asp-route-id="@patient.Id"/>
+            </div>
+        </div>
+    </form>
+    }
+}
