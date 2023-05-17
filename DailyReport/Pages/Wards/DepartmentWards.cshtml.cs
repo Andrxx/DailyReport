@@ -17,12 +17,14 @@ namespace DailyReport.Pages.Wards
         public Patient newPatient { get; set; } = new();
         [BindProperty]
         public List<Patient> patients { get; set; } = new();
+        public int departmentNumber;
         public DepartmentWardsModel(ApplicationContext db)
         {
             context = db;
         }
         public void OnGet(int depNumber)
         {
+            departmentNumber = depNumber;
             wards = WardServices.GetWardsByDepartment(context, depNumber);
 
 
@@ -78,12 +80,11 @@ namespace DailyReport.Pages.Wards
 
         public IActionResult OnPostAddPatient()
         {
-            if (!ModelState.IsValid)
+            //if (!ModelState.IsValid)
             //{
             //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
             //}
             PatientServices.AddPatient(context, newPatient);
-
             return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
         }
 
@@ -93,9 +94,7 @@ namespace DailyReport.Pages.Wards
             //{
             //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
             //}
-
             PatientServices.UpdatePatient(context, newPatient);
-
             return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
         }
 
