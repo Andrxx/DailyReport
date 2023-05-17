@@ -1,46 +1,5 @@
 ﻿@page
-@using DailyReport.Models
-@using DailyReport.Models.WardsModels
 @model DailyReport.Pages.Wards.WardsSummaryModel
 @{
-    ViewData["Title"] = "Места по стационару";
+    ViewData["Title"] = "Места";
 }
-
-<h3>Места в стационаре</h3>
-
-
-@{
-    foreach(Department dep in Model.departments){
-        <div class="row pb-2 ward-header">@dep.ToDepName()</div>
-        <div class="row">
-            @foreach(Ward ward in dep.Wards)
-            {
-            string style = ward.CanPut ? "ward-open" : "ward-close";
-            int counter = ward.Capacity > ward.PatientsInWard.Count ? ward.Capacity : ward.PatientsInWard.Count;
-                for (int i = 0; i < counter; i++)
-                {
-                    if (i < ward.PatientsInWard.Count){
-                        <div class="row @style">
-                            <div class="col-2">
-                                <input type="text" value="@ward.PatientsInWard[i].Name" asp-for="@Model.newPatient.Name" required />
-                            </div>
-                            <div class="col-2">
-                                <input type="text" value="@ward.PatientsInWard[i].sAge" asp-for="@Model.newPatient.sAge" required />
-                            </div>
-                            <div class="col-1">
-                                <input class="m-width-100" type="text" value="@ward.PatientsInWard[i].Male" placeholder="Пол" asp-for="@Model.newPatient.Male" required />
-                            </div>
-                            <div class="col-1">
-                                <input class="m-width-100" type="text" value="@ward.PatientsInWard[i].Diagnos" placeholder="Диагноз" asp-for="@Model.newPatient.Diagnos" required />
-                            </div>
-                            <div class="col-1 ">
-                                @ward.PatientsInWard[i].HospitalisationDate.ToString("dd.MM.yy")
-                            </div>
-                        </div>
-                    }
-                }
-            }
-        </div>
-    }
-}
-    

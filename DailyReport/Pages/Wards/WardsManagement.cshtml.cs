@@ -38,9 +38,13 @@ namespace DailyReport.Pages.Wards
             return RedirectToPage("WardsManagement", new { depNumber = ward.Department });
         }
 
-        public IActionResult OnPostDeleteWard(int id, int depNumber)
+        public IActionResult OnPostDeleteWard(Ward ward, int depNumber)
         {
-            WardServices.DeleteWard(context, id);
+            //todo - если в палате есть пациент, палата не удаляется. Сделать оповещение пользователя 
+            if (PatientServices.GetPatientsByDepartmentAndWard(context, ward.Department, ward.Number).Count == 0)
+            {
+                WardServices.DeleteWard(context, ward.Id); 
+            }
             return RedirectToPage("WardsManagement", new { depNumber });
         }
 
