@@ -91,5 +91,39 @@ namespace DailyReport.Services.WardServices
                 context.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// возвращет список номеров отделений, захардкоженный метод из сервиса
+        /// </summary>
+        /// <returns></returns>
+        public static List<int> GetDepNmbers()
+        {
+            List<int> numbers = new List<int>();
+            numbers.Add(1);
+            numbers.Add(3);
+            numbers.Add(4);
+            numbers.Add(5);
+            numbers.Add(6);
+            numbers.Add(7);
+
+            return numbers;
+        }
+
+        /// <summary>
+        /// возвращет список имен отделений, захардкоженный метод из сервиса
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> GetDepNmbersNames()
+        {
+            List<string> names = new List<string>();
+            names.Add("Первое отделение");
+            names.Add("Третье отделение");
+            names.Add("Четвертое отделение");
+            names.Add("Пятое отделение");
+            names.Add("Шестое отделение");
+            names.Add("Седьмое отделение");
+
+            return names;
+        }
     }
 }
