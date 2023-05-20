@@ -97,7 +97,7 @@
                                 <input class="m-width-100" type="text" value="@ward.PatientsInWard[i].Diagnos" placeholder="Диагноз" asp-for="@Model.newPatient.Diagnos" required />
                                 </div>
                                 <div class="col-1 ">
-                                    <input type="datetime" class="d-none" value="@ward.PatientsInWard[i].HospitalisationDate" asp-for="@Model.newPatient.HospitalisationDate" />
+                                <input type="date" class="d-none" value="@ward.PatientsInWard[i].HospitalisationDate" asp-for="@Model.newPatient.HospitalisationDate" />
                                     @ward.PatientsInWard[i].HospitalisationDate.ToString("dd.MM.yy")
                                 </div>
                                 
@@ -167,7 +167,7 @@
                                 <input class="m-width-100" type="text" placeholder="Диагноз" asp-for="@Model.newPatient.Diagnos" required/>
                                 </div>
                                 <div class="col-1 ">
-                                <input type="datetime" class="m-width-100" value="@DateTime.Now.ToString("dd.MM.yy")" asp-for="@Model.newPatient.HospitalisationDate"/>
+                                <input type="date" class="m-width-100" value="@DateTime.Now.ToString("dd.MM.yy")" asp-for="@Model.newPatient.HospitalisationDate"/>
                                 </div>
                                 <div class="col-1">
                                     <input  type="checkbox" asp-for="@Model.newPatient.HasRash">
