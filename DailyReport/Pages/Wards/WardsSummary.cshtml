@@ -1,4 +1,6 @@
 ﻿@page
+@using DailyReport.Models
+@using DailyReport.Models.WardsModels
 @model DailyReport.Pages.Wards.WardsSummaryModel
 @{
     ViewData["Title"] = "Места по стационару";
@@ -6,9 +8,23 @@
 
 <h3>Места в стационаре</h3>
 
-<div class="row">
 
-    <div class=""></div>
+@{
+    foreach(Department dep in Model.departments){
+        <div class="row pb-2 ward-header">@dep.ToDepName()</div>
+        <div class="row">
+            @foreach(Ward ward in dep.Wards)
+            {
+            string style = ward.CanPut ? "ward-open" : "ward-close";
+            int counter = ward.Capacity > ward.PatientsInWard.Count ? ward.Capacity : ward.PatientsInWard.Count;
+                for (int i = 0; i < counter; i++)
+                {
+                    if (i < ward.PatientsInWard.Count){
 
-
-</div>
+                    }
+                }
+            }
+        </div>
+    }
+}
+    
