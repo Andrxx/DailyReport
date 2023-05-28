@@ -34,11 +34,18 @@ namespace DailyReport.Services
             }
         }
 
-        //public static List<string> GetDepNumber(ApplicationContext context)
-        //{
-        //    List<string> depNumbers = new List<string>();
-
-        //}
-
+        /// <summary>
+        /// Получаем список отделений без ОРИТ, дневного стационара и грязной зоны 1 отд, сортировка по номеру отделения
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static List<Department> GetWDepartments(ApplicationContext context)
+        {
+            List<Department> departments = (from d in context.Departments
+                                            where (d.Number != 90 & d.Number != 91 && d.Number != 8 & d.Number != 11)
+                                            orderby d.Number
+                                            select d).ToList();
+            return departments;
+        }
     }
 }
