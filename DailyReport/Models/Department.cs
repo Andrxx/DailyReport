@@ -1,4 +1,7 @@
-﻿namespace DailyReport.Models
+﻿using DailyReport.Models.WardsModels;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DailyReport.Models
 {
     public class Department
     {
@@ -8,6 +11,10 @@
         public int AdultSpotsQuantity { get; set; }
         public int ChildrenSpotsQuantity { get; set; }
 
+        [NotMapped]
+        public List<Ward>? Wards { get; set; } = new();
+        
+        
         public string ToDepName()
         {
             string name;
