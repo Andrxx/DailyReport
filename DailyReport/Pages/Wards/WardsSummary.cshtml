@@ -20,7 +20,23 @@
                 for (int i = 0; i < counter; i++)
                 {
                     if (i < ward.PatientsInWard.Count){
-
+                        <div class="row @style">
+                            <div class="col-2">
+                                <input type="text" value="@ward.PatientsInWard[i].Name" asp-for="@Model.newPatient.Name" required />
+                            </div>
+                            <div class="col-2">
+                                <input type="text" value="@ward.PatientsInWard[i].sAge" asp-for="@Model.newPatient.sAge" required />
+                            </div>
+                            <div class="col-1">
+                                <input class="m-width-100" type="text" value="@ward.PatientsInWard[i].Male" placeholder="Пол" asp-for="@Model.newPatient.Male" required />
+                            </div>
+                            <div class="col-1">
+                                <input class="m-width-100" type="text" value="@ward.PatientsInWard[i].Diagnos" placeholder="Диагноз" asp-for="@Model.newPatient.Diagnos" required />
+                            </div>
+                            <div class="col-1 ">
+                                @ward.PatientsInWard[i].HospitalisationDate.ToString("dd.MM.yy")
+                            </div>
+                        </div>
                     }
                 }
             }

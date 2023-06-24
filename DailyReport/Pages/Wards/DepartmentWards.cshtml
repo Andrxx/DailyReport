@@ -16,7 +16,14 @@
         int counter = ward.Capacity > ward.PatientsInWard.Count ? ward.Capacity : ward.PatientsInWard.Count;
         <div class="container mt-1 @dirtyStyle">
             @{
-                string style = ward.CanPut ? "ward-open" : "ward-close";
+                string style = "ward-open";
+                if(ward.CanPut){
+                    if(ward.PatientsInWard.Count >= ward.Capacity) style = "ward-full";
+                }
+                else
+                {
+                    style = "ward-close";
+                }
             }
             <form method="post">   
                 <div class="row ward-header">

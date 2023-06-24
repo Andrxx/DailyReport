@@ -44,7 +44,7 @@ namespace DailyReport.Services.WardServices
             List<Ward> wards = new List<Ward>();
             wards = (from ward in context.Wards
                      where ward.Department == depNumber
-                     //orderby ward.Number /* ward.Number.Substring(0, 1)*/
+                     orderby ward.Number.Length, ward.Number
                      select ward).ToList();
             return wards;
         }
@@ -63,12 +63,22 @@ namespace DailyReport.Services.WardServices
             return ward;
         }
 
+        /// <summary>
+        /// добавляем палату
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="ward"></param>
         public static void AddWard(ApplicationContext context, Ward ward)
         {
             context.Wards.Add(ward);
             context.SaveChanges();
         }
 
+        /// <summary>
+        /// обновление палаты
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="ward"></param>
         public static void UpdateWard(ApplicationContext context, Ward ward)
         {
             Ward newWard = GetWardById(context, ward.Id);
@@ -113,7 +123,7 @@ namespace DailyReport.Services.WardServices
         /// возвращет список имен отделений, захардкоженный метод из сервиса
         /// </summary>
         /// <returns></returns>
-        public static List<string> GetDepNmbersNames()
+        public static List<string> GetDepNumbersNames()
         {
             List<string> names = new List<string>();
             names.Add("Первое отделение");
