@@ -22,9 +22,7 @@ namespace DailyReport.Pages.Wards
         public void OnGet(int depNumber)
         {
             departmentNumber = depNumber;
-            Wards = (from ward in context.Wards
-                     where ward.Department == depNumber
-                     select ward).ToList();
+            Wards = WardServices.GetWardsByDepartment(context, depNumber);
         }
 
         public IActionResult OnPostAddWard(Ward ward)
