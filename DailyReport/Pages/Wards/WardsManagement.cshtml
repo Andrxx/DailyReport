@@ -55,13 +55,13 @@
     </div>
     <div class="row">
         <div class="col-2">
-            <input type="text" placeholder="Номер палаты" asp-for="Ward.Number"/>
+            <input type="text" placeholder="Номер палаты" asp-for="Ward.Number" required/>
         </div>
         <div class="col-2">
-            <input type="number" asp-for="Ward.Capacity"/>
+            <input type="number" asp-for="Ward.Capacity" required />
         </div>
         <div class="col-1 d-none">
-            <input type="number" value="@Model.departmentNumber" asp-for="Ward.Department"/>
+            <input type="number" value="@Model.departmentNumber" asp-for="Ward.Department" />
         </div>
         <div class="col-1">
             <input type="submit" value="+" asp-page-handler="AddWard" />
