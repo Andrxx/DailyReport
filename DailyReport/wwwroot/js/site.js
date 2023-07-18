@@ -38,6 +38,38 @@ function CountReject() {
 	$("#sumAll").html(sumAll);
 }
 
-//function sbmt() {
-//	this.submit();
-//}
+function submitWard(event) {
+	event.preventDefault();
+	var dep = event.target.elements.ward_Department.value;	
+	var data = event.target.elements;
+	alert(data);
+	let response = fetch('/Wards/DepartmentWards?depNumber=' + dep, {
+		// Default options are marked with *
+		method: 'POST', // *GET, POST, PUT, DELETE, etc.
+		mode: 'cors', // no-cors, *cors, same-origin
+		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+		credentials: 'same-origin', // include, *same-origin, omit
+		headers: {
+			'Content-Type': 'application/json'
+			// 'Content-Type': 'application/x-www-form-urlencoded',
+		},
+		redirect: 'follow', // manual, *follow, error
+		referrerPolicy: 'no-referrer', // no-referrer, *client
+		//body: JSON.stringify(data) // body data type must match "Content-Type" header
+	});
+
+	//
+	//alert(response);
+	if (response.ok) { // если HTTP-статус в диапазоне 200-299 id - ward_Department  name  - ward.Department
+		alert("OK");
+
+	} else {
+		alert("Ошибка HTTP: " + response.status);
+	}
+
+	//setTimeout("event.target.scrollIntoView(true)", 1000);
+	//event.preventDefault();
+	//var log = event.target.serialize();
+	//console.log(event.target);		event.target.scrollIntoView(true);
+	//alert(event.target[0]);
+}
