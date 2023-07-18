@@ -25,7 +25,7 @@
                     style = "ward-close";
                 }
             }
-            <form method="post">   
+            <form method="post" onsubmit=submitWard(event)>
                 <div class="row ward-header">
                     <div class="col-2">
                         Палата @ward.Number
@@ -48,42 +48,43 @@
                         <input type="submit" value="&#9998" asp-page-handler="UpdateWard" />
                     </div>
                 </div>
-                <div class="row ward-header">
-                                        <div class="col-2">
-                                            ФИО пациента
-                                        </div>
-                                        <div class="col-2">
-                                            Возраст пациента
-                                        </div>
-                                        <div class="col-1">
-                                            Пол
-                                        </div>
-                                        <div class="col-1">
-                                            Диагноз
-                                        </div>
-                                        <div class="col-1">
-                                            Дата
-                                        </div>
-                                        <div class="col-1">
-                                            Сыпь
-                                        </div>
-                                        <div class="col-1">
-                                            Риск ВБИ
-                                        </div>
-                                        <div class="col-2">
-                                            <h7>От главного</h7>
-                                        </div>
-                </div>
             </form>
+
+            <div class="row ward-header">
+                <div class="col-2">
+                    ФИО пациента
+                </div>
+                <div class="col-2">
+                    Возраст пациента
+                </div>
+                <div class="col-1">
+                    Пол
+                </div>
+                <div class="col-1">
+                    Диагноз
+                </div>
+                <div class="col-1">
+                    Дата
+                </div>
+                <div class="col-1">
+                    Сыпь
+                </div>
+                <div class="col-1">
+                    Риск ВБИ
+                </div>
+                <div class="col-2">
+                    <h7>От главного</h7>
+                </div>
+            </div>
                                 
                 @for(int i = 0; i < counter; i++){
                 if (i < ward.PatientsInWard.Count)
                 {
-                    <form method="post">
+                    <form method="post" onsubmit=submitWard(event)>
                         <input class="d-none" type="number" value="@ward.PatientsInWard[i].Department" asp-for="@Model.newPatient.Department" />
                         <input class="d-none" type="text" value="@ward.PatientsInWard[i].WardNumber" asp-for="@Model.newPatient.WardNumber" />
                         <input class="d-none" type="number" value="@ward.PatientsInWard[i].Id" asp-for="@Model.newPatient.Id" />
-                            <div class="row @style">
+                            <div class="row @style" draggable="true">
                                 <div class="col-2">
                                     <input type="text" value="@ward.PatientsInWard[i].Name" asp-for="@Model.newPatient.Name" required />
                                 </div>
