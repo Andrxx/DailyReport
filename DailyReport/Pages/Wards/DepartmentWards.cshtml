@@ -14,7 +14,7 @@
     {
         string dirtyStyle = ward.IsDirtyZone ? "ward-dirty" : "";
         int counter = ward.Capacity > ward.PatientsInWard.Count ? ward.Capacity : ward.PatientsInWard.Count;
-        <div class="container mt-1 @dirtyStyle">
+        <div class="container mt-1 @dirtyStyle" >
             @{
                 string style = "ward-open";
                 if(ward.CanPut){
@@ -80,11 +80,11 @@
                 @for(int i = 0; i < counter; i++){
                 if (i < ward.PatientsInWard.Count)
                 {
-                    <form method="post" onsubmit=submitWard(event)>
+                    <form method="post" >
                         <input class="d-none" type="number" value="@ward.PatientsInWard[i].Department" asp-for="@Model.newPatient.Department" />
                         <input class="d-none" type="text" value="@ward.PatientsInWard[i].WardNumber" asp-for="@Model.newPatient.WardNumber" />
                         <input class="d-none" type="number" value="@ward.PatientsInWard[i].Id" asp-for="@Model.newPatient.Id" />
-                            <div class="row @style" draggable="true">
+                            <div class="row patient @style" draggable="true">
                                 <div class="col-2">
                                     <input type="text" value="@ward.PatientsInWard[i].Name" asp-for="@Model.newPatient.Name" required />
                                 </div>
@@ -154,7 +154,7 @@
                     <form method="post">
                         <input class="d-none" type="number" value="@ward.Department" asp-for="@Model.newPatient.Department"/>
                         <input class="d-none" type="text" value="@ward.Number" asp-for="@Model.newPatient.WardNumber" />
-                            <div class="row @style">
+                        <div class="row patient @style">
                                 <div class="col-2">
                                     <input  type="text" asp-for="@Model.newPatient.Name" required/>
                                 </div>

@@ -60,6 +60,10 @@ namespace DailyReport.Services.WardServices
             ward = (from w in context.Wards
                      where w.Id == id
                      select w).FirstOrDefault();
+            if (ward == null)
+            {
+                ward = new Ward();
+            }
             return ward;
         }
 
