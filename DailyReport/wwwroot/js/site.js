@@ -37,39 +37,72 @@ function CountReject() {
 	let sumAll = sumAdults + sumChild;
 	$("#sumAll").html(sumAll);
 }
-
 function submitWard(event) {
 	event.preventDefault();
 	var dep = event.target.elements.ward_Department.value;	
-	var data = event.target.elements;
-	alert(data);
-	let response = fetch('/Wards/DepartmentWards?depNumber=' + dep, {
-		// Default options are marked with *
-		method: 'POST', // *GET, POST, PUT, DELETE, etc.
-		mode: 'cors', // no-cors, *cors, same-origin
-		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-		credentials: 'same-origin', // include, *same-origin, omit
-		headers: {
-			'Content-Type': 'application/json'
-			// 'Content-Type': 'application/x-www-form-urlencoded',
-		},
-		redirect: 'follow', // manual, *follow, error
-		referrerPolicy: 'no-referrer', // no-referrer, *client
-		//body: JSON.stringify(data) // body data type must match "Content-Type" header
-	});
-
-	//
-	//alert(response);
-	if (response.ok) { // если HTTP-статус в диапазоне 200-299 id - ward_Department  name  - ward.Department
-		alert("OK");
-
-	} else {
-		alert("Ошибка HTTP: " + response.status);
+	let dirty = event.target.elements.ward_IsDirtyZone.checked;
+	let canPut = event.target.elements.ward_CanPut.checked;
+	var patientRows = event.target.parentElement.querySelectorAll(".patient");
+	var patientParent = event.target.parentElement;
+	//alert(document.location);
+	let url = document.location + '&handler=FetchWard';
+	let ward = event.target;
+	//alert(ward);
+	let response = fetch(url	//)
+		, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'multipart/form-data' // 'application/json'
+				// 'Content-Type': 'application/x-www-form-urlencoded',
+			},
+			body: ward
+		})
+		.then((response) => {
+			return response.status();
+		})
+		.then((result) => {
+		});
+	if (!dirty) {
+		if (patientParent.classList.contains('ward-dirty')) {
+			event.target.parentElement.classList.remove('ward-dirty');
+		}
 	}
-
-	//setTimeout("event.target.scrollIntoView(true)", 1000);
-	//event.preventDefault();
-	//var log = event.target.serialize();
-	//console.log(event.target);		event.target.scrollIntoView(true);
-	//alert(event.target[0]);
+	if (dirty) {
+		if (!patientParent.classList.contains('ward-dirty')) {
+			event.target.parentElement.classList.add('ward-dirty');
+		}
+	}
+	if (!canPut) {
+		patientRows.forEach((row) => {
+			if (row.classList.contains('ward-open')) {
+				row.classList.remove('ward-open');
+				row.classList.add('ward-close');
+			}
+		})
+	}
+	if (canPut) {
+		patientRows.forEach((row) => {
+			if (row.classList.contains('ward-close')) {
+				row.classList.add('ward-open');
+				row.classList.remove('ward-close');
+			}
+		})
+	}
 }
+//if (dirty) 
+	//alert();.parentNode.children.
+	//alert();
+	//let response = fetch('/Wards/DepartmentWards?depNumber=' + dep, {
+	//	// Default options are marked with *
+	//	method: 'POST', // *GET, POST, PUT, DELETE, etc.
+	//	mode: 'cors', // no-cors, *cors, same-origin
+	//	cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+	//	credentials: 'same-origin', // include, *same-origin, omit
+	//	headers: {
+	//		'Content-Type': 'application/json'
+	//		// 'Content-Type': 'application/x-www-form-urlencoded',
+	//	},
+	//	redirect: 'follow', // manual, *follow, error
+	//	referrerPolicy: 'no-referrer', // no-referrer, *client
+	//	//body: JSON.stringify(data) // body data type must match "Content-Type" header
+	//});

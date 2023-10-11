@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DailyReport.Pages.Wards
 {
+    [IgnoreAntiforgeryToken]
     public class DepartmentWardsModel : PageModel
     {
         ApplicationContext context;
@@ -76,6 +77,19 @@ namespace DailyReport.Pages.Wards
             //}
             WardServices.UpdateWard(context, ward);
             return RedirectToPage("DepartmentWards", new { depNumber = ward.Department });
+        }
+
+        public IActionResult OnPostFetchWard()
+        {
+            try
+            {
+                WardServices.UpdateWard(context, ward); //RedirectToPage("DepartmentWards", new { depNumber = ward.Department });
+                return new OkResult();
+            }
+            catch
+            {
+                return new NotFoundResult();
+            }
         }
 
         public IActionResult OnPostAddPatient()
