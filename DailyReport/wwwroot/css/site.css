@@ -125,3 +125,20 @@ th, td {
 .ward-full {
     background-color: #2c8ffb !important
 }
+
+.outpatients_wrapper {
+    margin: 0px 10px 0px 10px;
+    min-width: 100%;
+    display: grid;
+    grid-template-columns: 3fr 1fr 2.6fr  2fr 1fr 1fr 1.5fr 0.5fr;
+}
+.outpatients_form {
+    min-width: 100%;
+    display: grid;
+    grid-template-columns: 1px 3fr 1fr 1fr 0.3fr 1fr 0.3fr 2fr 1fr 1fr 1.5fr 0.6fr;
+}
+.outpatients_saved_form {
+    min-width: 100%;
+    display: grid;
+    grid-template-columns: 1px 1px 3fr 1fr 1fr 0.3fr 1fr 0.3fr 2fr 1fr 1fr 1.5fr 0.25fr 0.25fr;
+}
