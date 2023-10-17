@@ -37,6 +37,7 @@ function CountReject() {
 	let sumAll = sumAdults + sumChild;
 	$("#sumAll").html(sumAll);
 }
+
 function submitWard(event) {
 	event.preventDefault();
 	var dep = event.target.elements.ward_Department.value;	
@@ -46,48 +47,47 @@ function submitWard(event) {
 	var patientParent = event.target.parentElement;
 	//alert(document.location);
 	let url = document.location + '&handler=FetchWard';
-	let ward = event.target;
+	let ward = new FormData(event.target); //получаем данные формы
 	//alert(ward);
 	let response = fetch(url	//)
 		, {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'multipart/form-data' // 'application/json'
+				'Content-Type': 'application/x-www-form-urlencoded'	//используем кодировку для сохранения привязки объекта
 				// 'Content-Type': 'application/x-www-form-urlencoded',
 			},
-			body: ward
-		})
-		.then((response) => {
-			return response.status();
-		})
-		.then((result) => {
-		});
-	if (!dirty) {
-		if (patientParent.classList.contains('ward-dirty')) {
-			event.target.parentElement.classList.remove('ward-dirty');
-		}
-	}
-	if (dirty) {
-		if (!patientParent.classList.contains('ward-dirty')) {
-			event.target.parentElement.classList.add('ward-dirty');
-		}
-	}
-	if (!canPut) {
-		patientRows.forEach((row) => {
-			if (row.classList.contains('ward-open')) {
-				row.classList.remove('ward-open');
-				row.classList.add('ward-close');
+		body: new URLSearchParams(ward)		//преобразуем форму в application/x-www-form-urlencoded для работы привязки
+	})
+	.then((response) => {
+		if (response.ok) {
+			if (!dirty) {
+				if (patientParent.classList.contains('ward-dirty')) {
+				event.target.parentElement.classList.remove('ward-dirty');
+				}
 			}
-		})
-	}
-	if (canPut) {
-		patientRows.forEach((row) => {
-			if (row.classList.contains('ward-close')) {
-				row.classList.add('ward-open');
-				row.classList.remove('ward-close');
+				if (dirty) {
+					if (!patientParent.classList.contains('ward-dirty')) {
+					event.target.parentElement.classList.add('ward-dirty');
+					}
+				}
+			if (!canPut) {
+				patientRows.forEach((row) => {
+					if (row.classList.contains('ward-open')) {
+						row.classList.remove('ward-open');
+						row.classList.add('ward-close');
+					}
+				})
 			}
-		})
-	}
+			if (canPut) {
+				patientRows.forEach((row) => {
+					if (row.classList.contains('ward-close')) {
+						row.classList.add('ward-open');
+						row.classList.remove('ward-close');
+					}
+				})
+			}
+		}
+	});
 }
 //if (dirty) 
 	//alert();.parentNode.children.

@@ -46,7 +46,6 @@ namespace DailyReport.Pages.Wards
             //patients.Add(PatientServices.CreateTestPatient(10, false, false, false, false));
             //patients.Add(PatientServices.CreateTestPatient(11, false, false, false, false));
 
-
             patients = PatientServices.GetPatientsByDepartment(context, depNumber);
 
             //добавление пациентов в палаты, сохраняем в неотслеживаемое в БД поле
@@ -58,7 +57,7 @@ namespace DailyReport.Pages.Wards
                 }
             }
 
-            ////определяем доступность палаты в соответствии со статусом пациента
+            //определяем доступность палаты в соответствии со статусом пациента
             foreach (Ward ward in wards)
             {
                 foreach (Patient patient in ward.PatientsInWard)
@@ -83,7 +82,7 @@ namespace DailyReport.Pages.Wards
         {
             try
             {
-                WardServices.UpdateWard(context, ward); //RedirectToPage("DepartmentWards", new { depNumber = ward.Department });
+                WardServices.UpdateWard(context, ward);
                 return new OkResult();
             }
             catch

@@ -45,7 +45,7 @@
                         <input type="number" value="@ward.Id" asp-for="@ward.Id" />
                     </div>
                     <div class="col-1">
-                        <input type="submit" value="&#9998" asp-page-handler="UpdateWard" />
+                        <input type="submit" value="&#9998" asp-page-handler="" /> @*UpdateWard*@
                     </div>
                 </div>
             </form>
@@ -76,7 +76,7 @@
                     <h7>От главного</h7>
                 </div>
             </div>
-                                
+            
                 @for(int i = 0; i < counter; i++){
                 if (i < ward.PatientsInWard.Count)
                 {
