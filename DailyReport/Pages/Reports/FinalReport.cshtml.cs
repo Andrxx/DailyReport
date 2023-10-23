@@ -3,6 +3,7 @@ using DailyReport.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Composition;
 using System.Security.Cryptography;
 
@@ -272,9 +273,7 @@ namespace DailyReport.Pages.Reports
             }
             try
             {
-                patients = (from patient in context.OutcomingPatients
-                            where ((patient.Date > startTime) && (patient.Date < endTime))
-                            select patient).ToList();
+                patients = OutPatientService.GetOutPatientList(startTime, endTime, context);
 
                 //todo исправить возможное отсутствие возрста
                 if (patients != null)
@@ -328,7 +327,6 @@ namespace DailyReport.Pages.Reports
             return RedirectToAction("Get");
         }
 
-
         public IActionResult OnPostSavePatients()
         {
             if (!ModelState.IsValid)
@@ -345,11 +343,32 @@ namespace DailyReport.Pages.Reports
             OutPatientService.DeleteOutPatient(id, context);
             return RedirectToAction("Get");
         }
-
         public IActionResult OnPostUpdatePatient()
         {
             OutPatientService.UpdateOutPatient(newPatient, context);
             return RedirectToAction("Get");
+        }
+
+        public IActionResult OnPostFetchPatient()
+        {
+            try
+            {
+                OutPatientService.UpdateOutPatient(newPatient, context);
+                OutcomingPatient p = OutPatientService.GetOutPatientById(newPatient.Id, context);
+                if (p != null)
+                {
+                    string pat = JsonConvert.SerializeObject(p);
+                    return Content(JsonConvert.SerializeObject(p));
+                }
+                else
+                {
+                    return new NotFoundResult();
+                }
+            }
+            catch
+            {
+                return new NotFoundResult();
+            }
         }
     }
 }

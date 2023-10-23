@@ -1,4 +1,5 @@
 ﻿using DailyReport.Models;
+using DailyReport.Models.WardsModels;
 
 namespace DailyReport.Services
 {
@@ -74,8 +75,8 @@ namespace DailyReport.Services
         public static void DeleteOutPatient(int id, ApplicationContext context)
         {
             OutcomingPatient patient = (from p in context.OutcomingPatients
-                                   where (p.Id == id)
-                                   select p).FirstOrDefault();
+                                        where (p.Id == id)
+                                        select p).FirstOrDefault();
             if (patient != null)
             {
                 context.OutcomingPatients.Remove(patient);
@@ -86,8 +87,8 @@ namespace DailyReport.Services
         public static void UpdateOutPatient(OutcomingPatient patient, ApplicationContext context)
         {
             OutcomingPatient _patient = (from p in context.OutcomingPatients
-                            where (p.Id == patient.Id)
-                            select  p).FirstOrDefault();
+                                         where (p.Id == patient.Id)
+                                         select p).FirstOrDefault();
             if (_patient != null)
             {
                 _patient.Name = patient.Name;
@@ -100,6 +101,20 @@ namespace DailyReport.Services
                 _patient.Gender = patient.Gender;
                 context.SaveChanges();
             }
+        }
+
+        public static List<OutcomingPatient> GetOutPatientList(DateTime startTime, DateTime endTime, ApplicationContext context) {
+            List<OutcomingPatient> patients = (from patient in context.OutcomingPatients
+                        where((patient.Date > startTime) && (patient.Date<endTime))
+                        select patient).ToList();
+            return patients;
+        }
+        public static OutcomingPatient GetOutPatientById(int Id, ApplicationContext context)
+        {
+            OutcomingPatient patient = (from p in context.OutcomingPatients
+                                               where (p.Id == Id)
+                                               select p).FirstOrDefault();
+            return patient;
         }
     }
 }

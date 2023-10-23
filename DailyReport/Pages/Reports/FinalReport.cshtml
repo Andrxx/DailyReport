@@ -1137,7 +1137,7 @@
 @{
     foreach (OutcomingPatient patient in Model.patients)
     {
-        <form method="post" class="outpatients_saved_form">
+        <form method="post" class="outpatients_saved_form" onsubmit="updatePatient(event)">
             <input type="datetime" value="@patient.Date" class="form-control invisible" asp-for="newPatient.Date" />
             <input type="text" value="@patient.Id" class="form-control invisible" asp-for="newPatient.Id" />
              
@@ -1162,15 +1162,15 @@
             <input type="text" value="@patient.Shipped" class="form-control" asp-for="newPatient.Shipped" />
             @*<select class="form-select" asp-for="newPatient.Shipped">
             <option selected >@patient.Shipped</option>
-            @{
-            foreach(string s in Model.shipping){
-            <option value="@s">@s</option>
-            }
-            }
+                @{
+                    foreach(string s in Model.shipping){
+                    <option value="@s">@s</option>
+                    }
+                }
             </select>*@
                     
             <input type="text" value="@patient.SubmitedFrom" class="form-control" asp-for="newPatient.SubmitedFrom" />
-                    @*<select class="form-select" asp-for="newPatient.SubmitedFrom">
+            @*<select class="form-select" asp-for="newPatient.SubmitedFrom">
             <option selected>@patient.SubmitedFrom</option>
             @{
             foreach(string f in Model.submitedFrom){
