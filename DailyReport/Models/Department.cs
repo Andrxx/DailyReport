@@ -51,6 +51,11 @@ namespace DailyReport.Models
                         name = "Пятое отделение";
                         return name;
                     }
+                case 51:
+                    {
+                        name = "Пятое отделение грязная зона";
+                        return name;
+                    }
                 case 6:
                     {
                         name = "Шестое отделение";

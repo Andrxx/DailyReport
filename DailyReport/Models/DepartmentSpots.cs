@@ -14,6 +14,8 @@
         public int dep4Children { get; set; }
         public int dep5 { get; set; }
         public int dep5Children { get; set; }
+        public int dep51 { get; set; }
+        public int dep51Children { get; set; }
         public int dep6 { get; set; }
         public int dep6Children { get; set; }
         public int dep7 { get; set; }
