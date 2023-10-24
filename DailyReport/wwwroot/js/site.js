@@ -92,31 +92,31 @@ function submitWard(event) {
 }
 
 function updatePatient(event) {
-	event.preventDefault();
-	let url = document.location + '?handler=FetchPatient';
-	let patient = new FormData(event.target); //получаем данные формы
+	//event.preventDefault();
+	//let url = document.location + '?handler=FetchPatient';
+	//let patient = new FormData(event.target); //получаем данные формы
 
-	let response = fetch(url
-		, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'	//используем кодировку для сохранения привязки объекта
-				// 'Content-Type': 'application/x-www-form-urlencoded',
-			},
-			body: new URLSearchParams(patient)		//преобразуем форму в application/x-www-form-urlencoded для работы привязки
-		})
-		.then((response) => {
-			let patient = response.json();
-			event.target.querySelector('newPatient_Name').value = response.;
-			//
-			//newPatient_Gender
-			//newPatient_AgeYears
-			//newPatient_AgeMonth
-			//newPatient_Diagnos
-			//newPatient_Shipped
-			//newPatient_SubmitedFrom
-			//newPatient_SubmitedTo
-		});
+	//let response = fetch(url
+	//	, {
+	//		method: 'POST',
+	//		headers: {
+	//			'Content-Type': 'application/x-www-form-urlencoded'	//используем кодировку для сохранения привязки объекта
+	//			// 'Content-Type': 'application/x-www-form-urlencoded',
+	//		},
+	//		body: new URLSearchParams(patient)		//преобразуем форму в application/x-www-form-urlencoded для работы привязки
+	//	})
+	//	.then((response) => {
+	//		let patient = response.json();
+	//		event.target.querySelector('newPatient_Name').value = response.;
+	//		//
+	//		//newPatient_Gender
+	//		//newPatient_AgeYears
+	//		//newPatient_AgeMonth
+	//		//newPatient_Diagnos
+	//		//newPatient_Shipped
+	//		//newPatient_SubmitedFrom
+	//		//newPatient_SubmitedTo
+	//	});
 }
 
 //if (dirty) 

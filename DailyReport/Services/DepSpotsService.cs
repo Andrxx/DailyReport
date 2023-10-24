@@ -50,16 +50,17 @@ namespace DailyReport.Services
             DepartmentSpots _departmentSpots = new DepartmentSpots();
             List<Department> departments = (from dep in context.Departments
                                           select dep).ToList();
-            try
-            {
-                _departmentSpots.dep1 = departments.Find(p => p.Number == 1).AdultSpotsQuantity;
-                _departmentSpots.dep1Children = departments.Find(p => p.Number == 1).ChildrenSpotsQuantity;
-            }
-            catch
-            {
-                _departmentSpots.dep1 = 0;
-                _departmentSpots.dep1Children = 0;
-            }
+            //try
+            //{
+            //    //подсчет мест чистой зоны 1 отд
+            //    _departmentSpots.dep1 = departments.Find(p => p.Number == 1).AdultSpotsQuantity;
+            //    _departmentSpots.dep1Children = departments.Find(p => p.Number == 1).ChildrenSpotsQuantity;
+            //}
+            //catch
+            //{
+            //    _departmentSpots.dep1 = 0;
+            //    _departmentSpots.dep1Children = 0;
+            //}
             try
             {
                 _departmentSpots.dep11 = departments.Find(p => p.Number == 11).AdultSpotsQuantity;
@@ -109,6 +110,17 @@ namespace DailyReport.Services
             {
                 _departmentSpots.dep5 = 0;
                 _departmentSpots.dep5Children = 0;
+            }
+            try
+            {
+                //грязная зона 5 отд
+                _departmentSpots.dep51 = departments.Find(p => p.Number == 51).AdultSpotsQuantity;
+                _departmentSpots.dep51Children = departments.Find(p => p.Number == 51).ChildrenSpotsQuantity;
+            }
+            catch
+            {
+                _departmentSpots.dep51 = 0;
+                _departmentSpots.dep51Children = 0;
             }
             try
             {

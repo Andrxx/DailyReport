@@ -11,11 +11,14 @@
             <tbody>
                 <tr class="table-primary fw-bold m-0 p-0 print-m-p-0">
                     <td rowspan="2" class="print-m-p-0">@Model.reportDate.ToString("dd.MM.yy")</td>
-                    <td colspan="4">1-е ИО (@(@Model.departmentSpots.dep11 + @Model.departmentSpots.dep11Children
+                    @*<td colspan="4">1-е ИО (@(@Model.departmentSpots.dep11 + @Model.departmentSpots.dep11Children
+                        + @Model.departmentSpots.dep1 + @Model.departmentSpots.dep1Children) коек)</td>*@
+                    <td colspan="2" rowspan="2">1-е ИО (@(@Model.departmentSpots.dep11 + @Model.departmentSpots.dep11Children
                         + @Model.departmentSpots.dep1 + @Model.departmentSpots.dep1Children) коек)</td>
                     <td class="print-m-p-0" colspan="2" rowspan="2">3-е ИО (@(@Model.departmentSpots.dep3 + @Model.departmentSpots.dep3Children) коек)</td>
                     <td class="print-m-p-0" colspan="2" rowspan="2">4-е ИО (@(@Model.departmentSpots.dep4 + @Model.departmentSpots.dep4Children) коек)</td>
-                    <td class="print-m-p-0" colspan="2" rowspan="2">5-е ИО (@(@Model.departmentSpots.dep5 + @Model.departmentSpots.dep5Children) коек)</td>
+                    <td class="print-m-p-0" colspan="4" @*rowspan="2"*@>5-е ИО (@(@Model.departmentSpots.dep5 + @Model.departmentSpots.dep5Children
+                        + @Model.departmentSpots.dep51 + @Model.departmentSpots.dep51Children) коек)</td>
                     <td class="print-m-p-0" colspan="2" rowspan="2">6-е ИО (@(@Model.departmentSpots.dep6 + @Model.departmentSpots.dep6Children) коек)</td>
                     <td class="print-m-p-0" colspan="2" rowspan="2">7-е ИО (@(@Model.departmentSpots.dep7 + @Model.departmentSpots.dep7Children) коек)</td>
                     <td class="print-m-p-0" colspan="4">ОРИТ (@(@Model.departmentSpots.dep91 + @Model.departmentSpots.dep91Children
@@ -25,6 +28,7 @@
                     <td class="print-m-p-0" colspan="3" rowspan="2">Всего @(@Model.departmentSpots.sumOC + @Model.departmentSpots.sumOCChildren) с учетом дневного стационара</td>
                 </tr>
                 <tr class="table-primary fw-bold  m-0 p-0">
+                    @*первое отделение*@
                     <td class="print-m-p-0" colspan="2">Грязная</td>
                     <td class="print-m-p-0" colspan="2">Чистая</td>
                     <td class="print-m-p-0" colspan ="2">Грязная</td>
@@ -33,7 +37,7 @@
                 <tr class="table-secondary align-bottom  m-0 p-0">
                     <td class="fw-bold  print-m-p-0">
                         Всего: взрослые @Model.departmentSpots.sum, детские @Model.departmentSpots.sumChildren,
-                        COVID-19: ВЗР - @(@Model.departmentSpots.dep11 + @Model.departmentSpots.dep91), 
+                        COVID-19: ВЗР - @(@Model.departmentSpots.dep11 + @Model.departmentSpots.dep91 + @Model.departmentSpots.dep51), 
                         ДЕТ - @(@Model.departmentSpots.dep11Children + @Model.departmentSpots.dep91Children)</td>
                     <td class="print-m-p-0">Взр</td>
                     <td class="print-m-p-0">Дет</td>
