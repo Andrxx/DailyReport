@@ -8,6 +8,7 @@
         public int dep3 { get; set; }
         public int dep4 { get; set; }
         public int dep5 { get; set; }
+        public int dep51 { get; set; }
         public int dep6 { get; set; }
         public int dep7 { get; set; }
         public int dep8 { get; set; }
@@ -35,6 +36,7 @@
         public int dep3S { get; set; }
         public int dep4S { get; set; }
         public int dep5S { get; set; }
+        public int dep51S { get; set; }
         public int dep6S { get; set; }
         public int dep7S { get; set; }
         public int dep8S { get; set; }
@@ -49,6 +51,7 @@
         public double dep3P { get; set; }
         public double dep4P { get; set; }
         public double dep5P { get; set; }
+        public double dep51P { get; set; }
         public double dep6P { get; set; }
         public double dep7P { get; set; }
         public double dep8P { get; set; }
