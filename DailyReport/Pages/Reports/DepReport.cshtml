@@ -8,8 +8,9 @@
     else if (Model.report.depNumber == 82) msg = "платные услуги";
     else if (Model.report.depNumber == 8) msg = "Дневной стационар";
     else if (Model.report.depNumber == 11) msg = " 1 отделения";
+    else if (Model.report.depNumber == 51) msg = " 5 отделения";
     else msg = Model.report.depNumber + " отделения";
-    if ((Model.report.depNumber == 11) || (Model.report.depNumber == 91)) zone = "грязная ";
+    if ((Model.report.depNumber == 11) || (Model.report.depNumber == 91) || (Model.report.depNumber == 51)) zone = "грязная ";
     else zone = "чистая ";
     ViewData["Title"] = "Сводка " + msg;
 }
@@ -45,7 +46,6 @@
             <input class="d-print-none" type="submit" value="Сохранить" asp-page-handler="Report" asp-route-depNumber=@Model.report.depNumber />
         </form>
     }
-
     else
     {
         <div class="container">

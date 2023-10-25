@@ -9,6 +9,7 @@
     <div class="row" >
         <table class="table m-0 p-0 table-bordered border-dark text-center print-m-p-0">
             <tbody>
+                @*строка мест*@
                 <tr class="table-primary fw-bold m-0 p-0 print-m-p-0">
                     <td rowspan="2" class="print-m-p-0">@Model.reportDate.ToString("dd.MM.yy")</td>
                     @*<td colspan="4">1-е ИО (@(@Model.departmentSpots.dep11 + @Model.departmentSpots.dep11Children
@@ -27,13 +28,14 @@
                     <td class="print-m-p-0" colspan="3" rowspan="2">@(@Model.departmentSpots.sum + @Model.departmentSpots.sumChildren) стационарных коек</td>
                     <td class="print-m-p-0" colspan="3" rowspan="2">Всего @(@Model.departmentSpots.sumOC + @Model.departmentSpots.sumOCChildren) с учетом дневного стационара</td>
                 </tr>
+                @*строка разделения грязных, управление из стороки выше*@
                 <tr class="table-primary fw-bold  m-0 p-0">
-                    @*первое отделение*@
                     <td class="print-m-p-0" colspan="2">Грязная</td>
                     <td class="print-m-p-0" colspan="2">Чистая</td>
                     <td class="print-m-p-0" colspan ="2">Грязная</td>
                     <td class="print-m-p-0" colspan="2">Чистая</td>
                 </tr>
+                @*строка разделения взр/дети*@
                 <tr class="table-secondary align-bottom  m-0 p-0">
                     <td class="fw-bold  print-m-p-0">
                         Всего: взрослые @Model.departmentSpots.sum, детские @Model.departmentSpots.sumChildren,
@@ -66,17 +68,22 @@
                     <td class="print-m-p-0">Дет</td>
                     <td class="print-m-p-0">Всего</td>                   
                 </tr>
+                @*строка фактические койки*@
                 <tr class="table-secondary  m-0 p-0">
                     <td class="fw-bold  print-m-p-0">Количество коек (фактическое)</td>
-
                     <td class="print-m-p-0">@Model.departmentSpots.dep11</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep11Children</td>
-                    <td class="print-m-p-0">@Model.departmentSpots.dep1</td>
-                    <td class="print-m-p-0">@Model.departmentSpots.dep1Children</td>
+
+                    @*первое отделение чистое
+                        <td class="print-m-p-0">@Model.departmentSpots.dep1</td>
+                    <td class="print-m-p-0">@Model.departmentSpots.dep1Children</td>*@
+
                     <td class="print-m-p-0">@Model.departmentSpots.dep3</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep3Children</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep4</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep4Children</td>
+                    <td class="print-m-p-0">@Model.departmentSpots.dep51</td>
+                    <td class="print-m-p-0">@Model.departmentSpots.dep51Children</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep5</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep5Children</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep6</td>
@@ -233,10 +240,11 @@
                 <tr class="table-secondary border-transparent print-m-p-0">
                     <td class="fw-bold">Свободные места</td>
                     <td colspan="2">@(@Model.freeSpots.dep11S @*+ @Model.freeSpots.dep11Children*@)</td>
-                    <td colspan="2">@(@Model.freeSpots.dep1S @*+ @Model.freeSpots.dep1Children*@)</td>
+                   @* <td colspan="2">@(@Model.freeSpots.dep1S @*+ @Model.freeSpots.dep1Children)</td>*@
                     <td colspan="2">@(@Model.freeSpots.dep3S @*+ @Model.freeSpots.dep3Children*@)</td>
                     <td colspan="2">@(@Model.freeSpots.dep4S @*+ @Model.freeSpots.dep4Children*@)</td>
-                    <td colspan="2">@(@Model.freeSpots.dep5S @*+ @Model.freeSpots.dep5Children*@)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep51S @*+ @Model.freeSpots.dep5Children*@)</td>
+                    <td colspan="2">@(@Model.freeSpots.dep5S@*+ @Model.freeSpots.dep5Children*@)</td>
                     <td colspan="2">@(@Model.freeSpots.dep6S @*+ @Model.freeSpots.dep6Children*@)</td>
                     <td colspan="2">@(@Model.freeSpots.dep7S @*+ @Model.freeSpots.dep7Children*@)</td>
                     <td colspan="2">@(@Model.freeSpots.dep91S @*+ @Model.freeSpots.dep91Children*@)</td>
@@ -633,12 +641,14 @@
                     <td >Итого</td>
                     <td>@Model.deseaseSum11</td>
                     <td>@Model.deseaseSum11Children</td>
-                    <td>@Model.deseaseSum1</td>
-                    <td>@Model.deseaseSum1Children</td>
+                    @*<td>@Model.deseaseSum1</td>
+                    <td>@Model.deseaseSum1Children</td>*@
                     <td>@Model.deseaseSum3</td>
                     <td>@Model.deseaseSum3Children</td>
                     <td>@Model.deseaseSum4</td>
                     <td>@Model.deseaseSum4Children</td>
+                    <td>@Model.deseaseSum51</td>
+                    <td>@Model.deseaseSum51Children</td>
                     <td>@Model.deseaseSum5</td>
                     <td>@Model.deseaseSum5Children</td>
                     <td>@Model.deseaseSum6</td>
@@ -682,12 +692,14 @@
                     @{
                                     <td>@(@Model.deseaseSum11 + @Model.depReport11.care)</td>
                                     <td>@Model.deseaseSum11Children</td>
-                                    <td>@(@Model.deseaseSum1 + @Model.depReport1.care)</td>
-                                    <td>@Model.deseaseSum1Children</td>
+                                    @*<td>@(@Model.deseaseSum1 + @Model.depReport1.care)</td>
+                                    <td>@Model.deseaseSum1Children</td>*@
                                     <td>@(@Model.deseaseSum3 + @Model.depReport3.care)</td>
                                     <td>@Model.deseaseSum3Children</td>
                                     <td>@(@Model.deseaseSum4 + @Model.depReport4.care)</td>
                                     <td>@Model.deseaseSum4Children</td>
+                                    <td>@(@Model.deseaseSum51 + @Model.depReport51.care)</td>
+                                    <td>@Model.deseaseSum51Children</td>
                                     <td>@(@Model.deseaseSum5 + @Model.depReport5.care)</td>
                                     <td>@Model.deseaseSum5Children</td>
                                     <td>@(@Model.deseaseSum6 + @Model.depReport6.care)</td>
@@ -1127,7 +1139,8 @@
 </div>
 
 
-@*верстка под грид*@
+@*верстка под грид
+
 <div class="outpatients_wrapper">
     <div class="text-start">Пациент</div>
     <div class="">Пол</div>
@@ -1172,7 +1185,7 @@
                     }
                 }
             </select>*@
-                    
+ @*                   
             <input type="text" value="@patient.SubmitedFrom" class="form-control" asp-for="newPatient.SubmitedFrom" />
             @*<select class="form-select" asp-for="newPatient.SubmitedFrom">
             <option selected>@patient.SubmitedFrom</option>
@@ -1182,7 +1195,7 @@
             }
             }
             </select>*@
-
+@*
                     <input type="text" value="@patient.SubmitedTo" class="form-control" asp-for="newPatient.SubmitedTo" />
                     @*<select class="form-select" asp-for="newPatient.SubmitedTo">
             <option selected>@patient.SubmitedTo</option>
@@ -1192,13 +1205,13 @@
             }
             }
             </select>*@
-           
+@*           
             <input type="submit" value="&#128465" asp-page-handler="DeletePaient" asp-route-id="@patient.Id" />    
             <input type="submit" value="&#9998" asp-page-handler="UpdatePatient" />
         </form>
     }
 }
-@**@
+
 
 @if (!Model._onlyView)
 {
@@ -1233,7 +1246,7 @@
                 }
                 }
                 </select>*@
-
+@*
             <input type="text" placeholder="Направлен" class="form-control" asp-for="newPatient.SubmitedFrom" />
                     @* <select class="form-select" asp-for="newPatient.SubmitedFrom" required>
                 <option selected disabled>Направлен</option>
@@ -1243,7 +1256,7 @@
                 }
                 }
                 </select>*@
-
+@*
             <input type="text" placeholder="Переведен" class="form-control" asp-for="newPatient.SubmitedTo" required />
                     @* <select class="form-select" asp-for="newPatient.SubmitedTo" required>
                 <option selected disabled>Переведен</option>
@@ -1253,8 +1266,9 @@
                 }
                 }
                 </select>*@
-
+@*
             <input type="submit" value="+" asp-page-handler="SavePatients" />
 
     </form>
 }
+*@
