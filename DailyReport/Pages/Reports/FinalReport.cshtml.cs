@@ -14,7 +14,7 @@ namespace DailyReport.Pages.Reports
     {
         public FinalReport finalReport;
         public List<FinalReport> finalReports;
-        public DepReport depReport1, depReport11, depReport2, depReport3, depReport4, depReport5,
+        public DepReport depReport1, depReport11, depReport2, depReport3, depReport4, depReport5, depReport51,
             depReport6, depReport7, depReport8, depReport90, depReport91, depReport81, depReport82;
         ApplicationContext context;
         public FinalReportModel(ApplicationContext db)
@@ -87,12 +87,13 @@ namespace DailyReport.Pages.Reports
             }
            //ѕередаем сводки из списка в переменные
 #pragma warning disable CS8601 // ¬озможно, назначение-ссылка, допускающее значение NULL.
-            depReport1 = reports.Find(p => p.depNumber == 1);
+            //depReport1 = reports.Find(p => p.depNumber == 1);
             depReport11 = reports.Find(p => p.depNumber == 11);
             //depReport2 = reports.Find(p => p.depNumber == 2); //отделение пока не работает
             depReport3 = reports.Find(p => p.depNumber == 3);
             depReport4 = reports.Find(p => p.depNumber == 4);
             depReport5 = reports.Find(p => p.depNumber == 5);
+            depReport51 = reports.Find(p => p.depNumber == 51);
             depReport6 = reports.Find(p => p.depNumber == 6);
             depReport7 = reports.Find(p => p.depNumber == 7);
             depReport8 = reports.Find(p => p.depNumber == 8);
@@ -105,12 +106,13 @@ namespace DailyReport.Pages.Reports
             //                where report.date.Date == actualDate
             //               select report).FirstOrDefault();
 #pragma warning restore CS8601 // ¬озможно, назначение-ссылка, допускающее значение NULL.
-            if (depReport1 == null) depReport1 = new();
+            //if (depReport1 == null) depReport1 = new();
             if (depReport11 == null) depReport11 = new();
             if (depReport2 == null) depReport2 = new();
             if (depReport3 == null) depReport3 = new();
             if (depReport4 == null) depReport4 = new();
             if (depReport5 == null) depReport5 = new();
+            if (depReport51 == null) depReport51 = new();
             if (depReport6 == null) depReport6 = new();
             if (depReport7 == null) depReport7 = new();
             if (depReport8 == null) depReport8 = new();
@@ -123,10 +125,11 @@ namespace DailyReport.Pages.Reports
 
             //пор€док списка отделений должен строго соответствовать пор€дку отделений в сводке
             filteredReports.Add(depReport11);
-            filteredReports.Add(depReport1);
+            //filteredReports.Add(depReport1);
             //_filteredReports.Add(depReport2); отделение не работает
             filteredReports.Add(depReport3);
             filteredReports.Add(depReport4);
+            filteredReports.Add(depReport51);
             filteredReports.Add(depReport5);
             filteredReports.Add(depReport6);
             filteredReports.Add(depReport7);
@@ -173,7 +176,8 @@ namespace DailyReport.Pages.Reports
                 finalReport.restZoneChildren += _rep.restZoneChildrens;
                 finalReport.outRegions += _rep.outRegions;
                 finalReport.outRegionsChildren += _rep.outRegionsChildrens;
-                finalReport.forein += _rep.foreinChildrens;
+                finalReport.forein += _rep.forein;
+                finalReport.foreinChildren += _rep.foreinChildrens;
                 finalReport.LNR_DNR += _rep.LNR_DNR;
                 finalReport.LNR_DNRChildren += _rep.LNR_DNRChildrens;
                 finalReport.otherUkrane += _rep.otherUkrane;
@@ -215,23 +219,25 @@ namespace DailyReport.Pages.Reports
             oxygenSum91 = depReport91.CountO2();
             oxygenSum90 = depReport90.CountO2();
 
-            deseaseSum1 = depReport1.CountDiseases();
+            //deseaseSum1 = depReport1.CountDiseases();
             deseaseSum11 = depReport11.CountDiseases();
             deseaseSum2 = depReport2.CountDiseases();
             deseaseSum3 = depReport3.CountDiseases();
             deseaseSum4 = depReport4.CountDiseases();
             deseaseSum5 = depReport5.CountDiseases();
+            deseaseSum51 = depReport51.CountDiseases();
             deseaseSum6 = depReport6.CountDiseases();
             deseaseSum7 = depReport7.CountDiseases();
             deseaseSum8 = depReport8.CountDiseases();
             deseaseSum90 = depReport90.CountDiseases();
             deseaseSum91 = depReport91.CountDiseases();
-            deseaseSum1Children = depReport1.CountDiseasesChildren();
+            //deseaseSum1Children = depReport1.CountDiseasesChildren();
             deseaseSum11Children = depReport11.CountDiseasesChildren();
             deseaseSum2Children = depReport2.CountDiseasesChildren();
             deseaseSum3Children = depReport3.CountDiseasesChildren();
             deseaseSum4Children = depReport4.CountDiseasesChildren();
             deseaseSum5Children = depReport5.CountDiseasesChildren();
+            deseaseSum51Children = depReport51.CountDiseasesChildren();
             deseaseSum6Children = depReport6.CountDiseasesChildren();
             deseaseSum7Children = depReport7.CountDiseasesChildren();
             deseaseSum8Children = depReport8.CountDiseasesChildren();

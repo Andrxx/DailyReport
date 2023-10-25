@@ -39,3 +39,9 @@
 
 в DepartmentsManagement html
 добавил грязную 5 зону 
+
+в DepReport
+добавил парсер для 51 отделения
+
+в FreeSpots
+добавил строку 51 отд
