@@ -15,7 +15,7 @@
                     @*<td colspan="4">1-е ИО (@(@Model.departmentSpots.dep11 + @Model.departmentSpots.dep11Children
                         + @Model.departmentSpots.dep1 + @Model.departmentSpots.dep1Children) коек)</td>*@
                     <td colspan="2" rowspan="2">1-е ИО (@(@Model.departmentSpots.dep11 + @Model.departmentSpots.dep11Children
-                        + @Model.departmentSpots.dep1 + @Model.departmentSpots.dep1Children) коек (грязная зона))</td>
+                        @*+ @Model.departmentSpots.dep1 + @Model.departmentSpots.dep1Children*@) коек (грязная зона))</td>
                     <td class="print-m-p-0" colspan="2" rowspan="2">3-е ИО (@(@Model.departmentSpots.dep3 + @Model.departmentSpots.dep3Children) коек)</td>
                     <td class="print-m-p-0" colspan="2" rowspan="2">4-е ИО (@(@Model.departmentSpots.dep4 + @Model.departmentSpots.dep4Children) коек)</td>
                     <td class="print-m-p-0" colspan="4" @*rowspan="2"*@>5-е ИО (@(@Model.departmentSpots.dep5 + @Model.departmentSpots.dep5Children
@@ -1139,7 +1139,7 @@
 </div>
 
 
-@*верстка под грид
+@*верстка под грид*@
 
 <div class="outpatients_wrapper">
     <div class="text-start">Пациент</div>
@@ -1185,7 +1185,7 @@
                     }
                 }
             </select>*@
- @*                   
+                    
             <input type="text" value="@patient.SubmitedFrom" class="form-control" asp-for="newPatient.SubmitedFrom" />
             @*<select class="form-select" asp-for="newPatient.SubmitedFrom">
             <option selected>@patient.SubmitedFrom</option>
@@ -1195,8 +1195,8 @@
             }
             }
             </select>*@
-@*
-                    <input type="text" value="@patient.SubmitedTo" class="form-control" asp-for="newPatient.SubmitedTo" />
+
+            <input type="text" value="@patient.SubmitedTo" class="form-control" asp-for="newPatient.SubmitedTo" />
                     @*<select class="form-select" asp-for="newPatient.SubmitedTo">
             <option selected>@patient.SubmitedTo</option>
             @{
@@ -1205,7 +1205,7 @@
             }
             }
             </select>*@
-@*           
+            
             <input type="submit" value="&#128465" asp-page-handler="DeletePaient" asp-route-id="@patient.Id" />    
             <input type="submit" value="&#9998" asp-page-handler="UpdatePatient" />
         </form>
@@ -1246,7 +1246,7 @@
                 }
                 }
                 </select>*@
-@*
+
             <input type="text" placeholder="Направлен" class="form-control" asp-for="newPatient.SubmitedFrom" />
                     @* <select class="form-select" asp-for="newPatient.SubmitedFrom" required>
                 <option selected disabled>Направлен</option>
@@ -1256,7 +1256,7 @@
                 }
                 }
                 </select>*@
-@*
+
             <input type="text" placeholder="Переведен" class="form-control" asp-for="newPatient.SubmitedTo" required />
                     @* <select class="form-select" asp-for="newPatient.SubmitedTo" required>
                 <option selected disabled>Переведен</option>
@@ -1266,9 +1266,8 @@
                 }
                 }
                 </select>*@
-@*
+
             <input type="submit" value="+" asp-page-handler="SavePatients" />
 
     </form>
 }
-*@
