@@ -332,7 +332,10 @@ namespace DailyReport.Pages.Reports
             DutyServices.UpdateDutyDoc(newDoc, context);
             return RedirectToAction("Get");
         }
-
+        /// <summary>
+        /// Сохраняем пациента, метод с перезагрузкой страницы
+        /// </summary>
+        /// <returns></returns>
         public IActionResult OnPostSavePatients()
         {
             if (!ModelState.IsValid)
@@ -343,18 +346,55 @@ namespace DailyReport.Pages.Reports
             OutPatientService.AddPatient(newPatient, context);
             return RedirectToAction("Get");
         }
+        /// <summary>
+        /// Сохраняем пациента, метод без перезагрузки страницы
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult OnPostFetchSavePatients()
+        {
+            try
+            {
+                newPatient.Date = actualDate;
+                OutPatientService.AddPatient(newPatient, context);
+                //OutPatientService.UpdateOutPatient(newPatient, context);
+                OutcomingPatient p = OutPatientService.GetOutPatientById(newPatient.Id, context);
+                if (p != null)
+                {
+                    string pat = JsonConvert.SerializeObject(p);
+                    return Content(JsonConvert.SerializeObject(p));
+                }
+                else
+                {
+                    return new NotFoundResult();
+                }
+            }
+            catch
+            {
+                return new NotFoundResult();
+            }
+            
+            
+            return RedirectToAction("Get");
+        }
 
         public IActionResult OnPostDeletePaient(int id)
         {
             OutPatientService.DeleteOutPatient(id, context);
             return RedirectToAction("Get");
         }
+        /// <summary>
+        /// Обновляем пациента, метод перезагружет страницу
+        /// </summary>
+        /// <returns></returns>
         public IActionResult OnPostUpdatePatient()
         {
             OutPatientService.UpdateOutPatient(newPatient, context);
             return RedirectToAction("Get");
         }
-
+        /// <summary>
+        /// Обновляем данные пациента, метод для скрытой загрузки на странице без обновления
+        /// </summary>
+        /// <returns></returns>
         public IActionResult OnPostFetchPatient()
         {
             try
