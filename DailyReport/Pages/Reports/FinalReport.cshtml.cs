@@ -356,7 +356,6 @@ namespace DailyReport.Pages.Reports
             {
                 newPatient.Date = actualDate;
                 OutPatientService.AddPatient(newPatient, context);
-                //OutPatientService.UpdateOutPatient(newPatient, context);
                 OutcomingPatient p = OutPatientService.GetOutPatientById(newPatient.Id, context);
                 if (p != null)
                 {
@@ -372,9 +371,6 @@ namespace DailyReport.Pages.Reports
             {
                 return new NotFoundResult();
             }
-            
-            
-            return RedirectToAction("Get");
         }
 
         public IActionResult OnPostDeletePaient(int id)
