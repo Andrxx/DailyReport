@@ -1,0 +1,62 @@
+﻿@using DailyReport.Models;
+@model DailyReport.Pages.Reports.FinalReportModel;
+@{
+    OutcomingPatient patient;
+    //OutcomingPatient newPatient = new();
+}
+
+<form method="post" class="outpatients_saved_form" onsubmit="updatePatient(event)">
+    <input type="datetime" value="@patient.Date" class="form-control invisible" asp-for="newPatient.Date" />
+    <input type="text" value="@patient.Id" class="form-control invisible" asp-for="newPatient.Id" />
+
+    <input type="text" value="@patient.Name" class="form-control" asp-for="newPatient.Name" />
+
+    <select class="form-select" asp-for="newPatient.Gender">
+        <option selected value="@patient.Gender">@patient.Gender</option>
+        @{
+            <option value="М">М</option>
+            <option value="Ж">Ж</option>
+        }
+    </select>
+
+    <input type="number" step="1" value="@patient.AgeYears" required class="form-control" asp-for="newPatient.AgeYears" />
+    <label>лет</label>
+
+    <input type="text" value="@patient.AgeMonth" class="form-control" asp-for="newPatient.AgeMonth" />
+    <label>мес </label>
+
+    <input type="text" value="@patient.Diagnos" class="form-control" asp-for="newPatient.Diagnos" />
+
+    <input type="text" value="@patient.Shipped" class="form-control" asp-for="newPatient.Shipped" />
+    @*<select class="form-select" asp-for="newPatient.Shipped">
+    <option selected >@patient.Shipped</option>
+    @{
+    foreach(string s in Model.shipping){
+    <option value="@s">@s</option>
+    }
+    }
+    </select>*@
+
+    <input type="text" value="@patient.SubmitedFrom" class="form-control" asp-for="newPatient.SubmitedFrom" />
+    @*<select class="form-select" asp-for="newPatient.SubmitedFrom">
+    <option selected>@patient.SubmitedFrom</option>
+    @{
+    foreach(string f in Model.submitedFrom){
+    <option value="@f">@f</option>
+    }
+    }
+    </select>*@
+
+    <input type="text" value="@patient.SubmitedTo" class="form-control" asp-for="newPatient.SubmitedTo" />
+    @*<select class="form-select" asp-for="newPatient.SubmitedTo">
+    <option selected>@patient.SubmitedTo</option>
+    @{
+    foreach(string t in Model.submitedTo){
+    <option value="@t">@t</option>
+    }
+    }
+    </select>*@
+
+    <input type="submit" value="&#128465" asp-page-handler="DeletePaient" asp-route-id="@patient.Id" />
+    <input type="submit" value="&#9998" asp-page-handler="UpdatePatient" />
+</form>
