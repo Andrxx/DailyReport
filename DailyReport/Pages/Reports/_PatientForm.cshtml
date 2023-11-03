@@ -1,35 +1,31 @@
-﻿@*Генерирует формы для редактировния или сохранения нового отказного пацинта
-  Для формы сохранения передавать  Model.savedPatient = null
-*@
-@using DailyReport.Models;
+﻿@using DailyReport.Models;
 @model DailyReport.Pages.Reports.FinalReportModel;
 @{
     OutcomingPatient patient;
-    if (Model.savedPatient != null)
-    {
-        patient = Model.savedPatient;
-        <form method="post" class="outpatients_saved_form">
-            @*onsubmit="updatePatient(event)"*@
-        <input type="datetime" value="@patient.Date" class="form-control invisible" asp-for="newPatient.Date" />
-        <input type="text" value="@patient.Id" class="form-control invisible" asp-for="newPatient.Id" />
+    //OutcomingPatient newPatient = new();
+}
 
-        <input type="text" value="@patient.Name" class="form-control" asp-for="newPatient.Name" />
+<form method="post" class="outpatients_saved_form" onsubmit="updatePatient(event)">
+    <input type="datetime" value="@patient.Date" class="form-control invisible" asp-for="newPatient.Date" />
+    <input type="text" value="@patient.Id" class="form-control invisible" asp-for="newPatient.Id" />
 
-        <select class="form-select" asp-for="newPatient.Gender">
+    <input type="text" value="@patient.Name" class="form-control" asp-for="newPatient.Name" />
+
+    <select class="form-select" asp-for="newPatient.Gender">
         <option selected value="@patient.Gender">@patient.Gender</option>
         @{
             <option value="М">М</option>
             <option value="Ж">Ж</option>
         }
-        </select>
+    </select>
 
-        <input type="number" step="1" value="@patient.AgeYears" required class="form-control" asp-for="newPatient.AgeYears" />
-        <label>лет</label>
+    <input type="number" step="1" value="@patient.AgeYears" required class="form-control" asp-for="newPatient.AgeYears" />
+    <label>лет</label>
 
-        <input type="text" value="@patient.AgeMonth" class="form-control" asp-for="newPatient.AgeMonth" />
-        <label>мес </label>
+    <input type="text" value="@patient.AgeMonth" class="form-control" asp-for="newPatient.AgeMonth" />
+    <label>мес </label>
 
-        <input type="text" value="@patient.Diagnos" class="form-control" asp-for="newPatient.Diagnos" />
+    <input type="text" value="@patient.Diagnos" class="form-control" asp-for="newPatient.Diagnos" />
 
     <input type="text" value="@patient.Shipped" class="form-control" asp-for="newPatient.Shipped" />
     @*<select class="form-select" asp-for="newPatient.Shipped">
@@ -41,7 +37,7 @@
     }
     </select>*@
 
-        <input type="text" value="@patient.SubmitedFrom" class="form-control" asp-for="newPatient.SubmitedFrom" />
+    <input type="text" value="@patient.SubmitedFrom" class="form-control" asp-for="newPatient.SubmitedFrom" />
     @*<select class="form-select" asp-for="newPatient.SubmitedFrom">
     <option selected>@patient.SubmitedFrom</option>
     @{
@@ -51,7 +47,7 @@
     }
     </select>*@
 
-        <input type="text" value="@patient.SubmitedTo" class="form-control" asp-for="newPatient.SubmitedTo" />
+    <input type="text" value="@patient.SubmitedTo" class="form-control" asp-for="newPatient.SubmitedTo" />
     @*<select class="form-select" asp-for="newPatient.SubmitedTo">
     <option selected>@patient.SubmitedTo</option>
     @{
@@ -61,67 +57,6 @@
     }
     </select>*@
 
-        <input type="submit" value="&#128465" asp-page-handler="DeletePaient" asp-route-id="@patient.Id" />
-        <input type="submit" value="&#9998" asp-page-handler="UpdatePatient" />
-        </form>
-    }
-    else
-    {
-        <form method="post" class="outpatients_form d-print-none" id="emptyForm">
-             @*onsubmit="savePatient(event)"*@
-            <input type="datetime" value="@Model.reportDate" class="form-control invisible" asp-for="newPatient.Date" />
-            <input type="text" placeholder="ФИО пациента" class="form-control" asp-for="newPatient.Name" required />
-
-            <select class="form-select" asp-for="newPatient.Gender">
-                <option selected disabled>Пол</option>
-                @{
-                    <option value="М">М</option>
-                    <option value="Ж">Ж</option>
-                }
-            </select>
-
-
-            <input type="number" step="1" value="@Model.newPatient.AgeYears" required class="form-control d-inline-flex" asp-for="newPatient.AgeYears" />
-            <label>лет </label>
-
-
-            <input type="text" value="@Model.newPatient.AgeMonth" class="form-control" asp-for="newPatient.AgeMonth" />
-            <label>мес </label>
-
-            <input type="text" placeholder="Диагноз" class="form-control" asp-for="newPatient.Diagnos" />
-
-            <input type="text" placeholder="Доставлен" class="form-control" asp-for="newPatient.Shipped" />
-            @* <select class="form-select" asp-for="newPatient.Shipped">
-    <option selected disabled>Доставлен</option>
-    @{
-    foreach(string s in Model.shipping){
-    <option value="@s">@s</option>
-    }
-    }
-    </select>*@
-
-            <input type="text" placeholder="Направлен" class="form-control" asp-for="newPatient.SubmitedFrom" />
-            @* <select class="form-select" asp-for="newPatient.SubmitedFrom" required>
-    <option selected disabled>Направлен</option>
-    @{
-    foreach(string f in Model.submitedFrom){
-    <option value="@f">@f</option>
-    }
-    }
-    </select>*@
-
-            <input type="text" placeholder="Переведен" class="form-control" asp-for="newPatient.SubmitedTo" required />
-            @* <select class="form-select" asp-for="newPatient.SubmitedTo" required>
-    <option selected disabled>Переведен</option>
-    @{
-    foreach(string t in Model.submitedTo){
-    <option value="@t">@t</option>
-    }
-    }
-    </select>*@
-
-            <input type="submit" value="+" asp-page-handler="SavePatients" />
-        </form>
-    }
-}
-
+    <input type="submit" value="&#128465" asp-page-handler="DeletePaient" asp-route-id="@patient.Id" />
+    <input type="submit" value="&#9998" asp-page-handler="UpdatePatient" />
+</form>

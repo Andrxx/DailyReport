@@ -91,6 +91,36 @@ function submitWard(event) {
 	});
 }
 
+async function savePatient(event) {
+	event.preventDefault();
+	let url = document.location + '?handler=FetchSavePatients';
+	let patient = new FormData(event.target); //получаем данные формы
+	let response = await fetch(url
+		, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'	//используем кодировку для сохранения привязки объекта
+			},
+			body: new URLSearchParams(patient)		//преобразуем форму в application/x-www-form-urlencoded для работы привязки ASP Razor
+		});
+	if (response.ok) {
+		let result = await response.json();
+		alert(result.Gender);
+		//event.target.querySelector('#newPatient_Gender').value = result.Gender;// = response.;
+		//event.target.querySelector('#newPatient_Name').value = result.Name;
+		//event.target.querySelector('#newPatient_AgeYears').value = result.AgeYears;
+		//event.target.querySelector('#newPatient_AgeMonth').value = result.AgeMonth;
+		//event.target.querySelector('#newPatient_Diagnos').value = result.Diagnos;
+		//event.target.querySelector('#newPatient_Shipped').value = result.Shipped
+		//event.target.querySelector('#newPatient_SubmitedFrom').value = result.SubmitedFrom;
+		//event.target.querySelector('#newPatient_SubmitedTo').value = result.SubmitedTo;
+		//alert(event.target.querySelector('#newPatient_Shipped').value);
+	}
+	else {
+		alert("Не сохрнено, " + response.statusText);
+	}
+}
+
 async function updatePatient(event) {
 	event.preventDefault();
 	let url = document.location + '?handler=FetchPatient';

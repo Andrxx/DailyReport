@@ -1151,6 +1151,7 @@
     <div class="text-center">Переведен</div>
 </div>
 
+<div class="row" id="patient_wrapper">
 @{
     foreach (OutcomingPatient patient in Model.patients)
     {
@@ -1211,11 +1212,11 @@
         </form>
     }
 }
-
+</div>
 
 @if (!Model._onlyView)
 {
-    <form method="post" class="outpatients_form d-print-none">
+    <form method="post" class="outpatients_form d-print-none" onsubmit="savePatient(event)">
         <input type="datetime" value="@Model.reportDate" class="form-control invisible" asp-for="newPatient.Date" />
         <input type="text" placeholder="ФИО пациента" class="form-control" asp-for="newPatient.Name" required />
         
