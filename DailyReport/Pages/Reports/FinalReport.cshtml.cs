@@ -36,6 +36,7 @@ namespace DailyReport.Pages.Reports
         //свободные места
         public FreeSpots freeSpots;
         public List<string> doctors;
+        public OutcomingPatient savedPatient = new(); //поле для работы частичного представления формы, не использовать кроме вызова форм
 
         [BindProperty]
         public DutyDoc newDoc { get; set; } = new();

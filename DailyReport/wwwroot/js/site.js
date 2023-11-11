@@ -90,7 +90,7 @@ function submitWard(event) {
 		}
 	});
 }
-
+ 
 async function savePatient(event) {
 	event.preventDefault();
 	let url = document.location + '?handler=FetchSavePatients';
@@ -105,7 +105,9 @@ async function savePatient(event) {
 		});
 	if (response.ok) {
 		let result = await response.json();
-		alert(result.Gender);
+		let emptyForm = event.target.cloneNode(true);
+		event.target.parentElement.append(emptyForm);
+		alert(emptyForm);
 		//event.target.querySelector('#newPatient_Gender').value = result.Gender;// = response.;
 		//event.target.querySelector('#newPatient_Name').value = result.Name;
 		//event.target.querySelector('#newPatient_AgeYears').value = result.AgeYears;
@@ -120,6 +122,9 @@ async function savePatient(event) {
 		alert("Не сохрнено, " + response.statusText);
 	}
 }
+
+
+
 
 async function updatePatient(event) {
 	event.preventDefault();
@@ -144,12 +149,14 @@ async function updatePatient(event) {
 		event.target.querySelector('#newPatient_Shipped').value = result.Shipped
 		event.target.querySelector('#newPatient_SubmitedFrom').value = result.SubmitedFrom;
 		event.target.querySelector('#newPatient_SubmitedTo').value = result.SubmitedTo;
-		alert(event.target.querySelector('#newPatient_Shipped').value);
 	}
 	else {
 		alert("Не сохрнено, " + response.statusText);
 	}
 }
+
+
+
 
 
 
