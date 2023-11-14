@@ -66,6 +66,7 @@ namespace DailyReport.Pages.Reports
 
                 report = new();
                 report.depNumber = depNumber;
+                report.date = reportDate;
             }
 
             try

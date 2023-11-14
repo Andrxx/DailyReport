@@ -107,7 +107,7 @@ async function savePatient(event) {
 		let result = await response.json();
 		let emptyForm = event.target.cloneNode(true);
 		event.target.parentElement.append(emptyForm);
-		alert(emptyForm);
+		//alert(emptyForm);
 		//event.target.querySelector('#newPatient_Gender').value = result.Gender;// = response.;
 		//event.target.querySelector('#newPatient_Name').value = result.Name;
 		//event.target.querySelector('#newPatient_AgeYears').value = result.AgeYears;
