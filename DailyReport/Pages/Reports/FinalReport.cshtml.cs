@@ -116,7 +116,7 @@ namespace DailyReport.Pages.Reports
             if (depReport8 == null) 
             {
                 //на выходных загружаем данные предыдущей сводки
-                if(actualDate.DayOfWeek == DayOfWeek.Sunday || actualDate.DayOfWeek == DayOfWeek.Saturday)
+                if(true /*actualDate.DayOfWeek == DayOfWeek.Sunday || actualDate.DayOfWeek == DayOfWeek.Saturday*/)
                 {
                     DepReport report = (from r in context.DepReports
                               where (r.depNumber == 8) && (r.date > startTime.AddDays(-1)) && (r.date < endTime.AddDays(-1))
