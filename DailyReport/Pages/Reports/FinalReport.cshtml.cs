@@ -64,7 +64,7 @@ namespace DailyReport.Pages.Reports
             }
             //задаем дату отображения на сводке, устнавливть только после коррекции стартовой даты 
             else { reportDate = actualDate; }
-
+            
             departmentSpots = DepSpotsService.GetSpots(context);
             departmentSpots.sum = DepSpotsService.CountSum();
             departmentSpots.sumChildren = DepSpotsService.CountSumChildren();
@@ -116,7 +116,27 @@ namespace DailyReport.Pages.Reports
             if (depReport51 == null) depReport51 = new();
             if (depReport6 == null) depReport6 = new();
             if (depReport7 == null) depReport7 = new();
-            if (depReport8 == null) depReport8 = new();
+            if (depReport8 == null) 
+            {
+                //на выходных загружаем данные предыдущей сводки
+                if(actualDate.DayOfWeek == DayOfWeek.Sunday || actualDate.DayOfWeek == DayOfWeek.Saturday)
+                {
+                    DepReport report = (from r in context.DepReports
+                              where (r.depNumber == 8) && (r.date > startTime.AddDays(-1)) && (r.date < endTime.AddDays(-1))
+                              select r).AsNoTracking().FirstOrDefault();
+                    if (report != null)
+                    {
+                        depReport8 = (DepReport)report.Clone();
+                        //меняем дату на текущую и обнуляем ИД для сохранения новой записи в БД
+                        depReport8.date = actualDate;
+                        depReport8.Id = 0;
+                        context.DepReports.Update(depReport8);
+                        context.SaveChanges();
+                    }
+                    else depReport8 = new();
+                }
+                else depReport8 = new(); 
+            }
             if (depReport91 == null) depReport91 = new();
             if (depReport90 == null) depReport90 = new();
             if (depReport81 == null) depReport81 = new();
