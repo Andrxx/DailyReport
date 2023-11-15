@@ -103,9 +103,6 @@ namespace DailyReport.Pages.Reports
             depReport81 = reports.Find(p => p.depNumber == 81);
             depReport82 = reports.Find(p => p.depNumber == 82);
 
-            //_finalReport = (from report in context.FinalReports
-            //                where report.date.Date == actualDate
-            //               select report).FirstOrDefault();
 #pragma warning restore CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
             //if (depReport1 == null) depReport1 = new();
             if (depReport11 == null) depReport11 = new();
@@ -119,7 +116,7 @@ namespace DailyReport.Pages.Reports
             if (depReport8 == null) 
             {
                 //на выходных загружаем данные предыдущей сводки
-                if(true /*actualDate.DayOfWeek == DayOfWeek.Sunday || actualDate.DayOfWeek == DayOfWeek.Saturday*/)
+                if(actualDate.DayOfWeek == DayOfWeek.Sunday || actualDate.DayOfWeek == DayOfWeek.Saturday)
                 {
                     DepReport report = (from r in context.DepReports
                               where (r.depNumber == 8) && (r.date > startTime.AddDays(-1)) && (r.date < endTime.AddDays(-1))
