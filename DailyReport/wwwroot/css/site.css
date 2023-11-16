@@ -107,6 +107,7 @@ th, td {
     display: none;
 }
 
+/*ward section*/
 .ward-header {
     background-color:lightgray;
 }
@@ -126,6 +127,9 @@ th, td {
     background-color: #2c8ffb !important
 }
 
+
+
+/*outcoming patients section*/
 .outpatients_wrapper {
     min-width: 100%;
     display: grid;
