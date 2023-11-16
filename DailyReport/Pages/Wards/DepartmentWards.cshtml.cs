@@ -124,7 +124,7 @@ namespace DailyReport.Pages.Wards
             return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
         }
 
-        public IActionResult OnGetWardsList(int depNumber)
+        public IActionResult OnGetData(int depNumber)
         {
             departmentNumber = depNumber;
             wards = WardServices.GetWardsByDepartment(context, depNumber);
