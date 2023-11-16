@@ -377,7 +377,7 @@ namespace DailyReport.Pages.Reports
                 OutcomingPatient p = OutPatientService.GetOutPatientById(newPatient.Id, context);
                 if (p != null)
                 {
-                    string pat = JsonConvert.SerializeObject(p);
+                    //string pat = JsonConvert.SerializeObject(p);
                     return Content(JsonConvert.SerializeObject(p));
                 }
                 else

@@ -1,8 +1,10 @@
 using DailyReport.Models;
 using DailyReport.Models.WardsModels;
+using DailyReport.Services;
 using DailyReport.Services.WardServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 
 namespace DailyReport.Pages.Wards
 {
@@ -121,5 +123,43 @@ namespace DailyReport.Pages.Wards
 
             return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
         }
+
+        public IActionResult OnGetData(int depNumber)
+        {
+            departmentNumber = depNumber;
+            wards = WardServices.GetWardsByDepartment(context, depNumber);
+            patients = PatientServices.GetPatientsByDepartment(context, depNumber);
+
+            //добавление пациентов в палаты, сохраняем в неотслеживаемое в БД поле
+            foreach (Ward ward in wards)
+            {
+                foreach (Patient patient in patients)
+                {
+                    if (patient.WardNumber == ward.Number) ward.PatientsInWard.Add(patient);
+                }
+            }
+
+            //определяем доступность палаты в соответствии со статусом пациента
+            foreach (Ward ward in wards)
+            {
+                foreach (Patient patient in ward.PatientsInWard)
+                {
+                    if (patient.HasCareRisk || patient.HasRash || patient.IsUntochable) ward.CanPut = false;
+                }
+            }
+
+            if (wards != null)
+            {
+                //string ward = JsonConvert.SerializeObject(wards);
+                return Content(JsonConvert.SerializeObject(wards));
+            }
+            else
+            {
+                return new NotFoundResult();
+            }
+
+        }
     }
 }
+
+
