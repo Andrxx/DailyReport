@@ -127,10 +127,27 @@ namespace DailyReport.Pages.Reports
                         //меняем дату на текущую и обнуляем ИД для сохранения новой записи в БД
                         depReport8.date = actualDate;
                         depReport8.Id = 0;
+                        depReport8.present = report.present;
+                        depReport8.presentChildrens = report.presentChildrens;
+                        depReport8.existed = report.present;
+                        depReport8.existedChildren = report.presentChildrens;
+                        depReport8.income = 0;
+                        depReport8.incomeChildren = 0;
+                        depReport8.outcome = 0;
+                        depReport8.outcomeChildrens = 0;
+                        depReport8.movedInDep = 0;
+                        depReport8.movedOutDep = 0;
+                        depReport8.movedInDepChildrens = 0;
+                        depReport8.movedOutDepChildrens = 0;
+                        depReport8.died = 0;
+                        depReport8.diedChildrens = 0;
                         context.DepReports.Update(depReport8);
                         context.SaveChanges();
                     }
-                    else depReport8 = new();
+                    else
+                    {
+                        depReport8 = new();
+                    }
                 }
                 else depReport8 = new(); 
             }

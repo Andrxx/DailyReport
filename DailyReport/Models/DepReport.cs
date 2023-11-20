@@ -4,6 +4,8 @@ namespace DailyReport.Models
 {
     public class DepReport : ICloneable
     {
+        internal int incomeChildren;
+
         public int Id { get; set; }
         public DateTime date { get; set; } = DateTime.Now;//.AddDays(-1);
         public int depNumber { get; set; }
