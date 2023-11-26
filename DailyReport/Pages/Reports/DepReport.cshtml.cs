@@ -45,10 +45,11 @@ namespace DailyReport.Pages.Reports
             //падает при очистке БД - обработать для очистки и миграций
             //try
             //{
-            report = (from report in context.DepReports
-                       where (report.depNumber == depNumber)
-                       where ((report.date > startTime) && (report.date < endTime))
-                       select report).FirstOrDefault();
+#pragma warning disable CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
+            report = (from r in context.DepReports
+                       where ((r.depNumber == depNumber) && (r.date > startTime) && (r.date < endTime))
+                       select r).FirstOrDefault();
+#pragma warning restore CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
 
             //тест 
             //var reps = (from repo in context.DepReports
@@ -59,15 +60,15 @@ namespace DailyReport.Pages.Reports
             //}
             //catch { throw new  }
 
-             if (report == null)
-            {
+            if (report == null)
+             {
                 //тест для БД, изменить на создание нового для релиза
                 //_report = reportServise.CreateTest();
 
                 report = new();
                 report.depNumber = depNumber;
                 report.date = reportDate;
-            }
+             }
 
             try
             {
