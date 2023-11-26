@@ -2,6 +2,7 @@
 using DailyReport.Pages;
 using Microsoft.AspNetCore.SignalR;
 using System.ComponentModel.DataAnnotations;
+using System.Composition;
 
 namespace DailyReport.Services
 {
@@ -95,7 +96,32 @@ namespace DailyReport.Services
             return report;
         }
 
+        /// <summary>
+        /// Метод перезапсывет сводку данными другой сводки, коррекця с прошлых суток, не меняет дату, нозологии и Id
+        /// </summary>
+        /// <param name="lastReport"></param>
+        /// <returns></returns>
+        public static DepReport RewriteReportForLastDay(DepReport lastReport)
+        {
+            DepReport newReport = new();
+            newReport = (DepReport)lastReport.Clone();
+            newReport.present = lastReport.present;
+            newReport.presentChildrens = lastReport.presentChildrens;
+            newReport.existed = lastReport.present;
+            newReport.existedChildren = lastReport.presentChildrens;
+            newReport.income = 0;
+            newReport.incomeChildren = 0;
+            newReport.outcome = 0;
+            newReport.outcomeChildrens = 0;
+            newReport.movedInDep = 0;
+            newReport.movedOutDep = 0;
+            newReport.movedInDepChildrens = 0;
+            newReport.movedOutDepChildrens = 0;
+            newReport.died = 0;
+            newReport.diedChildrens = 0;
 
+            return newReport;
+        }
 
     }
 }
