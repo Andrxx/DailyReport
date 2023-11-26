@@ -33,7 +33,8 @@ namespace DailyReport.Pages.Reports
             {
                 startTime = startTime.AddDays(-1);
                 endTime = endTime.AddDays(-1);
-                reportDate = actualDate.AddDays(-1);
+                if(dateOffset == 0) reportDate = actualDate.AddDays(-1);    //корректруем значение даты сводки только дл€ текущей даты
+                else reportDate = actualDate;
             }
             //задаем дату отображени€ на сводке, устнавливть только после коррекции стартовой даты 
             else { reportDate = actualDate; }
@@ -61,14 +62,15 @@ namespace DailyReport.Pages.Reports
             //catch { throw new  }
 
             if (report == null)
-             {
+            {
                 //тест дл€ Ѕƒ, изменить на создание нового дл€ релиза
                 //_report = reportServise.CreateTest();
 
                 report = new();
                 report.depNumber = depNumber;
-                report.date = reportDate;
-             }
+                //при работе с прошлыми сводкам корректируем дату сводки
+                if(dateOffset != 0) report.date = reportDate;
+            }
 
             try
             {
