@@ -59,7 +59,7 @@ namespace DailyReport.Pages.Reports
             //}
             //catch { throw new  }
 
-            if (report == null)
+             if (report == null)
             {
                 //тест для БД, изменить на создание нового для релиза
                 //_report = reportServise.CreateTest();
