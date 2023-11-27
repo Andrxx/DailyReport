@@ -125,8 +125,8 @@ namespace DailyReport.Pages.Reports
                 if (curentReport == null)
                 {
                     //новая сущность для БД
-                    DepReport newRep = new();
-                    newRep = (DepReport)report.Clone();
+                    DepReport newRep = DepReportServise.RewriteReportForLastDay(report);
+                    //newRep = (DepReport)report.Clone();
                     //меняем дату на текущую и обнуляем ИД для сохранения новой записи в БД
                     newRep.date = actualDate;
                     newRep.Id = 0;
@@ -138,7 +138,7 @@ namespace DailyReport.Pages.Reports
                 else
                 {
                     int id = curentReport.Id;
-                    curentReport = report;
+                    curentReport = DepReportServise.RewriteReportForLastDay(report);
                     curentReport.Id = id;
                     curentReport.date = actualDate;
                     context.DepReports.Update(curentReport);
