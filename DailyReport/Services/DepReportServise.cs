@@ -110,7 +110,7 @@ namespace DailyReport.Services
             newReport.existed = lastReport.present;
             newReport.existedChildren = lastReport.presentChildrens;
             newReport.income = 0;
-            newReport.incomeChildren = 0;
+            newReport.incomeChildrens = 0;
             newReport.outcome = 0;
             newReport.outcomeChildrens = 0;
             newReport.movedInDep = 0;
@@ -119,7 +119,6 @@ namespace DailyReport.Services
             newReport.movedOutDepChildrens = 0;
             newReport.died = 0;
             newReport.diedChildrens = 0;
-
             return newReport;
         }
 
