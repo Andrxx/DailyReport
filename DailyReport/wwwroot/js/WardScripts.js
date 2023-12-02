@@ -10,13 +10,14 @@ async function loadData(url) {
 		for (let ward of result) {
 			let wardForm = document.createElement("form");
 			
-			let f = "< form method = 'post' onsubmit = 'submitWard(event)' >\
+			let f = "\
+				<form method ='post' onsubmit='submitWard(event)'> \
 					<div class='row ward-header'>\
 						<div class='col-2'>\
 							Палата @ward.Number\
 						</div>\
 						<div class='form-check form-switch col-2'>\
-							<input class='form-check-input' type='checkbox' asp-for='@ward.IsDirtyZone' >\
+							<input class='form-check-input' type='checkbox' asp-for='@ward.IsDirtyZone'>\
 								<label class='form-check-label' for=''>Грязная зона</label>\
 						</div>\
 						<div class='col-2 form-check form-switch'>\
@@ -25,20 +26,20 @@ async function loadData(url) {
 						</div>\
 						<div class='d-none col-1'>\
 							<input type='text' value='@ward.Number' asp-for='@ward.Number' />\
-							<input type='number' value='@ward.Capacity' asp-for='@ward.Capacity' />\
-							<input type='number' value='@ward.Department' asp-for='@ward.Department' />\
+							<input type='number' value='@ward.Capacity' asp-for='@ward.Capacity'/>\
+							<input type='number' value='@ward.Department' asp-for='@ward.Department'/>\
 							<input type='number' value='@ward.Id' asp-for='@ward.Id' />\
 						</div>\
 						<div class='col-1'>\
-							<input type='submit' value='&#9998' asp-page-handler='' /> @*UpdateWard*@\
+							<input type='submit' value='&#9998' asp-page-handler='UpdateWard' />\
 						</div>\
 					</div>\
-            </form >\
-			"
+            </form >"
 
 			wardForm.innerHTML = f;
+			document.querySelector('#ward_wrapper').append(wardForm);
 		}
-		alert(result);
+		//alert(result);
 		//event.target.querySelector('#newPatient_Gender').value = result.Gender;// = response.;
 		//event.target.querySelector('#newPatient_Name').value = result.Name;
 		//event.target.querySelector('#newPatient_AgeYears').value = result.AgeYears;
