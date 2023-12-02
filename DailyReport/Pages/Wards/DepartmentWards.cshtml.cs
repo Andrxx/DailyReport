@@ -30,7 +30,6 @@ namespace DailyReport.Pages.Wards
             departmentNumber = depNumber;
             wards = WardServices.GetWardsByDepartment(context, depNumber);
 
-
             //wards.Add(WardServices.CreateTestWard("1", 3, true, 3, true));
             //wards.Add(WardServices.CreateTestWard("2", 3, true, 3, true));
             //wards.Add(WardServices.CreateTestWard("3", 3, false, 4, true));
