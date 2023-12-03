@@ -123,11 +123,17 @@ namespace DailyReport.Pages.Wards
             return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
         }
 
+        // возврат данных для fetch методов
+
+        /// <summary>
+        /// возвращаем список палат по номеру отделения 
+        /// </summary>
+        /// <param name="depNumber"></param>
+        /// <returns></returns>
         public IActionResult OnGetWardsList(int depNumber)
         {
             departmentNumber = depNumber;
             wards = WardServices.GetWardsByDepartment(context, depNumber);
-            patients = PatientServices.GetPatientsByDepartment(context, depNumber);
 
             //добавление пациентов в палаты, сохраняем в неотслеживаемое в БД поле
             foreach (Ward ward in wards)
@@ -135,15 +141,6 @@ namespace DailyReport.Pages.Wards
                 foreach (Patient patient in patients)
                 {
                     if (patient.WardNumber == ward.Number) ward.PatientsInWard.Add(patient);
-                }
-            }
-
-            //определяем доступность палаты в соответствии со статусом пациента
-            foreach (Ward ward in wards)
-            {
-                foreach (Patient patient in ward.PatientsInWard)
-                {
-                    if (patient.HasCareRisk || patient.HasRash || patient.IsUntochable) ward.CanPut = false;
                 }
             }
 
@@ -156,7 +153,26 @@ namespace DailyReport.Pages.Wards
             {
                 return new NotFoundResult();
             }
+        }
 
+        /// <summary>
+        /// возвращаем список пациентов отделениия
+        /// </summary>
+        /// <param name="depNumber"></param>
+        /// <returns></returns>
+        public IActionResult OnGetPatientsList(int depNumber)
+        {
+            departmentNumber = depNumber;
+            patients = PatientServices.GetPatientsByDepartment(context, depNumber);
+            if (patients != null)
+            {
+                //string ward = JsonConvert.SerializeObject(patients);
+                return Content(JsonConvert.SerializeObject(patients));
+            }
+            else
+            {
+                return new NotFoundResult();
+            }
         }
     }
 }
