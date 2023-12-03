@@ -1,43 +1,117 @@
-﻿window.onload = async () => {
-	//var url = "Reports/DepReport?depNumber=1";
-	 await loadData(document.location + '&handler=WardsList');
+﻿const wardsUrlRequest = document.location + '&handler=WardsList';
+const patientsUrlRequest = document.location + '&handler=PatientsList'
 
+window.onload = async () => {
+	//var url = "Reports/DepReport?depNumber=1";
+	await loadData(wardsUrlRequest);
 }
 async function loadData(url) {
-	let response = await fetch(url);
-	if (response.ok) {
-		let result = await response.json();
-		for (let ward of result) {
-			let wardForm = document.createElement("form");
-			
-			let f = "\
-				<form method ='post' onsubmit='submitWard(event)'> \
-					<div class='row ward-header'>\
-						<div class='col-2'>\
-							Палата @ward.Number\
-						</div>\
-						<div class='form-check form-switch col-2'>\
-							<input class='form-check-input' type='checkbox' asp-for='@ward.IsDirtyZone'>\
-								<label class='form-check-label' for=''>Грязная зона</label>\
-						</div>\
-						<div class='col-2 form-check form-switch'>\
-							<input class='form-check-input' type='checkbox' asp-for='@ward.CanPut'>\
-								<label class='form-check-label' for=''>Палата открыта</label>\
-						</div>\
-						<div class='d-none col-1'>\
-							<input type='text' value='@ward.Number' asp-for='@ward.Number' />\
-							<input type='number' value='@ward.Capacity' asp-for='@ward.Capacity'/>\
-							<input type='number' value='@ward.Department' asp-for='@ward.Department'/>\
-							<input type='number' value='@ward.Id' asp-for='@ward.Id' />\
-						</div>\
-						<div class='col-1'>\
-							<input type='submit' value='&#9998' asp-page-handler='UpdateWard' />\
-						</div>\
-					</div>\
-            </form >"
+	let responseWardsList = await fetch(url);		//запрашиваем список палат
+	if (responseWardsList.ok) {
+		let wardsList = await responseWardsList.json();
+		let responsePatientList = await fetch(patientsUrlRequest);	//загружаем список пациентов
 
-			wardForm.innerHTML = f;
-			document.querySelector('#ward_wrapper').append(wardForm);
+		let patientList = [];
+		if (responsePatientList.ok) {
+			patientList = await responsePatientList.json();
+		}
+		else {
+			alert("Не удалось загрузить список пациентов " + responsePatientList.statusText);
+		}
+
+		for (let ward of wardsList) {
+			let wardHeaderForm = document.createElement("form");
+			let wardHeader = document.createElement("div");
+			let patientForm = document.createElement("form");
+
+			let wardHeaderFormText =
+				`<form method ='post' onsubmit = 'submitWard(event)' > 
+					<div class='row ward-header'>
+						<div class='col-2'>
+							Палата ${ward.Number}
+						</div>
+						<div class='form-check form-switch col-2'>
+							<input class='form-check-input' type='checkbox'>
+								<label class='form-check-label' for=''>Грязная зона</label>\
+						</div>
+						<div class='col-2 form-check form-switch'>
+							<input class='form-check-input' type='checkbox'>
+								<label class='form-check-label' for=''>Палата открыта</label>
+						</div>
+						<div class='col-1'>
+							<input type='submit' value='&#9998' asp-page-handler='UpdateWard' />
+						</div>
+					</div>
+				</form >`
+
+			let wardHeaderText =
+			`<div class="row ward-header">
+                <div class="col-2">
+                    ФИО пациента
+                </div>
+                <div class="col-2">
+                    Возраст пациента
+                </div>
+                <div class="col-1">
+                    Пол
+                </div>
+                <div class="col-1">
+                    Диагноз
+                </div>
+                <div class="col-1">
+                    Дата
+                </div>
+                <div class="col-1">
+                    Сыпь
+                </div>
+                <div class="col-1">
+                    Риск ВБИ
+                </div>
+                <div class="col-2">
+                    <h7>От главного</h7>
+                </div>
+            </div>`
+
+			let patientFormText =
+			` <form method="post">
+                        <div class="row patient ward-open">
+                                <div class="col-2">
+                                    <input  type="text" required/>
+                                </div>
+                                <div class="col-2">
+                                <input type="text" placeholder="" required />
+                                </div>
+                               
+                                <div class="col-1">
+                                <input class="m-width-100" type="text" placeholder="Пол" required/>
+                                </div>
+                                <div class="col-1">
+                                <input class="m-width-100" type="text" placeholder="Диагноз" required/>
+                                </div>
+                                <div class="col-1 ">
+                                <input type="date" class="m-width-100" value="@DateTime.Now.ToString("dd.MM.yy")" required />
+                                </div>
+                                <div class="col-1">
+                                    <input  type="checkbox" >
+                                </div>
+                                <div class="col-1">
+                                    <input  type="checkbox" >
+                                </div>
+                                <div class="col-1">
+                                    <input  type="checkbox" >
+                                </div>
+                                <div class="col-1 ">
+                                    <input type="submit" value="+" asp-page-handler="AddPatient"/>
+                                </div>
+                            </div>
+                    </form>`
+
+			wardHeaderForm.innerHTML = wardHeaderFormText;
+			wardHeader.innerHTML = wardHeaderText;
+			patientForm.innerHTML = patientFormText;
+			document.querySelector('#ward_wrapper').append(wardHeaderForm);
+			document.querySelector('#ward_wrapper').append(wardHeader);
+			document.querySelector('#ward_wrapper').append(patientForm);
 		}
 		//alert(result);
 		//event.target.querySelector('#newPatient_Gender').value = result.Gender;// = response.;
@@ -51,7 +125,7 @@ async function loadData(url) {
 		//alert(event.target.querySelector('#newPatient_Shipped').value);
 	}
 	else {
-		alert("Не сохрнено, " + response.statusText);
+		alert("Не сохранено, " + response.statusText);
 	}
 	//alert("load");
 } 
