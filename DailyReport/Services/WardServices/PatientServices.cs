@@ -20,17 +20,17 @@ namespace DailyReport.Services.WardServices
         }
 
         /// <summary>
-        /// Получаем пациентов по номеру отделения
+        /// Получаем пациентов по номеру отделения, сортировка по номеру палаты
         /// </summary>
         /// <param name="context"></param>
         /// <param name="depNumber"></param>
         /// <returns></returns>
         public static List<Patient> GetPatientsByDepartment(ApplicationContext context, int depNumber)
         {
-            //Patient patient = new Patient();
             List<Patient> patients = new List<Patient>();
             patients = (from p in context.Patients
                         where p.Department == depNumber
+                        orderby p.WardNumber
                         select p).ToList();
             return patients;
         }
