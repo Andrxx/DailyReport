@@ -20,6 +20,7 @@ async function loadData(url) {
 		}
 
 		for (let ward of wardsList) {
+			let filteredPaients = patientList.filter((patient) => patient.WardNumber == ward.Number);
 			let wardHeaderForm = document.createElement("form");
 			let wardHeader = document.createElement("div");
 			let patientForm = document.createElement("form");
@@ -73,39 +74,50 @@ async function loadData(url) {
             </div>`
 
 			let patientFormText =
-			` <form method="post">
-                        <div class="row patient ward-open">
-                                <div class="col-2">
-                                    <input  type="text" required/>
-                                </div>
-                                <div class="col-2">
-                                <input type="text" placeholder="" required />
-                                </div>
-                               
-                                <div class="col-1">
-                                <input class="m-width-100" type="text" placeholder="Пол" required/>
-                                </div>
-                                <div class="col-1">
-                                <input class="m-width-100" type="text" placeholder="Диагноз" required/>
-                                </div>
-                                <div class="col-1 ">
-                                <input type="date" class="m-width-100" value="@DateTime.Now.ToString("dd.MM.yy")" required />
-                                </div>
-                                <div class="col-1">
-                                    <input  type="checkbox" >
-                                </div>
-                                <div class="col-1">
-                                    <input  type="checkbox" >
-                                </div>
-                                <div class="col-1">
-                                    <input  type="checkbox" >
-                                </div>
-                                <div class="col-1 ">
-                                    <input type="submit" value="+" asp-page-handler="AddPatient"/>
-                                </div>
-                            </div>
-                    </form>`
+			`<form method="post">
+				<div class="row patient">
+					<div class="col-2">
+						<input  type="text" required/>
+                    </div>
+                    <div class="col-2">
+						<input type="text" placeholder="" required />
+                    </div>
+					<div class="col-1">
+						<input class="m-width-100" type="text" placeholder="Пол" required/>
+                    </div>
+                    <div class="col-1">
+						<input class="m-width-100" type="text" placeholder="Диагноз" required/>
+					</div>
+					<div class="col-1 ">
+						<input type="date" class="m-width-100" value="@DateTime.Now.ToString("dd.MM.yy")" required />
+					</div>
+					<div class="col-1">
+						<input  type="checkbox" >
+					</div>
+					<div class="col-1">
+						<input  type="checkbox" >
+                    </div>
+                    <div class="col-1">
+                        <input  type="checkbox" >
+                    </div>
+                    <div class="col-1 ">
+                        <input type="submit" value="+" asp-page-handler="AddPatient"/>
+                    </div>
+                </div>
+             </form>`
 
+			if (ward.IsDirtyZone) {
+				patientForm.classList.add("ward-dirty");
+			}
+			if (ward.CanPut) {
+				patientForm.classList.add("ward-open");
+			}
+			else {
+				patientForm.classList.add("ward-close");
+			}
+			if (ward.Capacity <= filteredPaients.length) {
+				patientForm.classList.add("ward-full");
+			}
 			wardHeaderForm.innerHTML = wardHeaderFormText;
 			wardHeader.innerHTML = wardHeaderText;
 			patientForm.innerHTML = patientFormText;
