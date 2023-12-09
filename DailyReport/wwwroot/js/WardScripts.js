@@ -19,11 +19,15 @@ async function loadData(url) {
 			alert("Не удалось загрузить список пациентов " + responsePatientList.statusText);
 		}
 
-		for (let ward of wardsList) {
+		for (let ward of wardsList)
+		{
 			let filteredPaients = patientList.filter((patient) => patient.WardNumber == ward.Number);
+			let wardFormWrapper = document.createElement("div");
+			wardFormWrapper.classList.add('mt-1');
 			let wardHeaderForm = document.createElement("form");
 			let wardHeader = document.createElement("div");
 			let patientForm = document.createElement("form");
+			let patientFormText;
 
 			let wardHeaderFormText =
 				`<form method ='post' onsubmit = 'submitWard(event)' > 
@@ -73,57 +77,110 @@ async function loadData(url) {
                 </div>
             </div>`
 
-			let patientFormText =
-			`<form method="post">
-				<div class="row patient">
-					<div class="col-2">
-						<input  type="text" required/>
-                    </div>
-                    <div class="col-2">
-						<input type="text" placeholder="" required />
-                    </div>
-					<div class="col-1">
-						<input class="m-width-100" type="text" placeholder="Пол" required/>
-                    </div>
-                    <div class="col-1">
-						<input class="m-width-100" type="text" placeholder="Диагноз" required/>
-					</div>
-					<div class="col-1 ">
-						<input type="date" class="m-width-100" value="@DateTime.Now.ToString("dd.MM.yy")" required />
-					</div>
-					<div class="col-1">
-						<input  type="checkbox" >
-					</div>
-					<div class="col-1">
-						<input  type="checkbox" >
-                    </div>
-                    <div class="col-1">
-                        <input  type="checkbox" >
-                    </div>
-                    <div class="col-1 ">
-                        <input type="submit" value="+" asp-page-handler="AddPatient"/>
-                    </div>
-                </div>
-             </form>`
+			//if (filteredPaients.length != 0) {
+			for (let i = 0; i < ward.Capacity; i++) {
+				let name = "";
+				let age = "";
+				let male = "";
+				let diagnos = "";
+				let date = "";
+				//let age = "";
+				//let male = "";
+				//let diagnos = "";
+				if (filteredPaients[i] != null) {
+					name = filteredPaients[i].Name;
+					age = filteredPaients[i].sAge;
+					male = filteredPaients[i].Male;
+					diagnos = filteredPaients[i].Diagnos;
+					date = filteredPaients[i].HospitalisationDate;
+					//name = filteredPaients[i].Name;
+					//name = filteredPaients[i].Name;
+				}
+				patientFormText =
+				`<form method="post">
+					<div class="row patient">
+						<div class="col-2">
+							<input  type="text" required value='${name}' />
+						</div>
+						<div class="col-2">
+							<input type="text" placeholder="" required value='${age}'/>
+						</div>
+						<div class="col-1">
+							<input class="m-width-100" type="text" placeholder="Пол" required value='${male}'/>
+						</div>
+						<div class="col-1">
+							<input class="m-width-100" type="text" placeholder="Диагноз" required value='${diagnos}'/>
+						</div>`
 
+				if (filteredPaients[i] != null) {
+					patientFormText +=
+						`<div class="col-1 ">
+							<input type="date" class="m-width-100" value='${date}' required />
+						</div>
+						 <div class="form-check form-switch col-1">
+							<input class="form-check-input" type="checkbox"  checked='${filteredPaients[i].HasRash}' asp-for="@Model.newPatient.HasRash">
+                         </div>
+						<div class="form-check form-switch col-1">
+							<input class="form-check-input" type="checkbox" checked='${filteredPaients[i].HasCareRisk}' asp-for="@Model.newPatient.HasCareRisk" >
+                        </div>
+						 <div class="form-check form-switch col-1">
+							<input class="form-check-input" type="checkbox" checked='${filteredPaients[i].IsUntochable}' asp-for="@Model.newPatient.IsUntochable">
+                        </div>
+						<div class="col-1 ">
+							<input type="submit" value="+" asp-page-handler="AddPatient"/>
+						</div>
+					</div>
+				</form>`
+				}
+				else{ 
+				patientFormText +=
+						`<div class="col-1 ">
+							<input type="date" class="m-width-100" value='${date}' required />
+						</div>
+						<div class="col-1">
+							<input  type="checkbox" >
+						</div>
+						<div class="col-1">
+							<input  type="checkbox" >
+						</div>
+						<div class="col-1">
+							<input  type="checkbox" >
+						</div>
+						<div class="col-1 ">
+							<input type="submit" value="+" asp-page-handler="AddPatient"/>
+						</div>
+					</div>
+				</form>`}
+					patientForm.innerHTML += patientFormText;
+					wardFormWrapper.append(patientForm);
+				}
+			//}
+			//else { patientFormText = ""; }
+
+			if (ward.Capacity <= filteredPaients.length) {
+				wardFormWrapper.classList.add("ward-full");
+			}
 			if (ward.IsDirtyZone) {
-				patientForm.classList.add("ward-dirty");
+				wardFormWrapper.classList.add("ward-dirty");
 			}
 			if (ward.CanPut) {
-				patientForm.classList.add("ward-open");
+				wardFormWrapper.classList.add("ward-open");
 			}
 			else {
-				patientForm.classList.add("ward-close");
+				wardFormWrapper.classList.add("ward-close");
 			}
-			if (ward.Capacity <= filteredPaients.length) {
-				patientForm.classList.add("ward-full");
-			}
+			
 			wardHeaderForm.innerHTML = wardHeaderFormText;
 			wardHeader.innerHTML = wardHeaderText;
-			patientForm.innerHTML = patientFormText;
-			document.querySelector('#ward_wrapper').append(wardHeaderForm);
-			document.querySelector('#ward_wrapper').append(wardHeader);
-			document.querySelector('#ward_wrapper').append(patientForm);
+			//patientForm.innerHTML = patientFormText;
+
+			//размещаем заголовки перед содержимым
+			wardFormWrapper.prepend(wardHeader);
+			wardFormWrapper.prepend(wardHeaderForm);
+			//document.querySelector('#ward_wrapper').append(wardHeaderForm);
+			//document.querySelector('#ward_wrapper').append(wardHeader);
+			//добавляем содержимое
+			document.querySelector('#ward_wrapper').append(wardFormWrapper);
 		}
 		//alert(result);
 		//event.target.querySelector('#newPatient_Gender').value = result.Gender;// = response.;
