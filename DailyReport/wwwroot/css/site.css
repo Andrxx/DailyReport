@@ -124,6 +124,14 @@ th, td {
     background-color: #2c8ffb
 }
 
+.ward_form {
+    min-width: 100%;
+    display: grid;
+    grid-column-gap: 5px;
+    grid-template-columns: 5fr 2fr 1fr 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+
 /*outcoming patients section*/
 .outpatients_wrapper {
     min-width: 100%;
@@ -145,3 +153,5 @@ th, td {
     grid-column-gap: 5px;
     margin-bottom: 7px;
 }
+
+/**/

@@ -998,14 +998,12 @@
                     foreach (OutcomingPatient patient in Model.patients)
                     {
                         Model.savedPatient = patient;
-                        @await Html.PartialAsync("_PatientForm", Model)
-                        ;
+                        @await Html.PartialAsync("_PatientForm", Model);
                     }
                     @if (!Model._onlyView)
                     {
                         Model.savedPatient = null;
-                        @await Html.PartialAsync("_PatientForm", Model)
-                        ;
+                        @await Html.PartialAsync("_PatientForm", Model);
                     }
                 }
             </div>
