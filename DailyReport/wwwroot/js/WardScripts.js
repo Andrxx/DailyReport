@@ -26,7 +26,9 @@ async function loadData(url) {
 			wardFormWrapper.classList.add('mt-1');
 			let wardHeaderForm = document.createElement("form");
 			let wardHeader = document.createElement("div");
-			let patientForm = document.createElement("form");
+			let patientForm = document.createElement("form");				//new HTMLElement();
+			
+			patientForm.classList.add('ward_form');
 			let patientFormText;
 
 			let wardHeaderFormText =
@@ -77,13 +79,12 @@ async function loadData(url) {
                 </div>
             </div>`
 
-			//if (filteredPaients.length != 0) {
 			for (let i = 0; i < ward.Capacity; i++) {
 				let name = "";
 				let age = "";
 				let male = "";
 				let diagnos = "";
-				let date = "";
+				let date = new Date();
 				//let age = "";
 				//let male = "";
 				//let diagnos = "";
@@ -92,70 +93,56 @@ async function loadData(url) {
 					age = filteredPaients[i].sAge;
 					male = filteredPaients[i].Male;
 					diagnos = filteredPaients[i].Diagnos;
-					date = filteredPaients[i].HospitalisationDate;
+					date = new Date(filteredPaients[i].HospitalisationDate);
+					date = Intl.DateTimeFormat().format(date);
+					//alert(date);
 					//name = filteredPaients[i].Name;
 					//name = filteredPaients[i].Name;
 				}
 				patientFormText =
-				`<form method="post">
-					<div class="row patient">
-						<div class="col-2">
-							<input  type="text" required value='${name}' />
-						</div>
-						<div class="col-2">
-							<input type="text" placeholder="" required value='${age}'/>
-						</div>
-						<div class="col-1">
-							<input class="m-width-100" type="text" placeholder="Пол" required value='${male}'/>
-						</div>
-						<div class="col-1">
-							<input class="m-width-100" type="text" placeholder="Диагноз" required value='${diagnos}'/>
-						</div>`
+				`<form method="post" class='ward_form'>
+					<input  type="text" required value='${name}' />
+					<input type="text" placeholder="" required value='${age}'/>
+					<input class="" type="text" placeholder="Пол" required value='${male}'/>
+					<input class="" type="text" placeholder="Диагноз" required value='${diagnos}'/>
+				`
 
 				if (filteredPaients[i] != null) {
+					let rash = '';
+					let care = '';
+					let untouch = '';
+					if (filteredPaients[i].HasRash) rash = 'checked';
+					if (filteredPaients[i].HasCareRisk) care = 'checked';
+					if (filteredPaients[i].IsUntochable) untouch = 'checked';
 					patientFormText +=
-						`<div class="col-1 ">
-							<input type="date" class="m-width-100" value='${date}' required />
-						</div>
-						 <div class="form-check form-switch col-1">
-							<input class="form-check-input" type="checkbox"  checked='${filteredPaients[i].HasRash}' asp-for="@Model.newPatient.HasRash">
-                         </div>
-						<div class="form-check form-switch col-1">
-							<input class="form-check-input" type="checkbox" checked='${filteredPaients[i].HasCareRisk}' asp-for="@Model.newPatient.HasCareRisk" >
-                        </div>
-						 <div class="form-check form-switch col-1">
-							<input class="form-check-input" type="checkbox" checked='${filteredPaients[i].IsUntochable}' asp-for="@Model.newPatient.IsUntochable">
-                        </div>
-						<div class="col-1 ">
-							<input type="submit" value="+" asp-page-handler="AddPatient"/>
-						</div>
-					</div>
+					`
+						<div> ${date} </div>
+						<input class="form-check-input" type="checkbox"  ${rash} asp-for="@Model.newPatient.HasRash">
+						<input class="form-check-input" type="checkbox" ${care} asp-for="@Model.newPatient.HasCareRisk" >
+						<input class="form-check-input" type="checkbox" ${untouch} asp-for="@Model.newPatient.IsUntochable">
+						<input type="submit" value="&#9998" asp-page-handler="UpdatePatient"/>
+						<input type="submit" value="&#128465" asp-page-handler="DeletePatient" />
+
 				</form>`
+					if (filteredPaients[i].HasRash || filteredPaients[i].HasCareRisk || filteredPaients[i].IsUntochable) {
+						wardFormWrapper.classList.add("ward-close");
+					}
 				}
 				else{ 
 				patientFormText +=
-						`<div class="col-1 ">
-							<input type="date" class="m-width-100" value='${date}' required />
-						</div>
-						<div class="col-1">
-							<input  type="checkbox" >
-						</div>
-						<div class="col-1">
-							<input  type="checkbox" >
-						</div>
-						<div class="col-1">
-							<input  type="checkbox" >
-						</div>
-						<div class="col-1 ">
-							<input type="submit" value="+" asp-page-handler="AddPatient"/>
-						</div>
-					</div>
+					`
+						<input type="date" class="" value='${date}' required />
+						<input  type="checkbox" >
+						<input  type="checkbox" >
+						<input  type="checkbox" >
+						<input type="submit" value="+" asp-page-handler="AddPatient"/>
+						<input type="submit" value=""  class="invisible" />
 				</form>`}
-					patientForm.innerHTML += patientFormText;
-					wardFormWrapper.append(patientForm);
+				patientForm.innerHTML = patientFormText;
+				let fClone = patientForm.cloneNode(true);	//клонируем и добавляем форму для передачи объекта по значению
+				wardFormWrapper.append(fClone);
+				//wardFormWrapper.insertAdjacentHTML('beforeend', patientForm);
 				}
-			//}
-			//else { patientFormText = ""; }
 
 			if (ward.Capacity <= filteredPaients.length) {
 				wardFormWrapper.classList.add("ward-full");
