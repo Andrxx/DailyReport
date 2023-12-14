@@ -26,6 +26,8 @@ async function loadData(url) {
 			wardFormWrapper.classList.add('mt-1');
 			let wardHeaderForm = document.createElement("form");
 			let wardHeader = document.createElement("div");
+			wardHeader.classList.add('ward-header');
+			//wardHeader.classList.add('row');
 			let patientForm = document.createElement("form");				//new HTMLElement();
 			
 			patientForm.classList.add('ward_form');
@@ -33,7 +35,7 @@ async function loadData(url) {
 
 			let wardHeaderFormText =
 				`<form method ='post' onsubmit = 'submitWard(event)' > 
-					<div class='row ward-header'>
+					<div class='row bg-lightgray'>
 						<div class='col-2'>
 							Палата ${ward.Number}
 						</div>
@@ -52,32 +54,37 @@ async function loadData(url) {
 				</form >`
 
 			let wardHeaderText =
-			`<div class="row ward-header">
-                <div class="col-2">
+                `<div class="">
                     ФИО пациента
                 </div>
-                <div class="col-2">
+                <div class="">
                     Возраст пациента
                 </div>
-                <div class="col-1">
+                <div class="">
                     Пол
                 </div>
-                <div class="col-1">
+                <div class="">
                     Диагноз
                 </div>
-                <div class="col-1">
+                <div class="">
                     Дата
                 </div>
-                <div class="col-1">
+                <div class="">
                     Сыпь
                 </div>
-                <div class="col-1">
-                    Риск ВБИ
+                <div class="">
+                     ВБИ
                 </div>
-                <div class="col-2">
-                    <h7>От главного</h7>
+                <div class="">
+                    АК
                 </div>
-            </div>`
+				<div class="invisible">
+                    АК
+                </div>
+				<div class="invisible">
+                    АК
+                </div>
+			`
 
 			for (let i = 0; i < ward.Capacity; i++) {
 				let name = "";
@@ -117,9 +124,16 @@ async function loadData(url) {
 					patientFormText +=
 					`
 						<div> ${date} </div>
-						<input class="form-check-input" type="checkbox"  ${rash} asp-for="@Model.newPatient.HasRash">
-						<input class="form-check-input" type="checkbox" ${care} asp-for="@Model.newPatient.HasCareRisk" >
-						<input class="form-check-input" type="checkbox" ${untouch} asp-for="@Model.newPatient.IsUntochable">
+
+						<div class="form-check form-switch col-1">
+							<input class="form-check-input" type="checkbox"  ${rash} asp-for="@Model.newPatient.HasRash">
+						</div>
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" ${care} asp-for="@Model.newPatient.HasCareRisk" >
+                        </div>
+						<div class="form-check form-switch col-1">
+							<input class="form-check-input" type="checkbox" ${untouch} asp-for="@Model.newPatient.IsUntochable">
+						</div>
 						<input type="submit" value="&#9998" asp-page-handler="UpdatePatient"/>
 						<input type="submit" value="&#128465" asp-page-handler="DeletePatient" />
 
