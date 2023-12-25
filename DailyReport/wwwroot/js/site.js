@@ -39,7 +39,7 @@ function CountReject() {
 }
 
 //TODO сообщение об ошибке при сбое БД
-function submitWard(event) {
+function submitWarddddd(event) {
 	event.preventDefault();
 	var dep = event.target.elements.ward_Department.value;	
 	let dirty = event.target.elements.ward_IsDirtyZone.checked;
@@ -91,7 +91,7 @@ function submitWard(event) {
 	});
 }
  
-async function savePatient(event) {
+async function savePatienttttt(event) {
 	event.preventDefault();
 	let url = document.location + '?handler=FetchSavePatients';
 	let patient = new FormData(event.target); //получаем данные формы
