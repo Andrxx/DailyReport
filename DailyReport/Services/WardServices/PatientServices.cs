@@ -81,7 +81,7 @@ namespace DailyReport.Services.WardServices
         /// </summary>
         /// <param name="context"></param>
         /// <param name="newPatient"></param>
-        public static void UpdatePatient(ApplicationContext context, Patient newPatient)
+        public static Patient UpdatePatient(ApplicationContext context, Patient newPatient)
         {
             Patient patient = GetPatientsById(context, newPatient.Id);
             if(patient != null)
@@ -100,8 +100,9 @@ namespace DailyReport.Services.WardServices
                 patient.sAge = newPatient.sAge;
                 patient.Male = newPatient.Male;
                 context.SaveChanges();
+                return patient;
             }
-            
+            else { return null; }
         }
 
         /// <summary>
