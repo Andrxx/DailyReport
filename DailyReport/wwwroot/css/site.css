@@ -108,6 +108,8 @@ th, td {
 .bg-lightgray {
     background-color: lightgray
 }
+
+
 /*ward section*/
 .ward-open {
     background-color: #4cff00a7
@@ -127,10 +129,10 @@ th, td {
     min-width: 100%;
     display: grid;
     grid-column-gap: 5px;
-    grid-template-columns: 350px 2fr 1fr 2fr 85px 40px 40px 40px 1fr 1fr;
+    grid-template-columns: 350px 3.5fr 3.7fr 3.8fr 85px 40px 40px 40px 1fr 1fr;
 }
 
-.ward_form {
+.patient_form {
     min-width: 100%;
     display: grid;
     grid-column-gap: 5px;

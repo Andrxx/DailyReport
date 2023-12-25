@@ -12,7 +12,7 @@ namespace DailyReport.Pages.Wards
     public class DepartmentWardsModel : PageModel
     {
         ApplicationContext context;
-        [BindProperty]
+        //[BindProperty]
         public Ward ward { get; set; }
         [BindProperty]
         public List<Ward> wards { get; set; } = new();
@@ -79,7 +79,7 @@ namespace DailyReport.Pages.Wards
             return RedirectToPage("DepartmentWards", new { depNumber = ward.Department });
         }
 
-        public IActionResult OnPostFetchWard()
+        public IActionResult OnPostFetchWard(Ward ward)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace DailyReport.Pages.Wards
             return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
         }
 
-        public IActionResult OnPostUpdatePatient()
+        public IActionResult OnPostUpdatePatient(Patient newPatient)
         {
             //if (!ModelState.IsValid)
             //{
@@ -168,6 +168,21 @@ namespace DailyReport.Pages.Wards
             {
                 //string ward = JsonConvert.SerializeObject(patients);
                 return Content(JsonConvert.SerializeObject(patients));
+            }
+            else
+            {
+                return new NotFoundResult();
+            }
+        }
+
+        public IActionResult OnPostUpdatePaient(Patient patient)
+        {
+
+            patient = PatientServices.UpdatePatient(context, patient);
+            if (patient != null)
+            {
+                //string ward = JsonConvert.SerializeObject(patients);
+                return Content(JsonConvert.SerializeObject(patient));
             }
             else
             {

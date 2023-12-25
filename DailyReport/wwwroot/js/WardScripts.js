@@ -1,5 +1,6 @@
 ﻿const wardsUrlRequest = document.location + '&handler=WardsList';
 const patientsUrlRequest = document.location + '&handler=PatientsList'
+const editPatient = document.location + '&handler=OnPostUpdatePatient'
 
 window.onload = async () => {
 	//var url = "Reports/DepReport?depNumber=1";
@@ -19,40 +20,50 @@ async function loadData(url) {
 			alert("Не удалось загрузить список пациентов " + responsePatientList.statusText);
 		}
 
-		for (let ward of wardsList)
-		{
+		for (let ward of wardsList) {
 			let filteredPaients = patientList.filter((patient) => patient.WardNumber == ward.Number);
 			let wardFormWrapper = document.createElement("div");
 			wardFormWrapper.classList.add('mt-1');
 			let wardHeaderForm = document.createElement("form");
 			let wardHeader = document.createElement("div");
 			wardHeader.classList.add('ward-header');
-			//wardHeader.classList.add('row');
-			let patientForm = document.createElement("form");				//new HTMLElement();
-			
-			patientForm.classList.add('ward_form');
+			let patientForm = document.createElement("form");
+			patientForm.setAttribute('method', 'post');
+			patientForm.classList.add('patient_form');
 			let patientFormText;
+			let isDirty = '';
+			let canPut = '';
+			if (ward.IsDirtyZone) isDirty = 'checked';
+			if (ward.CanPut) canPut = 'checked';
 
 			let wardHeaderFormText =
-				`<form method ='post' onsubmit = 'submitWard(event)' > 
+				`<form  onsubmit='submitWard(event)'> 
 					<div class='row bg-lightgray'>
 						<div class='col-2'>
 							Палата ${ward.Number}
-						</div>
-						<div class='form-check form-switch col-2'>
-							<input class='form-check-input' type='checkbox'>
-								<label class='form-check-label' for=''>Грязная зона</label>\
+							<input class='' value='${ward.Department}' type="hidden" id='ward_Department' name='Department'></input>
 						</div>
 						<div class='col-2 form-check form-switch'>
-							<input class='form-check-input' type='checkbox'>
+							<input class='form-check-input' type='checkbox' ${isDirty} id='ward_IsDirtyZone' name='IsDirtyZone'>
+							<label class='form-check-label' for=''>Грязная зона</label>
+						</div>
+						<div class='form-check form-switch col-2'>
+							<input class='form-check-input' type='checkbox' ${canPut} id='ward_CanPut' name='CanPut'>
 								<label class='form-check-label' for=''>Палата открыта</label>
 						</div>
 						<div class='col-1'>
-							<input type='submit' value='&#9998' asp-page-handler='UpdateWard' />
+							<input type='submit' value='&#9998' asp-page-handler='' />
+						</div>
+						<div class ="d-none col-1">
+							<input type="text" value='${ward.Number}' id='ward_Number' name='Number'/>
+							<input  type="number" value='${ward.Capacity}' id='ward_Capacity' name='Capacity'/>
+							<input type="number" value='${ward.Id}' id='ward_Id' name='Id'/>
 						</div>
 					</div>
 				</form >`
 
+			wardHeaderForm.setAttribute('method', 'post');
+			wardHeaderForm.setAttribute('onsubmit', 'submitWard(event)');
 			let wardHeaderText =
                 `<div class="">
                     ФИО пациента
@@ -92,9 +103,6 @@ async function loadData(url) {
 				let male = "";
 				let diagnos = "";
 				let date = new Date();
-				//let age = "";
-				//let male = "";
-				//let diagnos = "";
 				if (filteredPaients[i] != null) {
 					name = filteredPaients[i].Name;
 					age = filteredPaients[i].sAge;
@@ -102,16 +110,13 @@ async function loadData(url) {
 					diagnos = filteredPaients[i].Diagnos;
 					date = new Date(filteredPaients[i].HospitalisationDate);
 					date = Intl.DateTimeFormat().format(date);
-					//alert(date);
-					//name = filteredPaients[i].Name;
-					//name = filteredPaients[i].Name;
 				}
 				patientFormText =
-				`<form method="post" class='ward_form'>
-					<input  type="text" required value='${name}' />
-					<input type="text" placeholder="" required value='${age}'/>
-					<input class="" type="text" placeholder="Пол" required value='${male}'/>
-					<input class="" type="text" placeholder="Диагноз" required value='${diagnos}'/>
+				`<form>
+					<input  type="text" required value='${name}' name='Name'/>
+					<input type="text" placeholder="" required value='${age}' name='sAge'/>
+					<input class="" type="text" placeholder="Пол" required value='${male}' name='Male'/>
+					<input class="" type="text" placeholder="Диагноз" required value='${diagnos}' name='Diagnos'/>
 				`
 
 				if (filteredPaients[i] != null) {
@@ -124,40 +129,45 @@ async function loadData(url) {
 					patientFormText +=
 					`
 						<div> ${date} </div>
-
 						<div class="form-check form-switch col-1">
-							<input class="form-check-input" type="checkbox"  ${rash} asp-for="@Model.newPatient.HasRash">
+							<input class="form-check-input" type="checkbox"  ${rash} asp-for="@Model.newPatient.HasRash" name='HasRash'>
 						</div>
 						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" ${care} asp-for="@Model.newPatient.HasCareRisk" >
+							<input class="form-check-input" type="checkbox" ${care} asp-for="@Model.newPatient.HasCareRisk" name='HasCareRisk'>
                         </div>
 						<div class="form-check form-switch col-1">
-							<input class="form-check-input" type="checkbox" ${untouch} asp-for="@Model.newPatient.IsUntochable">
+							<input class="form-check-input" type="checkbox" ${untouch} asp-for="@Model.newPatient.IsUntochable" name='IsUntochable'>
 						</div>
-						<input type="submit" value="&#9998" asp-page-handler="UpdatePatient"/>
-						<input type="submit" value="&#128465" asp-page-handler="DeletePatient" />
+						<input type="submit" value="&#9998" name='edit' id='sub_edit' />
+						<input type="submit" value="&#128465" name='delete' id='sub_delete'/> 
 
-				</form>`
+						<input class="d-none" type="hidden" value=' ${filteredPaients[i].Department}'  name='Department'/>
+                        <input class="d-none" type="hidden" value='${filteredPaients[i].WardNumber}' name='WardNumber'/>
+                        <input class="d-none" type="hidden" value='${filteredPaients[i].Id}' name='Id'/>
+
+					</form>`
+
 					if (filteredPaients[i].HasRash || filteredPaients[i].HasCareRisk || filteredPaients[i].IsUntochable) {
 						wardFormWrapper.classList.add("ward-close");
-					}
+					}//<input type="hidden"></input onclick='eventAnalys(event)'formaction="${editPatient}"
 				}
 				else{ 
 				patientFormText +=
 					`
-						<input type="date" class="" value='${date}' required />
-						<input  type="checkbox" >
-						<input  type="checkbox" >
-						<input  type="checkbox" >
-						<input type="submit" value="+" asp-page-handler="AddPatient"/>
-						<input type="submit" value=""  class="invisible" />
-				</form>`}
+					<input type="date" class="" value='${date}' required name=''/>
+					<input  type="checkbox" name=''>
+					<input  type="checkbox" name=''>
+					<input  type="checkbox" name=''>
+					<input type="submit" value="+" name='add' id='sub_save'/>	
+				</form>`
+				}//<input type="submit" value=""  class="invisible" />
 				patientForm.innerHTML = patientFormText;
 				let fClone = patientForm.cloneNode(true);	//клонируем и добавляем форму для передачи объекта по значению
-				wardFormWrapper.append(fClone);
-				//wardFormWrapper.insertAdjacentHTML('beforeend', patientForm);
-				}
 
+				fClone.setAttribute('onsubmit', 'savePatient(event)');	//запуск формы
+
+				wardFormWrapper.append(fClone);
+			}
 			if (ward.Capacity <= filteredPaients.length) {
 				wardFormWrapper.classList.add("ward-full");
 			}
@@ -200,18 +210,23 @@ async function loadData(url) {
 	//alert("load");
 } 
 
-function submitWard(event) {
+async function submitWard(event) {
 	event.preventDefault();
 	var dep = event.target.elements.ward_Department.value;
 	let dirty = event.target.elements.ward_IsDirtyZone.checked;
 	let canPut = event.target.elements.ward_CanPut.checked;
-	var patientRows = event.target.parentElement.querySelectorAll(".patient");
+	var patientRows = event.target.parentElement.querySelectorAll(".patient_form");
 	var patientParent = event.target.parentElement;
-	//alert(document.location);
 	let url = document.location + '&handler=FetchWard';
 	let ward = new FormData(event.target); //получаем данные формы
+	//удаляем вхождения в форме с value='on' и добавляем булевые значения
+	ward.delete('IsDirtyZone');
+	ward.delete('CanPut');
+	ward.append('IsDirtyZone', event.target.elements.ward_IsDirtyZone.checked);
+	ward.append('CanPut', event.target.elements.ward_CanPut.checked);
+
 	//alert(ward);
-	let response = fetch(url	//)
+	let response = await fetch(url	//)
 		, {
 			method: 'POST',
 			headers: {
@@ -233,28 +248,56 @@ function submitWard(event) {
 					}
 				}
 				if (!canPut) {
-					patientRows.forEach((row) => {
-						if (row.classList.contains('ward-open')) {
-							row.classList.remove('ward-open');
-							row.classList.add('ward-close');
-						}
-					})
+					event.target.parentElement.classList.add('ward-close');
+					//patientRows.forEach((row) => {
+						//if (row.classList.contains('ward-open')) {
+							//row.classList.remove('ward-open');
+							//row.classList.add('ward-close');
+						//}
+					//})
 				}
 				if (canPut) {
-					patientRows.forEach((row) => {
-						if (row.classList.contains('ward-close')) {
-							row.classList.add('ward-open');
-							row.classList.remove('ward-close');
-						}
-					})
+					event.target.parentElement.classList.remove('ward-close');
+					event.target.parentElement.classList.add('ward-open');
+					//patientRows.forEach((row) => {
+						//if (row.classList.contains('ward-close')) {
+							//row.classList.add('ward-open');
+							//row.classList.remove('ward-close');
+						//}
+					//})
 				}
 			}
 		});
 }
 
+async function eventAnalys(event) {
+	event.preventDefault();
+	let action = event.target.name;
+	let nPatient = event.target.parentElement;
+	switch (action) {
+		case 'edit':
+			await savePatient(nPatient);
+			break;
+	}
+		
+}
+
 async function savePatient(event) {
 	event.preventDefault();
-	let url = document.location + '?handler=FetchSavePatients';
+	let fSubmitter = event.submitter;//.target//.querySelector('#sub_edit');  //event.target.contains();
+	let subUrl = '';
+	switch (fSubmitter.name) {
+		case 'edit':
+			subUrl = '&handler=UpdatePaient';
+			break;
+		case 'add':
+			;
+			break;
+		case 'delete':
+			;
+			break;
+	}
+	let url = document.location + subUrl;
 	let patient = new FormData(event.target); //получаем данные формы
 	let response = await fetch(url
 		, {
@@ -267,7 +310,7 @@ async function savePatient(event) {
 	if (response.ok) {
 		let result = await response.json();
 		let emptyForm = event.target.cloneNode(true);
-		event.target.parentElement.append(emptyForm);
+		event.parentElement.append(emptyForm);
 		//alert(emptyForm);
 		//event.target.querySelector('#newPatient_Gender').value = result.Gender;// = response.;
 		//event.target.querySelector('#newPatient_Name').value = result.Name;
