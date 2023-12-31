@@ -175,6 +175,11 @@ namespace DailyReport.Pages.Wards
             }
         }
 
+        /// <summary>
+        /// обновляем пациента и возвращаем как json объект, метод для fetch вызова
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns></returns>
         public IActionResult OnPostUpdatePaient(Patient patient)
         {
 
@@ -188,6 +193,20 @@ namespace DailyReport.Pages.Wards
             {
                 return new NotFoundResult();
             }
+        }
+
+
+        public IActionResult OnPostDeletePatient(int Id)
+        {
+
+            PatientServices.DeletePatient(context, Id);
+            Patient patient = PatientServices.GetPatientById(context, Id);
+            if (patient != null) { return new NotFoundResult(); }
+            else
+            {
+                return new OkResult();
+            }
+            //return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
         }
     }
 }

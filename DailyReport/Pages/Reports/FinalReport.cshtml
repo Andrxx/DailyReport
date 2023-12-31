@@ -11,40 +11,40 @@
             <tbody>
                 @*строка мест*@
                 <tr class="table-primary fw-bold m-0 p-0 print-m-p-0">
-                    <td rowspan="2" class="print-m-p-0">@Model.reportDate.ToString("dd.MM.yy")</td>
+                    <td @*rowspan="2"*@ class="print-m-p-0">@Model.reportDate.ToString("dd.MM.yy")</td>
                     @*<td colspan="4">1-е ИО (@(@Model.departmentSpots.dep11 + @Model.departmentSpots.dep11Children
                         + @Model.departmentSpots.dep1 + @Model.departmentSpots.dep1Children) коек)</td>*@
-                    <td colspan="2" rowspan="2">1-е ИО (@(@Model.departmentSpots.dep11 + @Model.departmentSpots.dep11Children
-                        @*+ @Model.departmentSpots.dep1 + @Model.departmentSpots.dep1Children*@) коек (грязная зона))</td>
-                    <td class="print-m-p-0" colspan="2" rowspan="2">3-е ИО (@(@Model.departmentSpots.dep3 + @Model.departmentSpots.dep3Children) коек)</td>
-                    <td class="print-m-p-0" colspan="2" rowspan="2">4-е ИО (@(@Model.departmentSpots.dep4 + @Model.departmentSpots.dep4Children) коек)</td>
-                    <td class="print-m-p-0" colspan="4" @*rowspan="2"*@>5-е ИО (@(@Model.departmentSpots.dep5 + @Model.departmentSpots.dep5Children
-                        + @Model.departmentSpots.dep51 + @Model.departmentSpots.dep51Children) коек)</td>
-                    <td class="print-m-p-0" colspan="2" rowspan="2">6-е ИО (@(@Model.departmentSpots.dep6 + @Model.departmentSpots.dep6Children) коек)</td>
-                    <td class="print-m-p-0" colspan="2" rowspan="2">7-е ИО (@(@Model.departmentSpots.dep7 + @Model.departmentSpots.dep7Children) коек)</td>
-                    <td class="print-m-p-0" colspan="4">ОРИТ (@(@Model.departmentSpots.dep91 + @Model.departmentSpots.dep91Children
-                        + @Model.departmentSpots.dep90 + @Model.departmentSpots.dep90Children) коек)</td>
-                    <td class="print-m-p-0" colspan="2" rowspan="2">Дневной стационар (@(@Model.departmentSpots.dep8 + @Model.departmentSpots.dep8Children) коек)</td>
-                    <td class="print-m-p-0" colspan="3" rowspan="2">@(@Model.departmentSpots.sum + @Model.departmentSpots.sumChildren) стационарных коек</td>
-                    <td class="print-m-p-0" colspan="3" rowspan="2">Всего @(@Model.departmentSpots.sumOC + @Model.departmentSpots.sumOCChildren) с учетом дневного стационара</td>
+                    <td colspan="2" @*rowspan="2"*@>1-е ИО (@(@* Model.departmentSpots.dep11 + @Model.departmentSpots.dep11Children +*@
+                        @Model.departmentSpots.dep1 + @Model.departmentSpots.dep1Children) коек)</td>
+                    <td class="print-m-p-0" colspan="2" @*rowspan="2"*@>3-е ИО (@(@Model.departmentSpots.dep3 + @Model.departmentSpots.dep3Children) коек)</td>
+                    <td class="print-m-p-0" colspan="2" @*rowspan="2"*@>4-е ИО (@(@Model.departmentSpots.dep4 + @Model.departmentSpots.dep4Children) коек)</td>
+                    <td class="print-m-p-0" colspan="2" @*rowspan="2"*@>5-е ИО (@(@Model.departmentSpots.dep5 + @Model.departmentSpots.dep5Children
+                        @*+ @Model.departmentSpots.dep51 + @Model.departmentSpots.dep51Children*@) коек)</td>
+                    <td class="print-m-p-0" colspan="2" @*rowspan="2"*@>6-е ИО (@(@Model.departmentSpots.dep6 + @Model.departmentSpots.dep6Children) коек)</td>
+                    <td class="print-m-p-0" colspan="2" @*rowspan="2"*@>7-е ИО (@(@Model.departmentSpots.dep7 + @Model.departmentSpots.dep7Children) коек)</td>
+                    <td class="print-m-p-0" colspan="2">ОРИТ (@( @* Model.departmentSpots.dep91 + @Model.departmentSpots.dep91Children + *@
+                        @Model.departmentSpots.dep90 + @Model.departmentSpots.dep90Children) коек)</td>
+                    <td class="print-m-p-0" colspan="2" @*rowspan="2"*@>Дневной стационар (@(@Model.departmentSpots.dep8 + @Model.departmentSpots.dep8Children) коек)</td>
+                    <td class="print-m-p-0" colspan="3" @*rowspan="2"*@>@(@Model.departmentSpots.sum + @Model.departmentSpots.sumChildren) стационарных коек</td>
+                    <td class="print-m-p-0" colspan="3" @*rowspan="2"*@>Всего @(@Model.departmentSpots.sumOC + @Model.departmentSpots.sumOCChildren) с учетом дневного стационара</td>
                 </tr>
-                @*строка разделения грязных, управление из стороки выше*@
+                @*строка разделения грязных, управление из стороки выше
                 <tr class="table-primary fw-bold  m-0 p-0">
                     <td class="print-m-p-0" colspan="2">Грязная</td>
                     <td class="print-m-p-0" colspan="2">Чистая</td>
                     <td class="print-m-p-0" colspan ="2">Грязная</td>
                     <td class="print-m-p-0" colspan="2">Чистая</td>
-                </tr>
+                </tr>*@
                 @*строка разделения взр/дети*@
                 <tr class="table-secondary align-bottom  m-0 p-0">
                     <td class="fw-bold  print-m-p-0">
-                        Всего: взрослые @Model.departmentSpots.sum, детские @Model.departmentSpots.sumChildren,
-                        COVID-19: ВЗР - @(@Model.departmentSpots.dep11 + @Model.departmentSpots.dep91 + @Model.departmentSpots.dep51), 
-                        ДЕТ - @(@Model.departmentSpots.dep11Children + @Model.departmentSpots.dep91Children)</td>
-                    <td class="print-m-p-0">Взр</td>
+                        Всего: взрослые @Model.departmentSpots.sum, детские @Model.departmentSpots.sumChildren</td>
+                       @* COVID-19: ВЗР - @(@Model.departmentSpots.dep11 + @Model.departmentSpots.dep91 + @Model.departmentSpots.dep51), 
+                        ДЕТ - @(@Model.departmentSpots.dep11Children + @Model.departmentSpots.dep91Children)*@
+                    @*<td class="print-m-p-0">Взр</td>
                     <td class="print-m-p-0">Дет</td>
                     <td class="print-m-p-0">Взр</td>
-                    <td class="print-m-p-0">Дет</td>
+                    <td class="print-m-p-0">Дет</td>*@
                     <td class="print-m-p-0">Взр</td>
                     <td class="print-m-p-0">Дет</td>
                     <td class="print-m-p-0">Взр</td>
@@ -71,27 +71,27 @@
                 @*строка фактические койки*@
                 <tr class="table-secondary  m-0 p-0">
                     <td class="fw-bold  print-m-p-0">Количество коек (фактическое)</td>
-                    <td class="print-m-p-0">@Model.departmentSpots.dep11</td>
-                    <td class="print-m-p-0">@Model.departmentSpots.dep11Children</td>
+                   @* <td class="print-m-p-0">@Model.departmentSpots.dep11</td>
+                    <td class="print-m-p-0">@Model.departmentSpots.dep11Children</td>*@
 
-                    @*первое отделение чистое
-                        <td class="print-m-p-0">@Model.departmentSpots.dep1</td>
-                    <td class="print-m-p-0">@Model.departmentSpots.dep1Children</td>*@
+                    @*первое отделение чистое*@
+                    <td class="print-m-p-0">@Model.departmentSpots.dep1</td>
+                    <td class="print-m-p-0">@Model.departmentSpots.dep1Children</td>
 
                     <td class="print-m-p-0">@Model.departmentSpots.dep3</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep3Children</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep4</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep4Children</td>
-                    <td class="print-m-p-0">@Model.departmentSpots.dep51</td>
-                    <td class="print-m-p-0">@Model.departmentSpots.dep51Children</td>
+                    @*<td class="print-m-p-0">@Model.departmentSpots.dep51</td>
+                    <td class="print-m-p-0">@Model.departmentSpots.dep51Children</td>*@
                     <td class="print-m-p-0">@Model.departmentSpots.dep5</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep5Children</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep6</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep6Children</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep7</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep7Children</td>
-                    <td class="print-m-p-0">@Model.departmentSpots.dep91</td>
-                    <td class="print-m-p-0">@Model.departmentSpots.dep91Children</td>
+                    @*<td class="print-m-p-0">@Model.departmentSpots.dep91</td>
+                    <td class="print-m-p-0">@Model.departmentSpots.dep91Children</td>*@
                     <td class="print-m-p-0">@Model.departmentSpots.dep90</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep90Children</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep8</td>
@@ -239,15 +239,15 @@
                 </tr>
                 <tr class="table-secondary border-transparent print-m-p-0">
                     <td class="fw-bold">Свободные места</td>
-                    <td colspan="2">@(@Model.freeSpots.dep11S @*+ @Model.freeSpots.dep11Children*@)</td>
-                   @* <td colspan="2">@(@Model.freeSpots.dep1S @*+ @Model.freeSpots.dep1Children)</td>*@
+                    @*<td colspan="2">@(@Model.freeSpots.dep11S @*+ @Model.freeSpots.dep11Children)</td>*@
+                    <td colspan="2">@(@Model.freeSpots.dep1S @*+ @Model.freeSpots.dep1Children*@)</td>
                     <td colspan="2">@(@Model.freeSpots.dep3S @*+ @Model.freeSpots.dep3Children*@)</td>
                     <td colspan="2">@(@Model.freeSpots.dep4S @*+ @Model.freeSpots.dep4Children*@)</td>
-                    <td colspan="2">@(@Model.freeSpots.dep51S @*+ @Model.freeSpots.dep5Children*@)</td>
+                    @*<td colspan="2">@(@Model.freeSpots.dep51S + @Model.freeSpots.dep5Children)</td>*@
                     <td colspan="2">@(@Model.freeSpots.dep5S@*+ @Model.freeSpots.dep5Children*@)</td>
                     <td colspan="2">@(@Model.freeSpots.dep6S @*+ @Model.freeSpots.dep6Children*@)</td>
                     <td colspan="2">@(@Model.freeSpots.dep7S @*+ @Model.freeSpots.dep7Children*@)</td>
-                    <td colspan="2">@(@Model.freeSpots.dep91S @*+ @Model.freeSpots.dep91Children*@)</td>
+                    @*<td colspan="2">@(@Model.freeSpots.dep91S @*+ @Model.freeSpots.dep91Children)</td>*@
                     <td colspan="2">@(@Model.freeSpots.dep90S @*+ @Model.freeSpots.dep90Children*@)</td>
                     <td colspan="2">@(@Model.freeSpots.dep8S @*+ @Model.freeSpots.dep8Children*@)</td>
                     <td>@Model.freeSpots.sum</td>
@@ -339,18 +339,17 @@
 
                 <tr class="table-warning border-transparent print-m-p-0">
                     <td class="fw-bold  print-m-p-0">Количество пациентов на кислороде</td>
-                    <td class="print-m-p-0" colspan="2">@Model.oxygenSum11</td>
+                    <td class="print-m-p-0" colspan="2">@Model.oxygenSum1</td>
                     <td class="print-m-p-0" colspan="2"></td>
                     <td class="print-m-p-0" colspan="2"></td>
                     <td class="print-m-p-0" colspan="2"></td>
                     <td class="print-m-p-0" colspan="2"></td>
                     <td class="print-m-p-0" colspan="2"></td>
-                    <td class="print-m-p-0" colspan="2"></td>
-                    <td class="print-m-p-0" colspan="2">@Model.oxygenSum91</td>
+                    @*<td class="print-m-p-0" colspan="2">@Model.oxygenSum91</td>*@
                     <td class="print-m-p-0" colspan="2">@Model.oxygenSum90</td>
                     <td class="print-m-p-0" colspan="2"></td>
                     <td class="print-m-p-0" colspan="2"></td>
-                    <td class="print-m-p-0">@(@Model.oxygenSum11 + @Model.oxygenSum91 + @Model.oxygenSum90)</td>
+                    <td class="print-m-p-0">@(@Model.oxygenSum1 + @*@Model.oxygenSum91 +*@ @Model.oxygenSum90)</td>
                     <td colspan="3" class="bg-transparent border-0 print-m-p-0"></td>
                 </tr>
 
@@ -476,7 +475,7 @@
 
                 <tr class="border-transparent print-m-p-0">
                     <td class="fw-bold  print-m-p-0"><b>Нозологии</b></td>
-                    <td class="print-m-p-0" colspan="23"></td>
+                    <td class="print-m-p-0" colspan="19"></td>
                     <td colspan="3" class="bg-transparent border-0 print-m-p-0"></td>
                 </tr>
                 <tr class="table-secondary border-transparent print-m-p-0">
@@ -639,24 +638,24 @@
                 </tr>
                 <tr class="table-primary fw-bold border-transparent print-m-p-0">
                     <td >Итого</td>
-                    <td>@Model.deseaseSum11</td>
-                    <td>@Model.deseaseSum11Children</td>
-                    @*<td>@Model.deseaseSum1</td>
-                    <td>@Model.deseaseSum1Children</td>*@
+                    @*<td>@Model.deseaseSum11</td>
+                    <td>@Model.deseaseSum11Children</td>*@
+                    <td>@Model.deseaseSum1</td>
+                    <td>@Model.deseaseSum1Children</td>
                     <td>@Model.deseaseSum3</td>
                     <td>@Model.deseaseSum3Children</td>
                     <td>@Model.deseaseSum4</td>
                     <td>@Model.deseaseSum4Children</td>
-                    <td>@Model.deseaseSum51</td>
-                    <td>@Model.deseaseSum51Children</td>
+                    @*<td>@Model.deseaseSum51</td>
+                    <td>@Model.deseaseSum51Children</td>*@
                     <td>@Model.deseaseSum5</td>
                     <td>@Model.deseaseSum5Children</td>
                     <td>@Model.deseaseSum6</td>
                     <td>@Model.deseaseSum6Children</td>
                     <td>@Model.deseaseSum7</td>
                     <td>@Model.deseaseSum7Children</td>
-                    <td>@Model.deseaseSum91</td>
-                    <td>@Model.deseaseSum91Children</td>
+                    @*<td>@Model.deseaseSum91</td>
+                    <td>@Model.deseaseSum91Children</td>*@
                     <td>@Model.deseaseSum90</td>
                     <td>@Model.deseaseSum90Children</td>   
                     <td>@Model.deseaseSum8</td>
@@ -690,24 +689,24 @@
                 <tr class="table-secondary border-transparent print-m-p-0">
                     <td class="fw-bold">Количество человек в крулосуточном стационаре</td>
                     @{
-                                    <td>@(@Model.deseaseSum11 + @Model.depReport11.care)</td>
-                                    <td>@Model.deseaseSum11Children</td>
-                                    @*<td>@(@Model.deseaseSum1 + @Model.depReport1.care)</td>
-                                    <td>@Model.deseaseSum1Children</td>*@
+                                    @*<td>@(@Model.deseaseSum11 + @Model.depReport11.care)</td>
+                                    <td>@Model.deseaseSum11Children</td>*@
+                                    <td>@(@Model.deseaseSum1 + @Model.depReport1.care)</td>
+                                    <td>@Model.deseaseSum1Children</td>
                                     <td>@(@Model.deseaseSum3 + @Model.depReport3.care)</td>
                                     <td>@Model.deseaseSum3Children</td>
                                     <td>@(@Model.deseaseSum4 + @Model.depReport4.care)</td>
                                     <td>@Model.deseaseSum4Children</td>
-                                    <td>@(@Model.deseaseSum51 + @Model.depReport51.care)</td>
-                                    <td>@Model.deseaseSum51Children</td>
+                                    @*<td>@(@Model.deseaseSum51 + @Model.depReport51.care)</td>
+                                    <td>@Model.deseaseSum51Children</td>*@
                                     <td>@(@Model.deseaseSum5 + @Model.depReport5.care)</td>
                                     <td>@Model.deseaseSum5Children</td>
                                     <td>@(@Model.deseaseSum6 + @Model.depReport6.care)</td>
                                     <td>@Model.deseaseSum6Children</td>
                                     <td>@(@Model.deseaseSum7 + @Model.depReport7.care)</td>
                                     <td>@Model.deseaseSum7Children</td>
-                                    <td>@(@Model.deseaseSum91 + @Model.depReport91.care)</td>
-                                    <td>@Model.deseaseSum91Children</td>
+                                    @*<td>@(@Model.deseaseSum91 + @Model.depReport91.care)</td>
+                                    <td>@Model.deseaseSum91Children</td>*@
                                     <td>@(@Model.deseaseSum90 + @Model.depReport90.care)</td>
                                     <td>@Model.deseaseSum90Children</td>
                                     <td>@(@Model.deseaseSum8 + @Model.depReport8.care)</td>
@@ -721,20 +720,20 @@
 
                 <tr class="border-transparent print-m-p-0">
                     <td class="fw-bold print-m-p-0">Обратившиеся в КДО</td>
-                    <td colspan="22" class="print-m-p-0"></td>
+                    <td colspan="18" class="print-m-p-0"></td>
                     <td class="text-center bg-light print-m-p-0" id="kdo">@Model.depReport81.present</td>
                     <td colspan="3" class="bg-transparent border-0 print-m-p-0"></td>
                 </tr>
                 <tr class="border-transparent print-m-p-0">
                     <td class="fw-bold print-m-p-0">Платные услуги</td>
-                    <td colspan="22" class="print-m-p-0"></td>
+                    <td colspan="18" class="print-m-p-0"></td>
                     <td class="text-center bg-light print-m-p-0" id="">@Model.depReport82.present</td>
                     <td colspan="3" class="bg-transparent print-m-p-0 border-0"></td>
                 </tr>
 
                 <tr class="border-transparent print-m-p-0">
                     <td class="fw-bold print-m-p-0">Отказ от госпитализации</td>
-                    <td colspan="20" class="print-m-p-0"></td>
+                    <td colspan="16" class="print-m-p-0"></td>
                     <td  class="print-m-p-0">@Model.reject</td>
                     @*<input id="reject" oninput="CountReject()" type="number" name="reject" class="reject" value="0" />*@
                     <td class="print-m-p-0">@Model.rejectChildren </td>@*<input id="rejectChildren" oninput="CountReject()" type="number" name="rejectChildrens" class="reject" value="0"/>*@
@@ -743,7 +742,7 @@
                 </tr>
                 <tr class="border-transparent print-m-p-0">
                     <td class="fw-bold">На амбулаторное лечение</td>
-                    <td colspan="20"></td>
+                    <td colspan="16"></td>
                     <td class="print-m-p-0">@Model.ambulance </td>@*<input id="ambulance" oninput="CountReject()" type="number" name="existed" class="reject" value="0"/>*@
                     <td class="print-m-p-0">@Model.ambulanceChildren</td>@*<input id="ambulanceChildren" oninput="CountReject()" type="number" name="existedChildrens" class="reject" value="0"/>*@ 
                     <td class="text-center print-m-p-0" id="sumAmb">@Model.sumAmbulance</td>
@@ -751,7 +750,7 @@
                 </tr>
                 <tr class="border-transparent pba-never print-m-p-0">
                     <td class="fw-bold">В другую МО</td>
-                    <td colspan="20"></td>
+                    <td colspan="16"></td>
                     <td>@Model.submitOtherHosp</td>@*<input id="sendToMO" oninput="CountReject()" type="number" name="existed" class="reject" value="0"/>*@
                     <td>@Model.submitOtherHospChildren </td>
                     <td  class="text-center" id="sumOth">@Model.sumOther</td>
@@ -759,7 +758,7 @@
                 </tr>
                 <tr class="table-secondary border-transparent pba-never print-m-p-0">
                     <td class="fw-bold">Всего не госпитализировано</td>
-                    <td colspan="20"></td>
+                    <td colspan="16"></td>
                     <td  class="text-center" id="sumAdults">@Model.sumAdults</td>
                     <td  class="text-center" id="sumChild">@Model.sumChildren</td>
                     <td  class="text-center" id="sumAll">@Model.sumTotal</td>

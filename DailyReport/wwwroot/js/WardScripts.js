@@ -113,10 +113,10 @@ async function loadData(url) {
 				}
 				patientFormText =
 				`<form>
-					<input  type="text" required value='${name}' name='Name'/>
-					<input type="text" placeholder="" required value='${age}' name='sAge'/>
-					<input class="" type="text" placeholder="Пол" required value='${male}' name='Male'/>
-					<input class="" type="text" placeholder="Диагноз" required value='${diagnos}' name='Diagnos'/>
+					<input  type="text" required value='${name}' name='Name' id=''/>
+					<input type="text" placeholder="" required value='${age}' name='sAge' id=''/>
+					<input class="" type="text" placeholder="Пол" required value='${male}' name='Male' id=''/>
+					<input class="" type="text" placeholder="Диагноз" required value='${diagnos}' name='Diagnos' id=''/>
 				`
 
 				if (filteredPaients[i] != null) {
@@ -130,19 +130,19 @@ async function loadData(url) {
 					`
 						<div> ${date} </div>
 						<div class="form-check form-switch col-1">
-							<input class="form-check-input" type="checkbox"  ${rash} asp-for="@Model.newPatient.HasRash" name='HasRash'>
+							<input class="form-check-input" type="checkbox"  ${rash} name='HasRash' id=''>
 						</div>
 						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" ${care} asp-for="@Model.newPatient.HasCareRisk" name='HasCareRisk'>
+							<input class="form-check-input" type="checkbox" ${care} name='HasCareRisk' id=''>
                         </div>
 						<div class="form-check form-switch col-1">
-							<input class="form-check-input" type="checkbox" ${untouch} asp-for="@Model.newPatient.IsUntochable" name='IsUntochable'>
+							<input class="form-check-input" type="checkbox" ${untouch} name='IsUntochable' id=''>
 						</div>
 						<input type="submit" value="&#9998" name='edit' id='sub_edit' />
 						<input type="submit" value="&#128465" name='delete' id='sub_delete'/> 
 
-						<input class="d-none" type="hidden" value=' ${filteredPaients[i].Department}'  name='Department'/>
-                        <input class="d-none" type="hidden" value='${filteredPaients[i].WardNumber}' name='WardNumber'/>
+						<input class="d-none" type="hidden" value=' ${filteredPaients[i].Department}'  name='Department' id=''/>
+                        <input class="d-none" type="hidden" value='${filteredPaients[i].WardNumber}' name='WardNumber' id=''/>
                         <input class="d-none" type="hidden" value='${filteredPaients[i].Id}' name='Id'/>
 
 					</form>`
@@ -154,11 +154,11 @@ async function loadData(url) {
 				else{ 
 				patientFormText +=
 					`
-					<input type="date" class="" value='${date}' required name=''/>
-					<input  type="checkbox" name=''>
-					<input  type="checkbox" name=''>
-					<input  type="checkbox" name=''>
-					<input type="submit" value="+" name='add' id='sub_save'/>	
+					<input type="date" class="" value='${date}' required name='' id=''/>
+					<input  type="checkbox" name='' id=''>
+					<input  type="checkbox" name='' id=''>
+					<input  type="checkbox" name='' id=''>
+					<input type="submit" value="+" name='add' id='sub_save' id=''/>	
 				</form>`
 				}//<input type="submit" value=""  class="invisible" />
 				patientForm.innerHTML = patientFormText;
@@ -294,11 +294,26 @@ async function savePatient(event) {
 			;
 			break;
 		case 'delete':
-			;
+			subUrl = '&handler=DeletePatient';
 			break;
 	}
 	let url = document.location + subUrl;
 	let patient = new FormData(event.target); //получаем данные формы
+	if (fSubmitter.name == 'delete') {
+		alert(patient.get('Id'));
+
+		let response = await fetch(url
+			, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'	//используем кодировку для сохранения привязки объекта
+				},
+				body: new URLSearchParams(patient.get("Id"))		//преобразуем форму в application/x-www-form-urlencoded для работы привязки ASP Razor
+			});
+		if (response.ok) {
+			//break;
+		}
+	}
 	let response = await fetch(url
 		, {
 			method: 'POST',
@@ -309,8 +324,8 @@ async function savePatient(event) {
 		});
 	if (response.ok) {
 		let result = await response.json();
-		let emptyForm = event.target.cloneNode(true);
-		event.parentElement.append(emptyForm);
+		//let emptyForm = event.target.cloneNode(true);
+		//event.target.parentElement.append(emptyForm);
 		//alert(emptyForm);
 		//event.target.querySelector('#newPatient_Gender').value = result.Gender;// = response.;
 		//event.target.querySelector('#newPatient_Name').value = result.Name;
@@ -323,6 +338,6 @@ async function savePatient(event) {
 		//alert(event.target.querySelector('#newPatient_Shipped').value);
 	}
 	else {
-		alert("Не сохрнено, " + response.statusText);
+		alert("Не сохранено, " + response.statusText);
 	}
 }
