@@ -57,7 +57,7 @@ namespace DailyReport.Services.WardServices
         /// <param name="context"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static Patient GetPatientsById(ApplicationContext context, int id)
+        public static Patient GetPatientById(ApplicationContext context, int id)
         {
             Patient patient = new();
             patient = (from p in context.Patients
@@ -83,7 +83,7 @@ namespace DailyReport.Services.WardServices
         /// <param name="newPatient"></param>
         public static Patient UpdatePatient(ApplicationContext context, Patient newPatient)
         {
-            Patient patient = GetPatientsById(context, newPatient.Id);
+            Patient patient = GetPatientById(context, newPatient.Id);
             if(patient != null)
             {
                 patient.HospitalisationDate = newPatient.HospitalisationDate;
@@ -106,19 +106,18 @@ namespace DailyReport.Services.WardServices
         }
 
         /// <summary>
-        /// удаляем пациента
+        /// удаляем пациента, метод не подтверждает удаление
         /// </summary>
         /// <param name="context"></param>
         /// <param name="id"></param>
         public static void DeletePatient(ApplicationContext context, int id)
         {
-            Patient newPatient = GetPatientsById(context, id);
+            Patient newPatient = GetPatientById(context, id);
             if (newPatient != null)
             {
                 context.Remove(newPatient);
-                context.SaveChanges();
+                //context.SaveChanges();
             }
-
         }
 
         public static Patient CreateTestPatient(int id, bool untoch, bool rash, bool disodered, bool risk)
