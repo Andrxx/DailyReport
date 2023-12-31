@@ -6,7 +6,7 @@
     msg = Model.departmentNumber + " отделения";
     ViewData["Title"] = "Управление палатами" + msg;
 }
-<script src="~/js/WardScripts.js" asp-append-version="true"></script>
+@*<script src="~/js/WardScripts.js" asp-append-version="true"></script>*@
 
 <h4>Регистрация пациентов @msg</h4>
 
@@ -51,7 +51,8 @@
                 </div>
             </form>
 
-            <div class="row ward-header">
+            <div class="row ">
+                @*ward-header*@
                 <div class="col-2">
                     ФИО пациента
                 </div>
