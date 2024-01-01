@@ -221,11 +221,14 @@
                         @Model.finalReport.diedChildren + @Model.depReport8.diedChildrens)</td>
                 </tr>
                 <tr class="print-m-p-0">
-                    <td class="fw-bold">Состоит в отделении</td>
+                    <td class="fw-bold print-m-p-0">Состоит в отделении</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                                        <td>@if(dr.present > 0) {@dr.present}</td>
-                                        <td>@if(dr.presentChildrens > 0) {@dr.presentChildrens}</td>
+                                        <td class="print-m-p-0">@if(dr.present > 0) {@dr.present}</td>
+                            <td class="print-m-p-0">@if (dr.presentChildrens > 0)
+                                {
+                                    @dr.presentChildrens
+                                }</td>
                         }
                     }
                     <td class="print-m-p-0">@Model.finalReport.present</td>
@@ -504,31 +507,31 @@
                     <td>@(@Model.finalReport.U072 + @Model.finalReport.U072Children)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="border-transparent print-m-p-0">
-                    <td class="fw-bold">ОРИ</td>
-                    @{
-                        foreach(DepReport dr in Model.filteredReports){
-                                        <td>@if(dr.ORVI > 0) @dr.ORVI </td>
-                                        <td>@if (dr.ORVIChildrens > 0) @dr.ORVIChildrens </td>
-                        }
-                    }
-                    <td>@Model.finalReport.ORVI</td>
-                    <td>@Model.finalReport.ORVIChildren</td>
-                    <td>@(@Model.finalReport.ORVI + @Model.finalReport.ORVIChildren)</td>
-                    <td colspan="3" class="bg-transparent border-0"></td>
-                </tr>
                 <tr class="border-transparent print-m-p-0 pba-always">
-                    <td class="fw-bold">Пневмония</td>
+                    <td class="fw-bold print-m-p-0">ОРИ</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                                        <td>@if(dr.pneumonia > 0) @dr.pneumonia </td>
-                                        <td>@if (dr.pneumoniaChildrens > 0) @dr.pneumoniaChildrens </td>
+                            <td class="print-m-p-0">@if(dr.ORVI > 0) @dr.ORVI </td>
+                            <td class="print-m-p-0">@if (dr.ORVIChildrens > 0) @dr.ORVIChildrens </td>
                         }
                     }
-                    <td>@Model.finalReport.pneumonia</td>
-                    <td>@Model.finalReport.pneumoniaChildren</td>
-                    <td>@(@Model.finalReport.pneumonia + @Model.finalReport.pneumoniaChildren)</td>
-                    <td colspan="3" class="bg-transparent border-0"></td>
+                    <td class="print-m-p-0">@Model.finalReport.ORVI</td>
+                    <td class="print-m-p-0">@Model.finalReport.ORVIChildren</td>
+                    <td class="print-m-p-0">@(@Model.finalReport.ORVI + @Model.finalReport.ORVIChildren)</td>
+                    <td colspan="3" class="bg-transparent border-0 print-m-p-0"></td>
+                </tr>
+                <tr class="border-transparent print-m-p-0 ">
+                    <td class="fw-bold print-m-p-0">Пневмония</td>
+                    @{
+                        foreach(DepReport dr in Model.filteredReports){
+                                        <td class="print-m-p-0">@if(dr.pneumonia > 0) @dr.pneumonia </td>
+                                        <td class="print-m-p-0">@if (dr.pneumoniaChildrens > 0) @dr.pneumoniaChildrens </td>
+                        }
+                    }
+                    <td class="print-m-p-0">@Model.finalReport.pneumonia</td>
+                    <td class="print-m-p-0">@Model.finalReport.pneumoniaChildren</td>
+                    <td class="print-m-p-0">@(@Model.finalReport.pneumonia + @Model.finalReport.pneumoniaChildren)</td>
+                    <td colspan="3" class="bg-transparent border-0 print-m-p-0"></td>
                 </tr>
                 <tr class="border-transparent print-m-p-0">
                     <td class="fw-bold">Грипп</td>
@@ -687,35 +690,35 @@
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
                 <tr class="table-secondary border-transparent print-m-p-0">
-                    <td class="fw-bold">Количество человек в крулосуточном стационаре</td>
+                    <td class="fw-bold print-m-p-0">Количество человек в крулосуточном стационаре</td>
                     @{
-                                    @*<td>@(@Model.deseaseSum11 + @Model.depReport11.care)</td>
-                                    <td>@Model.deseaseSum11Children</td>*@
-                                    <td>@(@Model.deseaseSum1 + @Model.depReport1.care)</td>
-                                    <td>@Model.deseaseSum1Children</td>
-                                    <td>@(@Model.deseaseSum3 + @Model.depReport3.care)</td>
-                                    <td>@Model.deseaseSum3Children</td>
-                                    <td>@(@Model.deseaseSum4 + @Model.depReport4.care)</td>
-                                    <td>@Model.deseaseSum4Children</td>
-                                    @*<td>@(@Model.deseaseSum51 + @Model.depReport51.care)</td>
-                                    <td>@Model.deseaseSum51Children</td>*@
-                                    <td>@(@Model.deseaseSum5 + @Model.depReport5.care)</td>
-                                    <td>@Model.deseaseSum5Children</td>
-                                    <td>@(@Model.deseaseSum6 + @Model.depReport6.care)</td>
-                                    <td>@Model.deseaseSum6Children</td>
-                                    <td>@(@Model.deseaseSum7 + @Model.depReport7.care)</td>
-                                    <td>@Model.deseaseSum7Children</td>
-                                    @*<td>@(@Model.deseaseSum91 + @Model.depReport91.care)</td>
-                                    <td>@Model.deseaseSum91Children</td>*@
-                                    <td>@(@Model.deseaseSum90 + @Model.depReport90.care)</td>
-                                    <td>@Model.deseaseSum90Children</td>
-                                    <td>@(@Model.deseaseSum8 + @Model.depReport8.care)</td>
-                                    <td>@Model.deseaseSum8Children</td>
-                                    <td>@*(@Model.deseaseSumFinal + Model.finalReport.care)*@</td>
-                                    <td>@*Model.deseaseSumFinalChildren*@</td>
-                                    <td>@(@Model.deseaseSumFinal + Model.finalReport.care + @Model.deseaseSumFinalChildren)</td>
+                        @*<td class="print-m-p-0">@(@Model.deseaseSum11 + @Model.depReport11.care)</td>
+                                    <td class="print-m-p-0">@Model.deseaseSum11Children</td>*@
+                                    <td class="print-m-p-0">@(@Model.deseaseSum1 + @Model.depReport1.care)</td>
+                                    <td class="print-m-p-0">@Model.deseaseSum1Children</td>
+                                    <td class="print-m-p-0">@(@Model.deseaseSum3 + @Model.depReport3.care)</td>
+                                    <td class="print-m-p-0">@Model.deseaseSum3Children</td>
+                                    <td class="print-m-p-0">@(@Model.deseaseSum4 + @Model.depReport4.care)</td>
+                                    <td class="print-m-p-0">@Model.deseaseSum4Children</td>
+                                    @*<td class="print-m-p-0">@(@Model.deseaseSum51 + @Model.depReport51.care)</td>
+                                    <td class="print-m-p-0">@Model.deseaseSum51Children</td>*@
+                                    <td class="print-m-p-0">@(@Model.deseaseSum5 + @Model.depReport5.care)</td>
+                                    <td class="print-m-p-0">@Model.deseaseSum5Children</td>
+                                    <td class="print-m-p-0">@(@Model.deseaseSum6 + @Model.depReport6.care)</td>
+                                    <td class="print-m-p-0">@Model.deseaseSum6Children</td>
+                                    <td class="print-m-p-0">@(@Model.deseaseSum7 + @Model.depReport7.care)</td>
+                                    <td class="print-m-p-0">@Model.deseaseSum7Children</td>
+                                    @*<td class="print-m-p-0">@(@Model.deseaseSum91 + @Model.depReport91.care)</td>
+                                    <td class="print-m-p-0">@Model.deseaseSum91Children</td>*@
+                                    <td class="print-m-p-0">@(@Model.deseaseSum90 + @Model.depReport90.care)</td>
+                                    <td class="print-m-p-0">@Model.deseaseSum90Children</td>
+                                    <td class="print-m-p-0">@(@Model.deseaseSum8 + @Model.depReport8.care)</td>
+                                    <td class="print-m-p-0">@Model.deseaseSum8Children</td>
+                                    <td class="print-m-p-0">@*(@Model.deseaseSumFinal + Model.finalReport.care)*@</td>
+                                    <td class="print-m-p-0">@*Model.deseaseSumFinalChildren*@</td>
+                                    <td class="print-m-p-0">@(@Model.deseaseSumFinal + Model.finalReport.care + @Model.deseaseSumFinalChildren)</td>
                      }
-                    <td colspan="3" class="bg-transparent border-0"></td>
+                    <td colspan="3" class="bg-transparent border-0 print-m-p-0"></td>
                 </tr>
 
                 <tr class="border-transparent print-m-p-0">
