@@ -3,15 +3,15 @@
 @model DailyReport.Pages.Reports.DepReportModel
 @{
     string msg, zone;
-    if ((Model.report.depNumber == 90) || (Model.report.depNumber == 91)) msg = "ОРИТ";
+    if ((Model.report.depNumber == 90) @*|| (Model.report.depNumber == 91)*@) msg = "ОРИТ";
     else if (Model.report.depNumber == 81) msg = "клинико-диагностическое отделение";
     else if (Model.report.depNumber == 82) msg = "платные услуги";
     else if (Model.report.depNumber == 8) msg = "Дневной стационар";
-    else if (Model.report.depNumber == 11) msg = " 1 отделения";
-    else if (Model.report.depNumber == 51) msg = " 5 отделения";
+    @*else if (Model.report.depNumber == 11) msg = " 1 отделения";
+    else if (Model.report.depNumber == 51) msg = " 5 отделения";*@
     else msg = Model.report.depNumber + " отделения";
-    if ((Model.report.depNumber == 11) || (Model.report.depNumber == 91) || (Model.report.depNumber == 51)) zone = "грязная ";
-    else zone = "чистая ";
+    @*if ((Model.report.depNumber == 11) || (Model.report.depNumber == 91) || (Model.report.depNumber == 51)) zone = "грязная ";
+    else zone = "чистая ";*@
     ViewData["Title"] = "Сводка " + msg;
 }
 
@@ -35,7 +35,7 @@
                             <input value="@Model.report.Id" type="number" name="id" class="invisible" asp-for="report.Id"/>
                             <input value="@Model.report.date" name="date" type="datetime" class="invisible" asp-for="report.date" />
                         </th>
-                        <th scope="col">Взрослые</th>
+                        <th scope="col">Всего пациентов</th>
                     </tr>
                 </thead>
                 <tr>
@@ -52,7 +52,7 @@
             <form name="repForm" method="post">
                 <div class="row">
                     <div class="col-4">
-                        Сводка @msg @zone зона
+                        Сводка @msg @*zone зона*@
                     </div>
                     <div class="col-4">
                         Дежурная м/с: @Model.report.dutyNurse
