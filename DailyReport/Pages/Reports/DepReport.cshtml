@@ -3,15 +3,19 @@
 @model DailyReport.Pages.Reports.DepReportModel
 @{
     string msg, zone;
-    if ((Model.report.depNumber == 90) @*|| (Model.report.depNumber == 91)*@) msg = "ОРИТ";
-    else if (Model.report.depNumber == 81) msg = "клинико-диагностическое отделение";
-    else if (Model.report.depNumber == 82) msg = "платные услуги";
+    if ((Model.report.depNumber == 90) || (Model.report.depNumber == 91)) msg = "ОРИТ";
+    else if (Model.report.depNumber == 81) msg = "Клинико-диагностическое отделение";
+    else if (Model.report.depNumber == 82) msg = "Платные услуги";
     else if (Model.report.depNumber == 8) msg = "Дневной стационар";
-    @*else if (Model.report.depNumber == 11) msg = " 1 отделения";
-    else if (Model.report.depNumber == 51) msg = " 5 отделения";*@
+    else if (Model.report.depNumber == 11) msg = " 1 отделения";
+    else if (Model.report.depNumber == 31) msg = " 3 отделения";
+    else if (Model.report.depNumber == 51) msg = " 5 отделения";
+    else if (Model.report.depNumber == 61) msg = " 6 отделения";
+    else if (Model.report.depNumber == 71) msg = " 7 отделения";
     else msg = Model.report.depNumber + " отделения";
-    @*if ((Model.report.depNumber == 11) || (Model.report.depNumber == 91) || (Model.report.depNumber == 51)) zone = "грязная ";
-    else zone = "чистая ";*@
+    if ((Model.report.depNumber == 11) || (Model.report.depNumber == 91) || (Model.report.depNumber == 51) ||
+    (Model.report.depNumber == 31) || (Model.report.depNumber == 61) || (Model.report.depNumber == 71)) zone = " грязная ";
+    else zone = " чистая ";
     ViewData["Title"] = "Сводка " + msg;
 }
 
@@ -52,7 +56,7 @@
             <form name="repForm" method="post">
                 <div class="row">
                     <div class="col-4">
-                        Сводка @msg @*zone зона*@
+                        Сводка @msg @zone зона
                     </div>
                     <div class="col-4">
                         Дежурная м/с: @Model.report.dutyNurse
