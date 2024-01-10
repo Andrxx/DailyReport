@@ -116,7 +116,7 @@ namespace DailyReport.Services.WardServices
             if (newPatient != null)
             {
                 context.Remove(newPatient);
-                //context.SaveChanges();
+                context.SaveChanges();
             }
         }
 
