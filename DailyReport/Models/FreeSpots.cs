@@ -6,11 +6,14 @@
         public int dep11 { get; set; }
         public int dep2 { get; set; }
         public int dep3 { get; set; }
+        public int dep31 { get; set; }
         public int dep4 { get; set; }
         public int dep5 { get; set; }
         public int dep51 { get; set; }
         public int dep6 { get; set; }
+        public int dep61 { get; set; }
         public int dep7 { get; set; }
+        public int dep71 { get; set; }
         public int dep8 { get; set; }
         public int dep90 { get; set; }
         public int dep91 { get; set; }
@@ -20,10 +23,14 @@
         public int dep11Children { get; set; }
         public int dep2Children { get; set; }
         public int dep3Children { get; set; }
+        public int dep31Children { get; set; }
         public int dep4Children { get; set; }
         public int dep5Children { get; set; }
+        public int dep51Children { get; set; }
         public int dep6Children { get; set; }
+        public int dep61Children { get; set; }
         public int dep7Children { get; set; }
+        public int dep71Children { get; set; }
         public int dep8Children { get; set; }
         public int dep90Children { get; set; }
         public int dep91Children { get; set; }
@@ -34,11 +41,14 @@
         public int dep11S { get; set; }
         public int dep2S { get; set; }
         public int dep3S { get; set; }
+        public int dep31S { get; set; }
         public int dep4S { get; set; }
         public int dep5S { get; set; }
         public int dep51S { get; set; }
         public int dep6S { get; set; }
         public int dep7S { get; set; }
+        public int dep61S { get; set; }
+        public int dep71S { get; set; }
         public int dep8S { get; set; }
         public int dep90S { get; set; }
         public int dep91S { get; set; }
