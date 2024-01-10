@@ -85,12 +85,11 @@ namespace DailyReport.Services
             if (_freeSpots.dep1S < 0) _freeSpots.dep1S = 0;
             if (_freeSpots.dep11S < 0) _freeSpots.dep11S = 0;
             if (_freeSpots.dep3S < 0) _freeSpots.dep3S = 0;
-            if (_freeSpots.dep31S < 0) _freeSpots.dep31S = 0;
             if (_freeSpots.dep4S < 0) _freeSpots.dep4S = 0;
             if (_freeSpots.dep5S < 0) _freeSpots.dep5S = 0;
-            if (_freeSpots.dep51S < 0) _freeSpots.dep51S = 0;
+            if (_freeSpots.dep51S < 0) _freeSpots.dep5S = 0;
             if (_freeSpots.dep6S < 0) _freeSpots.dep6S = 0;
-            if (_freeSpots.dep61S < 0) _freeSpots.dep61S = 0;
+            if (_freeSpots.dep61S < 0) _freeSpots.dep6S = 0;
             if (_freeSpots.dep7S < 0) _freeSpots.dep7S = 0;
             if (_freeSpots.dep71S < 0) _freeSpots.dep71S = 0;
             if (_freeSpots.dep8S < 0) _freeSpots.dep8S = 0;
