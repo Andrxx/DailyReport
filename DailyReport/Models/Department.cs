@@ -40,6 +40,11 @@ namespace DailyReport.Models
                         name = "Третье отделение";
                         return name;
                     }
+                case 31:
+                    {
+                        name = "Третье отделение грязная зона";
+                        return name;
+                    }
                 case 4:
                     {
                         name = "Четвертое отделение";
@@ -61,9 +66,19 @@ namespace DailyReport.Models
                         name = "Шестое отделение";
                         return name;
                     }
+                case 61:
+                    {
+                        name = "Шестое отделение грязная зона";
+                        return name;
+                    }
                 case 7:
                     {
                         name = "Седьмое отделение";
+                        return name;
+                    }
+                case 71:
+                    {
+                        name = "Седьмое отделение грязная зона";
                         return name;
                     }
                 case 8:
