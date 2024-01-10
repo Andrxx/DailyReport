@@ -68,18 +68,58 @@ namespace DailyReport.Pages.Wards
             }
         }
 
-        public IActionResult OnPostUpdateWard()
-        {
-            //TODO - приходит ошибка формы, почему?
-            //if (!ModelState.IsValid)
-            //{
-            //    return RedirectToPage("DepartmentWards", new { depNumber = ward.Department });
-            //}
-            WardServices.UpdateWard(context, ward);
-            return RedirectToPage("DepartmentWards", new { depNumber = ward.Department });
-        }
+        //public IActionResult OnPostUpdateWard()
+        //{
+        //    //TODO - приходит ошибка формы, почему?
+        //    //if (!ModelState.IsValid)
+        //    //{
+        //    //    return RedirectToPage("DepartmentWards", new { depNumber = ward.Department });
+        //    //}
+        //    WardServices.UpdateWard(context, ward);
+        //    return RedirectToPage("DepartmentWards", new { depNumber = ward.Department });
+        //}
 
-        public IActionResult OnPostFetchWard(Ward ward)
+
+
+        //public IActionResult OnPostAddPatient()
+        //{
+        //    //if (!ModelState.IsValid)
+        //    //{
+        //    //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
+        //    //}
+        //    PatientServices.AddPatient(context, newPatient);
+        //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
+        //}
+
+        //public IActionResult OnPostUpdatePatient(Patient newPatient)
+        //{
+        //    //if (!ModelState.IsValid)
+        //    //{
+        //    //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
+        //    //}
+        //    PatientServices.UpdatePatient(context, newPatient);
+        //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
+        //}
+
+        //public IActionResult OnPostDeletePatient()
+        //{
+        //    //if (!ModelState.IsValid)
+        //    //{
+        //    //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
+        //    //}
+        //    PatientServices.DeletePatient(context, newPatient.Id);
+
+        //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
+        //}
+
+        // возврат данных для fetch методов
+
+        /// <summary>
+        /// Обновление палаты, метод для fetch вызова 
+        /// </summary>
+        /// <param name="ward"></param>
+        /// <returns></returns>
+        public IActionResult OnPostUpdateWard(Ward ward)
         {
             try
             {
@@ -91,39 +131,6 @@ namespace DailyReport.Pages.Wards
                 return new NotFoundResult();
             }
         }
-
-        public IActionResult OnPostAddPatient()
-        {
-            //if (!ModelState.IsValid)
-            //{
-            //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
-            //}
-            PatientServices.AddPatient(context, newPatient);
-            return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
-        }
-
-        public IActionResult OnPostUpdatePatient(Patient newPatient)
-        {
-            //if (!ModelState.IsValid)
-            //{
-            //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
-            //}
-            PatientServices.UpdatePatient(context, newPatient);
-            return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
-        }
-
-        public IActionResult OnPostDeletePatient()
-        {
-            //if (!ModelState.IsValid)
-            //{
-            //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
-            //}
-            PatientServices.DeletePatient(context, newPatient.Id);
-
-            return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
-        }
-
-        // возврат данных для fetch методов
 
         /// <summary>
         /// возвращаем список палат по номеру отделения 
@@ -176,6 +183,24 @@ namespace DailyReport.Pages.Wards
         }
 
         /// <summary>
+        /// Добавляем пациента в БД, возвращаем сохраненного пациента
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns></returns>
+        public IActionResult OnPostAddPatient(Patient patient)
+        {
+            //try
+            //{
+                PatientServices.AddPatient(context, patient);
+                return Content(JsonConvert.SerializeObject(patient));
+            //}
+            //catch
+            //{
+                //return new NotFoundResult();
+            //}
+        }
+
+        /// <summary>
         /// обновляем пациента и возвращаем как json объект, метод для fetch вызова
         /// </summary>
         /// <param name="patient"></param>
@@ -196,12 +221,12 @@ namespace DailyReport.Pages.Wards
         }
 
 
-        public IActionResult OnPostDeletePatient(int Id)
+        public IActionResult OnPostDeletePatient(Patient patient)
         {
 
-            PatientServices.DeletePatient(context, Id);
-            Patient patient = PatientServices.GetPatientById(context, Id);
-            if (patient != null) { return new NotFoundResult(); }
+            PatientServices.DeletePatient(context, patient.Id);
+            Patient nPatient = PatientServices.GetPatientById(context, patient.Id);
+            if (nPatient != null) { return new NotFoundResult(); }   //проверка удаления
             else
             {
                 return new OkResult();
@@ -210,5 +235,3 @@ namespace DailyReport.Pages.Wards
         }
     }
 }
-
-
