@@ -108,7 +108,6 @@ namespace DailyReport.Pages.Reports
             }
             //задаем дату отображения на сводке, устнавливть только после коррекции стартовой даты 
             else { reportDate = actualDate; }
-            //находим запись прошлого дня
             report = (from report in context.DepReports
                        where (report.depNumber == depNumber) && (report.date > startTime && report.date < endTime)
                        select report).AsNoTracking().FirstOrDefault();
