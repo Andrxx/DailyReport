@@ -8,6 +8,13 @@ html {
   }
 }
 
+/*объ€вл€ем падинги до стилей печати, иначе смещение листа при печати*/
+#main_table {
+    font-size: 12px;
+    max-width: 100%;
+    margin-left: -100px !important;
+}
+
 @media print {
     html, body {
         font-size: 13px;
@@ -73,6 +80,11 @@ html {
         margin-bottom: 0px !important;
         margin-top: 0px !important;
     }
+    #main_table {
+        font-size: 12px;
+        max-width: 100%;
+        margin-left: 0px !important;
+    }
 }
 
 html {
@@ -83,6 +95,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
 
 th, td {
     padding: 0px; /* ѕол€ вокруг содержимого таблицы */
