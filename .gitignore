@@ -366,3 +366,5 @@ FodyWeavers.xsd
 /DailyReport/departments.db-wal
 /DailyReport/departments.db
 /DailyReport/departments.db~tDirty67Added
+/DailyReport/departments.db-shm~1
+/DailyReport/departments.db-wal~1
