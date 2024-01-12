@@ -32,7 +32,9 @@
                     <td class="print-m-p-0" colspan="3" rowspan="2">@(@Model.departmentSpots.sum + @Model.departmentSpots.sumChildren) стационарных коек, 
                         кроме того @(Model.departmentSpots.dep91 + @Model.departmentSpots.dep91Children + @Model.departmentSpots.dep90 + 
                         @Model.departmentSpots.dep90Children) коек ОРИТ</td>
-                    <td class="print-m-p-0" colspan="3" rowspan="2">Всего @(@Model.departmentSpots.sumOC + @Model.departmentSpots.sumOCChildren) с учетом дневного стационара</td>
+                    <td class="print-m-p-0" colspan="3" rowspan="2">Всего @(@Model.departmentSpots.sumOC + @Model.departmentSpots.sumOCChildren) с учетом
+                        дневного стационара, кроме того @(Model.departmentSpots.dep91 + @Model.departmentSpots.dep91Children + @Model.departmentSpots.dep90
+                        + @Model.departmentSpots.dep90Children) коек ОРИТ</td>
                 </tr>
                 @*строка разделения грязных, управление из стороки выше*@
                 <tr class="table-primary fw-bold  m-0 p-0">
@@ -139,19 +141,22 @@
                     <td class="print-m-p-0">@(@Model.departmentSpots.sumOC + @Model.departmentSpots.sumOCChildren)</td>
                 </tr>
                 <tr class="table-success print-m-p-0">
-                    <td class="fw-bold">Состояло</td>
+                    <td class="fw-bold print-m-p-0">Состояло</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
-                                        <td>@if(dr.existed > 0) {@dr.existed}</td>
-                                        <td>@if(dr.existedChildren > 0) {@dr.existedChildren}</td>
+                                        <td class="print-m-p-0">@if(dr.existed > 0) {@dr.existed}</td>
+                            <td class="print-m-p-0">@if (dr.existedChildren > 0)
+                                {
+                                    @dr.existedChildren
+                                }</td>
                         }
                     }
-                    <td>@Model.finalReport.existed</td>
-                    <td>@Model.finalReport.existedChildren</td>
-                    <td>@(@Model.finalReport.existed + @Model.finalReport.existedChildren)</td>
-                    <td>@(@Model.finalReport.existed + @Model.depReport8.existed)</td>
-                    <td>@(@Model.finalReport.existedChildren + @Model.depReport8.existedChildren)</td>
-                    <td>@(@Model.finalReport.existed + @Model.depReport8.existed + 
+                    <td class="print-m-p-0">@Model.finalReport.existed</td>
+                    <td class="print-m-p-0">@Model.finalReport.existedChildren</td>
+                    <td class="print-m-p-0">@(@Model.finalReport.existed + @Model.finalReport.existedChildren)</td>
+                    <td class="print-m-p-0">@(@Model.finalReport.existed + @Model.depReport8.existed)</td>
+                    <td class="print-m-p-0">@(@Model.finalReport.existedChildren + @Model.depReport8.existedChildren)</td>
+                    <td class="print-m-p-0">@(@Model.finalReport.existed + @Model.depReport8.existed +
                         @Model.finalReport.existedChildren + @Model.depReport8.existedChildren)</td>
                 </tr>
                 <tr class="print-m-p-0">
