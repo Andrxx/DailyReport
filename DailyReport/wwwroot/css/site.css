@@ -153,6 +153,10 @@ th, td {
     grid-template-columns: 350px 2fr 1fr 2fr 85px 40px 40px 40px 1fr 1fr;
 }
 
+/*input[name="edit"] {
+    background: white;
+    background-image : url(../resourses/pencil.png);
+}*/
 
 /*outcoming patients section*/
 .outpatients_wrapper {

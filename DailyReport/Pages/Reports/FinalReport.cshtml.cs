@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Composition;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace DailyReport.Pages.Reports
 {
@@ -337,14 +338,21 @@ namespace DailyReport.Pages.Reports
                 //todo исправить возможное отсутствие возрста
                 if (patients != null)
                 {
-                    reject = patients.FindAll(p => int.Parse(p.AgeYears) > 17 & p.SubmitedTo.ToLower().Trim() == "отказ").Count();
-                    rejectChildren = patients.FindAll(p => int.Parse(p.AgeYears) < 18 & p.SubmitedTo.ToLower().Trim() == "отказ").Count();
+                    Regex regex = new Regex(@"отказ(\w*)");
+                    reject = patients.FindAll(p => int.Parse(p.AgeYears) > 17 & regex.IsMatch(p.SubmitedTo.ToLower().Trim())/* == "отказ"*/).Count();
+                    rejectChildren = patients.FindAll(p => int.Parse(p.AgeYears) < 18 & regex.IsMatch(p.SubmitedTo.ToLower().Trim())/* == "отказ"*/).Count();
+
+                    //string s = "Бык тупогуб, тупогубенький бычок, у быка губа бела была тупа";
+                    //MatchCollection matches = regex.Matches(s);
+
                     ambulance = patients.FindAll(p => float.Parse(p.AgeYears) >= 18 & p.SubmitedTo.ToLower().Trim() == "амбулаторно").Count();
                     ambulanceChildren = patients.FindAll(p => float.Parse(p.AgeYears) < 18 & p.SubmitedTo.ToLower().Trim() == "амбулаторно").Count();
+                    
                     submitOtherHosp = patients.FindAll(p => float.Parse(p.AgeYears) >= 18 & p.SubmitedTo.ToLower().Trim() != "амбулаторно" 
-                        & p.SubmitedTo.ToLower().Trim() != "отказ").Count();
+                        &  !regex.IsMatch(p.SubmitedTo.ToLower().Trim())).Count();
                     submitOtherHospChildren = patients.FindAll(p => float.Parse(p.AgeYears) < 18 & p.SubmitedTo.ToLower().Trim() != "амбулаторно"
-                        & p.SubmitedTo.ToLower().Trim() != "отказ").Count();
+                        & !regex.IsMatch(p.SubmitedTo.ToLower().Trim())).Count();
+                    
                     sumReject = reject + rejectChildren;
                     sumAmbulance = ambulance + ambulanceChildren;
                     sumOther = submitOtherHosp + submitOtherHospChildren;

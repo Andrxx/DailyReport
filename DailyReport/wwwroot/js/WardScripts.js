@@ -127,7 +127,7 @@ async function loadData(url) {
 					if (filteredPaients[i].IsUntochable) untouch = 'checked';
 					patientFormText +=
 					`
-						<div  name='HospDate'> ${date} </div>
+						<div  name='HospDate' id='HospDate'> ${date} </div>
 						<div class="form-check form-switch col-1">
 							<input class="form-check-input" type="checkbox"  ${rash} name='HasRash' id=''>
 						</div>
@@ -137,7 +137,7 @@ async function loadData(url) {
 						<div class="form-check form-switch col-1">
 							<input class="form-check-input" type="checkbox" ${untouch} name='IsUntochable' id=''>
 						</div>
-						<input type="submit" value="&#9998" name='edit' id='sub_edit' />
+						<input type="submit" value="&#9998" name='edit' id='sub_edit'/>
 						<input type="submit" value="&#128465" name='delete' id='sub_delete'/> 
 
 						<input class="d-none" type="hidden" value=' ${ward.Department}'  name='Department' id=''/>
@@ -153,7 +153,7 @@ async function loadData(url) {
 				else{ 
 				patientFormText +=
 					`
-					<input type="date" class="" required name='HospDate' id=''/>
+					<input type="date" class="" required name='HospDate' id='HospDate'/>
 					<div class="form-check form-switch col-1">
 							<input class="form-check-input" type="checkbox" name='HasRash' id=''>
 						</div>
@@ -165,8 +165,8 @@ async function loadData(url) {
 						</div>
 					<input type="submit" value="+" name='add' id='sub_save' id=''/>	
 
-					<input class="d-none" type="hidden" value='${ward.Department}'  name='Department' id=''/>
-					<input class="d-none" type="hidden" value='${ward.Number}'. name='WardNumber' id=''/>
+					<input class="d-none" type="hidden" value='${ward.Department}' name='Department' id=''/>
+					<input class="d-none" type="hidden" value='${ward.Number}' name='WardNumber' id=''/>
 				</form>`
 				}//<input type="submit" value=""  class="invisible" />
 				patientForm.innerHTML = patientFormText;
@@ -197,16 +197,7 @@ async function loadData(url) {
 			//добавляем содержимое
 			document.querySelector('#ward_wrapper').append(wardFormWrapper);
 		}
-		//alert(result);
-		//event.target.querySelector('#newPatient_Gender').value = result.Gender;// = response.;
-		//event.target.querySelector('#newPatient_Name').value = result.Name;
-		//event.target.querySelector('#newPatient_AgeYears').value = result.AgeYears;
-		//event.target.querySelector('#newPatient_AgeMonth').value = result.AgeMonth;
-		//event.target.querySelector('#newPatient_Diagnos').value = result.Diagnos;
-		//event.target.querySelector('#newPatient_Shipped').value = result.Shipped
-		//event.target.querySelector('#newPatient_SubmitedFrom').value = result.SubmitedFrom;
-		//event.target.querySelector('#newPatient_SubmitedTo').value = result.SubmitedTo;
-		//alert(event.target.querySelector('#newPatient_Shipped').value);
+		
 	}
 	else {
 		alert("Не сохранено, " + response.statusText);
@@ -274,95 +265,109 @@ async function submitWard(event) {
 		});
 }
 
-async function eventAnalys(event) {
-	event.preventDefault();
-	let action = event.target.name;
-	let nPatient = event.target.parentElement;
-	switch (action) {
-		case 'edit':
-			await savePatient(nPatient);
-			break;
-	}
-		
-}
-
 async function savePatient(event) {
 	event.preventDefault();
-	let fSubmitter = event.submitter;	//.target//.querySelector('#sub_edit');  //event.target.contains();
+	let fSubmitter = event.submitter;	
+	let url;
 	let subUrl = '';
+	let patient = new FormData(event.target); //получаем данные формы
+	//let date = new Date(event.target.children.namedItem('HospDate').value);
+	//alert(event.target.children.namedItem('HospDate').value)
+	//alert(date);
+	//let date =  ;
+	let response;
 	switch (fSubmitter.name) {
-		case 'edit':
-			subUrl = '&handler=UpdatePaient';
-			break;
 		case 'add':
 			subUrl = '&handler=AddPatient';
+			url = document.location + subUrl;
+			response = await fetch(url
+				, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'	//используем кодировку для сохранения привязки объекта
+					},
+					body: new URLSearchParams(patient)		//преобразуем форму в application/x-www-form-urlencoded для работы привязки ASP Razor
+				});
+			if (response.ok) {
+				let newPatient = await response.json();
+				let d = document.createElement('div');	//создаем новое поле даты
+				//let date = new Date(event.target.HospDate.value);
+				//date = newPatient.HospitalisationDate;
+				//date = Intl.DateTimeFormat().format(date);
+				//<div name='HospDate'> ${date} </div>
+				d.setAttribute('name', 'HospDate');
+				//d.innerHTML = date;
+				//event.target.children.namedItem('HospDate').replaceWith(d);
+				//alert(date);
+				let e = document.createElement('input');
+				e.setAttribute('name', 'edit');
+				e.setAttribute('id', 'sub_edit');
+				e.setAttribute('type', 'submit');
+				e.value = "&#9998";
+				event.target.children.namedItem('add').replaceWith(e);
+				let del = document.createElement('input');
+				del.setAttribute('name', 'delete');
+				del.setAttribute('id', 'sub_delete');
+				del.setAttribute('type', 'submit');
+				del.setAttribute('value', '&#128465');
+				event.target.children.namedItem('edit').after(del);
+			}
+			else { alert("Не сохранено!"); }
 			break;
+
+		case 'edit':
+			subUrl = '&handler=UpdatePaient';
+			url = document.location + subUrl;
+			response = await fetch(url
+				, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'	//используем кодировку для сохранения привязки объекта
+					},
+					body: new URLSearchParams(patient)		//преобразуем форму в application/x-www-form-urlencoded для работы привязки ASP Razor
+				});
+			if (response.ok) {
+				//let p = await response.json();
+				alert("Сохранено");
+			}
+			else { alert("Не сохранено!"); }
+			break;
+
 		case 'delete':
 			subUrl = '&handler=DeletePatient';
+			url = document.location + subUrl;
+				response = await fetch(url
+					, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded'	//используем кодировку для сохранения привязки объекта
+						},
+						body: new URLSearchParams(patient)		//преобразуем форму в application/x-www-form-urlencoded для работы привязки ASP Razor
+					});
+			if (response.ok) {
+					//очищаем поля формы кроме номера палаты и отделения
+					event.target.querySelectorAll('input').forEach(el => {
+						if (el.name == 'WardNumber') { ; }
+						else if (el.name == 'Department') { ; }
+						else el.value = '';	
+					});
+					let d = document.createElement('input');	//создаем новое поле даты
+					d.setAttribute('name', 'HospDate');
+					d.setAttribute('type', 'date');
+					let i = document.createElement('input');	//создаем новую кнопку подтверждения
+					i.setAttribute('type', 'submit');
+					i.setAttribute('value', '+');
+					i.setAttribute('name', 'add');
+					i.setAttribute('id', 'sub_save');
+					event.target.children.namedItem('HospDate').replaceWith(d);
+					event.target.children.namedItem('Id').remove();
+					event.target.children.namedItem('edit').remove();
+					event.target.children.namedItem('delete').remove();
+					event.target.append(i);
+			}
 			break;
 	}
-	let url = document.location + subUrl;
-	let patient = new FormData(event.target); //получаем данные формы
-	if (fSubmitter.name == 'delete') {
-		let response = await fetch(url
-			, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded'	//используем кодировку для сохранения привязки объекта
-				},
-				body: new URLSearchParams(patient)		//преобразуем форму в application/x-www-form-urlencoded для работы привязки ASP Razor
-			});
-		if (response.ok) {
-			event.target.querySelectorAll('input').forEach(el => el.value = '');	//очищаем поля формы
-			let d = document.createElement('input');	//создаем новое поле даты
-			d.setAttribute('name', 'HospDate');
-			d.setAttribute('type', 'date');
-			let i = document.createElement('input');	//создаем новую кнопку подтверждения
-			i.setAttribute('type', 'submit');
-			i.setAttribute('value', '+');
-			i.setAttribute('type', 'submit');
-			i.setAttribute('name', 'add');
-			i.setAttribute('id', 'sub_save');
-			event.target.children.namedItem('HospDate').replaceWith(d);
-			event.target.children.namedItem('edit').remove();
-			event.target.children.namedItem('delete').remove();
-			event.target.append(i);
-		}
-	}
-	else if (fSubmitter.name == 'edit') {
-		let url = document.location + subUrl;
-		let patient = new FormData(event.target); //получаем данные формы
-		let response = await fetch(url
-			, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded'	//используем кодировку для сохранения привязки объекта
-				},
-				body: new URLSearchParams(patient)		//преобразуем форму в application/x-www-form-urlencoded для работы привязки ASP Razor
-			});
-		if (response.ok) {
-			//let p = await response.json();
-			alert("Сохранено");
-		}
-		else { alert("Не сохранено!"); }
-	}
-	else if (fSubmitter.name == 'add') {
-		let url = document.location + subUrl;
-		let patient = new FormData(event.target); //получаем данные формы
-		let response = await fetch(url
-			, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded'	//используем кодировку для сохранения привязки объекта
-				},
-				body: new URLSearchParams(patient)		//преобразуем форму в application/x-www-form-urlencoded для работы привязки ASP Razor
-			});
-		if (response.ok) {
-			let p = await response.json();
-			alert(p);
-		}
-		else { alert("Не сохранено!"); }
-	}
+
 	//let response = await fetch(url
 	//	, {
 	//		method: 'POST',

@@ -223,14 +223,21 @@ namespace DailyReport.Pages.Wards
 
         public IActionResult OnPostDeletePatient(Patient patient)
         {
-
-            PatientServices.DeletePatient(context, patient.Id);
-            Patient nPatient = PatientServices.GetPatientById(context, patient.Id);
-            if (nPatient != null) { return new NotFoundResult(); }   //проверка удаления
-            else
+            try
             {
-                return new OkResult();
+                if (patient == null || patient.Id == 0) 
+                { 
+                    return new NotFoundResult();
+                }
+                PatientServices.DeletePatient(context, patient.Id);
+                Patient nPatient = PatientServices.GetPatientById(context, patient.Id);
+                if (nPatient != null) { return new NotFoundResult(); }   //проверка удаления
+                else
+                {
+                    return new OkResult();
+                }
             }
+            catch { return new NotFoundResult(); }
             //return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
         }
     }
