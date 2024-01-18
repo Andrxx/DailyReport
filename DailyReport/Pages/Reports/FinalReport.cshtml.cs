@@ -338,20 +338,17 @@ namespace DailyReport.Pages.Reports
                 //todo исправить возможное отсутствие возрста
                 if (patients != null)
                 {
-                    Regex regex = new Regex(@"отказ(\w*)");
-                    reject = patients.FindAll(p => int.Parse(p.AgeYears) > 17 & regex.IsMatch(p.SubmitedTo.ToLower().Trim())/* == "отказ"*/).Count();
-                    rejectChildren = patients.FindAll(p => int.Parse(p.AgeYears) < 18 & regex.IsMatch(p.SubmitedTo.ToLower().Trim())/* == "отказ"*/).Count();
-
-                    //string s = "Бык тупогуб, тупогубенький бычок, у быка губа бела была тупа";
-                    //MatchCollection matches = regex.Matches(s);
+                    //Regex regex = new Regex(@"отказ(\w*)");
+                    reject = patients.FindAll(p => int.Parse(p.AgeYears) > 17 & p.SubmitedTo.ToLower().Trim() == "отказался").Count();
+                    rejectChildren = patients.FindAll(p => int.Parse(p.AgeYears) < 18 & p.SubmitedTo.ToLower().Trim() == "отказался").Count();
 
                     ambulance = patients.FindAll(p => float.Parse(p.AgeYears) >= 18 & p.SubmitedTo.ToLower().Trim() == "амбулаторно").Count();
                     ambulanceChildren = patients.FindAll(p => float.Parse(p.AgeYears) < 18 & p.SubmitedTo.ToLower().Trim() == "амбулаторно").Count();
                     
                     submitOtherHosp = patients.FindAll(p => float.Parse(p.AgeYears) >= 18 & p.SubmitedTo.ToLower().Trim() != "амбулаторно" 
-                        &  !regex.IsMatch(p.SubmitedTo.ToLower().Trim())).Count();
+                        & p.SubmitedTo.ToLower().Trim() == "отказался").Count();
                     submitOtherHospChildren = patients.FindAll(p => float.Parse(p.AgeYears) < 18 & p.SubmitedTo.ToLower().Trim() != "амбулаторно"
-                        & !regex.IsMatch(p.SubmitedTo.ToLower().Trim())).Count();
+                        & p.SubmitedTo.ToLower().Trim() != "отказался").Count();
                     
                     sumReject = reject + rejectChildren;
                     sumAmbulance = ambulance + ambulanceChildren;

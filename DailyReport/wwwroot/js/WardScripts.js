@@ -127,7 +127,7 @@ async function loadData(url) {
 					if (filteredPaients[i].IsUntochable) untouch = 'checked';
 					patientFormText +=
 					`
-						<div  name='HospDate' id='HospDate'> ${date} </div>
+						<div  name='HospitalisationDate' id='HospitalisationDate'> ${date} </div>
 						<div class="form-check form-switch col-1">
 							<input class="form-check-input" type="checkbox"  ${rash} name='HasRash' id=''>
 						</div>
@@ -137,8 +137,8 @@ async function loadData(url) {
 						<div class="form-check form-switch col-1">
 							<input class="form-check-input" type="checkbox" ${untouch} name='IsUntochable' id=''>
 						</div>
-						<input type="submit" value="&#9998" name='edit' id='sub_edit'/>
-						<input type="submit" value="&#128465" name='delete' id='sub_delete'/> 
+						<input type="submit" value="Р" name='edit' id='sub_edit'/>
+						<input type="submit" value="У" name='delete' id='sub_delete'/> 
 
 						<input class="d-none" type="hidden" value=' ${ward.Department}'  name='Department' id=''/>
                         <input class="d-none" type="hidden" value='${ward.Number}' name='WardNumber' id=''/>
@@ -148,12 +148,12 @@ async function loadData(url) {
 
 					if (filteredPaients[i].HasRash || filteredPaients[i].HasCareRisk || filteredPaients[i].IsUntochable) {
 						wardFormWrapper.classList.add("ward-close");
-					}//<input type="hidden"></input onclick='eventAnalys(event)'formaction="${editPatient}" value='${date}'
+					}//<input type="hidden"></input onclick='eventAnalys(event)'formaction="${editPatient}" value='${date}' корзина - &#128465 карандаш-&#9998
 				}
 				else{ 
 				patientFormText +=
 					`
-					<input type="date" class="" required name='HospDate' id='HospDate'/>
+					<input type="date" class="" required name='HospitalisationDate' id='HospitalisationDate'/>
 					<div class="form-check form-switch col-1">
 							<input class="form-check-input" type="checkbox" name='HasRash' id=''>
 						</div>
@@ -271,10 +271,6 @@ async function savePatient(event) {
 	let url;
 	let subUrl = '';
 	let patient = new FormData(event.target); //получаем данные формы
-	//let date = new Date(event.target.children.namedItem('HospDate').value);
-	//alert(event.target.children.namedItem('HospDate').value)
-	//alert(date);
-	//let date =  ;
 	let response;
 	switch (fSubmitter.name) {
 		case 'add':
@@ -290,27 +286,33 @@ async function savePatient(event) {
 				});
 			if (response.ok) {
 				let newPatient = await response.json();
-				let d = document.createElement('div');	//создаем новое поле даты
-				//let date = new Date(event.target.HospDate.value);
-				//date = newPatient.HospitalisationDate;
-				//date = Intl.DateTimeFormat().format(date);
-				//<div name='HospDate'> ${date} </div>
-				d.setAttribute('name', 'HospDate');
-				//d.innerHTML = date;
-				//event.target.children.namedItem('HospDate').replaceWith(d);
-				//alert(date);
+				//создаем новое поле даты
+				let d = document.createElement('div');	
+				d.setAttribute('name', 'HospitalisationDate');
+				let dt = new Date(newPatient.HospitalisationDate);
+				let sDate = dt.toLocaleDateString();
+				d.innerHTML = sDate;
+				event.target.children.namedItem('HospitalisationDate').replaceWith(d);
+				//новая кнопка редактировать
 				let e = document.createElement('input');
 				e.setAttribute('name', 'edit');
 				e.setAttribute('id', 'sub_edit');
 				e.setAttribute('type', 'submit');
-				e.value = "&#9998";
+				e.value = "Р";
 				event.target.children.namedItem('add').replaceWith(e);
+				//новая кнопка удалить
 				let del = document.createElement('input');
 				del.setAttribute('name', 'delete');
 				del.setAttribute('id', 'sub_delete');
 				del.setAttribute('type', 'submit');
-				del.setAttribute('value', '&#128465');
+				del.setAttribute('value', 'У');
 				event.target.children.namedItem('edit').after(del);
+				//создаем новое поле id <input class="d-none" type="hidden" value='${filteredPaients[i].Id}' name='Id'/>
+				let i = document.createElement('input');
+				i.setAttribute('name', 'Id');
+				i.setAttribute('type', 'hidden');
+				i.value = newPatient.Id;
+				event.target.children.namedItem('delete').after(i);
 			}
 			else { alert("Не сохранено!"); }
 			break;
@@ -349,17 +351,18 @@ async function savePatient(event) {
 					event.target.querySelectorAll('input').forEach(el => {
 						if (el.name == 'WardNumber') { ; }
 						else if (el.name == 'Department') { ; }
+						else if (el.name == 'HospitalisationDate') { ; }
 						else el.value = '';	
 					});
 					let d = document.createElement('input');	//создаем новое поле даты
-					d.setAttribute('name', 'HospDate');
+				d.setAttribute('name', 'HospitalisationDate');
 					d.setAttribute('type', 'date');
 					let i = document.createElement('input');	//создаем новую кнопку подтверждения
 					i.setAttribute('type', 'submit');
 					i.setAttribute('value', '+');
 					i.setAttribute('name', 'add');
 					i.setAttribute('id', 'sub_save');
-					event.target.children.namedItem('HospDate').replaceWith(d);
+				event.target.children.namedItem('HospitalisationDate').replaceWith(d);
 					event.target.children.namedItem('Id').remove();
 					event.target.children.namedItem('edit').remove();
 					event.target.children.namedItem('delete').remove();
