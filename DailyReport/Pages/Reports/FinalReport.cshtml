@@ -405,7 +405,7 @@
                     <td colspan="3" class="bg-transparent border-0 print-m-p-0"></td>
                 </tr>
 
-                <tr class="border-transparent print-m-p-0">
+                <tr class="border-transparent print-m-p-0 pba-always">
                     <td class="fw-bold">Беременные</td>
                      @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -417,7 +417,7 @@
                     <td>@(@Model.finalReport.pregnant + @Model.finalReport.pregnantChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="border-transparent print-m-p-0">
+                <tr class="border-transparent print-m-p-0 ">
                     <td class="fw-bold">Пациенты из зон отдыха</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -443,7 +443,7 @@
                     <td>@(@Model.finalReport.outRegions + @Model.finalReport.outRegionsChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="border-transparent print-m-p-0 pba-always">
+                <tr class="border-transparent print-m-p-0 ">
                     <td class="fw-bold">Иностранные граждне</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -636,7 +636,7 @@
                     <td>@(@Model.finalReport.meningit + @Model.finalReport.meningitChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                <tr class="border-transparent print-m-p-0">
+                <tr class="border-transparent print-m-p-0 pba-always">
                     <td class="fw-bold">Сепсис</td>
                     @{
                         foreach(DepReport dr in Model.filteredReports){
@@ -744,7 +744,7 @@
                     <td colspan="3" class="text-center print-m-p-0">@Model.finalReport.careDisodered</td>
                     <td colspan="3" class="bg-transparent border-0 print-m-p-0"></td>
                 </tr>
-                <tr class="table-secondary border-transparent print-m-p-0 pba-always">
+                <tr class="table-secondary border-transparent print-m-p-0 ">
                     <td class="fw-bold print-m-p-0">Количество человек в крулосуточном стационаре</td>
                     @{
                         <td class="print-m-p-0">@(@Model.deseaseSum1 + @Model.depReport1.care)</td>
