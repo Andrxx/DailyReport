@@ -58,16 +58,16 @@ namespace DailyReport.Services
                 _departmentSpots.dep3 = 0;
                 _departmentSpots.dep3Children = 0;
             }
-            try
-            {
-                _departmentSpots.dep31 = departments.Find(p => p.Number == 31).AdultSpotsQuantity;
-                _departmentSpots.dep31Children = departments.Find(p => p.Number == 31).ChildrenSpotsQuantity;
-            }
-            catch
-            {
-                _departmentSpots.dep31 = 0;
-                _departmentSpots.dep31Children = 0;
-            }
+            //try
+            //{
+            //    _departmentSpots.dep31 = departments.Find(p => p.Number == 31).AdultSpotsQuantity;
+            //    _departmentSpots.dep31Children = departments.Find(p => p.Number == 31).ChildrenSpotsQuantity;
+            //}
+            //catch
+            //{
+            //    _departmentSpots.dep31 = 0;
+            //    _departmentSpots.dep31Children = 0;
+            //}
             try
             {
                 _departmentSpots.dep4 = departments.Find(p => p.Number == 4).AdultSpotsQuantity;
@@ -109,16 +109,16 @@ namespace DailyReport.Services
                 _departmentSpots.dep6 = 0;
                 _departmentSpots.dep6Children = 0;
             }
-            try
-            {
-                _departmentSpots.dep61 = departments.Find(p => p.Number == 61).AdultSpotsQuantity;
-                _departmentSpots.dep61Children = departments.Find(p => p.Number == 61).ChildrenSpotsQuantity;
-            }
-            catch
-            {
-                _departmentSpots.dep61 = 0;
-                _departmentSpots.dep61Children = 0;
-            }
+            //try
+            //{
+            //    _departmentSpots.dep61 = departments.Find(p => p.Number == 61).AdultSpotsQuantity;
+            //    _departmentSpots.dep61Children = departments.Find(p => p.Number == 61).ChildrenSpotsQuantity;
+            //}
+            //catch
+            //{
+            //    _departmentSpots.dep61 = 0;
+            //    _departmentSpots.dep61Children = 0;
+            //}
             try
             {
                 _departmentSpots.dep7 = departments.Find(p => p.Number == 7).AdultSpotsQuantity;
@@ -129,16 +129,16 @@ namespace DailyReport.Services
                 _departmentSpots.dep7 = 0;
                 _departmentSpots.dep7Children = 0;
             }
-            try
-            {
-                _departmentSpots.dep71 = departments.Find(p => p.Number == 71).AdultSpotsQuantity;
-                _departmentSpots.dep71Children = departments.Find(p => p.Number == 71).ChildrenSpotsQuantity;
-            }
-            catch
-            {
-                _departmentSpots.dep71 = 0;
-                _departmentSpots.dep71Children = 0;
-            }
+            //try
+            //{
+            //    _departmentSpots.dep71 = departments.Find(p => p.Number == 71).AdultSpotsQuantity;
+            //    _departmentSpots.dep71Children = departments.Find(p => p.Number == 71).ChildrenSpotsQuantity;
+            //}
+            //catch
+            //{
+            //    _departmentSpots.dep71 = 0;
+            //    _departmentSpots.dep71Children = 0;
+            //}
             try
             {
                 _departmentSpots.dep8 = departments.Find(p => p.Number == 8).AdultSpotsQuantity;
@@ -179,9 +179,9 @@ namespace DailyReport.Services
         /// <returns></returns>
         public static int CountSum()
         {
-            int sum = departmentSpots.dep1 + departmentSpots.dep11 + departmentSpots.dep3 + departmentSpots.dep31 + departmentSpots.dep4 + 
-                departmentSpots.dep5 + departmentSpots.dep51 + departmentSpots.dep6 + departmentSpots.dep61 + departmentSpots.dep7 +
-                departmentSpots.dep71 /*+ departmentSpots.dep91 + departmentSpots.dep90*/;
+            int sum = departmentSpots.dep1 + departmentSpots.dep11 + departmentSpots.dep3 /*+ departmentSpots.dep31*/ + departmentSpots.dep4 + 
+                departmentSpots.dep5 + departmentSpots.dep51 + departmentSpots.dep6 /*+ departmentSpots.dep61*/ + departmentSpots.dep7 
+                /* +departmentSpots.dep71*/ /*+ departmentSpots.dep91 + departmentSpots.dep90*/;
 
             return sum;
         }
@@ -192,9 +192,9 @@ namespace DailyReport.Services
         /// <returns></returns>
         public static int CountSumChildren()
         {
-            int sum = departmentSpots.dep1Children + departmentSpots.dep11Children + departmentSpots.dep3Children + departmentSpots.dep31Children + 
-                departmentSpots.dep4Children + departmentSpots.dep5Children + departmentSpots.dep51Children + departmentSpots.dep6Children +
-                 departmentSpots.dep61Children + departmentSpots.dep7Children + departmentSpots.dep71Children /*+ departmentSpots.dep90Children + departmentSpots.dep91Children*/;
+            int sum = departmentSpots.dep1Children + departmentSpots.dep11Children + departmentSpots.dep3Children /*+ departmentSpots.dep31Children*/ + 
+                departmentSpots.dep4Children + departmentSpots.dep5Children + departmentSpots.dep51Children + departmentSpots.dep6Children 
+                 /*+ departmentSpots.dep61Children*/ + departmentSpots.dep7Children  /*departmentSpots.dep71Children*/ /*+ departmentSpots.dep90Children + departmentSpots.dep91Children*/;
 
             return sum;
         }

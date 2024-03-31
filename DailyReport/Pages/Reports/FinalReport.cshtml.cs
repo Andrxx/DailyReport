@@ -95,14 +95,14 @@ namespace DailyReport.Pages.Reports
             depReport11 = reports.Find(p => p.depNumber == 11);
             //depReport2 = reports.Find(p => p.depNumber == 2); //отделение пока не работает
             depReport3 = reports.Find(p => p.depNumber == 3);
-            depReport31 = reports.Find(p => p.depNumber == 31);
+            //depReport31 = reports.Find(p => p.depNumber == 31);
             depReport4 = reports.Find(p => p.depNumber == 4);
             depReport5 = reports.Find(p => p.depNumber == 5);
             depReport51 = reports.Find(p => p.depNumber == 51);
             depReport6 = reports.Find(p => p.depNumber == 6);
-            depReport61 = reports.Find(p => p.depNumber == 61);
+            //depReport61 = reports.Find(p => p.depNumber == 61);
             depReport7 = reports.Find(p => p.depNumber == 7);
-            depReport71 = reports.Find(p => p.depNumber == 71);
+            //depReport71 = reports.Find(p => p.depNumber == 71);
             depReport8 = reports.Find(p => p.depNumber == 8);
             depReport90 = reports.Find(p => p.depNumber == 90);
             depReport91 = reports.Find(p => p.depNumber == 91);
@@ -114,14 +114,14 @@ namespace DailyReport.Pages.Reports
             if (depReport11 == null) depReport11 = new();
             if (depReport2 == null) depReport2 = new();
             if (depReport3 == null) depReport3 = new();
-            if (depReport31 == null) depReport31 = new();
+            //if (depReport31 == null) depReport31 = new();
             if (depReport4 == null) depReport4 = new();
             if (depReport5 == null) depReport5 = new();
             if (depReport51 == null) depReport51 = new();
             if (depReport6 == null) depReport6 = new();
-            if (depReport61 == null) depReport61 = new();
+            //if (depReport61 == null) depReport61 = new();
             if (depReport7 == null) depReport7 = new();
-            if (depReport71 == null) depReport71 = new();
+            //if (depReport71 == null) depReport71 = new();
             if (depReport8 == null) 
             {
                 //на выходных загружаем данные предыдущей сводки
@@ -172,14 +172,14 @@ namespace DailyReport.Pages.Reports
             filteredReports.Add(depReport11);
             //_filteredReports.Add(depReport2); отделение не работает
             filteredReports.Add(depReport3);
-            filteredReports.Add(depReport31);
+            //filteredReports.Add(depReport31);
             filteredReports.Add(depReport4);       
             filteredReports.Add(depReport5);
             filteredReports.Add(depReport51);
             filteredReports.Add(depReport6);
-            filteredReports.Add(depReport61);
+            //filteredReports.Add(depReport61);
             filteredReports.Add(depReport7);
-            filteredReports.Add(depReport71);
+            //filteredReports.Add(depReport71);
             filteredReports.Add(depReport90);
             filteredReports.Add(depReport91);
 
@@ -271,14 +271,14 @@ namespace DailyReport.Pages.Reports
             deseaseSum11 = depReport11.CountDiseases();
             deseaseSum2 = depReport2.CountDiseases();
             deseaseSum3 = depReport3.CountDiseases();
-            deseaseSum31 = depReport31.CountDiseases();
+            //deseaseSum31 = depReport31.CountDiseases();
             deseaseSum4 = depReport4.CountDiseases();
             deseaseSum5 = depReport5.CountDiseases();
             deseaseSum51 = depReport51.CountDiseases();
             deseaseSum6 = depReport6.CountDiseases();
-            deseaseSum61 = depReport61.CountDiseases();
+            //deseaseSum61 = depReport61.CountDiseases();
             deseaseSum7 = depReport7.CountDiseases();
-            deseaseSum71 = depReport71.CountDiseases();
+            //deseaseSum71 = depReport71.CountDiseases();
             deseaseSum8 = depReport8.CountDiseases();
             deseaseSum90 = depReport90.CountDiseases();
             deseaseSum91 = depReport91.CountDiseases();
@@ -286,14 +286,14 @@ namespace DailyReport.Pages.Reports
             deseaseSum11Children = depReport11.CountDiseasesChildren();
             deseaseSum2Children = depReport2.CountDiseasesChildren();
             deseaseSum3Children = depReport3.CountDiseasesChildren();
-            deseaseSum31Children = depReport31.CountDiseasesChildren();
+            //deseaseSum31Children = depReport31.CountDiseasesChildren();
             deseaseSum4Children = depReport4.CountDiseasesChildren();
             deseaseSum5Children = depReport5.CountDiseasesChildren();
             deseaseSum51Children = depReport51.CountDiseasesChildren();
             deseaseSum6Children = depReport6.CountDiseasesChildren();
-            deseaseSum61Children = depReport61.CountDiseasesChildren();
+            //deseaseSum61Children = depReport61.CountDiseasesChildren();
             deseaseSum7Children = depReport7.CountDiseasesChildren();
-            deseaseSum71Children = depReport71.CountDiseasesChildren();
+            //deseaseSum71Children = depReport71.CountDiseasesChildren();
             deseaseSum8Children = depReport8.CountDiseasesChildren();
             deseaseSum90Children = depReport90.CountDiseasesChildren();
             deseaseSum91Children = depReport91.CountDiseasesChildren();
