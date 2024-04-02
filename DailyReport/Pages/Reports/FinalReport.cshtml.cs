@@ -346,7 +346,7 @@ namespace DailyReport.Pages.Reports
                     ambulanceChildren = patients.FindAll(p => float.Parse(p.AgeYears) < 18 & p.SubmitedTo.ToLower().Trim() == "амбулаторно").Count();
                     
                     submitOtherHosp = patients.FindAll(p => float.Parse(p.AgeYears) >= 18 & p.SubmitedTo.ToLower().Trim() != "амбулаторно" 
-                        & p.SubmitedTo.ToLower().Trim() == "отказался").Count();
+                        & p.SubmitedTo.ToLower().Trim() != "отказался").Count();
                     submitOtherHospChildren = patients.FindAll(p => float.Parse(p.AgeYears) < 18 & p.SubmitedTo.ToLower().Trim() != "амбулаторно"
                         & p.SubmitedTo.ToLower().Trim() != "отказался").Count();
                     
