@@ -8,49 +8,42 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-2">Номер отделения</div>
+        <div class="col-2">Название отделения</div>
+        <div class="col-1">Алиас отделения</div>
+        <div class="col-2">Номер отображения в сводке</div>
         <div class="col-2">Количество палат</div>
         <div class="col-2">Количество взрослых коек</div>
         <div class="col-2">Количество детских коек</div>
     </div>
+
     @{
-        foreach (Department deps in Model.Departments)
+        foreach (Department dep in Model.Departments)
         {
             <form method="post">
                 <div class="row pt-2">
                     <div class="col-2">
-                        <select class="form-select" value="@deps.Number"  asp-for="department.Number">
-                            <option selected value="@deps.Number">@deps.ToDepName()</option>
-                            <option value="1">Первое</option>
-                            <option value="11">Первое грязная зона</option>
-                            <option value="3">Третье</option>
-                            <option value="31">Третье грязная зона</option>
-                            <option value="4">Четвертое</option>
-                            <option value="5">Пятое</option>
-                            <option value="51">Пятое грязная зона</option>
-                            <option value="6">Шестое</option>
-                            <option value="7">Седьмое</option>
-                            <option value="61">Шестое грязная зона</option>
-                            <option value="71">Седьмое грязная зона</option>
-                            <option value="8">Дневной стационар</option>
-                            <option value="90">ОРИТ</option>
-                            <option value="91">ОРИТ грязная зона</option>
-                        </select>
+                        <input type="text" required value="@dep.Name" class="form-control" asp-for="department.Name" />
+                    </div>
+                    <div class="col-1">
+                        <input type="number" required value="@dep.Allias" class="form-control" asp-for="department.Allias" />
                     </div>
                     <div class="col-2">
-                        <input type="number" value="@deps.WardQuantity" class="form-control" asp-for="department.WardQuantity" />
+                        <input type="number" required value="@dep.ShowOrder" class="form-control" asp-for="department.ShowOrder" />
                     </div>
                     <div class="col-2">
-                        <input type="number" value="@deps.AdultSpotsQuantity" class="form-control" asp-for="department.AdultSpotsQuantity" />
+                        <input type="number" value="@dep.WardQuantity" class="form-control" asp-for="department.WardQuantity" />
                     </div>
                     <div class="col-2">
-                        <input type="number" value="@deps.ChildrenSpotsQuantity" class="form-control" asp-for="department.ChildrenSpotsQuantity" />
+                        <input type="number" value="@dep.AdultSpotsQuantity" class="form-control" asp-for="department.AdultSpotsQuantity" />
+                    </div>
+                    <div class="col-2">
+                        <input type="number" value="@dep.ChildrenSpotsQuantity" class="form-control" asp-for="department.ChildrenSpotsQuantity" />
                     </div>
                     <div class="col-2 d-none">
-                        <input type="number" value="@deps.Id" class="form-control invisible" asp-for="department.Id" />
+                        <input type="number" value="@dep.Id" class="form-control invisible" asp-for="department.Id" />
                     </div>
                     <div class="col-1 d-print-none">
-                        <input type="submit" value="&#128465" asp-page-handler="DeleteDepartment" asp-route-id="@deps.Id" />
+                        <input type="submit" value="&#128465" asp-page-handler="DeleteDepartment" asp-route-id="@dep.Id" />
                         <input type="submit" value="&#9998" asp-page-handler="UpdateDepartment" />
                     </div>
                 </div>
@@ -63,40 +56,35 @@
     <form method="post">
         <div class="row">
             <div class="col-2">
-                <select class="form-select" asp-for="department.Number">
-                    <option selected disabled>Отделение</option>
-                    <option value="1">Первое</option>
-                    <option value="11">Первое грязная зона</option>
-                    <option value="3">Третье</option>
-                    <option value="31">Третье грязная зона</option>
-                    <option value="4">Четвертое</option>
-                    <option value="5">Пятое</option>
-                    <option value="51">Пятое грязная зона</option>
-                    <option value="6">Шестое</option>
-                    <option value="7">Седьмое</option>
-                    <option value="61">Шестое грязная зона</option>
-                    <option value="71">Седьмое грязная зона</option>
-                    <option value="8">Дневной стационар</option>
-                    <option value="90">ОРИТ</option>
-                    <option value="91">ОРИТ грязная зона</option>
-                </select>                
+                <input type="text" required placeholder="Название отделения" class="form-control" asp-for="department.Name" />
+            </div>
+            <div class="col-1">
+                <input type="number" required placeholder="Алиас отделения" class="form-control" asp-for="department.Allias" />
             </div>
             <div class="col-2">
-                <input type="number" placeholder="Количество палат" class="form-control" asp-for="department.WardQuantity" />
+                <input type="number" required placeholder="Порядок отображения" class="form-control" asp-for="department.ShowOrder" />
             </div>
             <div class="col-2">
-                <input type="number" placeholder="Взрослые" class="form-control" asp-for="department.AdultSpotsQuantity" />
+                <input type="number" required placeholder="Количество палат" class="form-control" asp-for="department.WardQuantity"/>
             </div>
             <div class="col-2">
-                <input type="number" placeholder="Детские" class="form-control" asp-for="department.ChildrenSpotsQuantity" />
+                <input type="number" required placeholder="Взрослые" class="form-control" asp-for="department.AdultSpotsQuantity" />
             </div>
             <div class="col-2">
-
+                <input type="number" required placeholder="Детские" class="form-control" asp-for="department.ChildrenSpotsQuantity" />
             </div>
             <div class="col-1">
                 <input type="submit" value="+" asp-page-handler="SaveDepartment" />
             </div>
         </div>
     </form>
+
+    <div class="row mt-3">
+        <div class="col-8">
+            Название отделения может быть любым, должно нести смысловую нагрузку. <br />
+            Алиас отделения - цифровой код отделения для генерации ссылок, желательно совпадение с номером (первое отделение: алиас - 1) <br />
+            Номер отображения - порядок сортировки столбцов отделений в сводке, номера в разных отделениях не должны совпадать. <br />
+        </div>
+    </div>
 
 </div>

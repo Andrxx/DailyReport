@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DailyReport.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240622151949_DepartmentChanged")]
+    [Migration("20240622162621_DepartmentChanged")]
     partial class DepartmentChanged
     {
         /// <inheritdoc />
@@ -274,7 +274,7 @@ namespace DailyReport.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Number")
+                    b.Property<int?>("Number")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ShowOrder")

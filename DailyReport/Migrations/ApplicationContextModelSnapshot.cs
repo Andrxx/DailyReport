@@ -271,7 +271,7 @@ namespace DailyReport.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Number")
+                    b.Property<int?>("Number")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ShowOrder")

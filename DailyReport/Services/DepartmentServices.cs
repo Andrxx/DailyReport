@@ -1,4 +1,5 @@
 ﻿using DailyReport.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DailyReport.Services
 {
@@ -21,15 +22,17 @@ namespace DailyReport.Services
 
         public static void UpdateDepartment(Department department, ApplicationContext context)
         {
-            Department _department = (from d in context.Departments
-                                  where (d.Id == department.Id)
-                                  select d).FirstOrDefault();
+            Department _department = (Department)(from d in context.Departments
+                                      where (d.Id == department.Id)
+                                      select d).AsNoTracking().FirstOrDefault();
             if (_department != null)
             {
-                _department.Number = department.Number;
-                _department.WardQuantity = department.WardQuantity;
-                _department.AdultSpotsQuantity = department.AdultSpotsQuantity;
-                _department.ChildrenSpotsQuantity = department.ChildrenSpotsQuantity;
+                //_department.Number = department.Number;
+                //_department.WardQuantity = department.WardQuantity;
+                //_department.AdultSpotsQuantity = department.AdultSpotsQuantity;
+                //_department.ChildrenSpotsQuantity = department.ChildrenSpotsQuantity;
+                //_department = department;
+                context.Departments.Update(department);
                 context.SaveChanges();
             }
         }
