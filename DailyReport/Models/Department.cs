@@ -7,6 +7,9 @@ namespace DailyReport.Models
     {
         public int Id { get; set; }
         public int Number { get; set; }
+        public int Allias { get; set; }
+        public int ShowOrder { get; set; }
+        public string? Name { get; set; }
         public int WardQuantity { get; set; }
         public int AdultSpotsQuantity { get; set; }
         public int ChildrenSpotsQuantity { get; set; }
