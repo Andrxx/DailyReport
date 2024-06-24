@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DailyReport.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240622162621_DepartmentChanged")]
-    partial class DepartmentChanged
+    [Migration("20240623114834_DepRefactoring")]
+    partial class DepRefactoring
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -269,6 +269,9 @@ namespace DailyReport.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ChildrenSpotsQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("IsActive")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")

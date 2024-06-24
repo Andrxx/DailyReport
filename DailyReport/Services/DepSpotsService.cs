@@ -20,8 +20,8 @@ namespace DailyReport.Services
             try
             {
                 //подсчет мест чистой зоны 1 отд
-                _departmentSpots.dep1 = departments.Find(p => p.Number == 1).AdultSpotsQuantity;
-                _departmentSpots.dep1Children = departments.Find(p => p.Number == 1).ChildrenSpotsQuantity;
+                _departmentSpots.dep1 = departments.Find(p => p.Allias == 1).AdultSpotsQuantity;
+                _departmentSpots.dep1Children = departments.Find(p => p.Allias == 1).ChildrenSpotsQuantity;
             }
             catch
             {
@@ -30,8 +30,8 @@ namespace DailyReport.Services
             }
             try
             {
-                _departmentSpots.dep11 = departments.Find(p => p.Number == 11).AdultSpotsQuantity;
-                _departmentSpots.dep11Children = departments.Find(p => p.Number == 11).ChildrenSpotsQuantity;
+                _departmentSpots.dep11 = departments.Find(p => p.Allias == 11).AdultSpotsQuantity;
+                _departmentSpots.dep11Children = departments.Find(p => p.Allias == 11).ChildrenSpotsQuantity;
             }
             catch
             {
@@ -40,8 +40,8 @@ namespace DailyReport.Services
             }
             //try
             //{
-            //    _departmentSpots.dep2 = departments.Find(p => p.Number == 2).AdultSpotsQuantity;
-            //    _departmentSpots.dep2Children = departments.Find(p => p.Number == 2).ChildrenSpotsQuantity;
+            //    _departmentSpots.dep2 = departments.Find(p => p.Allias == 2).AdultSpotsQuantity;
+            //    _departmentSpots.dep2Children = departments.Find(p => p.Allias == 2).ChildrenSpotsQuantity;
             //}
             //catch
             //{
@@ -50,8 +50,8 @@ namespace DailyReport.Services
             //}
             try
             {
-                _departmentSpots.dep3 = departments.Find(p => p.Number == 3).AdultSpotsQuantity;
-                _departmentSpots.dep3Children = departments.Find(p => p.Number == 3).ChildrenSpotsQuantity;
+                _departmentSpots.dep3 = departments.Find(p => p.Allias == 3).AdultSpotsQuantity;
+                _departmentSpots.dep3Children = departments.Find(p => p.Allias == 3).ChildrenSpotsQuantity;
             }
             catch
             {
@@ -60,8 +60,8 @@ namespace DailyReport.Services
             }
             //try
             //{
-            //    _departmentSpots.dep31 = departments.Find(p => p.Number == 31).AdultSpotsQuantity;
-            //    _departmentSpots.dep31Children = departments.Find(p => p.Number == 31).ChildrenSpotsQuantity;
+            //    _departmentSpots.dep31 = departments.Find(p => p.Allias == 31).AdultSpotsQuantity;
+            //    _departmentSpots.dep31Children = departments.Find(p => p.Allias == 31).ChildrenSpotsQuantity;
             //}
             //catch
             //{
@@ -70,8 +70,8 @@ namespace DailyReport.Services
             //}
             try
             {
-                _departmentSpots.dep4 = departments.Find(p => p.Number == 4).AdultSpotsQuantity;
-                _departmentSpots.dep4Children = departments.Find(p => p.Number == 4).ChildrenSpotsQuantity;
+                _departmentSpots.dep4 = departments.Find(p => p.Allias == 4).AdultSpotsQuantity;
+                _departmentSpots.dep4Children = departments.Find(p => p.Allias == 4).ChildrenSpotsQuantity;
             }
             catch
             {
@@ -80,8 +80,8 @@ namespace DailyReport.Services
             }
             try
             {
-                _departmentSpots.dep5 = departments.Find(p => p.Number == 5).AdultSpotsQuantity;
-                _departmentSpots.dep5Children = departments.Find(p => p.Number == 5).ChildrenSpotsQuantity;
+                _departmentSpots.dep5 = departments.Find(p => p.Allias == 5).AdultSpotsQuantity;
+                _departmentSpots.dep5Children = departments.Find(p => p.Allias == 5).ChildrenSpotsQuantity;
             }
             catch
             {
@@ -91,8 +91,8 @@ namespace DailyReport.Services
             try
             {
                 //грязная зона 5 отд
-                _departmentSpots.dep51 = departments.Find(p => p.Number == 51).AdultSpotsQuantity;
-                _departmentSpots.dep51Children = departments.Find(p => p.Number == 51).ChildrenSpotsQuantity;
+                _departmentSpots.dep51 = departments.Find(p => p.Allias == 51).AdultSpotsQuantity;
+                _departmentSpots.dep51Children = departments.Find(p => p.Allias == 51).ChildrenSpotsQuantity;
             }
             catch
             {
@@ -101,8 +101,8 @@ namespace DailyReport.Services
             }
             try
             {
-                _departmentSpots.dep6 = departments.Find(p => p.Number == 6).AdultSpotsQuantity;
-                _departmentSpots.dep6Children = departments.Find(p => p.Number == 6).ChildrenSpotsQuantity;
+                _departmentSpots.dep6 = departments.Find(p => p.Allias == 6).AdultSpotsQuantity;
+                _departmentSpots.dep6Children = departments.Find(p => p.Allias == 6).ChildrenSpotsQuantity;
             }
             catch
             {
@@ -111,8 +111,8 @@ namespace DailyReport.Services
             }
             //try
             //{
-            //    _departmentSpots.dep61 = departments.Find(p => p.Number == 61).AdultSpotsQuantity;
-            //    _departmentSpots.dep61Children = departments.Find(p => p.Number == 61).ChildrenSpotsQuantity;
+            //    _departmentSpots.dep61 = departments.Find(p => p.Allias == 61).AdultSpotsQuantity;
+            //    _departmentSpots.dep61Children = departments.Find(p => p.Allias == 61).ChildrenSpotsQuantity;
             //}
             //catch
             //{
@@ -121,8 +121,8 @@ namespace DailyReport.Services
             //}
             try
             {
-                _departmentSpots.dep7 = departments.Find(p => p.Number == 7).AdultSpotsQuantity;
-                _departmentSpots.dep7Children = departments.Find(p => p.Number == 7).ChildrenSpotsQuantity;
+                _departmentSpots.dep7 = departments.Find(p => p.Allias == 7).AdultSpotsQuantity;
+                _departmentSpots.dep7Children = departments.Find(p => p.Allias == 7).ChildrenSpotsQuantity;
             }
             catch
             {
@@ -131,8 +131,8 @@ namespace DailyReport.Services
             }
             //try
             //{
-            //    _departmentSpots.dep71 = departments.Find(p => p.Number == 71).AdultSpotsQuantity;
-            //    _departmentSpots.dep71Children = departments.Find(p => p.Number == 71).ChildrenSpotsQuantity;
+            //    _departmentSpots.dep71 = departments.Find(p => p.Allias == 71).AdultSpotsQuantity;
+            //    _departmentSpots.dep71Children = departments.Find(p => p.Allias == 71).ChildrenSpotsQuantity;
             //}
             //catch
             //{
@@ -141,8 +141,8 @@ namespace DailyReport.Services
             //}
             try
             {
-                _departmentSpots.dep8 = departments.Find(p => p.Number == 8).AdultSpotsQuantity;
-                _departmentSpots.dep8Children = departments.Find(p => p.Number == 8).ChildrenSpotsQuantity;
+                _departmentSpots.dep8 = departments.Find(p => p.Allias == 8).AdultSpotsQuantity;
+                _departmentSpots.dep8Children = departments.Find(p => p.Allias == 8).ChildrenSpotsQuantity;
             }
             catch
             {
@@ -151,8 +151,8 @@ namespace DailyReport.Services
             }
             try
             {
-                _departmentSpots.dep90 = departments.Find(p => p.Number == 90).AdultSpotsQuantity;
-                _departmentSpots.dep90Children = departments.Find(p => p.Number == 90).ChildrenSpotsQuantity;
+                _departmentSpots.dep90 = departments.Find(p => p.Allias == 90).AdultSpotsQuantity;
+                _departmentSpots.dep90Children = departments.Find(p => p.Allias == 90).ChildrenSpotsQuantity;
             }
             catch
             {
@@ -161,8 +161,8 @@ namespace DailyReport.Services
             }
             try
             {
-                _departmentSpots.dep91 = departments.Find(p => p.Number == 91).AdultSpotsQuantity;
-                _departmentSpots.dep91Children = departments.Find(p => p.Number == 91).ChildrenSpotsQuantity;
+                _departmentSpots.dep91 = departments.Find(p => p.Allias == 91).AdultSpotsQuantity;
+                _departmentSpots.dep91Children = departments.Find(p => p.Allias == 91).ChildrenSpotsQuantity;
             }
             catch
             {

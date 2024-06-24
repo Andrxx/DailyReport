@@ -50,5 +50,14 @@ namespace DailyReport.Services
                                             select d).ToList();
             return departments;
         }
+
+        public static List<Department> GetSortedDepartments(ApplicationContext context)
+        {
+            List<Department> departments = (from d in context.Departments
+                                            //where (d.Number != 90 & d.Number != 91 && d.Number != 8 & d.Number != 11)
+                                            orderby d.ShowOrder
+                                            select d).ToList();
+            return departments;
+        }
     }
 }

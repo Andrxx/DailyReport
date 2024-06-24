@@ -13,6 +13,8 @@ namespace DailyReport.Pages.Reports
     [IgnoreAntiforgeryToken]
     public class FinalReportModel : PageModel
     {
+
+
         public FinalReport finalReport;
         public List<FinalReport> finalReports;
         public DepReport depReport1, depReport11, depReport2, depReport3, depReport31, depReport4, depReport5, depReport51,
@@ -22,6 +24,8 @@ namespace DailyReport.Pages.Reports
         {
             context = db;
         }
+
+        public List<Department> activeDepartments { get; set; } = new();
         public List<DepReport> reports { get; private set; } = new();
         public List<DepReport> filteredReports = new List<DepReport>();
         public DateTime actualDate = DateTime.Now, reportDate;
@@ -39,7 +43,7 @@ namespace DailyReport.Pages.Reports
         public FreeSpots freeSpots;
         public List<string> doctors;
         public OutcomingPatient savedPatient = new(); //поле для работы частичного представления формы, не использовать кроме вызова форм
-
+        public int departmentCounter/*, AdultSpotsSum = 0, ChildrenSpotsSum = 0*/;
         [BindProperty]
         public DutyDoc newDoc { get; set; } = new();
         public List<DutyDoc> depDocs { get; set; } = new();
@@ -66,7 +70,11 @@ namespace DailyReport.Pages.Reports
             }
             //задаем дату отображения на сводке, устнавливть только после коррекции стартовой даты 
             else { reportDate = actualDate; }
-            
+
+            //получаем список актуальных отделений
+            activeDepartments = DepartmentServices.GetSortedDepartments(context);
+            departmentCounter = activeDepartments.Count;
+
             //подсчет свободных мест
             departmentSpots = DepSpotsService.GetSpots(context);
             departmentSpots.sum = DepSpotsService.CountSum();

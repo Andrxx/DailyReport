@@ -13,6 +13,7 @@ namespace DailyReport.Models
         public int WardQuantity { get; set; }
         public int AdultSpotsQuantity { get; set; }
         public int ChildrenSpotsQuantity { get; set; }
+        public bool? IsActive { get; set; }
 
         [NotMapped]
         public List<Ward>? Wards { get; set; } = new();

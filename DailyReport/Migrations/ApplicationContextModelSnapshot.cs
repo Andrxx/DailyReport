@@ -268,6 +268,9 @@ namespace DailyReport.Migrations
                     b.Property<int>("ChildrenSpotsQuantity")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 

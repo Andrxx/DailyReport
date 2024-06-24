@@ -5,7 +5,7 @@
 namespace DailyReport.Migrations
 {
     /// <inheritdoc />
-    public partial class DepartmentChanged : Migration
+    public partial class DepRefactoring : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,6 +24,12 @@ namespace DailyReport.Migrations
                 type: "INTEGER",
                 nullable: false,
                 defaultValue: 0);
+
+            migrationBuilder.AddColumn<bool>(
+                name: "IsActive",
+                table: "Departments",
+                type: "INTEGER",
+                nullable: true);
 
             migrationBuilder.AddColumn<string>(
                 name: "Name",
@@ -44,6 +50,10 @@ namespace DailyReport.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "Allias",
+                table: "Departments");
+
+            migrationBuilder.DropColumn(
+                name: "IsActive",
                 table: "Departments");
 
             migrationBuilder.DropColumn(
