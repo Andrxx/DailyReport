@@ -27,8 +27,8 @@ namespace DailyReport.Pages.Reports
         public DateTime actualDate = DateTime.Now, reportDate;
         public bool _onlyView;
         public int oxygenSum1, oxygenSum11, oxygenSum91, oxygenSum90, deseaseSum1, deseaseSum11, deseaseSum2, deseaseSum3, deseaseSum31, deseaseSum4, deseaseSum5,
-            deseaseSum51, deseaseSum6, deseaseSum7, deseaseSum61, deseaseSum71, deseaseSum8, deseaseSum90, deseaseSum91, deseaseSum1Children, 
-            deseaseSum11Children, deseaseSum2Children, deseaseSum3Children, deseaseSum31Children, deseaseSum4Children, deseaseSum5Children, deseaseSum51Children, 
+            /*deseaseSum51,*/ deseaseSum6, deseaseSum7, deseaseSum61, deseaseSum71, deseaseSum8, deseaseSum90, deseaseSum91, deseaseSum1Children, 
+            deseaseSum11Children, deseaseSum2Children, deseaseSum3Children, deseaseSum31Children, deseaseSum4Children, deseaseSum5Children, /*deseaseSum51Children,*/ 
             deseaseSum6Children, deseaseSum61Children, deseaseSum7Children, deseaseSum71Children, deseaseSum8Children, deseaseSum90Children, deseaseSum91Children, deseaseSumFinal, 
             deseaseSumFinalChildren, UkraneSum, UkraneSumChildren;
         public int reject, rejectChildren, ambulance, ambulanceChildren, submitOtherHosp, submitOtherHospChildren, sumReject, 
@@ -98,7 +98,7 @@ namespace DailyReport.Pages.Reports
             //depReport31 = reports.Find(p => p.depNumber == 31);
             depReport4 = reports.Find(p => p.depNumber == 4);
             depReport5 = reports.Find(p => p.depNumber == 5);
-            depReport51 = reports.Find(p => p.depNumber == 51);
+            //depReport51 = reports.Find(p => p.depNumber == 51);
             depReport6 = reports.Find(p => p.depNumber == 6);
             //depReport61 = reports.Find(p => p.depNumber == 61);
             depReport7 = reports.Find(p => p.depNumber == 7);
@@ -117,7 +117,7 @@ namespace DailyReport.Pages.Reports
             //if (depReport31 == null) depReport31 = new();
             if (depReport4 == null) depReport4 = new();
             if (depReport5 == null) depReport5 = new();
-            if (depReport51 == null) depReport51 = new();
+            //if (depReport51 == null) depReport51 = new();
             if (depReport6 == null) depReport6 = new();
             //if (depReport61 == null) depReport61 = new();
             if (depReport7 == null) depReport7 = new();
@@ -175,7 +175,7 @@ namespace DailyReport.Pages.Reports
             //filteredReports.Add(depReport31);
             filteredReports.Add(depReport4);       
             filteredReports.Add(depReport5);
-            filteredReports.Add(depReport51);
+            //filteredReports.Add(depReport51);
             filteredReports.Add(depReport6);
             //filteredReports.Add(depReport61);
             filteredReports.Add(depReport7);
@@ -274,7 +274,7 @@ namespace DailyReport.Pages.Reports
             //deseaseSum31 = depReport31.CountDiseases();
             deseaseSum4 = depReport4.CountDiseases();
             deseaseSum5 = depReport5.CountDiseases();
-            deseaseSum51 = depReport51.CountDiseases();
+            //deseaseSum51 = depReport51.CountDiseases();
             deseaseSum6 = depReport6.CountDiseases();
             //deseaseSum61 = depReport61.CountDiseases();
             deseaseSum7 = depReport7.CountDiseases();
@@ -289,7 +289,7 @@ namespace DailyReport.Pages.Reports
             //deseaseSum31Children = depReport31.CountDiseasesChildren();
             deseaseSum4Children = depReport4.CountDiseasesChildren();
             deseaseSum5Children = depReport5.CountDiseasesChildren();
-            deseaseSum51Children = depReport51.CountDiseasesChildren();
+            //deseaseSum51Children = depReport51.CountDiseasesChildren();
             deseaseSum6Children = depReport6.CountDiseasesChildren();
             //deseaseSum61Children = depReport61.CountDiseasesChildren();
             deseaseSum7Children = depReport7.CountDiseasesChildren();

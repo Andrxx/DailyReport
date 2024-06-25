@@ -88,17 +88,17 @@ namespace DailyReport.Services
                 _departmentSpots.dep5 = 0;
                 _departmentSpots.dep5Children = 0;
             }
-            try
-            {
-                //грязная зона 5 отд
-                _departmentSpots.dep51 = departments.Find(p => p.Number == 51).AdultSpotsQuantity;
-                _departmentSpots.dep51Children = departments.Find(p => p.Number == 51).ChildrenSpotsQuantity;
-            }
-            catch
-            {
-                _departmentSpots.dep51 = 0;
-                _departmentSpots.dep51Children = 0;
-            }
+            //try
+            //{
+            //    //грязная зона 5 отд
+            //    _departmentSpots.dep51 = departments.Find(p => p.Number == 51).AdultSpotsQuantity;
+            //    _departmentSpots.dep51Children = departments.Find(p => p.Number == 51).ChildrenSpotsQuantity;
+            //}
+            //catch
+            //{
+            //    _departmentSpots.dep51 = 0;
+            //    _departmentSpots.dep51Children = 0;
+            //}
             try
             {
                 _departmentSpots.dep6 = departments.Find(p => p.Number == 6).AdultSpotsQuantity;

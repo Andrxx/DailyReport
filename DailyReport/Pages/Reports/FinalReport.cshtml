@@ -20,8 +20,8 @@
                     <td class="print-m-p-0" colspan="2" rowspan="2">3-е ИО (@(@Model.departmentSpots.dep3 + @Model.departmentSpots.dep3Children
                         @* + @Model.departmentSpots.dep31 + @Model.departmentSpots.dep31Children *@) коек)</td>
                     <td class="print-m-p-0" colspan="2" rowspan="2">4-е ИО (@(@Model.departmentSpots.dep4 + @Model.departmentSpots.dep4Children) коек)</td>
-                    <td class="print-m-p-0" colspan="4" @*rowspan="2"*@>5-е ИО (@(@Model.departmentSpots.dep5 + @Model.departmentSpots.dep5Children
-                        + @Model.departmentSpots.dep51 + @Model.departmentSpots.dep51Children) коек)</td>
+                    <td class="print-m-p-0" colspan="2" rowspan="2">5-е ИО (@(@Model.departmentSpots.dep5 + @Model.departmentSpots.dep5Children
+                        @* + @Model.departmentSpots.dep51 + @Model.departmentSpots.dep51Children *@) коек)</td>
                     <td class="print-m-p-0" colspan="2" rowspan="2">6-е ИО (@(@Model.departmentSpots.dep6 + @Model.departmentSpots.dep6Children
                         @* + @Model.departmentSpots.dep61 + @Model.departmentSpots.dep61Children *@) коек)</td>
                     <td class="print-m-p-0" colspan="2" rowspan="2">7-е ИО (@(@Model.departmentSpots.dep7 + @Model.departmentSpots.dep7Children 
@@ -47,8 +47,8 @@
                     <td class="print-m-p-0" colspan ="2">Грязная</td> *@
                     <td class="print-m-p-0" colspan="2">Чистая</td>
                     <td class="print-m-p-0" colspan="2">Грязная</td>
-                    <td class="print-m-p-0" colspan="2">Чистая</td>
-                    <td class="print-m-p-0" colspan="2">Грязная</td>
+                    @* <td class="print-m-p-0" colspan="2">Чистая</td>
+                    <td class="print-m-p-0" colspan="2">Грязная</td> *@
                     <td class="print-m-p-0" colspan="2">Чистая</td>
                     <td class="print-m-p-0" colspan="2">Грязная</td>
                 </tr>
@@ -63,9 +63,9 @@
                     <td class="print-m-p-0">Взр</td>
                     <td class="print-m-p-0">Дет</td>
                     <td class="print-m-p-0">Взр</td>
-                    <td class="print-m-p-0">Дет</td> *@
+                    <td class="print-m-p-0">Дет</td> 
                     <td class="print-m-p-0">Взр</td>
-                    <td class="print-m-p-0">Дет</td>
+                    <td class="print-m-p-0">Дет</td>*@
                     <td class="print-m-p-0">Взр</td>
                     <td class="print-m-p-0">Дет</td>
                     <td class="print-m-p-0">Взр</td>
@@ -113,8 +113,8 @@
 
                     <td class="print-m-p-0">@Model.departmentSpots.dep5</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep5Children</td>
-                    <td class="print-m-p-0">@Model.departmentSpots.dep51</td>
-                    <td class="print-m-p-0">@Model.departmentSpots.dep51Children</td>
+                   @*  <td class="print-m-p-0">@Model.departmentSpots.dep51</td>
+                    <td class="print-m-p-0">@Model.departmentSpots.dep51Children</td> *@
 
                     <td class="print-m-p-0">@Model.departmentSpots.dep6</td>
                     <td class="print-m-p-0">@Model.departmentSpots.dep6Children</td>
@@ -289,7 +289,7 @@
                     @*<td colspan="2">@(@Model.freeSpots.dep31S @*+ @Model.freeSpots.dep3Children)</td>*@
                     <td colspan="2">@(@Model.freeSpots.dep4S @*+ @Model.freeSpots.dep4Children*@)</td>
                     <td colspan="2">@(@Model.freeSpots.dep5S @*+ @Model.freeSpots.dep5Children*@)</td>
-                    <td colspan="2">@(@Model.freeSpots.dep51S @* + @Model.freeSpots.dep5Children*@)</td>
+                    @* <td colspan="2">@(@Model.freeSpots.dep51S @* + @Model.freeSpots.dep5Children)</td> *@
                     <td colspan="2">@(@Model.freeSpots.dep6S @*+ @Model.freeSpots.dep6Children*@)</td>
                     @*<td colspan="2">@(@Model.freeSpots.dep61S @*+ @Model.freeSpots.dep6Children)</td>*@
                     <td colspan="2">@(@Model.freeSpots.dep7S @*+ @Model.freeSpots.dep7Children*@)</td>
@@ -390,8 +390,8 @@
                     <td class="print-m-p-0" colspan="2">@Model.oxygenSum11</td>
                     @*<td class="print-m-p-0" colspan="2"></td>
                     <td class="print-m-p-0" colspan="2"></td>
-                    <td class="print-m-p-0" colspan="2"></td>*@
                     <td class="print-m-p-0" colspan="2"></td>
+                    <td class="print-m-p-0" colspan="2"></td>*@
                     <td class="print-m-p-0" colspan="2"></td>
                     <td class="print-m-p-0" colspan="2"></td>
                     <td class="print-m-p-0" colspan="2"></td>
@@ -527,7 +527,7 @@
 
                 <tr class="border-transparent print-m-p-0">
                     <td class="fw-bold  print-m-p-0"><b>Нозологии</b></td>
-                    <td class="print-m-p-0" colspan="25"></td>
+                    <td class="print-m-p-0" colspan="23"></td>
                     <td colspan="3" class="bg-transparent border-0 print-m-p-0"></td>
                 </tr>
                 <tr class="table-secondary border-transparent print-m-p-0">
@@ -702,8 +702,8 @@
                     <td>@Model.deseaseSum4Children</td>
                     <td>@Model.deseaseSum5</td>
                     <td>@Model.deseaseSum5Children</td>
-                    <td>@Model.deseaseSum51</td>
-                    <td>@Model.deseaseSum51Children</td>
+                    @*<td>@Model.deseaseSum51</td>
+                    <td>@Model.deseaseSum51Children</td>*@
                     <td>@Model.deseaseSum6</td>
                     <td>@Model.deseaseSum6Children</td>
                     @*<td>@Model.deseaseSum61</td>
@@ -762,8 +762,8 @@
 
                         <td class="print-m-p-0">@(@Model.deseaseSum5 + @Model.depReport5.care)</td>
                         <td class="print-m-p-0">@Model.deseaseSum5Children</td>
-                        <td class="print-m-p-0">@(@Model.deseaseSum51 + @Model.depReport51.care)</td>
-                        <td class="print-m-p-0">@Model.deseaseSum51Children</td>
+                        // <td class="print-m-p-0">@(@Model.deseaseSum51 + @Model.depReport51.care)</td>
+                        // <td class="print-m-p-0">@Model.deseaseSum51Children</td>
 
                         <td class="print-m-p-0">@(@Model.deseaseSum6 + @Model.depReport6.care)</td>
                         <td class="print-m-p-0">@Model.deseaseSum6Children</td>
@@ -791,20 +791,20 @@
 
                 <tr class="border-transparent print-m-p-0">
                     <td class="fw-bold print-m-p-0">Обратившиеся в КДО</td>
-                    <td colspan="24" class="print-m-p-0"></td>
+                    <td colspan="22" class="print-m-p-0"></td>
                     <td class="text-center bg-light print-m-p-0" id="kdo">@Model.depReport81.present</td>
                     <td colspan="3" class="bg-transparent border-0 print-m-p-0"></td>
                 </tr>
                 <tr class="border-transparent print-m-p-0">
                     <td class="fw-bold print-m-p-0">Платные услуги</td>
-                    <td colspan="24" class="print-m-p-0"></td>
+                    <td colspan="22" class="print-m-p-0"></td>
                     <td class="text-center bg-light print-m-p-0" id="">@Model.depReport82.present</td>
                     <td colspan="3" class="bg-transparent print-m-p-0 border-0"></td>
                 </tr>
 
                 <tr class="border-transparent print-m-p-0">
                     <td class="fw-bold print-m-p-0">Отказ от госпитализации</td>
-                    <td colspan="22" class="print-m-p-0"></td>
+                    <td colspan="20" class="print-m-p-0"></td>
                     <td  class="print-m-p-0">@Model.reject</td>
                     @*<input id="reject" oninput="CountReject()" type="number" name="reject" class="reject" value="0" />*@
                     <td class="print-m-p-0">@Model.rejectChildren </td>@*<input id="rejectChildren" oninput="CountReject()" type="number" name="rejectChildrens" class="reject" value="0"/>*@
@@ -813,7 +813,7 @@
                 </tr>
                 <tr class="border-transparent print-m-p-0">
                     <td class="fw-bold">На амбулаторное лечение</td>
-                    <td colspan="22"></td>
+                    <td colspan="20"></td>
                     <td class="print-m-p-0">@Model.ambulance </td>@*<input id="ambulance" oninput="CountReject()" type="number" name="existed" class="reject" value="0"/>*@
                     <td class="print-m-p-0">@Model.ambulanceChildren</td>@*<input id="ambulanceChildren" oninput="CountReject()" type="number" name="existedChildrens" class="reject" value="0"/>*@ 
                     <td class="text-center print-m-p-0" id="sumAmb">@Model.sumAmbulance</td>
@@ -821,7 +821,7 @@
                 </tr>
                 <tr class="border-transparent pba-never print-m-p-0">
                     <td class="fw-bold">В другую МО</td>
-                    <td colspan="22"></td>
+                    <td colspan="20"></td>
                     <td>@Model.submitOtherHosp</td>@*<input id="sendToMO" oninput="CountReject()" type="number" name="existed" class="reject" value="0"/>*@
                     <td>@Model.submitOtherHospChildren </td>
                     <td  class="text-center" id="sumOth">@Model.sumOther</td>
@@ -829,7 +829,7 @@
                 </tr>
                 <tr class="table-secondary border-transparent pba-never print-m-p-0">
                     <td class="fw-bold">Всего не госпитализировано</td>
-                    <td colspan="22"></td>
+                    <td colspan="20"></td>
                     <td  class="text-center" id="sumAdults">@Model.sumAdults</td>
                     <td  class="text-center" id="sumChild">@Model.sumChildren</td>
                     <td  class="text-center" id="sumAll">@Model.sumTotal</td>
