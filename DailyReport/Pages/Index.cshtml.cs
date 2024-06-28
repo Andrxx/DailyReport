@@ -8,14 +8,16 @@ namespace DailyReport.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
+        ApplicationContext context;
+        public IndexModel(ILogger<IndexModel> logger, ApplicationContext db)
         {
             _logger = logger;
+            context = db;
         }
-
+        public List<Department> Departments = new();
         public void OnGet()
         {
+            Departments = DepartmentServices.GetSortedDepartments(context);
         }
     }
 }

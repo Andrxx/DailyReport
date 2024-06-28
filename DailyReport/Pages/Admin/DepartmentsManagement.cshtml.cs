@@ -17,8 +17,7 @@ namespace DailyReport.Pages.Admin
         public Department department = new();
         public void OnGet()
         {
-            Departments = (from d in context.Departments
-                           select d).ToList();
+            Departments = DepartmentServices.GetSortedDepartments(context);//(from d in context.Departments    select d).ToList();
         }
 
         public IActionResult OnPostSaveDepartment(Department department)

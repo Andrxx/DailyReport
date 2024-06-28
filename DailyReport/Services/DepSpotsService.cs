@@ -4,8 +4,106 @@ namespace DailyReport.Services
 {
     public static class DepSpotsService
     {
-        static DepartmentSpots departmentSpots;
+        //костыль - коррекция отделений орит
+        private static List<int> correction = new() { 91, 90 }; 
 
+        /// <summary>
+        /// Считает все взрослые места во всех отделениях 
+        /// </summary>
+        /// <param name="departments"></param>
+        /// <returns></returns>
+        public static int GetFullAdultSpots(List<Department> departments) 
+        {
+            int sum = 0;
+            if (departments == null) return 0; 
+            foreach(Department dep in departments)
+            {
+                sum += dep.AdultSpotsQuantity;
+            }
+
+            try
+            {
+                foreach (int i in correction)
+                {
+                    sum -= departments.Find(d => d.Allias == i).AdultSpotsQuantity;
+                }
+            }
+            catch { }
+            return sum;
+        }
+        /// <summary>
+        /// Считает все детские места во всех отделениях 
+        /// </summary>
+        /// <param name="departments"></param>
+        /// <returns></returns>
+        public static int GetFullChildrenSpots(List<Department> departments)
+        {
+            int sum = 0;
+            if (departments == null) return 0;
+            foreach (Department dep in departments)
+            {
+                sum += dep.ChildrenSpotsQuantity;
+            }
+            try
+            {
+                foreach (int i in correction)
+                {
+                    sum -= departments.Find(d => d.Allias == i).ChildrenSpotsQuantity;
+                }
+            }
+            catch { }
+            return sum;
+        }
+        /// <summary>
+        /// Считает взрослые места по отделениям, за исключением отделений из списка исключения
+        /// </summary>
+        /// <param name="departments"></param>
+        /// <param name="excludedDeps"></param>
+        /// <returns></returns>
+        public static int GetAdultSpots(List<Department> departments, List<int> excludedDeps)
+        {
+            int sum = 0;
+            if (departments == null) return 0;
+
+            foreach (Department department in departments)
+            {
+                if (department.Allias != excludedDeps.Find(i => i == department.Allias))
+                {
+                    sum += department.AdultSpotsQuantity;
+                }
+            }
+
+            return sum;
+        }
+        /// <summary>
+        /// Считает детские места по отделениям, за исключением отделений из списка исключения
+        /// </summary>
+        /// <param name="departments"></param>
+        /// <param name="excludedDeps"></param>
+        /// <returns></returns>
+        public static int GetChildrenSpots(List<Department> departments, List<int> excludedDeps)
+        {
+            int sum = 0;
+            if (departments == null) return 0;
+
+            foreach (Department department in departments)
+            {
+                if (department.Allias != excludedDeps.Find(i => i == department.Allias))
+                {
+                    sum += department.ChildrenSpotsQuantity;
+                }
+            }
+
+
+            return sum;
+        }
+
+        /// <summary>
+        /// legacy
+        /// </summary>
+
+
+        static DepartmentSpots departmentSpots;
        
         /// <summary>
         /// получаем список мест из БД
@@ -88,17 +186,17 @@ namespace DailyReport.Services
                 _departmentSpots.dep5 = 0;
                 _departmentSpots.dep5Children = 0;
             }
-            try
-            {
-                //грязная зона 5 отд
-                _departmentSpots.dep51 = departments.Find(p => p.Allias == 51).AdultSpotsQuantity;
-                _departmentSpots.dep51Children = departments.Find(p => p.Allias == 51).ChildrenSpotsQuantity;
-            }
-            catch
-            {
-                _departmentSpots.dep51 = 0;
-                _departmentSpots.dep51Children = 0;
-            }
+            //try
+            //{
+            //    //грязная зона 5 отд
+            //    _departmentSpots.dep51 = departments.Find(p => p.Allias == 51).AdultSpotsQuantity;
+            //    _departmentSpots.dep51Children = departments.Find(p => p.Allias == 51).ChildrenSpotsQuantity;
+            //}
+            //catch
+            //{
+            //    _departmentSpots.dep51 = 0;
+            //    _departmentSpots.dep51Children = 0;
+            //}
             try
             {
                 _departmentSpots.dep6 = departments.Find(p => p.Allias == 6).AdultSpotsQuantity;

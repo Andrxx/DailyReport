@@ -8,6 +8,7 @@ namespace DailyReport.Models
 
         public int Id { get; set; }
         public DateTime date { get; set; } = DateTime.Now;//.AddDays(-1);
+        //public int? ShowOrder { get; set; }
         public int depNumber { get; set; }
         public int existed { get; set; }
         public int existedChildren { get; set; }

@@ -27,6 +27,7 @@ namespace DailyReport.Pages.Reports
 
         public List<Department> activeDepartments { get; set; } = new();
         public List<DepReport> reports { get; private set; } = new();
+        public List<DepReport>  sortedReports = new ();
         public List<DepReport> filteredReports = new List<DepReport>();
         public DateTime actualDate = DateTime.Now, reportDate;
         public bool _onlyView;
@@ -43,7 +44,7 @@ namespace DailyReport.Pages.Reports
         public FreeSpots freeSpots;
         public List<string> doctors;
         public OutcomingPatient savedPatient = new(); //поле для работы частичного представления формы, не использовать кроме вызова форм
-        public int departmentCounter/*, AdultSpotsSum = 0, ChildrenSpotsSum = 0*/;
+        public int departmentCounter, AdultSpotsSum, ChildrenSpotsSum, AdultAdditionalSpots, ChildrenAdditionalSpots, AdultFullSpotsSum, ChildrenFullSpotsSum;
         [BindProperty]
         public DutyDoc newDoc { get; set; } = new();
         public List<DutyDoc> depDocs { get; set; } = new();
@@ -55,6 +56,9 @@ namespace DailyReport.Pages.Reports
         public List<string> shipping = OutPatientService.GetShipping();
         public List<string> submitedFrom = OutPatientService.GetSubmitedFrom();
         public List<string> submitedTo = OutPatientService.GetSubmitedTo();
+
+        public List<int> excludedDeps = new() {8, 90, 91 };
+        public List<int> diseaseSums = new();
 
         public void OnGet(double dateOffset = 0, bool onlyView = false)
         {
@@ -76,6 +80,12 @@ namespace DailyReport.Pages.Reports
             departmentCounter = activeDepartments.Count;
 
             //подсчет свободных мест
+
+            AdultSpotsSum = DepSpotsService.GetAdultSpots(activeDepartments, excludedDeps);
+            ChildrenSpotsSum = DepSpotsService.GetChildrenSpots(activeDepartments, excludedDeps);
+            AdultFullSpotsSum = DepSpotsService.GetFullAdultSpots(activeDepartments);
+            ChildrenFullSpotsSum = DepSpotsService.GetFullChildrenSpots(activeDepartments);
+
             departmentSpots = DepSpotsService.GetSpots(context);
             departmentSpots.sum = DepSpotsService.CountSum();
             departmentSpots.sumChildren = DepSpotsService.CountSumChildren();
@@ -98,7 +108,15 @@ namespace DailyReport.Pages.Reports
                 reports = new();
             }
             //Передаем сводки из списка в переменные
-#pragma warning disable CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
+            foreach (Department dep in activeDepartments) 
+            {
+                DepReport _rep = reports.Find(rep => rep.depNumber == dep.Allias);
+                if (_rep is null) _rep = new DepReport();
+                sortedReports.Add(_rep);
+            }
+
+
+            //#pragma warning disable CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
             depReport1 = reports.Find(p => p.depNumber == 1);
             depReport11 = reports.Find(p => p.depNumber == 11);
             //depReport2 = reports.Find(p => p.depNumber == 2); //отделение пока не работает
@@ -130,14 +148,14 @@ namespace DailyReport.Pages.Reports
             //if (depReport61 == null) depReport61 = new();
             if (depReport7 == null) depReport7 = new();
             //if (depReport71 == null) depReport71 = new();
-            if (depReport8 == null) 
+            if (depReport8 == null)
             {
                 //на выходных загружаем данные предыдущей сводки
-                if(actualDate.DayOfWeek == DayOfWeek.Sunday || actualDate.DayOfWeek == DayOfWeek.Saturday)
+                if (actualDate.DayOfWeek == DayOfWeek.Sunday || actualDate.DayOfWeek == DayOfWeek.Saturday)
                 {
                     DepReport report = (from r in context.DepReports
-                              where (r.depNumber == 8) && (r.date > startTime.AddDays(-1)) && (r.date < endTime.AddDays(-1))
-                              select r).AsNoTracking().FirstOrDefault();
+                                        where (r.depNumber == 8) && (r.date > startTime.AddDays(-1)) && (r.date < endTime.AddDays(-1))
+                                        select r).AsNoTracking().FirstOrDefault();
                     if (report != null)
                     {
                         depReport8 = (DepReport)report.Clone();
@@ -166,7 +184,7 @@ namespace DailyReport.Pages.Reports
                         depReport8 = new();
                     }
                 }
-                else depReport8 = new(); 
+                else depReport8 = new();
             }
             if (depReport91 == null) depReport91 = new();
             if (depReport90 == null) depReport90 = new();
@@ -176,27 +194,27 @@ namespace DailyReport.Pages.Reports
             if (finalReport == null) finalReport = new();
 
             //порядок списка отделений должен строго соответствовать порядку отделений в сводке
-            filteredReports.Add(depReport1);
-            filteredReports.Add(depReport11);
-            //_filteredReports.Add(depReport2); отделение не работает
-            filteredReports.Add(depReport3);
-            //filteredReports.Add(depReport31);
-            filteredReports.Add(depReport4);       
-            filteredReports.Add(depReport5);
-            filteredReports.Add(depReport51);
-            filteredReports.Add(depReport6);
-            //filteredReports.Add(depReport61);
-            filteredReports.Add(depReport7);
-            //filteredReports.Add(depReport71);
-            filteredReports.Add(depReport90);
-            filteredReports.Add(depReport91);
+            //filteredReports.Add(depReport1);
+            //filteredReports.Add(depReport11);
+            ////_filteredReports.Add(depReport2); отделение не работает
+            //filteredReports.Add(depReport3);
+            ////filteredReports.Add(depReport31);
+            //filteredReports.Add(depReport4);       
+            //filteredReports.Add(depReport5);
+            //filteredReports.Add(depReport51);
+            //filteredReports.Add(depReport6);
+            ////filteredReports.Add(depReport61);
+            //filteredReports.Add(depReport7);
+            ////filteredReports.Add(depReport71);
+            //filteredReports.Add(depReport90);
+            //filteredReports.Add(depReport91);
 
 
             //в метод передаем данные не отфильтрованных сводок, иначе потеряем ДС (dep8)
-            freeSpots = FreeSpotsServices.CountSpots(reports, departmentSpots);
+            freeSpots = FreeSpotsServices.CountSpots(sortedReports, departmentSpots);
 
             //Считаем сумму по отделениям
-            foreach (DepReport _rep in filteredReports)
+            foreach (DepReport _rep in sortedReports)
             {
                 finalReport.existed += _rep.existed;
                 finalReport.existedChildren += _rep.existedChildren;
@@ -267,44 +285,49 @@ namespace DailyReport.Pages.Reports
                 finalReport.care += _rep.care;
                 finalReport.careDisodered += _rep.careDisodered;
             }
-            filteredReports.Add(depReport8); //дневной стационар не входит в общий список, добавляем его в лист после вычисления общего количества
+            //filteredReports.Add(depReport8); //дневной стационар не входит в общий список, добавляем его в лист после вычисления общего количества
 
-            oxygenSum1 = depReport1.CountO2();
-            oxygenSum11 = depReport11.CountO2();
+            oxygenSum1 = 0;// depReport1.CountO2();
+            oxygenSum11 = 0;// depReport11.CountO2();
 
-            oxygenSum91 = depReport91.CountO2();
-            oxygenSum90 = depReport90.CountO2();
+            oxygenSum91 = 0;// depReport91.CountO2();
+            oxygenSum90 = 0;// depReport90.CountO2();
 
-            deseaseSum1 = depReport1.CountDiseases();
-            deseaseSum11 = depReport11.CountDiseases();
-            deseaseSum2 = depReport2.CountDiseases();
-            deseaseSum3 = depReport3.CountDiseases();
-            //deseaseSum31 = depReport31.CountDiseases();
-            deseaseSum4 = depReport4.CountDiseases();
-            deseaseSum5 = depReport5.CountDiseases();
-            deseaseSum51 = depReport51.CountDiseases();
-            deseaseSum6 = depReport6.CountDiseases();
-            //deseaseSum61 = depReport61.CountDiseases();
-            deseaseSum7 = depReport7.CountDiseases();
-            //deseaseSum71 = depReport71.CountDiseases();
-            deseaseSum8 = depReport8.CountDiseases();
-            deseaseSum90 = depReport90.CountDiseases();
-            deseaseSum91 = depReport91.CountDiseases();
-            deseaseSum1Children = depReport1.CountDiseasesChildren();
-            deseaseSum11Children = depReport11.CountDiseasesChildren();
-            deseaseSum2Children = depReport2.CountDiseasesChildren();
-            deseaseSum3Children = depReport3.CountDiseasesChildren();
-            //deseaseSum31Children = depReport31.CountDiseasesChildren();
-            deseaseSum4Children = depReport4.CountDiseasesChildren();
-            deseaseSum5Children = depReport5.CountDiseasesChildren();
-            deseaseSum51Children = depReport51.CountDiseasesChildren();
-            deseaseSum6Children = depReport6.CountDiseasesChildren();
-            //deseaseSum61Children = depReport61.CountDiseasesChildren();
-            deseaseSum7Children = depReport7.CountDiseasesChildren();
-            //deseaseSum71Children = depReport71.CountDiseasesChildren();
-            deseaseSum8Children = depReport8.CountDiseasesChildren();
-            deseaseSum90Children = depReport90.CountDiseasesChildren();
-            deseaseSum91Children = depReport91.CountDiseasesChildren();
+            foreach(DepReport rep in sortedReports)
+            {
+                diseaseSums.Add(rep.CountDiseases());
+                diseaseSums.Add(rep.CountDiseasesChildren());
+            }
+            //deseaseSum1 = depReport1.CountDiseases();
+            //deseaseSum11 = depReport11.CountDiseases();
+            //deseaseSum2 = depReport2.CountDiseases();
+            //deseaseSum3 = depReport3.CountDiseases();
+            ////deseaseSum31 = depReport31.CountDiseases();
+            //deseaseSum4 = depReport4.CountDiseases();
+            //deseaseSum5 = depReport5.CountDiseases();
+            //deseaseSum51 = depReport51.CountDiseases();
+            //deseaseSum6 = depReport6.CountDiseases();
+            ////deseaseSum61 = depReport61.CountDiseases();
+            //deseaseSum7 = depReport7.CountDiseases();
+            ////deseaseSum71 = depReport71.CountDiseases();
+            //deseaseSum8 = depReport8.CountDiseases();
+            //deseaseSum90 = depReport90.CountDiseases();
+            //deseaseSum91 = depReport91.CountDiseases();
+            //deseaseSum1Children = depReport1.CountDiseasesChildren();
+            //deseaseSum11Children = depReport11.CountDiseasesChildren();
+            //deseaseSum2Children = depReport2.CountDiseasesChildren();
+            //deseaseSum3Children = depReport3.CountDiseasesChildren();
+            ////deseaseSum31Children = depReport31.CountDiseasesChildren();
+            //deseaseSum4Children = depReport4.CountDiseasesChildren();
+            //deseaseSum5Children = depReport5.CountDiseasesChildren();
+            //deseaseSum51Children = depReport51.CountDiseasesChildren();
+            //deseaseSum6Children = depReport6.CountDiseasesChildren();
+            ////deseaseSum61Children = depReport61.CountDiseasesChildren();
+            //deseaseSum7Children = depReport7.CountDiseasesChildren();
+            ////deseaseSum71Children = depReport71.CountDiseasesChildren();
+            //deseaseSum8Children = depReport8.CountDiseasesChildren();
+            //deseaseSum90Children = depReport90.CountDiseasesChildren();
+            //deseaseSum91Children = depReport91.CountDiseasesChildren();
             deseaseSumFinal = finalReport.CountDiseases();
             deseaseSumFinalChildren = finalReport.CountDiseasesChildren();
 

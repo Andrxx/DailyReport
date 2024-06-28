@@ -250,7 +250,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DepReports");
+                    b.ToTable("DepReports", (string)null);
                 });
 
             modelBuilder.Entity("DailyReport.Models.Department", b =>
@@ -285,7 +285,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("DailyReport.Models.DutyDoc", b =>
@@ -308,7 +308,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DutyDocs");
+                    b.ToTable("DutyDocs", (string)null);
                 });
 
             modelBuilder.Entity("DailyReport.Models.DutyNurse", b =>
@@ -331,7 +331,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DutyNurses");
+                    b.ToTable("DutyNurses", (string)null);
                 });
 
             modelBuilder.Entity("DailyReport.Models.FinalReport", b =>
@@ -606,7 +606,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FinalReports");
+                    b.ToTable("FinalReports", (string)null);
                 });
 
             modelBuilder.Entity("DailyReport.Models.FireReport", b =>
@@ -635,7 +635,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FireReports");
+                    b.ToTable("FireReports", (string)null);
                 });
 
             modelBuilder.Entity("DailyReport.Models.OutcomingPatient", b =>
@@ -673,7 +673,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OutcomingPatients");
+                    b.ToTable("OutcomingPatients", (string)null);
                 });
 
             modelBuilder.Entity("DailyReport.Models.Personel", b =>
@@ -697,7 +697,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Personels");
+                    b.ToTable("Personels", (string)null);
                 });
 
             modelBuilder.Entity("DailyReport.Models.WardsModels.Patient", b =>
@@ -751,7 +751,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Patients");
+                    b.ToTable("Patients", (string)null);
                 });
 
             modelBuilder.Entity("DailyReport.Models.WardsModels.Ward", b =>
@@ -778,7 +778,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Wards");
+                    b.ToTable("Wards", (string)null);
                 });
 #pragma warning restore 612, 618
         }

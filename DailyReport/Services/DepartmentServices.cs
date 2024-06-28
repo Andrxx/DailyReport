@@ -51,6 +51,11 @@ namespace DailyReport.Services
             return departments;
         }
 
+        /// <summary>
+        /// Получаем список всех отделений из БД, отсортированный по порядку отбражения
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static List<Department> GetSortedDepartments(ApplicationContext context)
         {
             List<Department> departments = (from d in context.Departments

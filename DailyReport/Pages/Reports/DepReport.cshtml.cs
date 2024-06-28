@@ -23,7 +23,7 @@ namespace DailyReport.Pages.Reports
         }
         //public DepReportServise reportServise = new();
 
-        public void OnGet(int depNumber, double dateOffset = 0)
+        public void OnGet(int depAllias, double dateOffset = 0)
         {
             actualDate = actualDate.AddDays(dateOffset);
             DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 8, 0, 0);
@@ -48,7 +48,7 @@ namespace DailyReport.Pages.Reports
             //{
 #pragma warning disable CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
             report = (from r in context.DepReports
-                       where ((r.depNumber == depNumber) && (r.date > startTime) && (r.date < endTime))
+                       where ((r.depNumber == depAllias) && (r.date > startTime) && (r.date < endTime))
                        select r).FirstOrDefault();
 #pragma warning restore CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
 
@@ -67,14 +67,14 @@ namespace DailyReport.Pages.Reports
                 //_report = reportServise.CreateTest();
 
                 report = new();
-                report.depNumber = depNumber;
+                report.depNumber = depAllias;
                 //при работе с прошлыми сводкам корректируем дату сводки
                 if(dateOffset != 0) report.date = reportDate;
             }
 
             try
             {
-                DutyNurse dn = DutyServices.GetDutyNurses(depNumber, context).FirstOrDefault();
+                DutyNurse dn = DutyServices.GetDutyNurses(depAllias, context).FirstOrDefault();
                 if(dn != null) report.dutyNurse = dn.name;
             }
             catch { }
