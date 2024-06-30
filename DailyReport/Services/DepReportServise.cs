@@ -56,6 +56,8 @@ namespace DailyReport.Services
             DepReport.foreinChildrens = 1;
             DepReport.LNR_DNR = 1;
             DepReport.LNR_DNRChildrens = 1;
+            DepReport.otherUkrane =1;
+            DepReport.otherUkraneChildren = 1;
             DepReport.incomeHospital = 1;
             DepReport.incomeHospitalChildrens = 1;
             DepReport.outcomeHospital = 1;
@@ -68,16 +70,24 @@ namespace DailyReport.Services
             DepReport.ORVIChildrens = 1;
             DepReport.pneumonia = 1;
             DepReport.pneumoniaChildrens = 1;
+            DepReport.grippe = 1;
+            DepReport.grippeChildrens = 1;
+            DepReport.measles = 1;
+            DepReport.measlesChildren = 1;
             DepReport.OKI = 1;
             DepReport.OKIChildrens = 1;
             DepReport.meningit = 1;
             DepReport.meningitChildrens = 1;
+            DepReport.sepsis = 1;
+            DepReport.sepsisChildren = 1;
             DepReport.hepatit = 1;
             DepReport.hepatitChildrens = 1;
             DepReport.HIV = 1;
             DepReport.HIVCildrens = 1;
             DepReport.other = 1;
             DepReport.otherChildrens = 1;
+            DepReport.care = 1;
+            DepReport.careDisodered = 1; 
             return DepReport;
         }
 

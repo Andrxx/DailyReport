@@ -6,7 +6,7 @@
     if ((Model.report.depNumber == 90) || (Model.report.depNumber == 91)) msg = "ОРИТ";
     else if (Model.report.depNumber == 81) msg = "Клинико-диагностическое отделение";
     else if (Model.report.depNumber == 82) msg = "Платные услуги";
-    else if (Model.report.depNumber == 8) msg = "Дневной стационар";
+    else if (Model.report.depNumber == 21) msg = "Дневной стационар";
     else if (Model.report.depNumber == 11) msg = " 1 отделения";
     else if (Model.report.depNumber == 31) msg = " 3 отделения";
     else if (Model.report.depNumber == 51) msg = " 5 отделения";
@@ -68,7 +68,7 @@
                     </div>
                 </div>
 
-                <input class="d-print-none" type="submit" value="Загрузить предыдущую сводку" asp-page-handler="PrevReport" asp-route-depNumber=@Model.report.depNumber />
+                <input class="d-print-none" type="submit" value="Загрузить предыдущую сводку" asp-page-handler="PrevReport" asp-route-depAllias=@Model.report.depNumber />
                 <table class="table mt-2 g-0 d-table table-sm ">
                     <thead> 
                         <tr>

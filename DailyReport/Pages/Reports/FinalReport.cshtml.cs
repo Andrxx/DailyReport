@@ -17,8 +17,7 @@ namespace DailyReport.Pages.Reports
 
         public FinalReport finalReport;
         public List<FinalReport> finalReports;
-        public DepReport depReport1, depReport11, depReport2, depReport3, depReport31, depReport4, depReport5, depReport51,
-            depReport6, depReport7, depReport61, depReport71, depReport8, depReport90, depReport91, depReport81, depReport82;
+        public DepReport  depReport81, depReport82;
         ApplicationContext context;
         public FinalReportModel(ApplicationContext db)
         {
@@ -31,20 +30,17 @@ namespace DailyReport.Pages.Reports
         public List<DepReport> filteredReports = new List<DepReport>();
         public DateTime actualDate = DateTime.Now, reportDate;
         public bool _onlyView;
-        public int oxygenSum1, oxygenSum11, oxygenSum91, oxygenSum90, deseaseSum1, deseaseSum11, deseaseSum2, deseaseSum3, deseaseSum31, deseaseSum4, deseaseSum5,
-            deseaseSum51, deseaseSum6, deseaseSum7, deseaseSum61, deseaseSum71, deseaseSum8, deseaseSum90, deseaseSum91, deseaseSum1Children, 
-            deseaseSum11Children, deseaseSum2Children, deseaseSum3Children, deseaseSum31Children, deseaseSum4Children, deseaseSum5Children, deseaseSum51Children, 
-            deseaseSum6Children, deseaseSum61Children, deseaseSum7Children, deseaseSum71Children, deseaseSum8Children, deseaseSum90Children, deseaseSum91Children, deseaseSumFinal, 
-            deseaseSumFinalChildren, UkraneSum, UkraneSumChildren;
+        public int  deseaseSumFinal, deseaseSumFinalChildren;
         public int reject, rejectChildren, ambulance, ambulanceChildren, submitOtherHosp, submitOtherHospChildren, sumReject, 
             sumAmbulance, sumOther, sumAdults, sumChildren, sumTotal;
         //фактические места в отделениях
-        public DepartmentSpots departmentSpots; 
+        //public DepartmentSpots departmentSpots; 
         //свободные места
         public FreeSpots freeSpots;
         public List<string> doctors;
         public OutcomingPatient savedPatient = new(); //поле для работы частичного представления формы, не использовать кроме вызова форм
-        public int departmentCounter, AdultSpotsSum, ChildrenSpotsSum, AdultAdditionalSpots, ChildrenAdditionalSpots, AdultFullSpotsSum, ChildrenFullSpotsSum;
+        public int departmentCounter, AdultSpotsSum, ChildrenSpotsSum, AdultAdditionalSpots, ChildrenAdditionalSpots, AdultFullSpotsSum, ChildrenFullSpotsSum
+            , ORITAdults, ORITChildren;
         [BindProperty]
         public DutyDoc newDoc { get; set; } = new();
         public List<DutyDoc> depDocs { get; set; } = new();
@@ -57,8 +53,10 @@ namespace DailyReport.Pages.Reports
         public List<string> submitedFrom = OutPatientService.GetSubmitedFrom();
         public List<string> submitedTo = OutPatientService.GetSubmitedTo();
 
-        public List<int> excludedDeps = new() {8, 90, 91 };
+        public List<int> excludedDeps = new() {21, 90, 91 };
         public List<int> diseaseSums = new();
+        public List<int> oxygenSum = new();
+
 
         public void OnGet(double dateOffset = 0, bool onlyView = false)
         {
@@ -85,16 +83,10 @@ namespace DailyReport.Pages.Reports
             ChildrenSpotsSum = DepSpotsService.GetChildrenSpots(activeDepartments, excludedDeps);
             AdultFullSpotsSum = DepSpotsService.GetFullAdultSpots(activeDepartments);
             ChildrenFullSpotsSum = DepSpotsService.GetFullChildrenSpots(activeDepartments);
-
-            departmentSpots = DepSpotsService.GetSpots(context);
-            departmentSpots.sum = DepSpotsService.CountSum();
-            departmentSpots.sumChildren = DepSpotsService.CountSumChildren();
-            departmentSpots.sumOC = DepSpotsService.CountSumOC();
-            departmentSpots.sumOCChildren = DepSpotsService.CountSumOCChildren();
-            
-            //todo - падает при очистке БД
-            //_rep = context.DepReports.AsNoTracking().ToList();
-            //finalReports = context.FinalReports.AsNoTracking().ToList();
+            ORITAdults = activeDepartments.FirstOrDefault(d => d.Allias == 90).AdultSpotsQuantity 
+                + activeDepartments.FirstOrDefault(d => d.Allias == 91).AdultSpotsQuantity;
+            ORITChildren = activeDepartments.FirstOrDefault(d => d.Allias == 90).ChildrenSpotsQuantity 
+                + activeDepartments.FirstOrDefault(d => d.Allias == 91).ChildrenSpotsQuantity;
 
             //Получаем список актуальных сводок из БД
             try
@@ -110,224 +102,145 @@ namespace DailyReport.Pages.Reports
             //Передаем сводки из списка в переменные
             foreach (Department dep in activeDepartments) 
             {
-                DepReport _rep = reports.Find(rep => rep.depNumber == dep.Allias);
+                DepReport? _rep = reports.Find(rep => rep.depNumber == dep.Allias);
                 if (_rep is null) _rep = new DepReport();
                 sortedReports.Add(_rep);
             }
 
 
-            //#pragma warning disable CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
-            depReport1 = reports.Find(p => p.depNumber == 1);
-            depReport11 = reports.Find(p => p.depNumber == 11);
-            //depReport2 = reports.Find(p => p.depNumber == 2); //отделение пока не работает
-            depReport3 = reports.Find(p => p.depNumber == 3);
-            //depReport31 = reports.Find(p => p.depNumber == 31);
-            depReport4 = reports.Find(p => p.depNumber == 4);
-            depReport5 = reports.Find(p => p.depNumber == 5);
-            depReport51 = reports.Find(p => p.depNumber == 51);
-            depReport6 = reports.Find(p => p.depNumber == 6);
-            //depReport61 = reports.Find(p => p.depNumber == 61);
-            depReport7 = reports.Find(p => p.depNumber == 7);
-            //depReport71 = reports.Find(p => p.depNumber == 71);
-            depReport8 = reports.Find(p => p.depNumber == 8);
-            depReport90 = reports.Find(p => p.depNumber == 90);
-            depReport91 = reports.Find(p => p.depNumber == 91);
+#pragma warning disable CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
             depReport81 = reports.Find(p => p.depNumber == 81);
             depReport82 = reports.Find(p => p.depNumber == 82);
 
 #pragma warning restore CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
-            if (depReport1 == null) depReport1 = new();
-            if (depReport11 == null) depReport11 = new();
-            if (depReport2 == null) depReport2 = new();
-            if (depReport3 == null) depReport3 = new();
-            //if (depReport31 == null) depReport31 = new();
-            if (depReport4 == null) depReport4 = new();
-            if (depReport5 == null) depReport5 = new();
-            if (depReport51 == null) depReport51 = new();
-            if (depReport6 == null) depReport6 = new();
-            //if (depReport61 == null) depReport61 = new();
-            if (depReport7 == null) depReport7 = new();
-            //if (depReport71 == null) depReport71 = new();
-            if (depReport8 == null)
-            {
-                //на выходных загружаем данные предыдущей сводки
-                if (actualDate.DayOfWeek == DayOfWeek.Sunday || actualDate.DayOfWeek == DayOfWeek.Saturday)
-                {
-                    DepReport report = (from r in context.DepReports
-                                        where (r.depNumber == 8) && (r.date > startTime.AddDays(-1)) && (r.date < endTime.AddDays(-1))
-                                        select r).AsNoTracking().FirstOrDefault();
-                    if (report != null)
-                    {
-                        depReport8 = (DepReport)report.Clone();
-                        //меняем дату на текущую и обнуляем ИД для сохранения новой записи в БД
-                        depReport8.date = actualDate;
-                        depReport8.Id = 0;
-                        depReport8.present = report.present;
-                        depReport8.presentChildrens = report.presentChildrens;
-                        depReport8.existed = report.present;
-                        depReport8.existedChildren = report.presentChildrens;
-                        depReport8.income = 0;
-                        depReport8.incomeChildren = 0;
-                        depReport8.outcome = 0;
-                        depReport8.outcomeChildrens = 0;
-                        depReport8.movedInDep = 0;
-                        depReport8.movedOutDep = 0;
-                        depReport8.movedInDepChildrens = 0;
-                        depReport8.movedOutDepChildrens = 0;
-                        depReport8.died = 0;
-                        depReport8.diedChildrens = 0;
-                        context.DepReports.Update(depReport8);
-                        context.SaveChanges();
-                    }
-                    else
-                    {
-                        depReport8 = new();
-                    }
-                }
-                else depReport8 = new();
-            }
-            if (depReport91 == null) depReport91 = new();
-            if (depReport90 == null) depReport90 = new();
+            //if (depReport8 == null)
+            //{
+            //    //на выходных загружаем данные предыдущей сводки
+            //    if (actualDate.DayOfWeek == DayOfWeek.Sunday || actualDate.DayOfWeek == DayOfWeek.Saturday)
+            //    {
+            //        DepReport report = (from r in context.DepReports
+            //                            where (r.depNumber == 8) && (r.date > startTime.AddDays(-1)) && (r.date < endTime.AddDays(-1))
+            //                            select r).AsNoTracking().FirstOrDefault();
+            //        if (report != null)
+            //        {
+            //            depReport8 = (DepReport)report.Clone();
+            //            //меняем дату на текущую и обнуляем ИД для сохранения новой записи в БД
+            //            depReport8.date = actualDate;
+            //            depReport8.Id = 0;
+            //            depReport8.present = report.present;
+            //            depReport8.presentChildrens = report.presentChildrens;
+            //            depReport8.existed = report.present;
+            //            depReport8.existedChildren = report.presentChildrens;
+            //            depReport8.income = 0;
+            //            depReport8.incomeChildren = 0;
+            //            depReport8.outcome = 0;
+            //            depReport8.outcomeChildrens = 0;
+            //            depReport8.movedInDep = 0;
+            //            depReport8.movedOutDep = 0;
+            //            depReport8.movedInDepChildrens = 0;
+            //            depReport8.movedOutDepChildrens = 0;
+            //            depReport8.died = 0;
+            //            depReport8.diedChildrens = 0;
+            //            context.DepReports.Update(depReport8);
+            //            context.SaveChanges();
+            //        }
+            //        else
+            //        {
+            //            depReport8 = new();
+            //        }
+            //    }
+
+            //костыль - платные услуги и КДО, пока не входят в сводки, обработать в будущем
             if (depReport81 == null) depReport81 = new();
             if (depReport82 == null) depReport82 = new();
 
             if (finalReport == null) finalReport = new();
 
-            //порядок списка отделений должен строго соответствовать порядку отделений в сводке
-            //filteredReports.Add(depReport1);
-            //filteredReports.Add(depReport11);
-            ////_filteredReports.Add(depReport2); отделение не работает
-            //filteredReports.Add(depReport3);
-            ////filteredReports.Add(depReport31);
-            //filteredReports.Add(depReport4);       
-            //filteredReports.Add(depReport5);
-            //filteredReports.Add(depReport51);
-            //filteredReports.Add(depReport6);
-            ////filteredReports.Add(depReport61);
-            //filteredReports.Add(depReport7);
-            ////filteredReports.Add(depReport71);
-            //filteredReports.Add(depReport90);
-            //filteredReports.Add(depReport91);
-
-
-            //в метод передаем данные не отфильтрованных сводок, иначе потеряем ДС (dep8)
-            freeSpots = FreeSpotsServices.CountSpots(sortedReports, departmentSpots);
-
             //Считаем сумму по отделениям
             foreach (DepReport _rep in sortedReports)
             {
-                finalReport.existed += _rep.existed;
-                finalReport.existedChildren += _rep.existedChildren;
-                finalReport.income += _rep.income;
-                finalReport.incomeChildren += _rep.incomeChildrens;
-                finalReport.outcome += _rep.outcome;
-                finalReport.outcomeChildren += _rep.outcomeChildrens;
-                finalReport.attachedToORIT += _rep.attachedToORIT;
-                finalReport.attachedToORITChildren += _rep.attachedToORITCildrens;
-                finalReport.movedOutDep += _rep.movedOutDep;
-                finalReport.movedOutDepChildren += _rep.movedOutDepChildrens;
-                finalReport.movedInDep += _rep.movedInDep;
-                finalReport.movedInDepChildren += _rep.movedInDepChildrens;
-                finalReport.died += _rep.died;
-                finalReport.diedChildren += _rep.diedChildrens;
-                finalReport.present += _rep.present;
-                finalReport.presentChildren += _rep.presentChildrens;          
-                finalReport.oIVL += _rep.oIVL;
-                finalReport.oIVLChildren += _rep.oIVLChildrens;
-                finalReport.oNIVL += _rep.oNIVL;
-                finalReport.oNIVLChildren += _rep.oNIVLChildrens;
-                finalReport.oNIVLVPO += _rep.oNIVLVPO;
-                finalReport.oNIVLVPOChildren += _rep.oNIVLVPOChildrens;
-                finalReport.oNIVLMask += _rep.oNIVLMask;
-                finalReport.oNIVLMaskChildren += _rep.oNIVLMaskChildrens;
-                finalReport.oMask += _rep.oMask;
-                finalReport.oMaskChildren += _rep.oMaskChildren;
-                finalReport.pregnant += _rep.pregnant;
-                finalReport.pregnantChildren += _rep.pregnantChildrens;
-                finalReport.restZone += _rep.restZone;
-                finalReport.restZoneChildren += _rep.restZoneChildrens;
-                finalReport.outRegions += _rep.outRegions;
-                finalReport.outRegionsChildren += _rep.outRegionsChildrens;
-                finalReport.forein += _rep.forein;
-                finalReport.foreinChildren += _rep.foreinChildrens;
-                finalReport.LNR_DNR += _rep.LNR_DNR;
-                finalReport.LNR_DNRChildren += _rep.LNR_DNRChildrens;
-                finalReport.otherUkrane += _rep.otherUkrane;
-                finalReport.otherUkraneChildren += _rep.otherUkraneChildren;
-                finalReport.incomeHospital += _rep.incomeHospital;
-                finalReport.incomeHospitalChildren += _rep.incomeHospitalChildrens;
-                finalReport.outcomeHospital += _rep.outcomeHospital;
-                finalReport.outcomeHospitalChildren += _rep.outcomeHospitalChildrens;
-                finalReport.U071 += _rep.U071;
-                finalReport.U071Children += _rep.U071Childrens;
-                finalReport.U072 += _rep.U072;
-                finalReport.U072Children += _rep.U072Childrens;
-                finalReport.ORVI += _rep.ORVI;
-                finalReport.ORVIChildren += _rep.ORVIChildrens;
-                finalReport.grippe += _rep.grippe;
-                finalReport.grippeChildren += _rep.grippeChildrens;
-                finalReport.pneumonia += _rep.pneumonia;
-                finalReport.pneumoniaChildren += _rep.pneumoniaChildrens;
-                finalReport.measles += _rep.measles;
-                finalReport.measlesChildren += _rep.measlesChildren;
-                finalReport.OKI += _rep.OKI;
-                finalReport.OKIChildren += _rep.OKIChildrens;
-                finalReport.meningit += _rep.meningit;
-                finalReport.meningitChildren += _rep.meningitChildrens;
-                finalReport.hepatit += _rep.hepatit;
-                finalReport.hepatitChildren += _rep.hepatitChildrens;
-                finalReport.HIV += _rep.HIV;
-                finalReport.HIVCildren += _rep.HIVCildrens;
-                finalReport.other += _rep.other;
-                finalReport.otherChildren += _rep.otherChildrens;
-                finalReport.sepsis += _rep.sepsis;
-                finalReport.sepsisChildren += _rep.sepsisChildren;
-                finalReport.care += _rep.care;
-                finalReport.careDisodered += _rep.careDisodered;
+                if (!excludedDeps.Contains(_rep.depNumber)) //выводим из подсчета отделения из списка исключения
+                {
+                    finalReport.existed += _rep.existed;
+                    finalReport.existedChildren += _rep.existedChildren;
+                    finalReport.income += _rep.income;
+                    finalReport.incomeChildren += _rep.incomeChildrens;
+                    finalReport.outcome += _rep.outcome;
+                    finalReport.outcomeChildren += _rep.outcomeChildrens;
+                    finalReport.attachedToORIT += _rep.attachedToORIT;
+                    finalReport.attachedToORITChildren += _rep.attachedToORITCildrens;
+                    finalReport.movedOutDep += _rep.movedOutDep;
+                    finalReport.movedOutDepChildren += _rep.movedOutDepChildrens;
+                    finalReport.movedInDep += _rep.movedInDep;
+                    finalReport.movedInDepChildren += _rep.movedInDepChildrens;
+                    finalReport.died += _rep.died;
+                    finalReport.diedChildren += _rep.diedChildrens;
+                    finalReport.present += _rep.present;
+                    finalReport.presentChildren += _rep.presentChildrens;
+                    finalReport.oIVL += _rep.oIVL;
+                    finalReport.oIVLChildren += _rep.oIVLChildrens;
+                    finalReport.oNIVL += _rep.oNIVL;
+                    finalReport.oNIVLChildren += _rep.oNIVLChildrens;
+                    finalReport.oNIVLVPO += _rep.oNIVLVPO;
+                    finalReport.oNIVLVPOChildren += _rep.oNIVLVPOChildrens;
+                    finalReport.oNIVLMask += _rep.oNIVLMask;
+                    finalReport.oNIVLMaskChildren += _rep.oNIVLMaskChildrens;
+                    finalReport.oMask += _rep.oMask;
+                    finalReport.oMaskChildren += _rep.oMaskChildren;
+                    finalReport.pregnant += _rep.pregnant;
+                    finalReport.pregnantChildren += _rep.pregnantChildrens;
+                    finalReport.restZone += _rep.restZone;
+                    finalReport.restZoneChildren += _rep.restZoneChildrens;
+                    finalReport.outRegions += _rep.outRegions;
+                    finalReport.outRegionsChildren += _rep.outRegionsChildrens;
+                    finalReport.forein += _rep.forein;
+                    finalReport.foreinChildren += _rep.foreinChildrens;
+                    finalReport.LNR_DNR += _rep.LNR_DNR;
+                    finalReport.LNR_DNRChildren += _rep.LNR_DNRChildrens;
+                    finalReport.otherUkrane += _rep.otherUkrane;
+                    finalReport.otherUkraneChildren += _rep.otherUkraneChildren;
+                    finalReport.incomeHospital += _rep.incomeHospital;
+                    finalReport.incomeHospitalChildren += _rep.incomeHospitalChildrens;
+                    finalReport.outcomeHospital += _rep.outcomeHospital;
+                    finalReport.outcomeHospitalChildren += _rep.outcomeHospitalChildrens;
+                    finalReport.U071 += _rep.U071;
+                    finalReport.U071Children += _rep.U071Childrens;
+                    finalReport.U072 += _rep.U072;
+                    finalReport.U072Children += _rep.U072Childrens;
+                    finalReport.ORVI += _rep.ORVI;
+                    finalReport.ORVIChildren += _rep.ORVIChildrens;
+                    finalReport.grippe += _rep.grippe;
+                    finalReport.grippeChildren += _rep.grippeChildrens;
+                    finalReport.pneumonia += _rep.pneumonia;
+                    finalReport.pneumoniaChildren += _rep.pneumoniaChildrens;
+                    finalReport.measles += _rep.measles;
+                    finalReport.measlesChildren += _rep.measlesChildren;
+                    finalReport.OKI += _rep.OKI;
+                    finalReport.OKIChildren += _rep.OKIChildrens;
+                    finalReport.meningit += _rep.meningit;
+                    finalReport.meningitChildren += _rep.meningitChildrens;
+                    finalReport.hepatit += _rep.hepatit;
+                    finalReport.hepatitChildren += _rep.hepatitChildrens;
+                    finalReport.HIV += _rep.HIV;
+                    finalReport.HIVCildren += _rep.HIVCildrens;
+                    finalReport.other += _rep.other;
+                    finalReport.otherChildren += _rep.otherChildrens;
+                    finalReport.sepsis += _rep.sepsis;
+                    finalReport.sepsisChildren += _rep.sepsisChildren;
+                    finalReport.care += _rep.care;
+                    finalReport.careDisodered += _rep.careDisodered;
+                }
             }
+            
             //filteredReports.Add(depReport8); //дневной стационар не входит в общий список, добавляем его в лист после вычисления общего количества
-
-            oxygenSum1 = 0;// depReport1.CountO2();
-            oxygenSum11 = 0;// depReport11.CountO2();
-
-            oxygenSum91 = 0;// depReport91.CountO2();
-            oxygenSum90 = 0;// depReport90.CountO2();
 
             foreach(DepReport rep in sortedReports)
             {
                 diseaseSums.Add(rep.CountDiseases());
                 diseaseSums.Add(rep.CountDiseasesChildren());
+                oxygenSum.Add(rep.CountO2());
             }
-            //deseaseSum1 = depReport1.CountDiseases();
-            //deseaseSum11 = depReport11.CountDiseases();
-            //deseaseSum2 = depReport2.CountDiseases();
-            //deseaseSum3 = depReport3.CountDiseases();
-            ////deseaseSum31 = depReport31.CountDiseases();
-            //deseaseSum4 = depReport4.CountDiseases();
-            //deseaseSum5 = depReport5.CountDiseases();
-            //deseaseSum51 = depReport51.CountDiseases();
-            //deseaseSum6 = depReport6.CountDiseases();
-            ////deseaseSum61 = depReport61.CountDiseases();
-            //deseaseSum7 = depReport7.CountDiseases();
-            ////deseaseSum71 = depReport71.CountDiseases();
-            //deseaseSum8 = depReport8.CountDiseases();
-            //deseaseSum90 = depReport90.CountDiseases();
-            //deseaseSum91 = depReport91.CountDiseases();
-            //deseaseSum1Children = depReport1.CountDiseasesChildren();
-            //deseaseSum11Children = depReport11.CountDiseasesChildren();
-            //deseaseSum2Children = depReport2.CountDiseasesChildren();
-            //deseaseSum3Children = depReport3.CountDiseasesChildren();
-            ////deseaseSum31Children = depReport31.CountDiseasesChildren();
-            //deseaseSum4Children = depReport4.CountDiseasesChildren();
-            //deseaseSum5Children = depReport5.CountDiseasesChildren();
-            //deseaseSum51Children = depReport51.CountDiseasesChildren();
-            //deseaseSum6Children = depReport6.CountDiseasesChildren();
-            ////deseaseSum61Children = depReport61.CountDiseasesChildren();
-            //deseaseSum7Children = depReport7.CountDiseasesChildren();
-            ////deseaseSum71Children = depReport71.CountDiseasesChildren();
-            //deseaseSum8Children = depReport8.CountDiseasesChildren();
-            //deseaseSum90Children = depReport90.CountDiseasesChildren();
-            //deseaseSum91Children = depReport91.CountDiseasesChildren();
+
             deseaseSumFinal = finalReport.CountDiseases();
             deseaseSumFinalChildren = finalReport.CountDiseasesChildren();
 

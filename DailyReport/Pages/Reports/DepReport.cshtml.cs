@@ -21,7 +21,6 @@ namespace DailyReport.Pages.Reports
         {
             context = db;
         }
-        //public DepReportServise reportServise = new();
 
         public void OnGet(int depAllias, double dateOffset = 0)
         {
@@ -64,7 +63,7 @@ namespace DailyReport.Pages.Reports
             if (report == null)
             {
                 //тест для БД, изменить на создание нового для релиза
-                //_report = reportServise.CreateTest();
+                //report = DepReportServise.CreateTest();
 
                 report = new();
                 report.depNumber = depAllias;
@@ -90,9 +89,9 @@ namespace DailyReport.Pages.Reports
         /// <summary>
         /// Метод находит в БД вчерашнюю сводку и перезаписывает ее в БД с сегодняшним числом и новым ИД
         /// </summary>
-        /// <param name="depNumber"></param>
+        /// <param name="depAllias"></param>
         /// <returns></returns>
-        public RedirectToPageResult OnPostPrevReport(int depNumber)
+        public RedirectToPageResult OnPostPrevReport(int depAllias)
         {
             //Reports = context.DepReports.AsNoTracking().ToList();
 
@@ -109,17 +108,17 @@ namespace DailyReport.Pages.Reports
             //задаем дату отображения на сводке, устнавливть только после коррекции стартовой даты 
             else { reportDate = actualDate; }
             report = (from report in context.DepReports
-                       where (report.depNumber == depNumber) && (report.date > startTime && report.date < endTime)
+                       where (report.depNumber == depAllias) && (report.date > startTime && report.date < endTime)
                        select report).AsNoTracking().FirstOrDefault();
             if (report == null)
             {
-                return RedirectToPage("DepReport", new { depNumber = depNumber });
+                return RedirectToPage("DepReport", new { depAllias = depAllias });
             }
             else 
             {
                 //ищем запись сегодняшней даты 
                 var curentReport = (from report in context.DepReports
-                          where (report.depNumber == depNumber) && (report.date > startTime.AddDays(1) && report.date < endTime.AddDays(1))
+                          where (report.depNumber == depAllias) && (report.date > startTime.AddDays(1) && report.date < endTime.AddDays(1))
                           select report).AsNoTracking().FirstOrDefault();
                 if (curentReport == null)
                 {
@@ -129,7 +128,7 @@ namespace DailyReport.Pages.Reports
                     newRep.Id = 0;
                     context.DepReports.Update(newRep);
                     context.SaveChanges();
-                    return RedirectToPage("DepReport", new { depNumber = depNumber });
+                    return RedirectToPage("DepReport", new { depAllias = depAllias });
                 }
                 //если имеется запись с текущей датой, перезаписывем ее предыдущей записью, оставляя текущее ИД и дату
                 else
@@ -140,7 +139,7 @@ namespace DailyReport.Pages.Reports
                     curentReport.date = actualDate;
                     context.DepReports.Update(curentReport);
                     context.SaveChanges();
-                    return RedirectToPage("DepReport", new { depNumber = depNumber });
+                    return RedirectToPage("DepReport", new { depAllias = depAllias });
                 }
             }  
         }
@@ -149,12 +148,12 @@ namespace DailyReport.Pages.Reports
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToPage("DepReport", new { depNumber = _report.depNumber });
+                return RedirectToPage("DepReport", new { depAllias = _report.depNumber });
             }
             //_report.dutyNurse = Request.Form["report.dutyNurse"];
             context.DepReports.Update(_report);
             context.SaveChanges();
-            return RedirectToPage("DepReport", new { depNumber = _report.depNumber });
+            return RedirectToPage("DepReport", new { depAllias = _report.depNumber });
         }
 
         public void OnPostDelete()
