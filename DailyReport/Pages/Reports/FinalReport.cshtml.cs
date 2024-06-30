@@ -83,10 +83,18 @@ namespace DailyReport.Pages.Reports
             ChildrenSpotsSum = DepSpotsService.GetChildrenSpots(activeDepartments, excludedDeps);
             AdultFullSpotsSum = DepSpotsService.GetFullAdultSpots(activeDepartments);
             ChildrenFullSpotsSum = DepSpotsService.GetFullChildrenSpots(activeDepartments);
-            ORITAdults = activeDepartments.FirstOrDefault(d => d.Allias == 90).AdultSpotsQuantity 
-                + activeDepartments.FirstOrDefault(d => d.Allias == 91).AdultSpotsQuantity;
-            ORITChildren = activeDepartments.FirstOrDefault(d => d.Allias == 90).ChildrenSpotsQuantity 
-                + activeDepartments.FirstOrDefault(d => d.Allias == 91).ChildrenSpotsQuantity;
+            try
+            {
+                ORITAdults = activeDepartments.FirstOrDefault(d => d.Allias == 90).AdultSpotsQuantity
+                    + activeDepartments.FirstOrDefault(d => d.Allias == 91).AdultSpotsQuantity;
+            }
+            catch { ORITAdults = 0; }
+            try
+            {
+                ORITChildren = activeDepartments.FirstOrDefault(d => d.Allias == 90).ChildrenSpotsQuantity
+                    + activeDepartments.FirstOrDefault(d => d.Allias == 91).ChildrenSpotsQuantity;
+            }
+            catch { ORITChildren = 0; }
 
             //Получаем список актуальных сводок из БД
             try
