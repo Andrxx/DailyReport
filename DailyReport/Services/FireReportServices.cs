@@ -102,7 +102,7 @@ namespace DailyReport.Services
 
             _report = reports.Find(p => p.DepNumber == 2);
             if (_report != null) filteredReports.Add(_report);
-            else filteredReports.Add(new FireReport { DepNumber = 3, Date = DateTime.Now });
+            else filteredReports.Add(new FireReport { DepNumber = 2, Date = DateTime.Now });
             
             _report = reports.Find(p => p.DepNumber == 3);
             if (_report != null) filteredReports.Add(_report);
