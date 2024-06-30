@@ -9,6 +9,7 @@
         public int Care { get; set; }
         public int Personel { get; set; }
         public DateTime Date { get; set; }
+        public int? ShowOrder { get; set; }
 
         public string ToDepName()
         {
@@ -57,6 +58,11 @@
                     }
                 case 8:
                     {
+                        name = "Восьмое отделение";
+                        return name;
+                    }
+                case 21:
+                    {
                         name = "Дневной стационар";
                         return name;
                     }
@@ -70,7 +76,7 @@
                         name = "ОРИТ грязная зона";
                         return name;
                     }
-                case 21:
+                case 25:
                     {
                         name = "Лаборатория";
                         return name;

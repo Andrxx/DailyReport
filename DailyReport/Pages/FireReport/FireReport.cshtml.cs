@@ -53,7 +53,7 @@ namespace DailyReport.Pages.FireReport
                 DutyNurse.Phone = personel.Phone;
             }
             DutyServices.AddDutyNurse(DutyNurse, context);
-            return RedirectToPage("FireReport", new { depNumber = DutyNurse.department });
+            return RedirectToPage("FireReport", new { depAllias = DutyNurse.department });
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace DailyReport.Pages.FireReport
         public IActionResult OnPostDeleteNurse(int id, int depNumber)
         {
             DutyServices.DeleteDutyNurse(id, context);
-            return RedirectToPage("FireReport", new { depNumber });
+            return RedirectToPage("FireReport", new { depAllias = depNumber });
         }
 
         //методы для работы со сводкой
@@ -74,11 +74,11 @@ namespace DailyReport.Pages.FireReport
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToPage("FireReport", new { depNumber = fireReport.DepNumber });
+                return RedirectToPage("FireReport", new { depAllias = fireReport.DepNumber });
             }
             fireReport.Date = DateTime.Now;
             FireReportServices.AddFireReport(fireReport, context);
-            return RedirectToPage("FireReport", new { depNumber = fireReport.DepNumber });
+            return RedirectToPage("FireReport", new { depAllias = fireReport.DepNumber });
         }
     }
 }

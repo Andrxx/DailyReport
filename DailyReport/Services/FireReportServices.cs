@@ -53,7 +53,8 @@ namespace DailyReport.Services
             }
             List<FireReport> fireReport = (from f in context.FireReports
                                      where ((f.Date > startTime) && (f.Date < endTime))
-                                     select f).ToList();
+                                           //orderby f.ShowOrder
+                                           select f).ToList();
             return fireReport;
         }
 
@@ -89,7 +90,7 @@ namespace DailyReport.Services
         /// Фильтрованый список заполняется по порядку отделений в выдаче всей сводки
         /// </summary>
         /// <returns></returns>
-        public static List<FireReport> GetFilteredReports(ApplicationContext context) 
+        public static List<FireReport> GetFilteredReports(ApplicationContext context/*, List<int>? excludedDeps*/) 
         {
             List<FireReport> reports = GetFireReports(context);
             List<FireReport> filteredReports = new();
@@ -99,6 +100,10 @@ namespace DailyReport.Services
             if(_report != null) filteredReports.Add(_report);
             else filteredReports.Add( new FireReport { DepNumber = 1, Date = DateTime.Now });
 
+            _report = reports.Find(p => p.DepNumber == 2);
+            if (_report != null) filteredReports.Add(_report);
+            else filteredReports.Add(new FireReport { DepNumber = 3, Date = DateTime.Now });
+            
             _report = reports.Find(p => p.DepNumber == 3);
             if (_report != null) filteredReports.Add(_report);
             else filteredReports.Add(new FireReport { DepNumber = 3, Date = DateTime.Now });
@@ -119,14 +124,18 @@ namespace DailyReport.Services
             if (_report != null) filteredReports.Add(_report);
             else filteredReports.Add(new FireReport { DepNumber = 7, Date = DateTime.Now });
 
+            _report = reports.Find(p => p.DepNumber == 8);
+            if (_report != null) filteredReports.Add(_report);
+            else filteredReports.Add(new FireReport { DepNumber = 8, Date = DateTime.Now });
+
             _report = reports.Find(p => p.DepNumber == 90);
             if (_report != null) filteredReports.Add(_report);
             else filteredReports.Add(new FireReport { DepNumber = 90, Date = DateTime.Now });
 
             //лаборатория - по умолчанию 2 сотрудника
-            _report = reports.Find(p => p.DepNumber == 21);
+            _report = reports.Find(p => p.DepNumber == 25);
             if (_report != null) filteredReports.Add(_report);
-            else filteredReports.Add(new FireReport { DepNumber = 21, Personel = 2, Date = DateTime.Now });
+            else filteredReports.Add(new FireReport { DepNumber = 25, Personel = 2, Date = DateTime.Now });
 
             //тех.персонал и охрана - не редактируется, добавляем 14 сотрудников
             filteredReports.Add(new FireReport { DepNumber = 102, Personel = 10, Date = DateTime.Now });

@@ -26,6 +26,25 @@
         }
     }
 </div>
+<div class="row fw-bold pt-1">
+    <h4>Второе отделение</h4>
+</div>
+<div class="row">
+    <div class="row fw-weight-lighter">
+        <div class="col-5 offset-1"> <h5>Ф.И.О.</h5></div>
+        <div class="col-3"><h5>Телефон</h5></div>
+
+    </div>
+    @{
+        foreach (DutyNurse dutyNurse in Model.dutyNurses2)
+        {
+            <div class="row border-bottom">
+                <div class="col-5 offset-1">@dutyNurse.name</div>
+                <div class="col-3 fs-3">@dutyNurse.Phone</div>
+            </div>
+        }
+    }
+</div>
 <div class="row fw-bold pt-2">
     <h4>Третье отделение</h4>
 </div>
@@ -113,6 +132,25 @@
     </div>
     @{
         foreach (DutyNurse dutyNurse in Model.dutyNurses7)
+        {
+            <div class="row border-bottom">
+                <div class="col-5 offset-1">@dutyNurse.name</div>
+                <div class="col-3 fs-3">@dutyNurse.Phone</div>
+            </div>
+        }
+    }
+</div>
+<div class="row fw-bold pt-1">
+    <h4>Восьмое отделение</h4>
+</div>
+<div class="row">
+    <div class="row fw-weight-lighter">
+        <div class="col-5 offset-1"> <h5>Ф.И.О.</h5></div>
+        <div class="col-3"><h5>Телефон</h5></div>
+
+    </div>
+    @{
+        foreach (DutyNurse dutyNurse in Model.dutyNurses8)
         {
             <div class="row border-bottom">
                 <div class="col-5 offset-1">@dutyNurse.name</div>
