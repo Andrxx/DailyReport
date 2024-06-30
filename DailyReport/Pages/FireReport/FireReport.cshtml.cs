@@ -11,7 +11,7 @@ namespace DailyReport.Pages.FireReport
     {
         public DateTime ActualDate = new();
         ApplicationContext context;
-        public int departmentNumber;
+        public int departmentAllias;
         public List<DutyNurse> dutyNurses;
         [BindProperty]
         public List<Personel> nursesList { get; set; }
@@ -26,21 +26,21 @@ namespace DailyReport.Pages.FireReport
         {
             context = db;
         }
-        public void OnGet(int depNumber)
+        public void OnGet(int depAllias)
         {
-            departmentNumber = depNumber;
+            departmentAllias = depAllias;
 
             //работа с медсестрами
-            dutyNurses = DutyServices.GetDutyNurses(depNumber, context);
+            dutyNurses = DutyServices.GetDutyNurses(depAllias, context);
             nursesList = DutyServices.GetNursesList(context);
 
             //работа со сводкой
-            fireReport = FireReportServices.GetFireReportByDep(departmentNumber, context);
+            fireReport = FireReportServices.GetFireReportByDep(departmentAllias, context);
             if (fireReport == null)
             {
                 fireReport = new Models.FireReport();
                 fireReport.Date = DateTime.Now;
-                fireReport.DepNumber = departmentNumber;
+                fireReport.DepNumber = departmentAllias;
             }
         }
 
