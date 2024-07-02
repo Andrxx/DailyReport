@@ -40,7 +40,7 @@ namespace DailyReport.Pages.Reports
         public List<string> doctors;
         public OutcomingPatient savedPatient = new(); //поле для работы частичного представления формы, не использовать кроме вызова форм
         public int departmentCounter, AdultSpotsSum, ChildrenSpotsSum, AdultAdditionalSpots, ChildrenAdditionalSpots, AdultFullSpotsSum, ChildrenFullSpotsSum
-            , ORITAdults, ORITChildren;
+            , ORITAdults, ORITChildren, AdditionalAdults, AdditionalChildren;
         [BindProperty]
         public DutyDoc newDoc { get; set; } = new();
         public List<DutyDoc> depDocs { get; set; } = new();
@@ -117,8 +117,11 @@ namespace DailyReport.Pages.Reports
 
 
 #pragma warning disable CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
+            //данные по КДО и платным услугам
             depReport81 = reports.Find(p => p.depNumber == 81);
             depReport82 = reports.Find(p => p.depNumber == 82);
+
+            //получаем пациентов
 
 #pragma warning restore CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
             //if (depReport8 == null)
@@ -167,7 +170,7 @@ namespace DailyReport.Pages.Reports
             //Считаем сумму по отделениям
             foreach (DepReport _rep in sortedReports)
             {
-                if (!excludedDeps.Contains(_rep.depNumber)) //выводим из подсчета отделения из списка исключения
+                if (_rep.depNumber != 21) //выводим из подсчета дневной стационар
                 {
                     finalReport.existed += _rep.existed;
                     finalReport.existedChildren += _rep.existedChildren;

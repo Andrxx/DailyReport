@@ -83,10 +83,7 @@
                         foreach (DepReport dr in Model.sortedReports)
                         {
                             <td class="print-m-p-0">@if(dr.existed > 0) {@dr.existed}</td>
-                            <td class="print-m-p-0">@if (dr.existedChildren > 0)
-                                {
-                                    @dr.existedChildren
-                                }</td>
+                            <td class="print-m-p-0">@if (dr.existedChildren > 0){@dr.existedChildren}</td>
                         }
                     }
 
