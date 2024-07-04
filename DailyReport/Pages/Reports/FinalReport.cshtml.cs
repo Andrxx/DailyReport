@@ -17,7 +17,7 @@ namespace DailyReport.Pages.Reports
 
         public FinalReport finalReport;
         public List<FinalReport> finalReports;
-        public DepReport  depReport81, depReport82;
+        public DepReport  depReport81, depReport82, depReport21;
         ApplicationContext context;
         public FinalReportModel(ApplicationContext db)
         {
@@ -40,7 +40,7 @@ namespace DailyReport.Pages.Reports
         public List<string> doctors;
         public OutcomingPatient savedPatient = new(); //поле для работы частичного представления формы, не использовать кроме вызова форм
         public int departmentCounter, AdultSpotsSum, ChildrenSpotsSum, AdultAdditionalSpots, ChildrenAdditionalSpots, AdultFullSpotsSum, ChildrenFullSpotsSum
-            , ORITAdults, ORITChildren, AdditionalAdults, AdditionalChildren;
+            , ORITAdults, ORITChildren;
         [BindProperty]
         public DutyDoc newDoc { get; set; } = new();
         public List<DutyDoc> depDocs { get; set; } = new();
@@ -121,7 +121,9 @@ namespace DailyReport.Pages.Reports
             depReport81 = reports.Find(p => p.depNumber == 81);
             depReport82 = reports.Find(p => p.depNumber == 82);
 
-            //получаем пациентов
+            //получаем дневной стационар
+            depReport21 = reports.Find(p => p.depNumber == 21);
+            if (depReport21 is null) depReport21 = new DepReport();
 
 #pragma warning restore CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
             //if (depReport8 == null)

@@ -12,13 +12,18 @@ namespace DailyReport.Pages.Admin
         {
             context = db;
         }
+        public List<Department> activeDepartments { get; set; } = new();
         public Personel personel, newPersonel = new Personel();
         public List<Personel> personels = new List<Personel>();
         public List<string> PType = PersonelServices.GetPType();
-        public List<string> DepsList = PersonelServices.GetDepartment();
+        public List<string> DepsList = new();// = PersonelServices.GetDepartments(context);
+        public int departmentCounter;
 
         public void OnGet()
         {
+            activeDepartments = DepartmentServices.GetSortedDepartments(context);
+            departmentCounter = activeDepartments.Count;
+            DepsList = PersonelServices.GetDepartments(context);
             personels = (from pers in context.Personels
                          orderby pers.Name, pers.Name.Substring(0, 1)
                          select pers).ToList();

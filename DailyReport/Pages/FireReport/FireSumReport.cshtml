@@ -7,6 +7,32 @@
 <div class="row">
     <h2>Дежурные медсестры на @DateTime.Now.ToString("dd.MM.yy")</h2>
 </div>
+
+@{
+    foreach (Department dep in Model.activeDepartments)
+    {
+        <div class="row fw-bold pt-1">
+            <h4>@dep.Name</h4>
+        </div>
+        <div class="row">
+            <div class="row fw-weight-lighter">
+                <div class="col-5 offset-1"> <h5>Ф.И.О.</h5></div>
+                <div class="col-3"><h5>Телефон</h5></div>
+
+            </div>
+            @{
+                foreach (DutyNurse dutyNurse in Model.dutyNurses1)
+                {
+                    <div class="row border-bottom">
+                        <div class="col-5 offset-1">@dutyNurse.name</div>
+                        <div class="col-3 fs-3">@dutyNurse.Phone</div>
+                    </div>
+                }
+            }
+        </div>
+    }
+}
+
 <div class="row fw-bold pt-1">
     <h4>Первое отделение</h4>
 </div>

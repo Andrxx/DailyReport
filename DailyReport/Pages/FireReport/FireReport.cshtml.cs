@@ -46,7 +46,7 @@ namespace DailyReport.Pages.FireReport
 
         public IActionResult OnPostSaveNurse()
         {
-            Personel personel = PersonelServices.GetPersonelByName(DutyNurse.name, context);
+            Personel? personel = PersonelServices.GetPersonelByName(DutyNurse?.name, context);
             if (personel != null)
             {
                 DutyNurse.dutyDate = DateTime.Now;

@@ -13,6 +13,7 @@ namespace DailyReport.Services
             PType.Add("Медсестра");
             PType.Add("Оператор ПК");
             PType.Add("Санитар");
+            PType.Add("Лаборант");
             return PType;
         }
 
@@ -20,7 +21,7 @@ namespace DailyReport.Services
         /// получаем список отделений - фиксированный список из кода
         /// </summary>
         /// <returns></returns>
-        public static List<string> GetDepartment()
+        public static List<string> GetDepartments()
         {
             List<string> Department = new();
             Department.Add("Приемное отделение");
@@ -36,6 +37,30 @@ namespace DailyReport.Services
             Department.Add("Дневной стационар");
             Department.Add("Платные услуги");
             return Department;
+        }
+
+        /// <summary>
+        /// получаем список имен отделений из БД
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static List<string> GetDepartments(ApplicationContext context)
+        {
+            List<string> Departments = new();
+            List<Department> activeDeps = new();
+            activeDeps = DepartmentServices.GetSortedDepartments(context);
+            try
+            {
+                foreach (Department department in activeDeps)
+                {
+                    Departments.Add(department.Name);
+                }
+            }
+            catch 
+            {
+                Departments.Add("Ошибка в имени отделения");
+            }
+            return Departments;
         }
 
         public static void AddPersonel(Personel personel, ApplicationContext context)

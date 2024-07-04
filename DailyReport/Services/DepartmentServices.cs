@@ -64,5 +64,21 @@ namespace DailyReport.Services
                                             select d).ToList();
             return departments;
         }
+
+        public static List<Department> GetSortedDepartments(ApplicationContext context, List<int> excludedDeps)
+        {
+            List<Department> _departments = (from d in context.Departments
+                                            where (!excludedDeps.Contains((int)d.Number))
+                                            orderby d.ShowOrder
+                                            select d).ToList();
+            List<Department> actualDepartments = new List<Department>();
+            foreach (Department dep in _departments)
+            {
+                if (!excludedDeps.Contains((int)dep.Allias)) actualDepartments.Add(dep);
+            }
+
+
+            return actualDepartments;
+        }
     }
 }

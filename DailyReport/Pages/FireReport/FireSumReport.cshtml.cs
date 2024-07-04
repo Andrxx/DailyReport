@@ -10,15 +10,20 @@ namespace DailyReport.Pages.FireReport
         ApplicationContext context;
         public List<Models.FireReport> reports = new List<Models.FireReport>();
         public List<DutyNurse> dutyNurses, dutyNurses1, dutyNurses2, dutyNurses3, dutyNurses4, dutyNurses5, dutyNurses6, dutyNurses7,dutyNurses8, dutyNurses90 = new List<DutyNurse>();
+        public List<Department> activeDepartments { get; set; } = new();
 
+        public FireSumReportModel(ApplicationContext db){
+            context = db;
+        }
 
-        public FireSumReportModel(ApplicationContext db)
-            {
-                context = db;
-            }
+        public List<int> excludedDeps = new() { 11, 91 };
+
 
         public void OnGet()
         {
+            activeDepartments = DepartmentServices.GetSortedDepartments(context, excludedDeps);
+
+
             //дежурная смена
             dutyNurses = DutyServices.GetDutyNurses(context);
             dutyNurses1 = dutyNurses.FindAll(n => n.department == 1);

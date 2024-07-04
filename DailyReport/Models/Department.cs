@@ -6,7 +6,10 @@ namespace DailyReport.Models
     public class Department
     {
         public int Id { get; set; }
-        public int? Number { get; set; }        //оставлен для обратной совместимости
+        /// <summary>
+        /// deprecated - оставлен для обратной совместимости, по возможности не использовать
+        /// </summary>
+        public int? Number { get; set; }        //оставлен для обратной совместимости, по возможности не использовать
         public int Allias { get; set; }
         public int ShowOrder { get; set; }
         public string? Name { get; set; }
