@@ -86,51 +86,58 @@ namespace DailyReport.Services
 
         //работа с суммарной пожарной сводкой 
         /// <summary>
-        /// Получаем список сводок, если в БД не сохрнено, добвляем пустую, но не сохраняем в БД
+        /// Получаем список сводок, если в БД не сохранено, добавляем пустую, но не сохраняем в БД
         /// Фильтрованый список заполняется по порядку отделений в выдаче всей сводки
         /// </summary>
         /// <returns></returns>
-        public static List<FireReport> GetFilteredReports(ApplicationContext context/*, List<int>? excludedDeps*/) 
+        public static List<FireReport> GetFilteredReports(ApplicationContext context, List<int> actualDepsAllias) 
         {
             List<FireReport> reports = GetFireReports(context);
             List<FireReport> filteredReports = new();
-            FireReport _report = new();
+            FireReport? _report = new();
 
-            _report = reports.Find(p => p.DepNumber == 1);
-            if(_report != null) filteredReports.Add(_report);
-            else filteredReports.Add( new FireReport { DepNumber = 1, Date = DateTime.Now });
+            foreach(int i in actualDepsAllias)
+            {
+                _report = reports.Find(p => p.DepNumber == i);
+                if (_report is null) _report = new FireReport { DepNumber = i, Date = DateTime.Now };
+                filteredReports.Add(_report);
+            }
 
-            _report = reports.Find(p => p.DepNumber == 2);
-            if (_report != null) filteredReports.Add(_report);
-            else filteredReports.Add(new FireReport { DepNumber = 2, Date = DateTime.Now });
-            
-            _report = reports.Find(p => p.DepNumber == 3);
-            if (_report != null) filteredReports.Add(_report);
-            else filteredReports.Add(new FireReport { DepNumber = 3, Date = DateTime.Now });
+            //_report = reports.Find(p => p.DepNumber == 1);
+            //if (_report != null) filteredReports.Add(_report);
+            //else filteredReports.Add(new FireReport { DepNumber = 1, Date = DateTime.Now });
 
-            _report = reports.Find(p => p.DepNumber == 4);
-            if (_report != null) filteredReports.Add(_report);
-            else filteredReports.Add(new FireReport { DepNumber = 4, Date = DateTime.Now });
+            //_report = reports.Find(p => p.DepNumber == 2);
+            //if (_report != null) filteredReports.Add(_report);
+            //else filteredReports.Add(new FireReport { DepNumber = 2, Date = DateTime.Now });
 
-            _report = reports.Find(p => p.DepNumber == 5);
-            if (_report != null) filteredReports.Add(_report);
-            else filteredReports.Add(new FireReport { DepNumber = 5, Date = DateTime.Now });
+            //_report = reports.Find(p => p.DepNumber == 3);
+            //if (_report != null) filteredReports.Add(_report);
+            //else filteredReports.Add(new FireReport { DepNumber = 3, Date = DateTime.Now });
 
-            _report = reports.Find(p => p.DepNumber == 6);
-            if (_report != null) filteredReports.Add(_report);
-            else filteredReports.Add(new FireReport { DepNumber = 6, Date = DateTime.Now });
+            //_report = reports.Find(p => p.DepNumber == 4);
+            //if (_report != null) filteredReports.Add(_report);
+            //else filteredReports.Add(new FireReport { DepNumber = 4, Date = DateTime.Now });
 
-            _report = reports.Find(p => p.DepNumber == 7);
-            if (_report != null) filteredReports.Add(_report);
-            else filteredReports.Add(new FireReport { DepNumber = 7, Date = DateTime.Now });
+            //_report = reports.Find(p => p.DepNumber == 5);
+            //if (_report != null) filteredReports.Add(_report);
+            //else filteredReports.Add(new FireReport { DepNumber = 5, Date = DateTime.Now });
 
-            _report = reports.Find(p => p.DepNumber == 8);
-            if (_report != null) filteredReports.Add(_report);
-            else filteredReports.Add(new FireReport { DepNumber = 8, Date = DateTime.Now });
+            //_report = reports.Find(p => p.DepNumber == 6);
+            //if (_report != null) filteredReports.Add(_report);
+            //else filteredReports.Add(new FireReport { DepNumber = 6, Date = DateTime.Now });
 
-            _report = reports.Find(p => p.DepNumber == 90);
-            if (_report != null) filteredReports.Add(_report);
-            else filteredReports.Add(new FireReport { DepNumber = 90, Date = DateTime.Now });
+            //_report = reports.Find(p => p.DepNumber == 7);
+            //if (_report != null) filteredReports.Add(_report);
+            //else filteredReports.Add(new FireReport { DepNumber = 7, Date = DateTime.Now });
+
+            //_report = reports.Find(p => p.DepNumber == 8);
+            //if (_report != null) filteredReports.Add(_report);
+            //else filteredReports.Add(new FireReport { DepNumber = 8, Date = DateTime.Now });
+
+            //_report = reports.Find(p => p.DepNumber == 90);
+            //if (_report != null) filteredReports.Add(_report);
+            //else filteredReports.Add(new FireReport { DepNumber = 90, Date = DateTime.Now });
 
             //лаборатория - по умолчанию 2 сотрудника
             _report = reports.Find(p => p.DepNumber == 25);

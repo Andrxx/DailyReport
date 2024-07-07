@@ -59,16 +59,20 @@ namespace DailyReport.Services
         public static List<Department> GetSortedDepartments(ApplicationContext context)
         {
             List<Department> departments = (from d in context.Departments
-                                            //where (d.Number != 90 & d.Number != 91 && d.Number != 8 & d.Number != 11)
                                             orderby d.ShowOrder
                                             select d).ToList();
             return departments;
         }
 
+        /// <summary>
+        /// Получаем список отделений из БД без отделений из списка исключения, отсортированный по порядку отбражения
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="excludedDeps"></param>
+        /// <returns></returns>
         public static List<Department> GetSortedDepartments(ApplicationContext context, List<int> excludedDeps)
         {
             List<Department> _departments = (from d in context.Departments
-                                            where (!excludedDeps.Contains((int)d.Number))
                                             orderby d.ShowOrder
                                             select d).ToList();
             List<Department> actualDepartments = new List<Department>();
@@ -76,7 +80,6 @@ namespace DailyReport.Services
             {
                 if (!excludedDeps.Contains((int)dep.Allias)) actualDepartments.Add(dep);
             }
-
 
             return actualDepartments;
         }
