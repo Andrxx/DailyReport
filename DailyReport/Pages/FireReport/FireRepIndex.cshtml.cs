@@ -8,23 +8,26 @@ namespace DailyReport.Pages.FireReport
     public class FireRepIndexModel : PageModel
     {
         ApplicationContext context;
-        public FireRepIndexModel( ApplicationContext db)
+        private readonly IConfiguration appConfig;
+        public FireRepIndexModel(ApplicationContext db, IConfiguration Configuration)
         {
             context = db;
+            appConfig = Configuration;
         }
         public List<Department> Departments = new();
-        public List<int> excludedDeps = new() { 11, 91 };   //список отделений не выводимых в сводке
+        public List<int> excludedDeps;               //список отделений не выводимых в сводке
         public void OnGet()
         {
-            Departments = DepartmentServices.GetSortedDepartments(context);
-            //int i = Departments.Count;
-            for (int i = Departments.Count - 1; i>=0; i--)
-                {
-                if (excludedDeps.Contains(Departments[i].Allias))
-                {
-                    Departments.Remove(Departments[i]);
-                }
+
+            var ed = appConfig["ExcludedDepartments:FireIndexExclusion"];
+            try
+            {
+                if (ed != null) excludedDeps = ed.Split(' ').Select(x => int.Parse(x)).ToList();
+                else excludedDeps = new();
             }
+            catch { excludedDeps = new(); }
+
+            Departments = DepartmentServices.GetSortedDepartments(context, excludedDeps);
         }
     }
 }

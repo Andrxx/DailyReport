@@ -2,12 +2,8 @@
 @using DailyReport.Models
 @model DailyReport.Pages.FireReport.FireReportModel
 @{
-    string msg;
-    if ((Model.departmentAllias == 90) || (Model.departmentAllias == 91)) msg = "ОРИТ";
-    else if (Model.departmentAllias == 21) msg = "Дневной стационар";
-    else if (Model.departmentAllias == 25) msg = " лаборатории";
-    else msg = Model.departmentAllias + " отделения";
-    ViewData["Title"] = "Пожарная сводка " + msg;
+    
+    ViewData["Title"] = "Пожарная сводка " + @Model.department.Name;
 }
 
 <form method="post">
@@ -24,7 +20,7 @@
             </select>
         </div>
         <div class="col-2 d-none">
-            <input type="int" value="@Model.departmentAllias" class="form-control invisible" asp-for="DutyNurse.department" />
+            <input type="int" value="@Model.department.Allias" class="form-control invisible" asp-for="DutyNurse.department" />
             <input type="datetime" value="@DateTime.Now" class="form-control invisible" asp-for="DutyNurse.dutyDate" />
         </div>
         <div class="col-2">
@@ -45,7 +41,7 @@
                 <div class="col-3">@dutyNurse.Phone</div>
                 <div class="col-2">@dutyNurse.ToDepName()</div>
                 <div class="col-1">
-                    <input type="submit" value="&#128465" asp-page-handler="DeleteNurse" asp-route-id="@dutyNurse.Id" asp-route-depNumber="@Model.departmentAllias" />
+                    <input type="submit" value="&#128465" asp-page-handler="DeleteNurse" asp-route-id="@dutyNurse.Id" asp-route-depNumber="@Model.department.Allias" />
                 </div>
             </div>
         </form>
@@ -53,7 +49,7 @@
 }
 
 <div class="row pb-3">
-    <div class="col-4"> <h4>Пожарная сводка @msg</h4></div>
+    <div class="col-4"> <h4>Пожарная сводка @Model.department.Name</h4></div>
 </div>
 <div class="row pb-3">
     <div class="col-6"> <h2>Состоит</h2></div>

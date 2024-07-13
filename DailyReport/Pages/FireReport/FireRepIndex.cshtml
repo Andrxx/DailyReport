@@ -5,7 +5,7 @@
     ViewData["Title"] = "Пожарная сводка";
 }
 <div class="text-center">
-    <h1 class="display-4">Сводка отделений</h1>
+    <h1 class="display-4">Пожарная сводка отделений</h1>
 
     @{
         foreach (Department dep in Model.Departments)
@@ -13,8 +13,7 @@
             <p><a href="FireReport?depAllias=@dep.Allias">@dep.Name </a></p>
         }
     }
-    @*вспомогательные отделения*@
-    <p><a href="FireReport?depAllias=25">Лаборатория</a></p>
+    
     <p><a href="FireSumReport">Сводка по больнице</a></p>
 
 </div>

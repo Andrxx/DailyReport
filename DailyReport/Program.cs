@@ -24,8 +24,6 @@ builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite(
 
 var app = builder.Build();
 
-//app.Map("/", () => "Index Page");
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

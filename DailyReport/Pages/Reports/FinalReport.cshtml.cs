@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Composition;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.Configuration;
 
 namespace DailyReport.Pages.Reports
 {
@@ -14,13 +15,14 @@ namespace DailyReport.Pages.Reports
     public class FinalReportModel : PageModel
     {
 
-
+        private readonly IConfiguration appConfig;
         public FinalReport finalReport;
         public List<FinalReport> finalReports;
         public DepReport  depReport81, depReport82, depReport21;
         ApplicationContext context;
-        public FinalReportModel(ApplicationContext db)
+        public FinalReportModel(ApplicationContext db, IConfiguration Configuration )
         {
+            appConfig = Configuration; 
             context = db;
         }
 
@@ -53,13 +55,40 @@ namespace DailyReport.Pages.Reports
         public List<string> submitedFrom = OutPatientService.GetSubmitedFrom();
         public List<string> submitedTo = OutPatientService.GetSubmitedTo();
 
-        public List<int> excludedDeps = new() {21, 90, 91 };
+        public List<int> excludedDeps = new();
+        public List<int> excludedSpots = new();
+        public List<int> ORITcorrection = new();
         public List<int> diseaseSums = new();
         public List<int> oxygenSum = new();
 
 
+
         public void OnGet(double dateOffset = 0, bool onlyView = false)
         {
+            //excludedDeps 
+            var ed = appConfig["ExcludedDepartments:FinalReportSpotsExclusion"];
+            try { 
+                if (ed != null) excludedSpots = ed.Split(' ').Select(x => int.Parse(x)).ToList();
+                else excludedSpots = new(); 
+            }
+            catch { excludedSpots = new(); }
+
+            var corr = appConfig["ExcludedDepartments:FinalReportORITSpotsCorrection"];
+            try
+            {
+                if (corr != null) ORITcorrection = corr.Split(' ').Select(x => int.Parse(x)).ToList();
+                else ORITcorrection = new();
+            }
+            catch { ORITcorrection = new(); }
+
+            var depExc = appConfig["ExcludedDepartments:FinalReportDepartmentsExclusion"];
+            try
+            {
+                if (depExc != null) excludedDeps = depExc.Split(' ').Select(x => int.Parse(x)).ToList();
+                else excludedDeps = new();
+            }
+            catch { excludedDeps = new(); }
+
             _onlyView = onlyView;
             actualDate = actualDate.AddDays(dateOffset);
             DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 8, 0, 0);
@@ -74,15 +103,15 @@ namespace DailyReport.Pages.Reports
             else { reportDate = actualDate; }
 
             //получаем список актуальных отделений
-            activeDepartments = DepartmentServices.GetSortedDepartments(context);
+            activeDepartments = DepartmentServices.GetSortedDepartments(context, excludedDeps);
             departmentCounter = activeDepartments.Count;
 
             //подсчет свободных мест
 
-            AdultSpotsSum = DepSpotsService.GetAdultSpots(activeDepartments, excludedDeps);
-            ChildrenSpotsSum = DepSpotsService.GetChildrenSpots(activeDepartments, excludedDeps);
-            AdultFullSpotsSum = DepSpotsService.GetFullAdultSpots(activeDepartments);
-            ChildrenFullSpotsSum = DepSpotsService.GetFullChildrenSpots(activeDepartments);
+            AdultSpotsSum = DepSpotsService.GetAdultSpots(activeDepartments, excludedSpots);
+            ChildrenSpotsSum = DepSpotsService.GetChildrenSpots(activeDepartments, excludedSpots);
+            AdultFullSpotsSum = DepSpotsService.GetFullAdultSpots(activeDepartments, ORITcorrection);
+            ChildrenFullSpotsSum = DepSpotsService.GetFullChildrenSpots(activeDepartments, ORITcorrection);
             try
             {
                 ORITAdults = activeDepartments.FirstOrDefault(d => d.Allias == 90).AdultSpotsQuantity
@@ -245,8 +274,6 @@ namespace DailyReport.Pages.Reports
                 }
             }
             
-            //filteredReports.Add(depReport8); //дневной стационар не входит в общий список, добавляем его в лист после вычисления общего количества
-
             foreach(DepReport rep in sortedReports)
             {
                 diseaseSums.Add(rep.CountDiseases());

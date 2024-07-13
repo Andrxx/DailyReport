@@ -11,7 +11,7 @@ namespace DailyReport.Pages.FireReport
     {
         public DateTime ActualDate = new();
         ApplicationContext context;
-        public int departmentAllias;
+        public Department department;
         public List<DutyNurse> dutyNurses;
         [BindProperty]
         public List<Personel> nursesList { get; set; }
@@ -28,19 +28,22 @@ namespace DailyReport.Pages.FireReport
         }
         public void OnGet(int depAllias)
         {
-            departmentAllias = depAllias;
-
+            department = DepartmentServices.GetSortedDepartments(context).FirstOrDefault(d => d.Allias == depAllias);
+            
+            //костыль - сделать обработку ошибки поиска отделени€
+            if (department is null) { department = new() { Number = depAllias, Name = depAllias.ToString() }; }
+            
             //работа с медсестрами
             dutyNurses = DutyServices.GetDutyNurses(depAllias, context);
             nursesList = DutyServices.GetNursesList(context);
 
             //работа со сводкой
-            fireReport = FireReportServices.GetFireReportByDep(departmentAllias, context);
+            fireReport = FireReportServices.GetFireReportByDep(department.Allias, context);
             if (fireReport == null)
             {
                 fireReport = new Models.FireReport();
                 fireReport.Date = DateTime.Now;
-                fireReport.DepNumber = departmentAllias;
+                fireReport.DepNumber = department.Allias;
             }
         }
 

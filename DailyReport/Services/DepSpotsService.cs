@@ -5,14 +5,14 @@ namespace DailyReport.Services
     public static class DepSpotsService
     {
         //костыль - коррекция отделений орит
-        private static List<int> correction = new() { 91, 90 }; 
+        //private static List<int> correction = new() { 91, 90 }; 
 
         /// <summary>
-        /// Считает все взрослые места во всех отделениях 
+        /// Считает все взрослые места во всех отделениях с учетом списка коррекции 
         /// </summary>
         /// <param name="departments"></param>
         /// <returns></returns>
-        public static int GetFullAdultSpots(List<Department> departments) 
+        public static int GetFullAdultSpots(List<Department> departments, List<int> correction) 
         {
             int sum = 0;
             if (departments == null) return 0; 
@@ -32,11 +32,11 @@ namespace DailyReport.Services
             return sum;
         }
         /// <summary>
-        /// Считает все детские места во всех отделениях 
+        /// Считает все детские места во всех отделениях с учетом списка коррекции 
         /// </summary>
         /// <param name="departments"></param>
         /// <returns></returns>
-        public static int GetFullChildrenSpots(List<Department> departments)
+        public static int GetFullChildrenSpots(List<Department> departments, List<int> correction)
         {
             int sum = 0;
             if (departments == null) return 0;
@@ -54,6 +54,40 @@ namespace DailyReport.Services
             catch { }
             return sum;
         }
+
+        /// <summary>
+        /// Считает все взрослые места во всех отделениях
+        /// </summary>
+        /// <param name="departments"></param>
+        /// <returns></returns>
+        public static int GetFullAdultSpots(List<Department> departments)
+        {
+            int sum = 0;
+            if (departments == null) return 0;
+            foreach (Department dep in departments)
+            {
+                sum += dep.AdultSpotsQuantity;
+            }
+            return sum;
+        }
+
+        /// <summary>
+        /// Считает все детские места во всех отделениях 
+        /// </summary>
+        /// <param name="departments"></param>
+        /// <returns></returns>
+        public static int GetFullChildrenSpots(List<Department> departments)
+        {
+            int sum = 0;
+            if (departments == null) return 0;
+            foreach (Department dep in departments)
+            {
+                sum += dep.ChildrenSpotsQuantity;
+            }
+            return sum;
+        }
+
+
         /// <summary>
         /// Считает взрослые места по отделениям, за исключением отделений из списка исключения
         /// </summary>
@@ -93,15 +127,13 @@ namespace DailyReport.Services
                     sum += department.ChildrenSpotsQuantity;
                 }
             }
-
-
             return sum;
         }
+
 
         /// <summary>
         /// legacy
         /// </summary>
-
 
         static DepartmentSpots departmentSpots;
        

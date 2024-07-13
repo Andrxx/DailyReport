@@ -9,15 +9,27 @@ namespace DailyReport.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         ApplicationContext context;
-        public IndexModel(ILogger<IndexModel> logger, ApplicationContext db)
+        private readonly IConfiguration appConfig;
+        public IndexModel(ILogger<IndexModel> logger, ApplicationContext db, IConfiguration configuration)
         {
             _logger = logger;
             context = db;
+            appConfig = configuration;
         }
         public List<Department> Departments = new();
+        public List<int> excludedDeps = new();
+
         public void OnGet()
         {
-            Departments = DepartmentServices.GetSortedDepartments(context);
+            var depExc = appConfig["ExcludedDepartments:MainPageDepartmentsExclusion"];
+            try
+            {
+                if (depExc != null) excludedDeps = depExc.Split(' ').Select(x => int.Parse(x)).ToList();
+                else excludedDeps = new();
+            }
+            catch { excludedDeps = new(); }
+
+            Departments = DepartmentServices.GetSortedDepartments(context, excludedDeps);
         }
     }
 }
