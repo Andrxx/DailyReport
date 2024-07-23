@@ -13,7 +13,8 @@ namespace DailyReport.Pages.Reports
     {
         ApplicationContext context;
         [BindProperty(SupportsGet = true)]
-        public DepReport report { get; set; }
+        public DepReport? report { get; set; }
+        //public DepReport? _report { get; set; }
         public List<DepReport> Reports { get; private set; } = new();
         public DateTime actualDate = DateTime.Now, reportDate;//.AddDays(-1);
         public List<string> nurses = new();
@@ -42,29 +43,14 @@ namespace DailyReport.Pages.Reports
             //Reports = context.DepReports.AsNoTracking().ToList();
             //_report = reportServise.CreateTest();
 
-            //падает при очистке БД - обработать для очистки и миграций
-            //try
-            //{
-#pragma warning disable CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
-            report = (from r in context.DepReports
-                       where ((r.depNumber == depAllias) && (r.date > startTime) && (r.date < endTime))
-                       select r).FirstOrDefault();
-#pragma warning restore CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
+            report = DepReportServise.GetRepByNumber(context, depAllias, startTime, endTime);
 
-            //тест 
-            //var reps = (from repo in context.DepReports
-            //            where (repo.depNumber == depNumber)
-            //            where (repo.date.Date > startTime) && (repo.date.Date < endTime)
-            //            select repo).ToList();
             //_report = reportServise.CreateRandomReport((int)depNumber);
-            //}
-            //catch { throw new  }
 
-            if (report == null)
+            if (report is null)
             {
                 //тест для БД, изменить на создание нового для релиза
                 //report = DepReportServise.CreateTest();
-
                 report = new();
                 report.depNumber = depAllias;
                 //при работе с прошлыми сводкам корректируем дату сводки
@@ -73,7 +59,7 @@ namespace DailyReport.Pages.Reports
 
             try
             {
-                DutyNurse dn = DutyServices.GetDutyNurses(depAllias, context).FirstOrDefault();
+                DutyNurse? dn = DutyServices.GetDutyNurses(depAllias, context).FirstOrDefault();
                 if(dn != null) report.dutyNurse = dn.name;
             }
             catch { }
@@ -82,8 +68,6 @@ namespace DailyReport.Pages.Reports
             //          where str.PersType == "Медсестра"
             //          orderby str.Name, str.Name.Substring(0, 1)
             //          select str.Name).ToList();
-
-
         }
 
         /// <summary>
@@ -107,20 +91,16 @@ namespace DailyReport.Pages.Reports
             }
             //задаем дату отображения на сводке, устнавливть только после коррекции стартовой даты 
             else { reportDate = actualDate; }
-            report = (from report in context.DepReports
-                       where (report.depNumber == depAllias) && (report.date > startTime && report.date < endTime)
-                       select report).AsNoTracking().FirstOrDefault();
-            if (report == null)
+            report = DepReportServise.GetRepByNumber(context, depAllias, startTime, endTime);
+            if (report is null)
             {
                 return RedirectToPage("DepReport", new { depAllias = depAllias });
             }
             else 
             {
-                //ищем запись сегодняшней даты 
-                var curentReport = (from report in context.DepReports
-                          where (report.depNumber == depAllias) && (report.date > startTime.AddDays(1) && report.date < endTime.AddDays(1))
-                          select report).AsNoTracking().FirstOrDefault();
-                if (curentReport == null)
+                //ищем запись сегодняшней даты, используем метод без отслеживания сущности сводки из БД.
+                var curentReport = DepReportServise.GetRepByNumberNoTracking(context, depAllias, startTime.AddDays(1), endTime.AddDays(1));
+                if (curentReport is null)
                 {
                     //новая сущность для БД
                     DepReport newRep = DepReportServise.RewriteReportForLastDay(report);

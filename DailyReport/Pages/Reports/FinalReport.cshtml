@@ -92,10 +92,10 @@
                     <td class="print-m-p-0">@Model.finalReport.existedChildren</td>
                     <td class="print-m-p-0">@(@Model.finalReport.existed + @Model.finalReport.existedChildren)</td>
 
-                    <td class="print-m-p-0">@(@Model.finalReport.existed + @Model.depReport21.existed)</td>
-                    <td class="print-m-p-0">@(@Model.finalReport.existedChildren + @Model.depReport21.existedChildren)</td>
-                    <td class="print-m-p-0">@(@Model.finalReport.existed + @Model.finalReport.existedChildren + @Model.depReport21.existed
-                            + @Model.depReport21.existedChildren)
+                    <td class="print-m-p-0">@(@Model.finalReport.existed + @Model.DayCareReport.existed)</td>
+                    <td class="print-m-p-0">@(@Model.finalReport.existedChildren + @Model.DayCareReport.existedChildren)</td>
+                    <td class="print-m-p-0">@(@Model.finalReport.existed + @Model.finalReport.existedChildren + @Model.DayCareReport.existed
+                            + @Model.DayCareReport.existedChildren)
                     </td>
                 </tr>
                 <tr class="print-m-p-0">
@@ -113,10 +113,10 @@
                     <td class="print-m-p-0">@Model.finalReport.income</td>
                     <td class="print-m-p-0">@Model.finalReport.incomeChildren</td>
                     <td class="print-m-p-0">@(@Model.finalReport.income + @Model.finalReport.incomeChildren)</td>
-                    <td class="print-m-p-0">@(@Model.finalReport.income + @Model.depReport21.income)</td>
-                    <td class="print-m-p-0">@(@Model.finalReport.incomeChildren + @Model.depReport21.incomeChildrens)</td>
-                    <td class="print-m-p-0">@(@Model.finalReport.income + @Model.finalReport.incomeChildren + @Model.depReport21.incomeChildrens 
-                            + @Model.depReport21.income)
+                    <td class="print-m-p-0">@(@Model.finalReport.income + @Model.DayCareReport.income)</td>
+                    <td class="print-m-p-0">@(@Model.finalReport.incomeChildren + @Model.DayCareReport.incomeChildrens)</td>
+                    <td class="print-m-p-0">@(@Model.finalReport.income + @Model.finalReport.incomeChildren + @Model.DayCareReport.incomeChildrens 
+                            + @Model.DayCareReport.income)
                     </td>
                 </tr>
                 <tr class="table-success print-m-p-0">
@@ -131,10 +131,10 @@
                     <td>@Model.finalReport.outcome</td>
                     <td>@Model.finalReport.outcomeChildren</td>
                     <td>@(@Model.finalReport.outcome + @Model.finalReport.outcomeChildren)</td>
-                    <td>@(@Model.finalReport.outcome + @Model.depReport21.outcome)</td>
-                    <td>@(@Model.finalReport.outcomeChildren + @Model.depReport21.outcomeChildrens)</td>
-                    <td>@(@Model.finalReport.outcome + @Model.finalReport.outcomeChildren + @Model.depReport21.outcome
-                            + @Model.depReport21.outcomeChildrens)
+                    <td>@(@Model.finalReport.outcome + @Model.DayCareReport.outcome)</td>
+                    <td>@(@Model.finalReport.outcomeChildren + @Model.DayCareReport.outcomeChildrens)</td>
+                    <td>@(@Model.finalReport.outcome + @Model.finalReport.outcomeChildren + @Model.DayCareReport.outcome
+                            + @Model.DayCareReport.outcomeChildrens)
                     </td>
                 </tr>
 
@@ -151,10 +151,10 @@
                     <td>@Model.finalReport.attachedToORIT</td>
                     <td>@Model.finalReport.attachedToORITChildren</td>
                     <td>@(@Model.finalReport.attachedToORIT + @Model.finalReport.attachedToORITChildren)</td>
-                    <td>@(@Model.finalReport.attachedToORIT + @Model.depReport21.attachedToORIT)</td>
-                    <td>@(@Model.finalReport.attachedToORITChildren + @Model.depReport21.attachedToORITCildrens)</td>
-                    <td>@(@Model.finalReport.attachedToORIT + @Model.finalReport.attachedToORITChildren + @Model.depReport21.attachedToORIT 
-                            + @Model.depReport21.attachedToORITCildrens)
+                    <td>@(@Model.finalReport.attachedToORIT + @Model.DayCareReport.attachedToORIT)</td>
+                    <td>@(@Model.finalReport.attachedToORITChildren + @Model.DayCareReport.attachedToORITCildrens)</td>
+                    <td>@(@Model.finalReport.attachedToORIT + @Model.finalReport.attachedToORITChildren + @Model.DayCareReport.attachedToORIT 
+                            + @Model.DayCareReport.attachedToORITCildrens)
                     </td>
                 </tr>
                 <tr class="table-secondary print-m-p-0">
@@ -169,10 +169,10 @@
                     <td>@Model.finalReport.movedOutDep</td>
                     <td>@Model.finalReport.movedOutDepChildren</td>
                     <td>@(@Model.finalReport.movedOutDep + @Model.finalReport.movedOutDepChildren)</td>
-                    <td>@(@Model.finalReport.movedOutDep + @Model.depReport21.movedOutDep)</td>
-                    <td>@(@Model.finalReport.movedOutDepChildren + @Model.depReport21.movedOutDepChildrens)</td>
-                    <td>@(@Model.finalReport.movedOutDep + @Model.finalReport.movedOutDepChildren + @Model.depReport21.movedOutDep 
-                            + @Model.depReport21.movedOutDepChildrens)
+                    <td>@(@Model.finalReport.movedOutDep + @Model.DayCareReport.movedOutDep)</td>
+                    <td>@(@Model.finalReport.movedOutDepChildren + @Model.DayCareReport.movedOutDepChildrens)</td>
+                    <td>@(@Model.finalReport.movedOutDep + @Model.finalReport.movedOutDepChildren + @Model.DayCareReport.movedOutDep 
+                            + @Model.DayCareReport.movedOutDepChildrens)
                     </td>
                 </tr>
                 <tr class="table-secondary print-m-p-0">
@@ -187,10 +187,10 @@
                     <td>@Model.finalReport.movedInDep</td>
                     <td>@Model.finalReport.movedInDepChildren</td>
                     <td>@(@Model.finalReport.movedInDep + @Model.finalReport.movedInDepChildren)</td>
-                    <td>@(@Model.finalReport.movedInDep + @Model.depReport21.movedInDep)</td>
-                    <td>@(@Model.finalReport.movedInDepChildren + @Model.depReport21.movedInDepChildrens)</td>
-                    <td>@(@Model.finalReport.movedInDep + @Model.finalReport.movedInDepChildren + @Model.depReport21.movedInDep 
-                            + @Model.depReport21.movedInDepChildrens)
+                    <td>@(@Model.finalReport.movedInDep + @Model.DayCareReport.movedInDep)</td>
+                    <td>@(@Model.finalReport.movedInDepChildren + @Model.DayCareReport.movedInDepChildrens)</td>
+                    <td>@(@Model.finalReport.movedInDep + @Model.finalReport.movedInDepChildren + @Model.DayCareReport.movedInDep 
+                            + @Model.DayCareReport.movedInDepChildrens)
                     </td>
                 </tr>
                 <tr class="table-secondary print-m-p-0">
@@ -205,9 +205,9 @@
                     <td>@Model.finalReport.died</td>
                     <td>@Model.finalReport.diedChildren</td>
                     <td>@(@Model.finalReport.died + @Model.finalReport.diedChildren)</td>
-                    <td>@(@Model.finalReport.died + @Model.depReport21.died)</td>
-                    <td>@(@Model.finalReport.diedChildren + @Model.depReport21.diedChildrens)</td>
-                    <td>@(@Model.finalReport.died + @Model.finalReport.diedChildren + @Model.depReport21.died + @Model.depReport21.diedChildrens)</td>
+                    <td>@(@Model.finalReport.died + @Model.DayCareReport.died)</td>
+                    <td>@(@Model.finalReport.diedChildren + @Model.DayCareReport.diedChildrens)</td>
+                    <td>@(@Model.finalReport.died + @Model.finalReport.diedChildren + @Model.DayCareReport.died + @Model.DayCareReport.diedChildrens)</td>
                 </tr>
                 <tr class="print-m-p-0">
                     <td class="fw-bold print-m-p-0">Состоит в отделении</td>
@@ -221,10 +221,10 @@
                     <td class="print-m-p-0">@Model.finalReport.present</td>
                     <td class="print-m-p-0">@Model.finalReport.presentChildren</td>
                     <td class="print-m-p-0">@(@Model.finalReport.present + @Model.finalReport.presentChildren)</td>
-                    <td class="print-m-p-0">@(@Model.finalReport.present + @Model.depReport21.present)</td>
-                    <td class="print-m-p-0">@(@Model.finalReport.presentChildren + @Model.depReport21.presentChildrens)</td>
-                    <td class="print-m-p-0">@(@Model.finalReport.present + @Model.finalReport.presentChildren + @Model.depReport21.present 
-                            + @Model.depReport21.presentChildrens)
+                    <td class="print-m-p-0">@(@Model.finalReport.present + @Model.DayCareReport.present)</td>
+                    <td class="print-m-p-0">@(@Model.finalReport.presentChildren + @Model.DayCareReport.presentChildrens)</td>
+                    <td class="print-m-p-0">@(@Model.finalReport.present + @Model.finalReport.presentChildren + @Model.DayCareReport.present 
+                            + @Model.DayCareReport.presentChildrens)
                     </td>
                 </tr>
                @*  <tr class="table-secondary border-transparent print-m-p-0">
@@ -692,13 +692,13 @@
                 <tr class="border-transparent print-m-p-0">
                     <td class="fw-bold print-m-p-0">Обратившиеся в КДО</td>
                     <td colspan="@(@Model.departmentCounter*2 + 2)" class="print-m-p-0"></td>
-                    <td class="text-center bg-light print-m-p-0" id="kdo">@Model.depReport81.present</td>
+                    <td class="text-center bg-light print-m-p-0" id="kdo">@Model.KDOreport.present</td>
                     <td colspan="3" class="bg-transparent border-0 print-m-p-0"></td>
                 </tr>
                 <tr class="border-transparent print-m-p-0">
                     <td class="fw-bold print-m-p-0">Платные услуги</td>
                     <td colspan="@(@Model.departmentCounter*2 + 2)" class="print-m-p-0"></td>
-                    <td class="text-center bg-light print-m-p-0" id="">@Model.depReport82.present</td>
+                    <td class="text-center bg-light print-m-p-0" id="">@Model.PayServiceReport.present</td>
                     <td colspan="3" class="bg-transparent print-m-p-0 border-0"></td>
                 </tr>
 

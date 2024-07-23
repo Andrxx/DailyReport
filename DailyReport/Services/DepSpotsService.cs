@@ -1,11 +1,31 @@
 ﻿using DailyReport.Models;
+using DailyReport.Models.DTO;
 
 namespace DailyReport.Services
 {
     public static class DepSpotsService
     {
-        //костыль - коррекция отделений орит
-        //private static List<int> correction = new() { 91, 90 }; 
+        /// <summary>
+        /// Считаем места для взрослых и детей в стационаре по списку полных отчетов. Не уточняется ДС и ОРИТ
+        /// </summary>
+        /// <param name="FRdepartments"></param>
+        /// <returns></returns>
+        public static HospitalSpots GetHospitalSpots (List<FullReportData> FRdepartments)
+        {
+            HospitalSpots hospitalSpots = new HospitalSpots ();
+            foreach (FullReportData repData in FRdepartments) 
+            {
+                if (repData.CountSpots)
+                {
+                    hospitalSpots.Adult += repData.Department.AdultSpotsQuantity;
+                    hospitalSpots.Children += repData.Department.ChildrenSpotsQuantity;
+                }
+            }
+
+
+            return hospitalSpots;
+        }
+
 
         /// <summary>
         /// Считает все взрослые места во всех отделениях с учетом списка коррекции 
@@ -127,6 +147,30 @@ namespace DailyReport.Services
                     sum += department.ChildrenSpotsQuantity;
                 }
             }
+            return sum;
+        }
+        /// <summary>
+        /// Считает взрослые места по отделениям используя FullReportData
+        /// </summary>
+        /// <param name="FRdepartments"></param>
+        /// <returns></returns>
+        public static int GetAdultSpots(List<FullReportData> FRdepartments)
+        {
+            int sum = 0;
+            if (FRdepartments == null) return 0;
+
+            foreach (FullReportData frd in FRdepartments)
+            {
+                if (frd.CountSpots)
+                {
+                    try
+                    {
+                        sum += frd.Department.AdultSpotsQuantity;
+                    }
+                    catch { sum += 0; }
+                }
+            }
+
             return sum;
         }
 

@@ -8,33 +8,39 @@ using System.Composition;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
+using Microsoft.VisualBasic;
+using DailyReport.Models.DTO;
 
 namespace DailyReport.Pages.Reports
 {
     [IgnoreAntiforgeryToken]
     public class FinalReportModel : PageModel
     {
-
         private readonly IConfiguration appConfig;
         public FinalReport finalReport;
         public List<FinalReport> finalReports;
-        public DepReport  depReport81, depReport82, depReport21;
+        public DepReport?  KDOreport, PayServiceReport, DayCareReport;
         ApplicationContext context;
         public FinalReportModel(ApplicationContext db, IConfiguration Configuration )
         {
             appConfig = Configuration; 
             context = db;
         }
-
+        public List<FullReportData> FullReports { get; set; } = new();
         public List<Department> activeDepartments { get; set; } = new();
+        public List<Department> allDepartments { get; set; } = new();
         public List<DepReport> reports { get; private set; } = new();
         public List<DepReport>  sortedReports = new ();
+        //public HospitalSpots hospitalSpots { get; set; }
+
         public List<DepReport> filteredReports = new List<DepReport>();
         public DateTime actualDate = DateTime.Now, reportDate;
         public bool _onlyView;
         public int  deseaseSumFinal, deseaseSumFinalChildren;
-        public int reject, rejectChildren, ambulance, ambulanceChildren, submitOtherHosp, submitOtherHospChildren, sumReject, 
+        public int reject, rejectChildren, ambulance, ambulanceChildren, submitOtherHosp, submitOtherHospChildren, sumReject,
             sumAmbulance, sumOther, sumAdults, sumChildren, sumTotal;
+            
+        public int? KDOallias, PayServAllias, DCallias, ORITAllias, ORITDirtyAllias;
         //фактические места в отделениях
         //public DepartmentSpots departmentSpots; 
         //свободные места
@@ -60,8 +66,6 @@ namespace DailyReport.Pages.Reports
         public List<int> ORITcorrection = new();
         public List<int> diseaseSums = new();
         public List<int> oxygenSum = new();
-
-
 
         public void OnGet(double dateOffset = 0, bool onlyView = false)
         {
@@ -89,6 +93,32 @@ namespace DailyReport.Pages.Reports
             }
             catch { excludedDeps = new(); }
 
+            try
+            {
+                DCallias = int.Parse(appConfig["DayCareAllias"]);
+            }
+            catch { /*DCallias = 0;*/ }
+            try
+            {
+                KDOallias = int.Parse(appConfig["KDOallias"]);
+            }
+            catch { }
+            try
+            {
+                PayServAllias = int.Parse(appConfig["PayServiceAllias"]);
+            }
+            catch { }
+            try
+            {
+                ORITDirtyAllias = int.Parse(appConfig["ORITDirtyAllias"]);
+            }
+            catch {  }
+            try
+            {
+                ORITAllias = int.Parse(appConfig["ORITAllias"]);
+            }
+            catch { }
+
             _onlyView = onlyView;
             actualDate = actualDate.AddDays(dateOffset);
             DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 8, 0, 0);
@@ -106,22 +136,54 @@ namespace DailyReport.Pages.Reports
             activeDepartments = DepartmentServices.GetSortedDepartments(context, excludedDeps);
             departmentCounter = activeDepartments.Count;
 
-            //подсчет свободных мест
+            allDepartments = DepartmentServices.GetSortedDepartments(context);
 
+            //Формируем список полных отчетов для всех отделений, 
+            //foreach (var dep in allDepartments) 
+            //{
+            //    FullReportData _frd = new FullReportData();
+            //    _frd.Department = dep;
+            //    _frd.CountSpots = !excludedSpots.Contains(dep.Allias);
+            //    _frd.ShowInFinalReport = !excludedDeps.Contains(dep.Allias);
+
+            //    FullReports.Add(_frd);
+            //}
+
+            //подсчет свободных мест
+            //hospitalSpots = DepSpotsService.GetHospitalSpots(FullReports);
+            ////добавляем отдельно места для ОРИТ, чистой и грязной зоны, дневного стационара
+            //var fullrep = FullReports.Find(frd => frd.Department.Allias == ORITAllias);
+            //if (fullrep != null)
+            //{
+            //    hospitalSpots.ORITAdult += fullrep.Department.AdultSpotsQuantity;
+            //    hospitalSpots.ORITChildren += fullrep.Department.ChildrenSpotsQuantity;
+            //}
+            //fullrep = FullReports.Find(frd => frd.Department.Allias == ORITDirtyAllias);
+            //{
+            //    hospitalSpots.ORITAdult += fullrep.Department.AdultSpotsQuantity;
+            //    hospitalSpots.ORITChildren += fullrep.Department.ChildrenSpotsQuantity;
+            //}
+            //fullrep = FullReports.Find(frd => frd.Department.Allias == DCallias);
+            //{
+            //    hospitalSpots.DayCareAdult += fullrep.Department.AdultSpotsQuantity;
+            //    hospitalSpots.DayCareChildren += fullrep.Department.ChildrenSpotsQuantity;
+            //}
+
+             
             AdultSpotsSum = DepSpotsService.GetAdultSpots(activeDepartments, excludedSpots);
             ChildrenSpotsSum = DepSpotsService.GetChildrenSpots(activeDepartments, excludedSpots);
             AdultFullSpotsSum = DepSpotsService.GetFullAdultSpots(activeDepartments, ORITcorrection);
             ChildrenFullSpotsSum = DepSpotsService.GetFullChildrenSpots(activeDepartments, ORITcorrection);
             try
             {
-                ORITAdults = activeDepartments.FirstOrDefault(d => d.Allias == 90).AdultSpotsQuantity
-                    + activeDepartments.FirstOrDefault(d => d.Allias == 91).AdultSpotsQuantity;
+                ORITAdults = activeDepartments.FirstOrDefault(d => d.Allias == ORITAllias).AdultSpotsQuantity
+                    + activeDepartments.FirstOrDefault(d => d.Allias == ORITDirtyAllias).AdultSpotsQuantity;
             }
             catch { ORITAdults = 0; }
             try
             {
-                ORITChildren = activeDepartments.FirstOrDefault(d => d.Allias == 90).ChildrenSpotsQuantity
-                    + activeDepartments.FirstOrDefault(d => d.Allias == 91).ChildrenSpotsQuantity;
+                ORITChildren = activeDepartments.FirstOrDefault(d => d.Allias == ORITAllias).ChildrenSpotsQuantity
+                    + activeDepartments.FirstOrDefault(d => d.Allias == ORITDirtyAllias).ChildrenSpotsQuantity;
             }
             catch { ORITChildren = 0; }
 
@@ -140,64 +202,56 @@ namespace DailyReport.Pages.Reports
             foreach (Department dep in activeDepartments) 
             {
                 DepReport? _rep = reports.Find(rep => rep.depNumber == dep.Allias);
-                if (_rep is null) _rep = new DepReport();
+                if (_rep is null) _rep = new DepReport() { depNumber = dep.Allias };
                 sortedReports.Add(_rep);
             }
 
-
-#pragma warning disable CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
             //данные по КДО и платным услугам
-            depReport81 = reports.Find(p => p.depNumber == 81);
-            depReport82 = reports.Find(p => p.depNumber == 82);
+            KDOreport = reports.Find(p => p.depNumber == KDOallias);
+            if(KDOreport is null) KDOreport = new DepReport();
+            PayServiceReport = reports.Find(p => p.depNumber == PayServAllias);
+            if(PayServiceReport is null) PayServiceReport = new DepReport();
 
             //получаем дневной стационар
-            depReport21 = reports.Find(p => p.depNumber == 21);
-            if (depReport21 is null) depReport21 = new DepReport();
+            DayCareReport = reports.Find(p => p.depNumber == DCallias);
 
-#pragma warning restore CS8601 // Возможно, назначение-ссылка, допускающее значение NULL.
-            //if (depReport8 == null)
-            //{
-            //    //на выходных загружаем данные предыдущей сводки
-            //    if (actualDate.DayOfWeek == DayOfWeek.Sunday || actualDate.DayOfWeek == DayOfWeek.Saturday)
-            //    {
-            //        DepReport report = (from r in context.DepReports
-            //                            where (r.depNumber == 8) && (r.date > startTime.AddDays(-1)) && (r.date < endTime.AddDays(-1))
-            //                            select r).AsNoTracking().FirstOrDefault();
-            //        if (report != null)
-            //        {
-            //            depReport8 = (DepReport)report.Clone();
-            //            //меняем дату на текущую и обнуляем ИД для сохранения новой записи в БД
-            //            depReport8.date = actualDate;
-            //            depReport8.Id = 0;
-            //            depReport8.present = report.present;
-            //            depReport8.presentChildrens = report.presentChildrens;
-            //            depReport8.existed = report.present;
-            //            depReport8.existedChildren = report.presentChildrens;
-            //            depReport8.income = 0;
-            //            depReport8.incomeChildren = 0;
-            //            depReport8.outcome = 0;
-            //            depReport8.outcomeChildrens = 0;
-            //            depReport8.movedInDep = 0;
-            //            depReport8.movedOutDep = 0;
-            //            depReport8.movedInDepChildrens = 0;
-            //            depReport8.movedOutDepChildrens = 0;
-            //            depReport8.died = 0;
-            //            depReport8.diedChildrens = 0;
-            //            context.DepReports.Update(depReport8);
-            //            context.SaveChanges();
-            //        }
-            //        else
-            //        {
-            //            depReport8 = new();
-            //        }
-            //    }
 
-            //костыль - платные услуги и КДО, пока не входят в сводки, обработать в будущем
-            if (depReport81 == null) depReport81 = new();
-            if (depReport82 == null) depReport82 = new();
-
-            if (finalReport == null) finalReport = new();
-
+            //на выходных загружаем данные предыдущей сводки для дневного стационара
+            if ((actualDate.DayOfWeek == DayOfWeek.Sunday || actualDate.DayOfWeek == DayOfWeek.Saturday) && (DCallias is not null))
+            {
+                //DayCareReport = reports.Find(p => p.depNumber == DCallias);
+                if (DayCareReport is null)
+                {
+                    DepReport? report = DepReportServise.GetRepByNumberNoTracking(context, (int)DCallias, startTime.AddDays(-1), endTime.AddDays(-1));
+                    if (report is not null)
+                    {
+                        DayCareReport = (DepReport)report.Clone();
+                        //меняем дату на текущую и обнуляем ИД для сохранения новой записи в БД
+                        DayCareReport.date = actualDate;
+                        DayCareReport.Id = 0;
+                        DayCareReport.depNumber = (int)DCallias;
+                        DayCareReport.present = report.present;
+                        DayCareReport.presentChildrens = report.presentChildrens;
+                        DayCareReport.existed = report.present;
+                        DayCareReport.existedChildren = report.presentChildrens;
+                        DayCareReport.income = 0;
+                        DayCareReport.incomeChildren = 0;
+                        DayCareReport.outcome = 0;
+                        DayCareReport.outcomeChildrens = 0;
+                        DayCareReport.movedInDep = 0;
+                        DayCareReport.movedOutDep = 0;
+                        DayCareReport.movedInDepChildrens = 0;
+                        DayCareReport.movedOutDepChildrens = 0;
+                        DayCareReport.died = 0;
+                        DayCareReport.diedChildrens = 0;
+                        sortedReports[sortedReports.FindIndex(p => p.depNumber == DCallias)] = DayCareReport;
+                        context.DepReports.Update(DayCareReport);
+                        context.SaveChanges();
+                    }
+                }
+            }
+            if (DayCareReport is null) DayCareReport = new();
+            if (finalReport is null) finalReport = new();
             //Считаем сумму по отделениям
             foreach (DepReport _rep in sortedReports)
             {
@@ -346,7 +400,6 @@ namespace DailyReport.Pages.Reports
             {
             }
         }
-      
         
         /// <summary>
         /// сохранение данных смены через абстракцию сервисов
@@ -453,6 +506,43 @@ namespace DailyReport.Pages.Reports
             {
                 return new NotFoundResult();
             }
+        }
+    
+    
+        private DepReport AddDCreport (DateTime startTime, DateTime endTime)
+        {
+            DepReport? _report = new DepReport();
+            _report = DepReportServise.GetRepByNumber(context, (int)DCallias, startTime, endTime);
+            if (_report is null)
+            {
+                //depReport8 = (DepReport)_report.Clone();
+                ////меняем дату на текущую и обнуляем ИД для сохранения новой записи в БД
+                //depReport8.date = actualDate;
+                //depReport8.Id = 0;
+                //depReport8.present = _report.present;
+                //depReport8.presentChildrens = _report.presentChildrens;
+                //depReport8.existed = _report.present;
+                //depReport8.existedChildren = _report.presentChildrens;
+                //depReport8.income = 0;
+                //depReport8.incomeChildren = 0;
+                //depReport8.outcome = 0;
+                //depReport8.outcomeChildrens = 0;
+                //depReport8.movedInDep = 0;
+                //depReport8.movedOutDep = 0;
+                //depReport8.movedInDepChildrens = 0;
+                //depReport8.movedOutDepChildrens = 0;
+                //depReport8.died = 0;
+                //depReport8.diedChildrens = 0;
+                //context.DepReports.Update(depReport8);
+                //context.SaveChanges();
+            }
+            else
+            {
+                return _report;
+            }
+
+            return _report;
+            //    }
         }
     }
 }

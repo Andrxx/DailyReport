@@ -1,6 +1,7 @@
 ﻿using DailyReport.Models;
 using DailyReport.Pages;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.Composition;
 
@@ -132,5 +133,38 @@ namespace DailyReport.Services
             return newReport;
         }
 
+        /// <summary>
+        /// Получаем отчет отделения по номеру и заданной дате
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="depNumber"></param>
+        /// <param name="StartTime"></param>
+        /// <param name="EndTime"></param>
+        /// <returns></returns>
+        public static DepReport GetRepByNumber(ApplicationContext context, int depNumber, DateTime StartTime, DateTime EndTime)
+        {
+            var report = (from rep in context.DepReports
+                      where (rep.depNumber == depNumber) && (rep.date > StartTime && rep.date < EndTime)
+                      select rep).FirstOrDefault();
+
+            return report;
+        }
+
+        /// <summary>
+        /// Получаем отчет отделения по номеру и заданной дате без отслеживания сущности 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="depNumber"></param>
+        /// <param name="StartTime"></param>
+        /// <param name="EndTime"></param>
+        /// <returns></returns>
+        public static DepReport GetRepByNumberNoTracking(ApplicationContext context, int depNumber, DateTime StartTime, DateTime EndTime)
+        {
+            var report = (from rep in context.DepReports
+                          where (rep.depNumber == depNumber) && (rep.date > StartTime && rep.date < EndTime)
+                          select rep).AsNoTracking().FirstOrDefault();
+
+            return report;
+        }
     }
 }
