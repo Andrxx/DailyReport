@@ -3,7 +3,7 @@ using DailyReport.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using DailyReport.Services.WardServices;
-using DailyReport.Services;
+using DailyReport.Services.Reports;
 
 namespace DailyReport.Pages.Wards
 {

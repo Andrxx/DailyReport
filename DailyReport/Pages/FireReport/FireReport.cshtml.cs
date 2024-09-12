@@ -1,5 +1,8 @@
 using DailyReport.Models;
+using DailyReport.Models.PersonelFolder;
+using DailyReport.Models.Reports;
 using DailyReport.Services;
+using DailyReport.Services.Reports;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Cryptography;
@@ -11,23 +14,34 @@ namespace DailyReport.Pages.FireReport
     {
         public DateTime ActualDate = new();
         ApplicationContext context;
-        public Department department;
+        IConfiguration appConfig;
+        public Department? department;
         public List<DutyNurse> dutyNurses;
         [BindProperty]
         public List<Personel> nursesList { get; set; }
+        public List<Personel> rentgenologistsList { get; set; }
         [BindProperty]
         public List<Tuple<string, string>> nurseInfo { get; set; }
         [BindProperty]
         public DutyNurse DutyNurse { get; set; } = new();
         [BindProperty]
-        public Models.FireReport fireReport { get; set; } = new();
+        public Models.Reports.FireReport fireReport { get; set; } = new();
+        public int? RHAllias;
 
-        public FireReportModel(ApplicationContext db)
+        public FireReportModel(ApplicationContext db, IConfiguration Configuration)
         {
             context = db;
+            appConfig = Configuration;
         }
         public void OnGet(int depAllias)
         {
+
+            try
+            {
+                RHAllias = int.Parse(appConfig["RHAllias"]);
+            }
+            catch { }
+
             department = DepartmentServices.GetSortedDepartments(context).FirstOrDefault(d => d.Allias == depAllias);
             
             //костыль - сделать обработку ошибки поиска отделения
@@ -37,11 +51,14 @@ namespace DailyReport.Pages.FireReport
             dutyNurses = DutyServices.GetDutyNurses(depAllias, context);
             nursesList = DutyServices.GetNursesList(context);
 
+            //добавляем дежурного рентгенолога
+            rentgenologistsList = DutyServices.GetRentgenologistsList(context);
+
             //работа со сводкой
             fireReport = FireReportServices.GetFireReportByDep(department.Allias, context);
             if (fireReport == null)
             {
-                fireReport = new Models.FireReport();
+                fireReport = new Models.Reports.FireReport();
                 fireReport.Date = DateTime.Now;
                 fireReport.DepNumber = department.Allias;
             }
@@ -58,7 +75,17 @@ namespace DailyReport.Pages.FireReport
             DutyServices.AddDutyNurse(DutyNurse, context);
             return RedirectToPage("FireReport", new { depAllias = DutyNurse.department });
         }
-
+        public IActionResult OnPostSaveRHDoc()
+        {
+            Personel? personel = PersonelServices.GetPersonelByName(DutyNurse?.name, context);
+            if (personel != null)
+            {
+                DutyNurse.dutyDate = DateTime.Now;
+                DutyNurse.Phone = personel.Phone;
+            }
+            DutyServices.AddDutyNurse(DutyNurse, context);
+            return RedirectToPage("FireReport", new { depAllias = DutyNurse.department });
+        }
         /// <summary>
         /// удаляем медсестру из БД, вторым параметром передаем номер отделения для правильного возврата 
         /// </summary>

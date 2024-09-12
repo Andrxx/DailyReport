@@ -1,0 +1,119 @@
+﻿@page
+@using DailyReport.Models.Reports
+@model DailyReport.Pages.Admin.LinesManagementModel
+@{
+}
+
+<div class="row">
+    <div class="col-3">Название категории</div>
+    <div class="col-2">Порядок отображения в сводке</div>
+</div>
+
+@{
+    foreach (LineType type in Model.types)
+    {
+        <form method="post">
+            <div class="row pt-2">
+                <div class="col-3">
+                    <input type="text" required value="@type.Name" class="form-control" asp-for="Type.Name" />
+                </div>
+              
+                <div class="col-3">
+                    <input type="number" required value="@type.Order" class="form-control" asp-for="Type.Order" />
+                </div>
+
+                <div class="col-2 d-none">
+                    <input type="number" value="@type.Id" class="form-control invisible" asp-for="Type.Id" />
+                </div>
+                <div class="col-1 d-print-none">
+                    <input type="submit" value="&#128465" asp-page-handler="DeleteType" asp-route-id="@type.Id" />
+                    <input type="submit" value="&#9998" asp-page-handler="UpdateType" />
+                </div>
+            </div>
+        </form>
+    }
+}
+
+<form method="post">
+    <div class="row pt-2">
+        <div class="col-3">
+            <input type="text" required class="form-control" asp-for="Type.Name" />
+        </div>
+        <div class="col-3">
+            <input type="number" required class="form-control" asp-for="Type.Order" />
+        </div>
+        <div class="col-1 d-print-none">
+            <input type="submit" value="+" asp-page-handler="SaveType" />
+        </div>
+    </div>
+</form>
+
+
+<div class="row">
+    <div class="col-3">Название стороки</div>
+    <div class="col-3">Тип строки</div>
+    <div class="col-2">Порядок отображения в сводке</div>
+
+</div>
+
+@{
+    foreach (LineEntity line in Model.Lines)
+    {
+        <form method="post">
+            <div class="row pt-2">
+                <div class="col-3">
+                    <input type="text" required value="@line.Name" class="form-control" asp-for="Line.Name" />
+                </div>
+                <div class="col-3">
+                    <select class="form-select"  asp-for="Line.EntityType">
+                        <option selected>@line.EntityType</option>
+                        @{
+                            foreach (LineType type in Model.types)
+                            {
+                                <option value="@type.Name">@type.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-3">
+                    <input type="number" required value="@line.Order" class="form-control" asp-for="Line.Order" />
+                </div>
+
+                <div class="col-2 d-none">
+                    <input type="number" value="@line.Id" class="form-control invisible" asp-for="Line.Id" />
+                </div>
+                <div class="col-1 d-print-none">
+                    <input type="submit" value="&#128465" asp-page-handler="DeleteLine" asp-route-id="@line.Id" />
+                    <input type="submit" value="&#9998" asp-page-handler="UpdateLine" />
+                </div>
+            </div>
+        </form>
+    }
+}
+
+
+        <form method="post">
+            <div class="row pt-2">
+                <div class="col-3">
+                    <input type="text" required  class="form-control" asp-for="Line.Name" />
+                </div>
+                <div class="col-3">
+            <select class="form-select" asp-for="Line.EntityType">
+                <option selected disabled>Выбрать категорию строки</option>
+                @{
+                    foreach (LineType type in Model.types)
+                    {
+                        <option value="@type.Name">@type.Name</option>
+                    }
+                }
+            </select>
+                </div>
+                <div class="col-3">
+                    <input type="number" required  class="form-control" asp-for="Line.Order" />
+                </div>
+                <div class="col-1 d-print-none">
+                    <input type="submit" value="+" asp-page-handler="SaveLine"/>
+
+                </div>
+            </div>
+        </form>

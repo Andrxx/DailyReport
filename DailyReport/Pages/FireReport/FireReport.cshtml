@@ -1,11 +1,38 @@
 ﻿@page
 @using DailyReport.Models
+@using DailyReport.Models.PersonelFolder
 @model DailyReport.Pages.FireReport.FireReportModel
 @{
     
     ViewData["Title"] = "Пожарная сводка " + @Model.department.Name;
 }
 
+
+@if (@Model.department.Allias == @Model.RHAllias)
+{
+    <form method="post">
+    <div class="row">
+        <div class="col-4">
+            <select class="form-select" asp-for="DutyNurse.name">
+                <option selected disabled>Выбрать дежурного рентгенолога</option>
+                @{
+                    foreach (Personel nurse in Model.rentgenologistsList)
+                    {
+                        <option value="@nurse.Name">@nurse.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="col-2 d-none">
+            <input type="int" value="@Model.department.Allias" class="form-control invisible" asp-for="DutyNurse.department" />
+            <input type="datetime" value="@DateTime.Now" class="form-control invisible" asp-for="DutyNurse.dutyDate" />
+        </div>
+        <div class="col-2">
+            <input type="submit" value="+" asp-page-handler="SaveRHDoc" />
+        </div>
+    </div>
+    </form>
+}
 <form method="post">
     <div class="row">
         <div class="col-4">

@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Linq;
+using DailyReport.Models.Reports;
+using DailyReport.Models.PersonelFolder;
+using DailyReport.Services.Reports;
 
 namespace DailyReport.Pages.Reports
 {
@@ -63,11 +66,6 @@ namespace DailyReport.Pages.Reports
                 if(dn != null) report.dutyNurse = dn.name;
             }
             catch { }
-            //получаем список медсестер больницы
-            //nurses = (from str in context.Personels
-            //          where str.PersType == "ћедсестра"
-            //          orderby str.Name, str.Name.Substring(0, 1)
-            //          select str.Name).ToList();
         }
 
         /// <summary>
@@ -130,9 +128,7 @@ namespace DailyReport.Pages.Reports
             {
                 return RedirectToPage("DepReport", new { depAllias = _report.depNumber });
             }
-            //_report.dutyNurse = Request.Form["report.dutyNurse"];
-            context.DepReports.Update(_report);
-            context.SaveChanges();
+            DepReportServise.AddReport(context, _report);
             return RedirectToPage("DepReport", new { depAllias = _report.depNumber });
         }
 

@@ -1,5 +1,5 @@
 using DailyReport.Models;
-using DailyReport.Services;
+using DailyReport.Services.Reports;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -8,7 +8,7 @@ namespace DailyReport.Pages.Admin
     public class FireReportsModel : PageModel
     {
         ApplicationContext context;
-        public List<Models.FireReport> reports { get; set; }
+        public List<Models.Reports.FireReport> reports { get; set; }
 
         public FireReportsModel(ApplicationContext db)
         {

@@ -1,84 +1,75 @@
-﻿namespace DailyReport.Models
+﻿namespace DailyReport.Models.PersonelFolder
 {
-    public class DutyNurse
+    public class Personel
     {
         public int Id { get; set; }
-        public string? name { get; set; }
-        public int? department { get; set; }
-        public DateTime dutyDate { get; set; }
+        public string Name { get; set; }
         public string? Phone { get; set; }
-    
+        public string? PersType { get; set; }
+        public string? Department { get; set; }
+
         public string ToDepName()
         {
             string name;
-            switch (department)
+            switch (Department)
             {
-                case  1:
+                case "1":
                     {
                         name = "Первое отделение";
                         return name;
                     }
-                case 11:
+                case "11":
                     {
-                        name = "Первое отделение грязная зона";                 
+                        name = "Первое отделение грязная зона";
                         return name;
                     }
-                case 2:
+                case "2":
                     {
                         name = "Второе отделение";
                         return name;
                     }
-                case 3:
+                case "3":
                     {
                         name = "Третье отделение";
                         return name;
                     }
-                case 4:
+                case "4":
                     {
                         name = "Четвертое отделение";
                         return name;
 
                     }
-                case 5:
+                case "5":
                     {
                         name = "Пятое отделение";
                         return name;
                     }
-                case 6:
+                case "6":
                     {
                         name = "Шестое отделение";
                         return name;
                     }
-                case 7:
+                case "7":
                     {
                         name = "Седьмое отделение";
                         return name;
                     }
-                case 8:
+                case "8":
                     {
                         name = "Дневной стационар";
                         return name;
                     }
-                case 90:
+                case "90":
                     {
                         name = "ОРИТ";
                         return name;
 
                     }
-                case 91:
+                case "91":
                     {
                         name = "ОРИТ грязная зона";
                         return name;
-                    }
-                case 21:
-                    {
-                        name = "Лаборатория";
-                        return name;
-                    }
-                case 102:
-                    {
-                        name = "Охрана и тех.персонал";
-                        return name;
+
                     }
                 default:
                     {

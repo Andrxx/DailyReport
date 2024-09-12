@@ -1,4 +1,7 @@
-﻿namespace DailyReport.Models.DTO
+﻿using DailyReport.Models.PersonelFolder;
+using DailyReport.Models.Reports;
+
+namespace DailyReport.Models.DTO
 {
     public class FullFireReport
     {

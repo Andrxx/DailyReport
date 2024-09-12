@@ -1,6 +1,7 @@
 ﻿@page
 @using DailyReport.Models
 @using DailyReport.Models.DTO
+@using DailyReport.Models.PersonelFolder
 @model DailyReport.Pages.FireReport.FireSumReportModel
 @{
     ViewData["Title"] = "Пожарная сводка";
@@ -51,19 +52,22 @@
     <div class=" col-1">Всего дет</div>
     <div class=" col-2">Время сводки</div>
 </div>
-@{
-    foreach (FullFireReport ffr in Model.fullFireReports)
-    {
-        <div class="row text-end">
-            <div class=" col-2 border border-dark">@ffr.Department.Name</div>
-            <div class=" col-1 border border-dark">@ffr.FireReport.Adult</div>
-            <div class=" col-1 border border-dark">@ffr.FireReport.Children</div>
-            <div class=" col-1 border border-dark">@ffr.FireReport.Care</div>
-            <div class=" col-1 border border-dark">@ffr.FireReport.Personel</div>
-            <div class=" col-1 border border-dark">@(@ffr.FireReport.Adult + @ffr.FireReport.Care)</div>
-            <div class=" col-1 border border-dark">@ffr.FireReport.Children</div>
-            <div class=" col-2 border border-dark">@ffr.FireReport.Date.ToString("HH:mm dd.MM.yy")</div>
-        </div>
+    @{
+        foreach (FullFireReport ffr in Model.fullFireReports)
+        {
+            if (ffr.Department.Allias != Model.RHAllias)
+            {
+                <div class="row text-end">
+                    <div class=" col-2 border border-dark">@ffr.Department.Name</div>
+                    <div class=" col-1 border border-dark">@ffr.FireReport.Adult</div>
+                    <div class=" col-1 border border-dark">@ffr.FireReport.Children</div>
+                    <div class=" col-1 border border-dark">@ffr.FireReport.Care</div>
+                    <div class=" col-1 border border-dark">@ffr.FireReport.Personel</div>
+                    <div class=" col-1 border border-dark">@(@ffr.FireReport.Adult + @ffr.FireReport.Care)</div>
+                    <div class=" col-1 border border-dark">@ffr.FireReport.Children</div>
+                    <div class=" col-2 border border-dark">@ffr.FireReport.Date.ToString("HH:mm dd.MM.yy")</div>
+                </div>
+        }
     }
 }
     <button class="d-print-none mt-2 action-print">Печать</button>

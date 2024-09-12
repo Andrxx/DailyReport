@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Cryptography;
 using System.Composition;
+using DailyReport.Models.PersonelFolder;
 
 namespace DailyReport.Services
 {
@@ -63,6 +64,20 @@ namespace DailyReport.Services
                 _doctors.Add(p.Name);
             }
             return _doctors;
+        }
+
+        public static List<Personel> GetRentgenologistsList(ApplicationContext context)
+        {
+            List<Personel> rentgenologist = new();
+            try
+            {
+                rentgenologist = (from personel in context.Personels
+                          where (personel.PersType == "Врач рентгенолог")
+                          orderby personel.Name, personel.Name.Substring(0, 1)
+                          select personel).ToList();
+            }
+            catch { }
+            return rentgenologist;
         }
 
         public static void AddDutyDoc(DutyDoc dutyDoc, ApplicationContext context)

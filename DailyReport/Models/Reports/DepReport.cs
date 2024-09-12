@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DailyReport.Models
+namespace DailyReport.Models.Reports
 {
     public class DepReport : ICloneable
     {
-        internal int incomeChildren;
+        public List<ReportLine>? Lines { get; set; }
 
+        internal int incomeChildren;
         public int Id { get; set; }
         public DateTime date { get; set; } = DateTime.Now;//.AddDays(-1);
         //public int? ShowOrder { get; set; }
@@ -85,6 +86,7 @@ namespace DailyReport.Models
         public int presentWithCare { get; set; }
         public int presentWithCareChildren { get; set; }
 
+        public List<LineEntity>? lines { get; set; }
         public string? dutyNurse { get; set; }
 
         /// <summary>
@@ -93,7 +95,7 @@ namespace DailyReport.Models
         /// <returns></returns>
         public int CountO2()
         {
-            int _summary = oIVL + oMask + oNIVL + oNIVLMask + oNIVLVPO 
+            int _summary = oIVL + oMask + oNIVL + oNIVLMask + oNIVLVPO
                 + oIVLChildrens + oMaskChildren + oNIVLChildrens + oNIVLMaskChildrens + oNIVLVPOChildrens;
             return _summary;
         }
@@ -151,5 +153,5 @@ namespace DailyReport.Models
         }
     }
 
-    
+
 }

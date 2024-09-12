@@ -1,5 +1,5 @@
 ﻿using DailyReport.Models;
-using DailyReport.Services;
+using DailyReport.Services.Reports;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 

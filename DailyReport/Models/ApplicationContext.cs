@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using DailyReport.Models;
 using DailyReport.Models.WardsModels;
+using DailyReport.Models.Reports;
+using DailyReport.Models.PersonelFolder;
 
 namespace DailyReport.Models
 {
@@ -23,6 +24,9 @@ namespace DailyReport.Models
         public DbSet<FireReport> FireReports { get; set; } = null!;
         public DbSet<Ward> Wards { get; set; } = null!;
         public DbSet<Patient> Patients  { get; set; } = null!;
+        public DbSet<LineEntity> Lines { get; set; } = null!;
+        public DbSet<LineType> LineTypes { get; set; } = null!;
+        public DbSet<ReportLine> ReportLines { get; set; } = null!;
 
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //    => options.UseSqlite(@"Data Source=departmentsdb.db");

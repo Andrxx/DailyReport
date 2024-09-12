@@ -1,5 +1,7 @@
 using DailyReport.Models;
-using DailyReport.Services;
+using DailyReport.Models.PersonelFolder;
+using DailyReport.Models.Reports;
+using DailyReport.Services.Reports;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 

@@ -1,7 +1,7 @@
 ﻿using DailyReport.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace DailyReport.Services
+namespace DailyReport.Services.Reports
 {
     public static class DepartmentServices
     {
@@ -13,18 +13,18 @@ namespace DailyReport.Services
 
         public static void DeleteDepartment(int id, ApplicationContext context)
         {
-            Department department = (from d in context.Departments
-                                 where (d.Id == id)
-                                 select d).FirstOrDefault();
+            Department? department = (from d in context.Departments
+                                      where d.Id == id
+                                      select d).FirstOrDefault();
             if (department != null) context.Departments.Remove(department);
             context.SaveChanges();
         }
 
         public static void UpdateDepartment(Department department, ApplicationContext context)
         {
-            Department _department = (Department)(from d in context.Departments
-                                      where (d.Id == department.Id)
-                                      select d).AsNoTracking().FirstOrDefault();
+            Department? _department = (from d in context.Departments
+                                       where d.Id == department.Id
+                                       select d).AsNoTracking().FirstOrDefault();
             if (_department != null)
             {
                 //_department.Number = department.Number;
@@ -45,7 +45,7 @@ namespace DailyReport.Services
         public static List<Department> GetWDepartments(ApplicationContext context)
         {
             List<Department> departments = (from d in context.Departments
-                                            where (d.Number != 90 & d.Number != 91 && d.Number != 8 & d.Number != 11)
+                                            where d.Number != 90 & d.Number != 91 && d.Number != 8 & d.Number != 11
                                             orderby d.Number
                                             select d).ToList();
             return departments;
@@ -73,12 +73,12 @@ namespace DailyReport.Services
         public static List<Department> GetSortedDepartments(ApplicationContext context, List<int> excludedDeps)
         {
             List<Department> _departments = (from d in context.Departments
-                                            orderby d.ShowOrder
-                                            select d).ToList();
+                                             orderby d.ShowOrder
+                                             select d).ToList();
             List<Department> actualDepartments = new List<Department>();
             foreach (Department dep in _departments)
             {
-                if (!excludedDeps.Contains((int)dep.Allias)) actualDepartments.Add(dep);
+                if (!excludedDeps.Contains(dep.Allias)) actualDepartments.Add(dep);
             }
 
             return actualDepartments;

@@ -1,9 +1,9 @@
-﻿namespace DailyReport.Models
+﻿namespace DailyReport.Models.Reports
 {
     public class FireReport
     {
         public int Id { get; set; }
-        public int DepNumber { get; set; } 
+        public int DepNumber { get; set; }
         public int Adult { get; set; }
         public int Children { get; set; }
         public int Care { get; set; }

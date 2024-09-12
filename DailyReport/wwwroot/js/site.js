@@ -63,7 +63,7 @@ async function updatePatient(event) {
 		event.target.querySelector('#newPatient_SubmitedTo').value = result.SubmitedTo;
 	}
 	else {
-		alert("Не сохрнено, " + response.statusText);
+		alert("Не сохранено, " + response.statusText);
 	}
 }
 

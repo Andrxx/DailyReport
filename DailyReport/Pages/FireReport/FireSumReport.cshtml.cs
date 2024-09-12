@@ -1,6 +1,8 @@
 using DailyReport.Models;
 using DailyReport.Models.DTO;
+using DailyReport.Models.PersonelFolder;
 using DailyReport.Services;
+using DailyReport.Services.Reports;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
@@ -15,11 +17,13 @@ namespace DailyReport.Pages.FireReport
     {
         ApplicationContext context;
         private readonly IConfiguration appConfig;
-        public List<Models.FireReport> reports = new List<Models.FireReport>();
-        public Models.FireReport labReport;
+        public List<Models.Reports.FireReport> reports = new List<Models.Reports.FireReport>();
+        public Models.Reports.FireReport labReport;
         public List<DutyNurse> dutyNurses = new List<DutyNurse>();
         public List<Department> activeDepartments { get; set; } = new();
         public List<FullFireReport> fullFireReports { get; set; } = new List<FullFireReport>();
+
+
 
         public FireSumReportModel(ApplicationContext db, IConfiguration configuration)
         {
@@ -28,6 +32,7 @@ namespace DailyReport.Pages.FireReport
         }
 
         public List<int> excludedDeps = new();
+        public int? RHAllias;
 
         public void OnGet()
         {
@@ -38,6 +43,13 @@ namespace DailyReport.Pages.FireReport
                 else excludedDeps = new();
             }
             catch { excludedDeps = new(); }
+
+            try
+            {
+                RHAllias = int.Parse(appConfig["RHAllias"]);
+            }
+            catch { }
+
 
             List<int> actualDeps = new();
             activeDepartments = DepartmentServices.GetSortedDepartments(context, excludedDeps);
@@ -57,7 +69,7 @@ namespace DailyReport.Pages.FireReport
                 fullFireReport.Department = department;
                 List<DutyNurse> _dutyNurses = dutyNurses.FindAll(n => n.department == department.Allias);
                 fullFireReport.Nurses = _dutyNurses;
-                Models.FireReport _report = reports.Find(r => r.DepNumber == department.Allias);
+                Models.Reports.FireReport _report = reports.Find(r => r.DepNumber == department.Allias);
                 fullFireReport.FireReport = _report;
                 fullFireReports.Add(fullFireReport);
             }
@@ -88,12 +100,10 @@ namespace DailyReport.Pages.FireReport
 
         private bool AddFireReportToList(List<FullFireReport> fullFireReports)
         {
-
-
             try
             {         
-                var additionalReports = appConfig.GetSection("AddedFirereports").Get<List<Models.FireReport>>();
-                foreach (Models.FireReport ar in additionalReports)
+                var additionalReports = appConfig.GetSection("AddedFirereports").Get<List<Models.Reports.FireReport>>();
+                foreach (Models.Reports.FireReport ar in additionalReports)
                 {
                     ar.Date = DateTime.Now;
                     fullFireReports.Find(ffr => ffr.Department.Allias == ar.DepNumber).FireReport = ar;

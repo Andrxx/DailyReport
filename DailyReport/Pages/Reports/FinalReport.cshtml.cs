@@ -10,6 +10,10 @@ using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualBasic;
 using DailyReport.Models.DTO;
+using System;
+using DailyReport.Models.Reports;
+using DailyReport.Models.PersonelFolder;
+using DailyReport.Services.Reports;
 
 namespace DailyReport.Pages.Reports
 {
@@ -545,4 +549,5 @@ namespace DailyReport.Pages.Reports
             //    }
         }
     }
+
 }

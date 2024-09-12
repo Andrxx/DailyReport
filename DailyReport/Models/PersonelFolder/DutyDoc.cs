@@ -1,4 +1,4 @@
-﻿namespace DailyReport.Models
+﻿namespace DailyReport.Models.PersonelFolder
 {
     public class DutyDoc
     {
@@ -6,10 +6,10 @@
         public string? dutyDoc { get; set; }
         public string? departments { get; set; }
         public DateTime dutyDate { get; set; } //= DateTime.Now.Date;//.AddDays(-1);
-        public  DutyType type { get; set; }
+        public DutyType type { get; set; }
     }
 
-    public enum DutyType 
+    public enum DutyType
     {
         Department,
         Reanimanion,

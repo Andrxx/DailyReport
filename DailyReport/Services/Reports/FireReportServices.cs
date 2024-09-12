@@ -1,6 +1,7 @@
 ﻿using DailyReport.Models;
+using DailyReport.Models.Reports;
 
-namespace DailyReport.Services
+namespace DailyReport.Services.Reports
 {
     public static class FireReportServices
     {
@@ -31,7 +32,7 @@ namespace DailyReport.Services
                 endTime = endTime.AddDays(-1);
             }
             FireReport fireReport = (from f in context.FireReports
-                                     where (f.DepNumber == depNumber) && ((f.Date > startTime) && (f.Date < endTime))
+                                     where f.DepNumber == depNumber && f.Date > startTime && f.Date < endTime
                                      select f).FirstOrDefault();
             return fireReport;
         }
@@ -41,7 +42,7 @@ namespace DailyReport.Services
         /// <param name="depNumber"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static List<FireReport> GetFireReports( ApplicationContext context)
+        public static List<FireReport> GetFireReports(ApplicationContext context)
         {
             DateTime actualDate = DateTime.Now;
             DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 8, 0, 0);
@@ -52,7 +53,7 @@ namespace DailyReport.Services
                 endTime = endTime.AddDays(-1);
             }
             List<FireReport> fireReport = (from f in context.FireReports
-                                     where ((f.Date > startTime) && (f.Date < endTime))
+                                           where f.Date > startTime && f.Date < endTime
                                            //orderby f.ShowOrder
                                            select f).ToList();
             return fireReport;
@@ -61,7 +62,7 @@ namespace DailyReport.Services
         public static void DeleteFireReport(int id, ApplicationContext context)
         {
             FireReport fireReport = (from f in context.FireReports
-                                     where (f.Id == id)
+                                     where f.Id == id
                                      select f).FirstOrDefault();
             if (fireReport != null) context.FireReports.Remove(fireReport);
             context.SaveChanges();
@@ -70,8 +71,8 @@ namespace DailyReport.Services
         public static void UpdateFireReport(FireReport fireRport, ApplicationContext context)
         {
             FireReport _fireRport = (from f in context.FireReports
-                                      where (f.Id == fireRport.Id)
-                                      select f).FirstOrDefault();
+                                     where f.Id == fireRport.Id
+                                     select f).FirstOrDefault();
             if (_fireRport != null)
             {
                 _fireRport.DepNumber = fireRport.DepNumber;
@@ -90,13 +91,13 @@ namespace DailyReport.Services
         /// Фильтрованый список заполняется по порядку отделений в выдаче всей сводки
         /// </summary>
         /// <returns></returns>
-        public static List<FireReport> GetFilteredReports(ApplicationContext context, List<int> actualDepsAllias) 
+        public static List<FireReport> GetFilteredReports(ApplicationContext context, List<int> actualDepsAllias)
         {
             List<FireReport> reports = GetFireReports(context);
             List<FireReport> filteredReports = new();
             FireReport? _report = new();
 
-            foreach(int i in actualDepsAllias)
+            foreach (int i in actualDepsAllias)
             {
                 _report = reports.Find(p => p.DepNumber == i);
                 if (_report is null) _report = new FireReport { DepNumber = i, Date = DateTime.Now };
@@ -150,6 +151,6 @@ namespace DailyReport.Services
             return filteredReports;
         }
 
-             
+
     }
 }

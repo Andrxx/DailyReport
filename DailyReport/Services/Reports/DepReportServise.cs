@@ -1,11 +1,12 @@
 ﻿using DailyReport.Models;
+using DailyReport.Models.Reports;
 using DailyReport.Pages;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.Composition;
 
-namespace DailyReport.Services
+namespace DailyReport.Services.Reports
 {
     public static class DepReportServise
     {
@@ -57,7 +58,7 @@ namespace DailyReport.Services
             DepReport.foreinChildrens = 1;
             DepReport.LNR_DNR = 1;
             DepReport.LNR_DNRChildrens = 1;
-            DepReport.otherUkrane =1;
+            DepReport.otherUkrane = 1;
             DepReport.otherUkraneChildren = 1;
             DepReport.incomeHospital = 1;
             DepReport.incomeHospitalChildrens = 1;
@@ -88,7 +89,7 @@ namespace DailyReport.Services
             DepReport.other = 1;
             DepReport.otherChildrens = 1;
             DepReport.care = 1;
-            DepReport.careDisodered = 1; 
+            DepReport.careDisodered = 1;
             return DepReport;
         }
 
@@ -101,11 +102,23 @@ namespace DailyReport.Services
         public static DepReport CreateRandomReport(int department, double dateOffset = 0, bool test = true)
         {
             DepReport report = new();
-            if(test) report = CreateTest();
+            if (test) report = CreateTest();
             report.depNumber = department;
             report.date = DateTime.Now.AddDays(dateOffset);
             return report;
         }
+
+        /// <summary>
+        /// Добавляем отчет в БД, без проверки корректности данных
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="report"></param>
+        public static void AddReport(ApplicationContext context, DepReport report)
+        {
+            context.DepReports.Update(report);
+            context.SaveChanges();
+        }
+
 
         /// <summary>
         /// Метод перезаписывет сводку данными другой сводки, коррекця с прошлых суток, не меняет дату, нозологии и Id
@@ -144,8 +157,8 @@ namespace DailyReport.Services
         public static DepReport GetRepByNumber(ApplicationContext context, int depNumber, DateTime StartTime, DateTime EndTime)
         {
             var report = (from rep in context.DepReports
-                      where (rep.depNumber == depNumber) && (rep.date > StartTime && rep.date < EndTime)
-                      select rep).FirstOrDefault();
+                          where rep.depNumber == depNumber && rep.date > StartTime && rep.date < EndTime
+                          select rep).FirstOrDefault();
 
             return report;
         }
@@ -161,7 +174,7 @@ namespace DailyReport.Services
         public static DepReport GetRepByNumberNoTracking(ApplicationContext context, int depNumber, DateTime StartTime, DateTime EndTime)
         {
             var report = (from rep in context.DepReports
-                          where (rep.depNumber == depNumber) && (rep.date > StartTime && rep.date < EndTime)
+                          where rep.depNumber == depNumber && rep.date > StartTime && rep.date < EndTime
                           select rep).AsNoTracking().FirstOrDefault();
 
             return report;

@@ -1,4 +1,4 @@
-﻿namespace DailyReport.Models
+﻿namespace DailyReport.Models.Reports
 {
     public class FinalReport
     {

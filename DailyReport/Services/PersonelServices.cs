@@ -1,4 +1,6 @@
 ﻿using DailyReport.Models;
+using DailyReport.Models.PersonelFolder;
+using DailyReport.Services.Reports;
 using Microsoft.Build.Evaluation;
 using System.Numerics;
 
@@ -10,6 +12,7 @@ namespace DailyReport.Services
         {
             List<string> PType = new();
             PType.Add("Врач");
+            PType.Add("Врач рентгенолог");
             PType.Add("Медсестра");
             PType.Add("Оператор ПК");
             PType.Add("Санитар");
