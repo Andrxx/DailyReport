@@ -15,19 +15,41 @@ namespace DailyReport.Pages.Reports
     public class DepReportModel : PageModel
     {
         ApplicationContext context;
+        private readonly IConfiguration appConfig;
         [BindProperty(SupportsGet = true)]
         public DepReport? report { get; set; }
         //public DepReport? _report { get; set; }
         public List<DepReport> Reports { get; private set; } = new();
-        public DateTime actualDate = DateTime.Now, reportDate;//.AddDays(-1);
+        public DateTime actualDate = DateTime.Now, reportDate;
         public List<string> nurses = new();
-        public DepReportModel(ApplicationContext db)
+        public DepReportModel(ApplicationContext db, IConfiguration Configuration)
         {
             context = db;
+            appConfig = Configuration;
         }
+
+        public string existedStatus, presentStatus;
+        public bool existed, present;
 
         public void OnGet(int depAllias, double dateOffset = 0)
         {
+            //проверка статуса показа строки состояло
+            try
+            {
+                existed = bool.Parse(appConfig["ExistedStatus"]);
+            }
+            catch { existed = true; }
+            if (!existed) { existedStatus = "disabled"; }
+
+            //проверка статуса показа строки состоит
+            try
+            {
+                present = bool.Parse(appConfig["PresentStatus"]);
+            }
+            catch { present = true; }
+            if (!present) { presentStatus = "disabled"; }
+
+
             actualDate = actualDate.AddDays(dateOffset);
             DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 8, 0, 0);
             DateTime endTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 59, 59).AddDays(1);
