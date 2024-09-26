@@ -70,10 +70,10 @@ namespace DailyReport.Pages.Reports
         public List<int> ORITcorrection = new();
         public List<int> diseaseSums = new();
         public List<int> oxygenSum = new();
+        string ReportTimeChange;
 
         public void OnGet(double dateOffset = 0, bool onlyView = false)
         {
-            //excludedDeps 
             var ed = appConfig["ExcludedDepartments:FinalReportSpotsExclusion"];
             try { 
                 if (ed != null) excludedSpots = ed.Split(' ').Select(x => int.Parse(x)).ToList();
@@ -122,11 +122,19 @@ namespace DailyReport.Pages.Reports
                 ORITAllias = int.Parse(appConfig["ORITAllias"]);
             }
             catch { }
-
+            try
+            {
+                ReportTimeChange = (appConfig["ReportTimeChange"]);
+            }
+            catch { ReportTimeChange = "08:00:00"; }
             _onlyView = onlyView;
             actualDate = actualDate.AddDays(dateOffset);
-            DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 8, 0, 0);
-            DateTime endTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 59, 59).AddDays(1);
+
+            //DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 8, 00, 00);
+            DateTime startTime = DateOnly.FromDateTime(actualDate).ToDateTime(TimeOnly.Parse(ReportTimeChange));
+
+            //DateTime endTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 59, 59).AddDays(1);
+            DateTime endTime = DateOnly.FromDateTime(actualDate).ToDateTime(TimeOnly.Parse(ReportTimeChange)).AddDays(1).AddSeconds(-1);
             if (actualDate.Hour < 8)
             {
                 startTime = startTime.AddDays(-1);
@@ -551,3 +559,4 @@ namespace DailyReport.Pages.Reports
     }
 
 }
+

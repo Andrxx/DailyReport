@@ -30,6 +30,7 @@ namespace DailyReport.Pages.Reports
 
         public string existedStatus, presentStatus;
         public bool existed, present;
+        string ReportTimeChange;
 
         public void OnGet(int depAllias, double dateOffset = 0)
         {
@@ -39,7 +40,7 @@ namespace DailyReport.Pages.Reports
                 existed = bool.Parse(appConfig["ExistedStatus"]);
             }
             catch { existed = true; }
-            if (!existed) { existedStatus = "disabled"; }
+            if (!existed) { existedStatus = "readonly"; }
 
             //проверка статуса показа строки состоит
             try
@@ -47,21 +48,30 @@ namespace DailyReport.Pages.Reports
                 present = bool.Parse(appConfig["PresentStatus"]);
             }
             catch { present = true; }
-            if (!present) { presentStatus = "disabled"; }
+            if (!present) { presentStatus = "readonly"; }
 
+            try
+            {
+                ReportTimeChange = (appConfig["ReportTimeChange"]);
+            }
+            catch { ReportTimeChange = "08:00:00"; }
 
             actualDate = actualDate.AddDays(dateOffset);
-            DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 8, 0, 0);
-            DateTime endTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 59, 59).AddDays(1);
+            //DateTime startTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 8, 0, 0);
+            //DateTime endTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 59, 59).AddDays(1);
+
+            DateTime startTime = DateOnly.FromDateTime(actualDate).ToDateTime(TimeOnly.Parse(ReportTimeChange));
+            DateTime endTime = DateOnly.FromDateTime(actualDate).ToDateTime(TimeOnly.Parse(ReportTimeChange)).AddDays(1).AddSeconds(-1);
+
             //коррекция даты для ночного времени
-            if(actualDate.Hour < 8)
+            if (actualDate.Hour < 8)
             {
                 startTime = startTime.AddDays(-1);
                 endTime = endTime.AddDays(-1);
                 if(dateOffset == 0) reportDate = actualDate.AddDays(-1);    //корректруем значение даты сводки только для текущей даты
                 else reportDate = actualDate;
             }
-            //задаем дату отображения на сводке, устнавливть только после коррекции стартовой даты 
+            //задаем дату отображения на сводке, устанавливть только после коррекции стартовой даты 
             else { reportDate = actualDate; }
 
 
