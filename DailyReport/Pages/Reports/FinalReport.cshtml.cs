@@ -135,7 +135,7 @@ namespace DailyReport.Pages.Reports
 
             //DateTime endTime = new DateTime(actualDate.Year, actualDate.Month, actualDate.Day, 7, 59, 59).AddDays(1);
             DateTime endTime = DateOnly.FromDateTime(actualDate).ToDateTime(TimeOnly.Parse(ReportTimeChange)).AddDays(1).AddSeconds(-1);
-            if (actualDate.Hour < 8)
+            if (actualDate.Hour < startTime.Hour)
             {
                 startTime = startTime.AddDays(-1);
                 endTime = endTime.AddDays(-1);

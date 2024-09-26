@@ -64,7 +64,7 @@ namespace DailyReport.Pages.Reports
             DateTime endTime = DateOnly.FromDateTime(actualDate).ToDateTime(TimeOnly.Parse(ReportTimeChange)).AddDays(1).AddSeconds(-1);
 
             //коррекция даты для ночного времени
-            if (actualDate.Hour < 8)
+            if (actualDate.Hour < startTime.Hour)
             {
                 startTime = startTime.AddDays(-1);
                 endTime = endTime.AddDays(-1);
