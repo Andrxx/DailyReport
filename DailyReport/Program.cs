@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
+//builder.Logging.ClearProviders();
+//builder.Logging.AddConsole();
 builder.Services.AddRazorPages();
 
 //builder.WebHost.ConfigureKestrel(serverOptions =>

@@ -338,8 +338,8 @@ namespace DailyReport.Pages.Reports
                     finalReport.care += _rep.care;
                     finalReport.careDisodered += _rep.careDisodered;
 
-                    finalReport.IFSO += _rep.IFSO;
-                    finalReport.IFSOChildren += _rep.IFSOChildren;
+                    //finalReport.IFSO += _rep.IFSO;
+                    //finalReport.IFSOChildren += _rep.IFSOChildren;
                     
                 }
             }

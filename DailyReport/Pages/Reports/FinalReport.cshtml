@@ -334,7 +334,7 @@
                     <td colspan="3" class="bg-transparent border-0 print-m-p-0"> </td>
                 </tr>
 
-                 <tr class="border-transparent print-m-p-0 ">
+               @*  <tr class="border-transparent print-m-p-0 ">
                     <td class="fw-bold">Пациенты финансовой олимпиады</td>
                     @{
                         foreach (DepReport dr in Model.sortedReports)
@@ -348,7 +348,7 @@
                     <td>@(@Model.finalReport.IFSO + @Model.finalReport.IFSOChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-
+                *@
 
                 <tr class="border-transparent print-m-p-0 pba-always">
                     <td class="fw-bold">Беременные</td>
