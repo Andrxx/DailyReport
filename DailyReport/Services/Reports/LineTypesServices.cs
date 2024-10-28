@@ -45,7 +45,11 @@ namespace DailyReport.Services.Reports
             }
         }
 
-
+        /// <summary>
+        /// Получаес список типов строк, сортированный по порядку
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static List<LineType> GetOrderedTypes(ApplicationContext context)
         {
             List<LineType> types = (from t in context.LineTypes

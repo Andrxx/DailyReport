@@ -180,6 +180,12 @@
                 </tr> *@
                     @*админ раздел*@
                     <tr>
+                        <td scope="col">Международная Олимпиада по финансовой безопасности</td>
+                        <td scope="col"><input required min="0" value="@Model.report.IFSO" type="number" name="IFSO" asp-for="report.IFSO" /></td>
+                        <td scope="col"><input required min="0" value="@Model.report.IFSOChildren" type="number" name="IFSOChildren" asp-for="report.IFSOChildren" /> </td>
+                    </tr>
+
+                    <tr>
                         <td scope="col">Беременные</td>
                         <td scope="col"><input required min="0" value="@Model.report.pregnant" type="number" name="pregnant" asp-for="report.pregnant"/></td>
                         <td scope="col"><input required min="0" value="@Model.report.pregnantChildrens" type="number" name="pregnantChildrens"/> </td>

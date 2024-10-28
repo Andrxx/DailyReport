@@ -18,10 +18,11 @@ namespace DailyReport.Pages.Reports
         private readonly IConfiguration appConfig;
         [BindProperty(SupportsGet = true)]
         public DepReport? report { get; set; }
-        //public DepReport? _report { get; set; }
-        public List<DepReport> Reports { get; private set; } = new();
         public DateTime actualDate = DateTime.Now, reportDate;
         public List<string> nurses = new();
+        public List<LineEntity> Lines = new();
+        public ReportLine reportLine;
+        public int? KDOallias, PayServAllias, DCallias, ORITAllias, ORITDirtyAllias;
         public DepReportModel(ApplicationContext db, IConfiguration Configuration)
         {
             context = db;
@@ -34,6 +35,17 @@ namespace DailyReport.Pages.Reports
 
         public void OnGet(int depAllias, double dateOffset = 0)
         {
+            try
+            {
+                KDOallias = int.Parse(appConfig["KDOallias"]);
+            }
+            catch { }
+            try
+            {
+                PayServAllias = int.Parse(appConfig["PayServiceAllias"]);
+            }
+            catch { }
+
             //проверка статуса показа строки состояло
             try
             {
@@ -87,9 +99,16 @@ namespace DailyReport.Pages.Reports
                 //тест для БД, изменить на создание нового для релиза
                 //report = DepReportServise.CreateTest();
                 report = new();
+                //report.Lines = new();
                 report.depNumber = depAllias;
                 //при работе с прошлыми сводкам корректируем дату сводки
                 if(dateOffset != 0) report.date = reportDate;
+
+                //Lines = LinesServices.GetOrderedLines(context);
+                //foreach(LineEntity line in Lines)
+                //{
+                //    report.Lines.Add(new ReportLine() { name = line.Name, lineType = line.EntityType, Adults = 0,  Children = 0});
+                //}
             }
 
             try
@@ -108,12 +127,19 @@ namespace DailyReport.Pages.Reports
         public RedirectToPageResult OnPostPrevReport(int depAllias)
         {
             //Reports = context.DepReports.AsNoTracking().ToList();
-
+            try
+            {
+                ReportTimeChange = (appConfig["ReportTimeChange"]);
+            }
+            catch { ReportTimeChange = "08:00:00"; }
             DateTime lastlDate = actualDate.AddDays(-1);
-            DateTime startTime = new DateTime(lastlDate.Year, lastlDate.Month, lastlDate.Day, 8, 0, 0);
-            DateTime endTime = new DateTime(lastlDate.Year, lastlDate.Month, lastlDate.Day, 7, 59, 59).AddDays(1);
+            //DateTime startTime = new DateTime(lastlDate.Year, lastlDate.Month, lastlDate.Day, 8, 0, 0);
+            //DateTime endTime = new DateTime(lastlDate.Year, lastlDate.Month, lastlDate.Day, 7, 59, 59).AddDays(1);
+            DateTime startTime = DateOnly.FromDateTime(lastlDate).ToDateTime(TimeOnly.Parse(ReportTimeChange));
+            DateTime endTime = DateOnly.FromDateTime(lastlDate).ToDateTime(TimeOnly.Parse(ReportTimeChange)).AddDays(1).AddSeconds(-1);
+
             //коррекция даты для ночного времени
-            if (lastlDate.Hour < 8)
+            if (lastlDate.Hour < startTime.Hour)
             {
                 startTime = startTime.AddDays(-1);
                 endTime = endTime.AddDays(-1);

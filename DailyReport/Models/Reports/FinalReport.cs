@@ -96,6 +96,9 @@
         public int sumChild { get; set; }
         public int sumAll { get; set; }
 
+        public int IFSO { get; set; }               //участники олимпиады по фин. безопасности
+        public int IFSOChildren { get; set; }       //поле временно введено в связи с событием
+
         /// <summary>
         /// Считаем больных по отделениям
         /// </summary>

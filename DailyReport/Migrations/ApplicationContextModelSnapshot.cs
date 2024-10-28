@@ -172,6 +172,12 @@ namespace DailyReport.Migrations
                     b.Property<int>("HIVCildrens")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("IFSO")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IFSOChildren")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("LNR_DNR")
                         .HasColumnType("INTEGER");
 
@@ -406,6 +412,12 @@ namespace DailyReport.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("HIVCildren")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IFSO")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IFSOChildren")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("LNR_DNR")
@@ -759,10 +771,10 @@ namespace DailyReport.Migrations
                     b.Property<int>("Children")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int?>("DepReportId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("lineOrder")
+                    b.Property<int>("DepartmentId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("lineType")
@@ -771,10 +783,9 @@ namespace DailyReport.Migrations
                     b.Property<string>("name")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("reportDate")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("id");
+
+                    b.HasIndex("DepReportId");
 
                     b.ToTable("ReportLines");
                 });
@@ -867,8 +878,17 @@ namespace DailyReport.Migrations
                         .HasForeignKey("DepReportId");
                 });
 
+            modelBuilder.Entity("DailyReport.Models.Reports.ReportLine", b =>
+                {
+                    b.HasOne("DailyReport.Models.Reports.DepReport", null)
+                        .WithMany("Lines")
+                        .HasForeignKey("DepReportId");
+                });
+
             modelBuilder.Entity("DailyReport.Models.Reports.DepReport", b =>
                 {
+                    b.Navigation("Lines");
+
                     b.Navigation("lines");
                 });
 #pragma warning restore 612, 618

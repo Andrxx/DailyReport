@@ -4,14 +4,11 @@ namespace DailyReport.Models.Reports
 {
     public class ReportLine
     {
-        //public ReportLine() { }
         public int id { get; set; }
         public int DepartmentId { get; set; } 
         public string? name { get; set; }
         public string? lineType { get; set; }
-        //public int TypeOrder
-        public DateTime reportDate { get; set; }
-        public int lineOrder { get; set; }
+        //public DateTime reportDate { get; set; }
         public int Adults { get; set; }
         public int Children { get; set; }
     }

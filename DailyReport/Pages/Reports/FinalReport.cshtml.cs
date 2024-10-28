@@ -101,7 +101,7 @@ namespace DailyReport.Pages.Reports
             {
                 DCallias = int.Parse(appConfig["DayCareAllias"]);
             }
-            catch { /*DCallias = 0;*/ }
+            catch { DCallias = 21; }
             try
             {
                 KDOallias = int.Parse(appConfig["KDOallias"]);
@@ -267,7 +267,7 @@ namespace DailyReport.Pages.Reports
             //—читаем сумму по отделени€м
             foreach (DepReport _rep in sortedReports)
             {
-                if (_rep.depNumber != 21) //выводим из подсчета дневной стационар
+                if (_rep.depNumber != DCallias) //выводим из подсчета дневной стационар
                 {
                     finalReport.existed += _rep.existed;
                     finalReport.existedChildren += _rep.existedChildren;
@@ -337,6 +337,10 @@ namespace DailyReport.Pages.Reports
                     finalReport.sepsisChildren += _rep.sepsisChildren;
                     finalReport.care += _rep.care;
                     finalReport.careDisodered += _rep.careDisodered;
+
+                    finalReport.IFSO += _rep.IFSO;
+                    finalReport.IFSOChildren += _rep.IFSOChildren;
+                    
                 }
             }
             

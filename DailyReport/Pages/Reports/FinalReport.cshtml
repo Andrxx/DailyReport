@@ -334,6 +334,22 @@
                     <td colspan="3" class="bg-transparent border-0 print-m-p-0"> </td>
                 </tr>
 
+                 <tr class="border-transparent print-m-p-0 ">
+                    <td class="fw-bold">Пациенты финансовой олимпиады</td>
+                    @{
+                        foreach (DepReport dr in Model.sortedReports)
+                        {
+                            <td>@if (dr.IFSO > 0)@dr.IFSO</td>
+                                        <td>@if (dr.IFSOChildren > 0) @dr.IFSOChildren </td>
+                        }
+                    }
+                    <td>@Model.finalReport.IFSO</td>
+                    <td>@Model.finalReport.IFSOChildren</td>
+                    <td>@(@Model.finalReport.IFSO + @Model.finalReport.IFSOChildren)</td>
+                    <td colspan="3" class="bg-transparent border-0"></td>
+                </tr>
+
+
                 <tr class="border-transparent print-m-p-0 pba-always">
                     <td class="fw-bold">Беременные</td>
                      @{

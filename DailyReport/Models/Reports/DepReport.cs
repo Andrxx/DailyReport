@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DailyReport.Models.Reports
 {
@@ -79,6 +80,10 @@ namespace DailyReport.Models.Reports
         public int sepsisChildren { get; set; }
         public int measles { get; set; }
         public int measlesChildren { get; set; }
+        //[NotMapped]
+        public int IFSO { get; set; }               //участники олимпиады по фин. безопасности
+        //[NotMapped]
+        public int IFSOChildren { get; set; }       //поле временно введено в связи с событием
 
         //уход
         public int care { get; set; }
