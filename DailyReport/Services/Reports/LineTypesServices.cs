@@ -20,29 +20,29 @@ namespace DailyReport.Services.Reports
 
         public static void AddType(LineType lineType, ApplicationContext context)
         {
-            context.LineTypes.Add(lineType);
-            context.SaveChanges();
+            //context.LineTypes.Add(lineType);
+            //context.SaveChanges();
         }
 
         public static void DeleteType(int id, ApplicationContext context)
         {
-            LineType? type = (from t in context.LineTypes
-                              where t.Id == id
-                                select t).FirstOrDefault();
-            if (type != null) context.LineTypes.Remove(type);
-            context.SaveChanges();
+            //LineType? type = (from t in context.LineTypes
+            //                  where t.Id == id
+            //                    select t).FirstOrDefault();
+            //if (type != null) context.LineTypes.Remove(type);
+            //context.SaveChanges();
         }
 
         public static void UpdateType(LineType lineType, ApplicationContext context)
         {
-            LineType? type = (from l in context.LineTypes
-                               where l.Id == lineType.Id
-                                 select l).AsNoTracking().FirstOrDefault();
-            if (type != null)
-            {
-                context.LineTypes.Update(lineType);
-                context.SaveChanges();
-            }
+            //LineType? type = (from l in context.LineTypes
+            //                   where l.Id == lineType.Id
+            //                     select l).AsNoTracking().FirstOrDefault();
+            //if (type != null)
+            //{
+            //    context.LineTypes.Update(lineType);
+            //    context.SaveChanges();
+            //}
         }
 
         /// <summary>
@@ -50,13 +50,13 @@ namespace DailyReport.Services.Reports
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static List<LineType> GetOrderedTypes(ApplicationContext context)
-        {
-            List<LineType> types = (from t in context.LineTypes
-                                      orderby t.Order
-                                      select t).ToList();
-            return types;
-        }
+        //public static List<LineType> GetOrderedTypes(ApplicationContext context)
+        //{
+        //    List<LineType> types = (from t in context.LineTypes
+        //                              orderby t.Order
+        //                              select t).ToList();
+        //    return types;
+        //}
 
     }
 }

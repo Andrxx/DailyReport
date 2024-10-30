@@ -18,10 +18,7 @@ namespace DailyReport.Pages.Admin
 
         public void OnGet()
         {
-            _logger.LogInformation("GET Pages.PrivacyModel called.");
-
-            _logger.LogInformation("About page visited at {DT}",
-            DateTime.UtcNow.ToLongTimeString());
+           
         }
 
         public void OnPostMigrate()

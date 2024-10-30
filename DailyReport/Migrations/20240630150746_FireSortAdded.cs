@@ -15,6 +15,30 @@ namespace DailyReport.Migrations
                 table: "FireReports",
                 type: "INTEGER",
                 nullable: true);
+            migrationBuilder.DropTable(
+                name: "Lines");
+
+            migrationBuilder.DropTable(
+                name: "LineTypes");
+
+            migrationBuilder.DropTable(
+                name: "ReportLines");
+
+            //migrationBuilder.DropColumn(
+            //    name: "IFSO",
+            //    table: "FinalReports");
+
+            //migrationBuilder.DropColumn(
+            //    name: "IFSOChildren",
+            //    table: "FinalReports");
+
+            //migrationBuilder.DropColumn(
+            //    name: "IFSO",
+            //    table: "DepReports");
+
+            //migrationBuilder.DropColumn(
+            //    name: "IFSOChildren",
+            //    table: "DepReports");
         }
 
         /// <inheritdoc />

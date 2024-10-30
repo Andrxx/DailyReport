@@ -21,8 +21,8 @@ namespace DailyReport.Pages.Admin
 
         public void OnGet()
         {
-            types = LineTypesServices.GetOrderedTypes(context); //GetHardcodedTypes(); 
-            Lines = LinesServices.GetOrderedLines(context);
+            //types = LineTypesServices.GetOrderedTypes(context); //GetHardcodedTypes(); 
+            //Lines = LinesServices.GetOrderedLines(context);
         }
 
         public IActionResult OnPostSaveType(LineType Type)

@@ -8,17 +8,17 @@ namespace DailyReport.Services.Reports
     {
         public static void AddLine(LineEntity lineEntity, ApplicationContext context)
         {
-            context.Lines.Add(lineEntity);
-            context.SaveChanges();
+            //context.Lines.Add(lineEntity);
+            //context.SaveChanges();
         }
 
         public static void DeleteLine(int id, ApplicationContext context)
         {
-            LineEntity? line = (from l in context.Lines
-                                where l.Id == id
-                                select l).FirstOrDefault();
-            if (line != null) context.Lines.Remove(line);
-            context.SaveChanges();
+            //LineEntity? line = (from l in context.Lines
+            //                    where l.Id == id
+            //                    select l).FirstOrDefault();
+            //if (line != null) context.Lines.Remove(line);
+            //context.SaveChanges();
         }
 
         /// <summary>
@@ -28,14 +28,14 @@ namespace DailyReport.Services.Reports
         /// <param name="context"></param>
         public static void UpdateLine(LineEntity lineEntity, ApplicationContext context)
         {
-            LineEntity? _line = (from l in context.Lines
-                                 where l.Id == lineEntity.Id
-                                 select l).AsNoTracking().FirstOrDefault();
-            if (_line != null)
-            {
-                context.Lines.Update(lineEntity);
-                context.SaveChanges();
-            }
+            //LineEntity? _line = (from l in context.Lines
+            //                     where l.Id == lineEntity.Id
+            //                     select l).AsNoTracking().FirstOrDefault();
+            //if (_line != null)
+            //{
+            //    context.Lines.Update(lineEntity);
+            //    context.SaveChanges();
+            //}
         }
 
         /// <summary>
@@ -43,27 +43,27 @@ namespace DailyReport.Services.Reports
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static List<LineEntity> GetLines(ApplicationContext context)
-        {
+        //public static List<LineEntity> GetLines(ApplicationContext context)
+        //{
 
-            List<LineEntity> lines = (from l in context.Lines
-                                      orderby l.EntityType, l.Order                             
-                                      select l).ToList();
-            return lines;
-        }
+        //    //List<LineEntity> lines = (from l in context.Lines
+        //    //                          orderby l.EntityType, l.Order                             
+        //    //                          select l).ToList();
+        //    //return lines;
+        //}
 
         /// <summary>
         /// Возвращает список строк сортированый по типам, потом по порядку строк, не работает при отсутствии типов
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static List<LineEntity> GetOrderedLines(ApplicationContext context)
-        {
-            List<LineEntity> lines = (from l in context.Lines
-                                      join t in context.LineTypes on l.EntityType equals t.Name
-                                      orderby t.Order, l.Order
-                                      select l).ToList();
-            return lines;
-        }
+        //public static List<LineEntity> GetOrderedLines(ApplicationContext context)
+        //{
+        //    //List<LineEntity> lines = (from l in context.Lines
+        //    //                          join t in context.LineTypes on l.EntityType equals t.Name
+        //    //                          orderby t.Order, l.Order
+        //    //                          select l).ToList();
+        //    //return lines;
+        //}
     }
 }

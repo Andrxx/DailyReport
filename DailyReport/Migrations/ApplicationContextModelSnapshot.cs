@@ -17,150 +17,7 @@ namespace DailyReport.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
 
-            modelBuilder.Entity("DailyReport.Models.Department", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AdultSpotsQuantity")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Allias")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ChildrenSpotsQuantity")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("Number")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ShowOrder")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("WardQuantity")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Departments");
-                });
-
-            modelBuilder.Entity("DailyReport.Models.OutcomingPatient", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("AgeMonth")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("AgeYears")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Diagnos")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Shipped")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("SubmitedFrom")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("SubmitedTo")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OutcomingPatients");
-                });
-
-            modelBuilder.Entity("DailyReport.Models.PersonelFolder.DutyDoc", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("departments")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("dutyDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("dutyDoc")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("type")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DutyDocs");
-                });
-
-            modelBuilder.Entity("DailyReport.Models.PersonelFolder.DutyNurse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("department")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("dutyDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("name")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DutyNurses");
-                });
-
-            modelBuilder.Entity("DailyReport.Models.PersonelFolder.Personel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Department")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PersType")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Personels");
-                });
-
-            modelBuilder.Entity("DailyReport.Models.Reports.DepReport", b =>
+            modelBuilder.Entity("DailyReport.Models.DepReport", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -170,12 +27,6 @@ namespace DailyReport.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("HIVCildrens")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("IFSO")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("IFSOChildren")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("LNR_DNR")
@@ -399,10 +250,91 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DepReports");
+                    b.ToTable("DepReports", (string)null);
                 });
 
-            modelBuilder.Entity("DailyReport.Models.Reports.FinalReport", b =>
+            modelBuilder.Entity("DailyReport.Models.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AdultSpotsQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Allias")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ChildrenSpotsQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Number")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ShowOrder")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("WardQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments", (string)null);
+                });
+
+            modelBuilder.Entity("DailyReport.Models.DutyDoc", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("departments")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("dutyDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("dutyDoc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("type")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DutyDocs", (string)null);
+                });
+
+            modelBuilder.Entity("DailyReport.Models.DutyNurse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("department")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("dutyDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DutyNurses", (string)null);
+                });
+
+            modelBuilder.Entity("DailyReport.Models.FinalReport", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -412,12 +344,6 @@ namespace DailyReport.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("HIVCildren")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("IFSO")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("IFSOChildren")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("LNR_DNR")
@@ -680,10 +606,10 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FinalReports");
+                    b.ToTable("FinalReports", (string)null);
                 });
 
-            modelBuilder.Entity("DailyReport.Models.Reports.FireReport", b =>
+            modelBuilder.Entity("DailyReport.Models.FireReport", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -712,82 +638,69 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FireReports");
+                    b.ToTable("FireReports", (string)null);
                 });
 
-            modelBuilder.Entity("DailyReport.Models.Reports.LineEntity", b =>
+            modelBuilder.Entity("DailyReport.Models.OutcomingPatient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("DepReportId")
+                    b.Property<string>("AgeMonth")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AgeYears")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Diagnos")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Shipped")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SubmitedFrom")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SubmitedTo")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OutcomingPatients", (string)null);
+                });
+
+            modelBuilder.Entity("DailyReport.Models.Personel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("EntityType")
-                        .IsRequired()
+                    b.Property<string>("Department")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Order")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("PersType")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepReportId");
-
-                    b.ToTable("Lines");
-                });
-
-            modelBuilder.Entity("DailyReport.Models.Reports.LineType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LineTypes");
-                });
-
-            modelBuilder.Entity("DailyReport.Models.Reports.ReportLine", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Adults")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Children")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("DepReportId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("lineType")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("name")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("DepReportId");
-
-                    b.ToTable("ReportLines");
+                    b.ToTable("Personels", (string)null);
                 });
 
             modelBuilder.Entity("DailyReport.Models.WardsModels.Patient", b =>
@@ -841,7 +754,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Patients");
+                    b.ToTable("Patients", (string)null);
                 });
 
             modelBuilder.Entity("DailyReport.Models.WardsModels.Ward", b =>
@@ -868,28 +781,7 @@ namespace DailyReport.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Wards");
-                });
-
-            modelBuilder.Entity("DailyReport.Models.Reports.LineEntity", b =>
-                {
-                    b.HasOne("DailyReport.Models.Reports.DepReport", null)
-                        .WithMany("lines")
-                        .HasForeignKey("DepReportId");
-                });
-
-            modelBuilder.Entity("DailyReport.Models.Reports.ReportLine", b =>
-                {
-                    b.HasOne("DailyReport.Models.Reports.DepReport", null)
-                        .WithMany("Lines")
-                        .HasForeignKey("DepReportId");
-                });
-
-            modelBuilder.Entity("DailyReport.Models.Reports.DepReport", b =>
-                {
-                    b.Navigation("Lines");
-
-                    b.Navigation("lines");
+                    b.ToTable("Wards", (string)null);
                 });
 #pragma warning restore 612, 618
         }
