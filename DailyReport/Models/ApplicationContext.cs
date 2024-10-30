@@ -24,7 +24,7 @@ namespace DailyReport.Models
         public DbSet<FireReport> FireReports { get; set; } = null!;
         public DbSet<Ward> Wards { get; set; } = null!;
         public DbSet<Patient> Patients  { get; set; } = null!;
-        public DbSet<LineEntity> Lines { get; set; } = null!;
+        //public DbSet<LineEntity> Lines { get; set; } = null!;
         //public DbSet<LineType> LineTypes { get; set; } = null!;
         //public DbSet<ReportLine> ReportLines { get; set; } = null!;
 
