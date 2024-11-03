@@ -321,6 +321,20 @@
                     <td>@(@Model.finalReport.oMask + @Model.finalReport.oMaskChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
+                <tr class="border-transparent print-m-p-0" @Model.OxygenVisibility>
+                    <td class="fw-bold">@Model.OptionOxygenName</td>
+                    @{
+                        foreach (DepReport dr in Model.sortedReports)
+                        {
+                            <td>@if (dr.optionalOxygen > 0)@dr.optionalOxygen</td>
+                            <td>@if (dr.optionalOxygenChildren > 0) @dr.optionalOxygenChildren </td>
+                        }
+                    }
+                    <td>@Model.finalReport.optionalOxygen</td>
+                    <td>@Model.finalReport.optionalOxygenChildren</td>
+                    <td>@(@Model.finalReport.optionalOxygen + @Model.finalReport.optionalOxygenChildren)</td>
+                    <td colspan="3" class="bg-transparent border-0"></td>
+                </tr>
 
                 <tr class="table-warning border-transparent print-m-p-0">
                     <td class="fw-bold  print-m-p-0">Количество пациентов на кислороде</td>
@@ -334,21 +348,20 @@
                     <td colspan="3" class="bg-transparent border-0 print-m-p-0"> </td>
                 </tr>
 
-               @*  <tr class="border-transparent print-m-p-0 ">
-                    <td class="fw-bold">Пациенты финансовой олимпиады</td>
+                <tr class="border-transparent print-m-p-0" @Model.SocialVisibility>
+                    <td class="fw-bold">@Model.OptionSocialName</td>
                     @{
                         foreach (DepReport dr in Model.sortedReports)
                         {
-                            <td>@if (dr.IFSO > 0)@dr.IFSO</td>
-                                        <td>@if (dr.IFSOChildren > 0) @dr.IFSOChildren </td>
+                            <td>@if (dr.optionalSocial > 0)@dr.optionalSocial</td>
+                            <td>@if (dr.optionalSocialChildren > 0) @dr.optionalSocialChildren </td>
                         }
                     }
-                    <td>@Model.finalReport.IFSO</td>
-                    <td>@Model.finalReport.IFSOChildren</td>
-                    <td>@(@Model.finalReport.IFSO + @Model.finalReport.IFSOChildren)</td>
+                    <td>@Model.finalReport.optionalSocial</td>
+                    <td>@Model.finalReport.optionalSocialChildren</td>
+                    <td>@(@Model.finalReport.optionalSocial + @Model.finalReport.optionalSocialChildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
-                *@
 
                 <tr class="border-transparent print-m-p-0 pba-always">
                     <td class="fw-bold">Беременные</td>
@@ -477,7 +490,7 @@
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
                 
-                @*НОЗООЛОГИИ pba-always*@
+                @*НОЗООЛОГИИ*@
 
                 <tr class="border-transparent print-m-p-0">
                     <td class="fw-bold  print-m-p-0"><b>Нозологии</b></td>
@@ -640,6 +653,21 @@
                     <td>@(@Model.finalReport.HIV + @Model.finalReport.HIVCildren)</td>
                     <td colspan="3" class="bg-transparent border-0"></td>
                 </tr>
+                <tr class="border-transparent print-m-p-0" @Model.NozologyVisibility>
+                    <td class="fw-bold">@Model.OptionNozologyName</td>
+                    @{
+                        foreach (DepReport dr in Model.sortedReports)
+                        {
+                            <td>@if (dr.optionalNozology > 0)@dr.optionalNozology</td>
+                            <td>@if (dr.optionalNozologyChildren > 0) @dr.optionalNozologyChildren </td>
+                        }
+                    }
+                    <td>@Model.finalReport.optionalNozology</td>
+                    <td>@Model.finalReport.optionalNozologyChildren</td>
+                    <td>@(@Model.finalReport.optionalNozology + @Model.finalReport.optionalNozologyChildren)</td>
+                    <td colspan="3" class="bg-transparent border-0"></td>
+                </tr>
+
                 <tr class="border-transparent print-m-p-0">
                     <td class="fw-bold">Прочее</td>
                     @{
@@ -662,7 +690,6 @@
                             <td>@sum</td>
                         }
                     }
-
                     <td>@Model.deseaseSumFinal</td>
                     <td>@Model.deseaseSumFinalChildren</td>
                     <td>@(@Model.deseaseSumFinal + @Model.deseaseSumFinalChildren)</td>
@@ -689,6 +716,17 @@
                         }
                       }
                     <td colspan="3" class="text-center print-m-p-0">@Model.finalReport.careDisodered</td>
+                    <td colspan="3" class="bg-transparent border-0 print-m-p-0"></td>
+                </tr>
+                <tr class="border-transparent print-m-p-0" @Model.CareVisibility>
+                    <td class="fw-bold">@Model.OptionCareName</td>
+                    @{
+                        foreach (DepReport dr in Model.sortedReports)
+                        {
+                            <td colspan="2" class="text-left">@if (dr.optionalCare > 0)@dr.optionalCare</td>
+                        }
+                    }
+                    <td colspan="3" class="text-center print-m-p-0">@Model.finalReport.optionalCare</td>
                     <td colspan="3" class="bg-transparent border-0 print-m-p-0"></td>
                 </tr>
                 <tr class="table-secondary border-transparent print-m-p-0 ">

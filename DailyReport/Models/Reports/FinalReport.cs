@@ -1,4 +1,6 @@
-﻿namespace DailyReport.Models.Reports
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DailyReport.Models.Reports
 {
     public class FinalReport
     {
@@ -85,6 +87,16 @@
         public int presentWithCare { get; set; }
         public int presentWithCareChildren { get; set; }
 
+        //дополнительные поля сводки
+        public int optionalSocial { get; set; }
+        public int optionalSocialChildren { get; set; }
+        public int optionalNozology { get; set; }
+        public int optionalNozologyChildren { get; set; }
+        public int optionalOxygen { get; set; }
+        public int optionalOxygenChildren { get; set; }
+        public int optionalCare { get; set; }
+        public int optionalCarelChildren { get; set; }
+
         //не госпитализированые пациенты
         public int reject { get; set; }
         public int rejectChildren { get; set; }
@@ -96,8 +108,8 @@
         public int sumChild { get; set; }
         public int sumAll { get; set; }
 
-        public int IFSO { get; set; }               //участники олимпиады по фин. безопасности
-        public int IFSOChildren { get; set; }       //поле временно введено в связи с событием
+        //public int IFSO { get; set; }               //участники олимпиады по фин. безопасности
+        //public int IFSOChildren { get; set; }       //поле временно введено в связи с событием
 
         /// <summary>
         /// Считаем больных по отделениям
@@ -105,7 +117,7 @@
         /// <returns></returns>
         public int CountDiseases()
         {
-            int _summary = U071 + U072 + ORVI + grippe + pneumonia + OKI + meningit + hepatit + HIV + other + sepsis + measles;
+            int _summary = U071 + U072 + ORVI + grippe + pneumonia + OKI + meningit + hepatit + HIV + other + sepsis + measles + optionalNozology;
             return _summary;
         }
         /// <summary>
@@ -115,7 +127,7 @@
         public int CountDiseasesChildren()
         {
             int _summary = U071Children + U072Children + ORVIChildren + grippeChildren + pneumoniaChildren + OKIChildren + meningitChildren +
-                hepatitChildren + HIVCildren + otherChildren + sepsisChildren + measlesChildren;
+                hepatitChildren + HIVCildren + otherChildren + sepsisChildren + measlesChildren + optionalNozologyChildren;
             return _summary;
         }
 

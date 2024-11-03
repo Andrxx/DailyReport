@@ -80,10 +80,6 @@ namespace DailyReport.Models.Reports
         public int sepsisChildren { get; set; }
         public int measles { get; set; }
         public int measlesChildren { get; set; }
-        //[NotMapped]
-        //public int IFSO { get; set; }               //участники олимпиады по фин. безопасности
-        //[NotMapped]
-        //public int IFSOChildren { get; set; }       //поле временно введено в связи с событием
 
         //уход
         public int care { get; set; }
@@ -91,8 +87,19 @@ namespace DailyReport.Models.Reports
         public int presentWithCare { get; set; }
         public int presentWithCareChildren { get; set; }
 
-        public List<LineEntity>? lines { get; set; }
+        //public List<LineEntity>? lines { get; set; }
         public string? dutyNurse { get; set; }
+
+        //строки с дополнительными данными
+        public int optionalSocial { get; set; }
+        public int optionalSocialChildren { get; set; }
+        public int optionalNozology { get; set; }
+        public int optionalNozologyChildren { get; set; }
+        public int optionalOxygen { get; set; }
+        public int optionalOxygenChildren { get; set; }
+        public int optionalCare { get; set; }
+        public int optionalCarelChildren { get; set; }
+
 
         /// <summary>
         /// подсчет количества больных на кислороде (считаем и детей и взрослых)
@@ -100,8 +107,8 @@ namespace DailyReport.Models.Reports
         /// <returns></returns>
         public int CountO2()
         {
-            int _summary = oIVL + oMask + oNIVL + oNIVLMask + oNIVLVPO
-                + oIVLChildrens + oMaskChildren + oNIVLChildrens + oNIVLMaskChildrens + oNIVLVPOChildrens;
+            int _summary = oIVL + oMask + oNIVL + oNIVLMask + oNIVLVPO + oIVLChildrens + oMaskChildren + oNIVLChildrens
+                + oNIVLMaskChildrens + oNIVLVPOChildrens + optionalOxygen + optionalOxygenChildren;
             return _summary;
         }
         /// <summary>
@@ -111,7 +118,7 @@ namespace DailyReport.Models.Reports
         public int CountDiseases()
         {
             int _summary = U071 + U072 + ORVI + pneumonia + OKI + grippe + meningit + hepatit
-                + HIV + other + sepsis + measles;
+                + HIV + other + sepsis + measles + optionalNozology;
             return _summary;
         }
         /// <summary>
@@ -121,7 +128,7 @@ namespace DailyReport.Models.Reports
         public int CountDiseasesChildren()
         {
             int _summary = U071Childrens + U072Childrens + ORVIChildrens + grippeChildrens + pneumoniaChildrens + OKIChildrens + meningitChildrens +
-                hepatitChildrens + HIVCildrens + otherChildrens + sepsisChildren + measlesChildren;
+                hepatitChildrens + HIVCildrens + otherChildrens + sepsisChildren + measlesChildren + optionalNozologyChildren;
             return _summary;
         }
         /// <summary>

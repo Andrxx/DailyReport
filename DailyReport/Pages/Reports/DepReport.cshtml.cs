@@ -23,6 +23,8 @@ namespace DailyReport.Pages.Reports
         public List<LineEntity> Lines = new();
         public ReportLine reportLine;
         public int? KDOallias, PayServAllias, DCallias, ORITAllias, ORITDirtyAllias;
+        public string OptionNozologyName, OptionOxygenName, OptionCareName, OptionSocialName;
+        public string NozologyVisibility, SocialVisibility, OxygenVisibility, CareVisibility;
         public DepReportModel(ApplicationContext db, IConfiguration Configuration)
         {
             context = db;
@@ -45,6 +47,55 @@ namespace DailyReport.Pages.Reports
                 PayServAllias = int.Parse(appConfig["PayServiceAllias"]);
             }
             catch { }
+            try
+            {
+                DCallias = int.Parse(appConfig["DayCareAllias"]);
+            }
+            catch { DCallias = 21; }
+            //проверка статуса настраиваемых полей сводки
+            try
+            {
+                OptionOxygenName = appConfig["Oxygen:Name"];
+                if (!bool.Parse(appConfig["Oxygen:Visible"])) OxygenVisibility = "hidden";
+            }
+            catch
+            {
+                OptionOxygenName = "";
+                OxygenVisibility = "";
+            }
+
+            try
+            {
+                OptionNozologyName = appConfig["Nozology:Name"];
+                if (!bool.Parse(appConfig["Oxygen:Visible"])) NozologyVisibility = "hidden";
+            }
+            catch
+            {
+                OptionNozologyName = "";
+                NozologyVisibility = "";
+            }
+
+            try
+            {
+                OptionSocialName = appConfig["Social:Name"];
+                if (!bool.Parse(appConfig["Oxygen:Visible"])) SocialVisibility = "hidden";
+            }
+            catch
+            {
+                OptionSocialName = "";
+                SocialVisibility = "";
+            }
+
+            try
+            {
+                OptionCareName = appConfig["Care:Name"];
+                if (!bool.Parse(appConfig["Oxygen:Visible"])) CareVisibility = "hidden";
+            }
+            catch
+            {
+                OptionCareName = "";
+                CareVisibility = "";
+            }
 
             //проверка статуса показа строки состояло
             try
@@ -103,12 +154,6 @@ namespace DailyReport.Pages.Reports
                 report.depNumber = depAllias;
                 //при работе с прошлыми сводкам корректируем дату сводки
                 if(dateOffset != 0) report.date = reportDate;
-
-                //Lines = LinesServices.GetOrderedLines(context);
-                //foreach(LineEntity line in Lines)
-                //{
-                //    report.Lines.Add(new ReportLine() { name = line.Name, lineType = line.EntityType, Adults = 0,  Children = 0});
-                //}
             }
 
             try
@@ -137,7 +182,6 @@ namespace DailyReport.Pages.Reports
             //DateTime endTime = new DateTime(lastlDate.Year, lastlDate.Month, lastlDate.Day, 7, 59, 59).AddDays(1);
             DateTime startTime = DateOnly.FromDateTime(lastlDate).ToDateTime(TimeOnly.Parse(ReportTimeChange));
             DateTime endTime = DateOnly.FromDateTime(lastlDate).ToDateTime(TimeOnly.Parse(ReportTimeChange)).AddDays(1).AddSeconds(-1);
-
             //коррекция даты для ночного времени
             if (lastlDate.Hour < startTime.Hour)
             {
@@ -177,7 +221,7 @@ namespace DailyReport.Pages.Reports
                     context.SaveChanges();
                     return RedirectToPage("DepReport", new { depAllias = depAllias });
                 }
-            }  
+            }
         }
 
         public IActionResult OnPostReport(DepReport _report)

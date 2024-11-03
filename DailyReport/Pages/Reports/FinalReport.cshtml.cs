@@ -71,7 +71,8 @@ namespace DailyReport.Pages.Reports
         public List<int> diseaseSums = new();
         public List<int> oxygenSum = new();
         string ReportTimeChange;
-
+        public string OptionNozologyName, OptionOxygenName, OptionCareName, OptionSocialName;
+        public string NozologyVisibility, SocialVisibility, OxygenVisibility, CareVisibility;
         public void OnGet(double dateOffset = 0, bool onlyView = false)
         {
             var ed = appConfig["ExcludedDepartments:FinalReportSpotsExclusion"];
@@ -122,6 +123,51 @@ namespace DailyReport.Pages.Reports
                 ORITAllias = int.Parse(appConfig["ORITAllias"]);
             }
             catch { }
+            //проверка статуса настраиваемых полей сводки
+            try
+            {
+                OptionOxygenName = appConfig["Oxygen:Name"];
+                if (!bool.Parse(appConfig["Oxygen:Visible"])) OxygenVisibility = "hidden";
+            }
+            catch
+            {
+                OptionOxygenName = "";
+                OxygenVisibility = "";
+            }
+
+            try
+            {
+                OptionNozologyName = appConfig["Nozology:Name"];
+                if (!bool.Parse(appConfig["Oxygen:Visible"])) NozologyVisibility = "hidden";
+            }
+            catch
+            {
+                OptionNozologyName = "";
+                NozologyVisibility = "";
+            }
+
+            try
+            {
+                OptionSocialName = appConfig["Social:Name"];
+                if (!bool.Parse(appConfig["Oxygen:Visible"])) SocialVisibility = "hidden";
+            }
+            catch
+            {
+                OptionSocialName = "";
+                SocialVisibility = "";
+            }
+
+            try
+            {
+                OptionCareName = appConfig["Care:Name"];
+                if (!bool.Parse(appConfig["Oxygen:Visible"])) CareVisibility = "hidden";
+            }
+            catch
+            {
+                OptionCareName = "";
+                CareVisibility = "";
+            }
+
             try
             {
                 ReportTimeChange = (appConfig["ReportTimeChange"]);
@@ -295,6 +341,10 @@ namespace DailyReport.Pages.Reports
                     finalReport.oNIVLMaskChildren += _rep.oNIVLMaskChildrens;
                     finalReport.oMask += _rep.oMask;
                     finalReport.oMaskChildren += _rep.oMaskChildren;
+                    finalReport.optionalOxygen += _rep.optionalOxygen;
+                    finalReport.optionalOxygenChildren += _rep.optionalOxygenChildren;
+                    finalReport.optionalSocial += _rep.optionalSocial;
+                    finalReport.optionalSocialChildren += _rep.optionalSocialChildren;
                     finalReport.pregnant += _rep.pregnant;
                     finalReport.pregnantChildren += _rep.pregnantChildrens;
                     finalReport.restZone += _rep.restZone;
@@ -335,11 +385,11 @@ namespace DailyReport.Pages.Reports
                     finalReport.otherChildren += _rep.otherChildrens;
                     finalReport.sepsis += _rep.sepsis;
                     finalReport.sepsisChildren += _rep.sepsisChildren;
+                    finalReport.optionalNozology += _rep.optionalNozology;
+                    finalReport.optionalNozologyChildren += _rep.optionalNozologyChildren;
                     finalReport.care += _rep.care;
                     finalReport.careDisodered += _rep.careDisodered;
-
-                    //finalReport.IFSO += _rep.IFSO;
-                    //finalReport.IFSOChildren += _rep.IFSOChildren;
+                    finalReport.optionalCare += _rep.optionalCare;
                     
                 }
             }
