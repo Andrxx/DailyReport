@@ -67,7 +67,7 @@ namespace DailyReport.Pages.Reports
             try
             {
                 OptionNozologyName = appConfig["Nozology:Name"];
-                if (!bool.Parse(appConfig["Oxygen:Visible"])) NozologyVisibility = "hidden";
+                if (!bool.Parse(appConfig["Nozology:Visible"])) NozologyVisibility = "hidden";
             }
             catch
             {
@@ -78,7 +78,7 @@ namespace DailyReport.Pages.Reports
             try
             {
                 OptionSocialName = appConfig["Social:Name"];
-                if (!bool.Parse(appConfig["Oxygen:Visible"])) SocialVisibility = "hidden";
+                if (!bool.Parse(appConfig["Social:Visible"])) SocialVisibility = "hidden";
             }
             catch
             {
@@ -89,7 +89,7 @@ namespace DailyReport.Pages.Reports
             try
             {
                 OptionCareName = appConfig["Care:Name"];
-                if (!bool.Parse(appConfig["Oxygen:Visible"])) CareVisibility = "hidden";
+                if (!bool.Parse(appConfig["Care:Visible"])) CareVisibility = "hidden";
             }
             catch
             {

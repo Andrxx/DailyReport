@@ -132,40 +132,40 @@ namespace DailyReport.Pages.Reports
             catch
             {
                 OptionOxygenName = "";
-                OxygenVisibility = "";
+                OxygenVisibility = "hidden";
             }
 
             try
             {
                 OptionNozologyName = appConfig["Nozology:Name"];
-                if (!bool.Parse(appConfig["Oxygen:Visible"])) NozologyVisibility = "hidden";
+                if (!bool.Parse(appConfig["Nozology:Visible"])) NozologyVisibility = "hidden";
             }
             catch
             {
                 OptionNozologyName = "";
-                NozologyVisibility = "";
+                NozologyVisibility = "hidden";
             }
 
             try
             {
                 OptionSocialName = appConfig["Social:Name"];
-                if (!bool.Parse(appConfig["Oxygen:Visible"])) SocialVisibility = "hidden";
+                if (!bool.Parse(appConfig["Social:Visible"])) SocialVisibility = "hidden";
             }
             catch
             {
                 OptionSocialName = "";
-                SocialVisibility = "";
+                SocialVisibility = "hidden";
             }
 
             try
             {
                 OptionCareName = appConfig["Care:Name"];
-                if (!bool.Parse(appConfig["Oxygen:Visible"])) CareVisibility = "hidden";
+                if (!bool.Parse(appConfig["Care:Visible"])) CareVisibility = "hidden";
             }
             catch
             {
                 OptionCareName = "";
-                CareVisibility = "";
+                CareVisibility = "hidden";
             }
 
             try
