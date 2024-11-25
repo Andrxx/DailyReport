@@ -1,4 +1,6 @@
-﻿namespace DailyReport.Models.Reports
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace DailyReport.Models.Reports
 {
     public class FireReport
     {
@@ -10,6 +12,8 @@
         public int Personel { get; set; }
         public DateTime Date { get; set; }
         public int? ShowOrder { get; set; }
+        [NotMapped]
+        public bool IsAdded { get; set; }
 
         public string ToDepName()
         {

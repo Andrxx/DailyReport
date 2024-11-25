@@ -22,8 +22,8 @@ namespace DailyReport.Pages.FireReport
         public List<DutyNurse> dutyNurses = new List<DutyNurse>();
         public List<Department> activeDepartments { get; set; } = new();
         public List<FullFireReport> fullFireReports { get; set; } = new List<FullFireReport>();
-
-
+        public int DormitoryAlias;
+        public List<int> LongStoredReps;
 
         public FireSumReportModel(ApplicationContext db, IConfiguration configuration)
         {
@@ -43,6 +43,14 @@ namespace DailyReport.Pages.FireReport
                 else excludedDeps = new();
             }
             catch { excludedDeps = new(); }
+             
+            var longStored = appConfig["LongStoredFireReportsAliaces"];
+            try
+            {
+                if (longStored != null) LongStoredReps = longStored.Split(' ').Select(x => int.Parse(x)).ToList();
+                else excludedDeps = new();
+            }
+            catch { LongStoredReps = new(); }
 
             try
             {
@@ -50,6 +58,11 @@ namespace DailyReport.Pages.FireReport
             }
             catch { }
 
+            try
+            {
+                DormitoryAlias = int.Parse(appConfig["DormitoryAlias"]);
+            }
+            catch { }
 
             List<int> actualDeps = new();
             activeDepartments = DepartmentServices.GetSortedDepartments(context, excludedDeps);
@@ -61,7 +74,7 @@ namespace DailyReport.Pages.FireReport
             dutyNurses = DutyServices.GetDutyNurses(context);
 
             //пожарные сводки
-            reports = FireReportServices.GetFilteredReports(context, actualDeps);
+            reports = FireReportServices.GetFilteredReports(context, actualDeps, LongStoredReps);
 
             foreach (var department in activeDepartments)
             {
@@ -74,16 +87,19 @@ namespace DailyReport.Pages.FireReport
                 fullFireReports.Add(fullFireReport);
             }
             AddDataToList(fullFireReports);
-            AddFireReportToList(fullFireReports);
+            //AddFireReportToList(fullFireReports);
             //добавляем лабораторию
             //тех.персонал и охрана - не редактируется, добавляем 14 сотрудников
             //labReport = new() { DepNumber = 102, Personel = 12, Date = DateTime.Now };
         }
 
+        /// <summary>
+        /// Получаем данные медесетер из файла конфигурации
+        /// </summary>
+        /// <param name="fullFireReports"></param>
+        /// <returns></returns>
         private bool AddDataToList(List<FullFireReport> fullFireReports)
         {
-
-            
             try
             {
                 //метод получения конфига через секцию
@@ -98,6 +114,12 @@ namespace DailyReport.Pages.FireReport
             return true;
         }
 
+        /// <summary>
+        /// deprecated - из конфигурации перенесено в БД, удалить после тестирования. включая вхождения в конфиге
+        /// Добавляем дополнительные данные в список сводок
+        /// </summary>
+        /// <param name="fullFireReports"></param>
+        /// <returns></returns>
         private bool AddFireReportToList(List<FullFireReport> fullFireReports)
         {
             try
@@ -106,11 +128,11 @@ namespace DailyReport.Pages.FireReport
                 foreach (Models.Reports.FireReport ar in additionalReports)
                 {
                     ar.Date = DateTime.Now;
+                    ar.IsAdded = true;
                     fullFireReports.Find(ffr => ffr.Department.Allias == ar.DepNumber).FireReport = ar;
                 }
             }
             catch { return false; }
-
             return true;
         }
     }

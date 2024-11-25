@@ -59,14 +59,11 @@
                     <td class="fw-bold  print-m-p-0">Количество коек (фактическое)</td>
 
                     @{
-
                         foreach (Department dep in Model.activeDepartments)
                         {
                             <td class="print-m-p-0">@dep.AdultSpotsQuantity</td>
                             <td class="print-m-p-0">@dep.ChildrenSpotsQuantity</td>
                         }
-                        //костыль для вывода мест орит
-
                     }
 
                     <td class="print-m-p-0">@Model.AdultSpotsSum</td>
@@ -712,7 +709,9 @@
                      @{
                         foreach (DepReport dr in Model.sortedReports)
                         {
-                            <td colspan="2" class="text-left">@if(dr.care > 0) @dr.careDisodered</td>  
+                            <td colspan="2" class="text-left">@if (dr.careDisodered > 0)
+                                    @dr.careDisodered
+    </td>
                         }
                       }
                     <td colspan="3" class="text-center print-m-p-0">@Model.finalReport.careDisodered</td>
