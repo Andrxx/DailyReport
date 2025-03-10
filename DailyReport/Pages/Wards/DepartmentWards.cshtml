@@ -14,9 +14,6 @@
     foreach (Ward ward in Model.wards)
     {
         string dirtyStyle = ward.IsDirtyZone ? "ward-dirty" : "";
-        int counter = ward.Capacity > ward.PatientsInWard.Count ? ward.Capacity : ward.PatientsInWard.Count;
-        <div class="container mt-1 @dirtyStyle" >
-            @{
                 string style = "ward-open";
                 if(ward.CanPut){
                     if(ward.PatientsInWard.Count >= ward.Capacity) style = "ward-full";
@@ -25,7 +22,11 @@
                 {
                     style = "ward-close";
                 }
-            }
+
+
+        int counter = ward.Capacity > ward.PatientsInWard.Count ? ward.Capacity : ward.PatientsInWard.Count;
+        <div class="container mt-1 @dirtyStyle @style">
+           
             <form method="post" onsubmit=submitWard(event)>
                 <div class="row bg-lightgray">
                     <div class="col-2">
@@ -87,7 +88,7 @@
                         <input class="d-none" type="text" value="@ward.PatientsInWard[i].WardNumber" asp-for="@Model.newPatient.WardNumber" />
                         <input class="d-none" type="number" value="@ward.PatientsInWard[i].Id" asp-for="@Model.newPatient.Id" />
                         <input class="d-none" type="date" value="@ward.PatientsInWard[i].HospitalisationDate.ToString("yyyy-MM-dd")" asp-for="@Model.newPatient.HospitalisationDate" />
-                            <div class="row patient @style" draggable="true">
+                            <div class="row patient" draggable="true">
                                 <div class="col-2">
                                     <input type="text" value="@ward.PatientsInWard[i].Name" asp-for="@Model.newPatient.Name" required />
                                 </div>
@@ -157,7 +158,7 @@
                     <form method="post">
                         <input class="d-none" type="number" value="@ward.Department" asp-for="@Model.newPatient.Department"/>
                         <input class="d-none" type="text" value="@ward.Number" asp-for="@Model.newPatient.WardNumber" />
-                        <div class="row patient @style">
+                        <div class="row patient">
                                 <div class="col-2">
                                     <input  type="text" asp-for="@Model.newPatient.Name" required/>
                                 </div>

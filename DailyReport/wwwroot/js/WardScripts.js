@@ -183,9 +183,11 @@ async function loadData(url) {
 				wardFormWrapper.classList.add("ward-dirty");
 			}
 			if (ward.CanPut) {
+				wardFormWrapper.classList.remove("ward-close");
 				wardFormWrapper.classList.add("ward-open");
 			}
 			else {
+				wardFormWrapper.classList.remove("ward-open");
 				wardFormWrapper.classList.add("ward-close");
 			}
 			
@@ -243,6 +245,7 @@ async function submitWard(event) {
 					}
 				}
 				if (!canPut) {
+					event.target.parentElement.classList.remove('ward-open');
 					event.target.parentElement.classList.add('ward-close');
 					//patientRows.forEach((row) => {
 						//if (row.classList.contains('ward-open')) {
