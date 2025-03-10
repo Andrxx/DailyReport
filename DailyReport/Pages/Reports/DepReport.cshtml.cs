@@ -150,7 +150,6 @@ namespace DailyReport.Pages.Reports
                 //тест для БД, изменить на создание нового для релиза
                 //report = DepReportServise.CreateTest();
                 report = new();
-                //report.Lines = new();
                 report.depNumber = depAllias;
                 //при работе с прошлыми сводкам корректируем дату сводки
                 if(dateOffset != 0) report.date = reportDate;

@@ -1,0 +1,9 @@
+﻿@page
+@using DailyReport.Models.WardsModels
+@model DailyReport.Pages.Wards.ShortWardModel
+@{
+    string msg;
+    msg = Model.departmentAllias + " отделения";
+    ViewData["Title"] = "Управление палатами" + msg;
+}
+<script src="~/js/WardScripts.js" asp-append-version="true"></script>

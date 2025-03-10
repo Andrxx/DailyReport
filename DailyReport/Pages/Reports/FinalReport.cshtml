@@ -13,6 +13,7 @@
             <tbody>
                 @*строка мест*@
                 <tr class="table-primary fw-bold m-0 p-0 print-m-p-0">
+                    
                     <td class="print-m-p-0">@Model.reportDate.ToString("dd.MM.yy")</td>
                     @{
                         foreach (Department dep in Model.activeDepartments)
@@ -23,12 +24,18 @@
                         }
                     }
                     <td class="print-m-p-0" colspan="3">
-                        @(@Model.AdultSpotsSum + @Model.ChildrenSpotsSum) стационарных коек,
-                        кроме того @(@Model.ORITAdults + Model.ORITChildren) коек ОРИТ
+                        @{
+                            bool flag = Model.ORITcorrection.Count() != 0;
+                        }
+                        @(@Model.AdultSpotsSum + @Model.ChildrenSpotsSum) стационарных коек
+                        @(flag ? ", кроме того " + (Model.ORITAdults + Model.ORITChildren) + " коек ОРИТ" : "")
+         
                     </td>
                     <td class="print-m-p-0" colspan="3">
                         Всего @(@Model.AdultFullSpotsSum + @Model.ChildrenFullSpotsSum) с учетом
-                        дневного стационара, кроме того @(@Model.ORITAdults + Model.ORITChildren) коек ОРИТ
+                        дневного стационара
+                        @(flag ? ", кроме того " + (Model.ORITAdults + Model.ORITChildren) + " коек ОРИТ" : "")
+                       
                     </td>
                 </tr>
 
@@ -52,8 +59,6 @@
                     <td class="print-m-p-0">Всего</td>                   
                 </tr>
 
-             
-
                 @*строка фактические койки*@
                 <tr class="table-secondary  m-0 p-0">
                     <td class="fw-bold  print-m-p-0">Количество коек (фактическое)</td>
@@ -74,8 +79,6 @@
                     <td class="print-m-p-0">@(@Model.AdultFullSpotsSum + @Model.ChildrenFullSpotsSum)</td>
                 </tr>
 
-
-
                 <tr class="table-success print-m-p-0">
                     <td class="fw-bold print-m-p-0">Состояло</td>
                     @{
@@ -86,12 +89,11 @@
                         }
                     }
 
-
                     <td class="print-m-p-0">@Model.finalReport.existed</td>
                     <td class="print-m-p-0">@Model.finalReport.existedChildren</td>
                     <td class="print-m-p-0">@(@Model.finalReport.existed + @Model.finalReport.existedChildren)</td>
 
-                    <td class="print-m-p-0">@(@Model.finalReport.existed + @Model.DayCareReport.existed)</td>
+                    <td class="print-m-p-0">@(@Model.finalReport.existed + @Model?.DayCareReport?.existed)</td>
                     <td class="print-m-p-0">@(@Model.finalReport.existedChildren + @Model.DayCareReport.existedChildren)</td>
                     <td class="print-m-p-0">@(@Model.finalReport.existed + @Model.finalReport.existedChildren + @Model.DayCareReport.existed
                             + @Model.DayCareReport.existedChildren)
@@ -513,8 +515,8 @@
                     @{
                         foreach (DepReport dr in Model.sortedReports)
                         {
-                                        <td>@if(dr.U072 > 0) @dr.U072 </td>
-                                        <td>@if (dr.U072Childrens > 0) @dr.U072Childrens</td>
+                            <td>@if(dr.U072 > 0) @dr.U072 </td>
+                            <td>@if (dr.U072Childrens > 0) @dr.U072Childrens</td>
                         }
                     }
                     <td>@Model.finalReport.U072</td>
@@ -711,7 +713,7 @@
                         {
                             <td colspan="2" class="text-left">@if (dr.careDisodered > 0)
                                     @dr.careDisodered
-    </td>
+                            </td>
                         }
                       }
                     <td colspan="3" class="text-center print-m-p-0">@Model.finalReport.careDisodered</td>
@@ -819,9 +821,9 @@
                                                 <select class="form-select" asp-for="newDoc.dutyDoc">
                                                     <option selected >@doc.dutyDoc</option>
                                                     @{
-                                            foreach(string d in Model.doctors){
-                                                                        <option value="@d">@d</option>
-                                            }
+                                                        foreach(string d in Model.doctors){
+                                                             <option value="@d">@d</option>
+                                                        }   
                                                     }
                                                 </select>
                                             </div> 

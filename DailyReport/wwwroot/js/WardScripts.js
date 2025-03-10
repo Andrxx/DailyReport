@@ -2,9 +2,9 @@
 const patientsUrlRequest = document.location + '&handler=PatientsList'
 const editPatient = document.location + '&handler=OnPostUpdatePatient'
 
-window.onload = async () => {
-	await loadData(wardsUrlRequest);
-}
+//window.onload = async () => {
+//	await loadData(wardsUrlRequest);
+//}
 async function loadData(url) {
 	let responseWardsList = await fetch(url);		//запрашиваем список палат
 	if (responseWardsList.ok) {

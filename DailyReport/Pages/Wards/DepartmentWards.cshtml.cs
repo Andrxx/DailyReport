@@ -25,10 +25,10 @@ namespace DailyReport.Pages.Wards
         {
             context = db;
         }
-        public void OnGet(int depNumber)
+        public void OnGet(int depAllias)
         {
-            departmentNumber = depNumber;
-            wards = WardServices.GetWardsByDepartment(context, depNumber);
+            departmentNumber = depAllias;
+            wards = WardServices.GetWardsByDepartment(context, depAllias);
 
             //wards.Add(WardServices.CreateTestWard("1", 3, true, 3, true));
             //wards.Add(WardServices.CreateTestWard("2", 3, true, 3, true));
@@ -47,7 +47,7 @@ namespace DailyReport.Pages.Wards
             //patients.Add(PatientServices.CreateTestPatient(10, false, false, false, false));
             //patients.Add(PatientServices.CreateTestPatient(11, false, false, false, false));
 
-            patients = PatientServices.GetPatientsByDepartment(context, depNumber);
+            patients = PatientServices.GetPatientsByDepartment(context, depAllias);
 
             //добавление пациентов в палаты, сохраняем в неотслеживаемое в БД поле
             foreach (Ward ward in wards)
@@ -81,36 +81,36 @@ namespace DailyReport.Pages.Wards
 
 
 
-        //public IActionResult OnPostAddPatient()
-        //{
-        //    //if (!ModelState.IsValid)
-        //    //{
-        //    //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
-        //    //}
-        //    PatientServices.AddPatient(context, newPatient);
-        //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
-        //}
+        public IActionResult OnPostAddPatient()
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
+            //}
+            PatientServices.AddPatient(context, newPatient);
+            return RedirectToPage("DepartmentWards", new { depAllias = newPatient.Department });
+        }
 
-        //public IActionResult OnPostUpdatePatient(Patient newPatient)
-        //{
-        //    //if (!ModelState.IsValid)
-        //    //{
-        //    //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
-        //    //}
-        //    PatientServices.UpdatePatient(context, newPatient);
-        //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
-        //}
+        public IActionResult OnPostUpdatePatient(Patient newPatient)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
+            //}
+            PatientServices.UpdatePatient(context, newPatient);
+            return RedirectToPage("DepartmentWards", new { depAllias = newPatient.Department });
+        }
 
-        //public IActionResult OnPostDeletePatient()
-        //{
-        //    //if (!ModelState.IsValid)
-        //    //{
-        //    //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
-        //    //}
-        //    PatientServices.DeletePatient(context, newPatient.Id);
+        public IActionResult OnPostDeletePatient()
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
+            //}
+            PatientServices.DeletePatient(context, newPatient.Id);
 
-        //    return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
-        //}
+            return RedirectToPage("DepartmentWards", new { depAllias = newPatient.Department });
+        }
 
         // возврат данных для fetch методов
 
@@ -187,58 +187,58 @@ namespace DailyReport.Pages.Wards
         /// </summary>
         /// <param name="patient"></param>
         /// <returns></returns>
-        public IActionResult OnPostAddPatient(Patient patient)
-        {
-            //try
-            //{
-                PatientServices.AddPatient(context, patient);
-                return Content(JsonConvert.SerializeObject(patient));
-            //}
-            //catch
-            //{
-                //return new NotFoundResult();
-            //}
-        }
+        //public IActionResult OnPostAddPatient(Patient newPatient)
+        //{
+        //    //try
+        //    //{
+        //        PatientServices.AddPatient(context, newPatient);
+        //        return Content(JsonConvert.SerializeObject(newPatient));
+        //    //}
+        //    //catch
+        //    //{
+        //        //return new NotFoundResult();
+        //    //}
+        //}
 
         /// <summary>
         /// обновляем пациента и возвращаем как json объект, метод для fetch вызова
         /// </summary>
         /// <param name="patient"></param>
         /// <returns></returns>
-        public IActionResult OnPostUpdatePaient(Patient patient)
-        {
+        //public IActionResult OnPostUpdatePaient(Patient patient)
+        //{
 
-            patient = PatientServices.UpdatePatient(context, patient);
-            if (patient != null)
-            {
-                //string ward = JsonConvert.SerializeObject(patients);
-                return Content(JsonConvert.SerializeObject(patient));
-            }
-            else
-            {
-                return new NotFoundResult();
-            }
-        }
+        //    patient = PatientServices.UpdatePatient(context, patient);
+        //    if (patient != null)
+        //    {
+        //        //string ward = JsonConvert.SerializeObject(patients);
+        //        return Content(JsonConvert.SerializeObject(patient));
+        //    }
+        //    else
+        //    {
+        //        return new NotFoundResult();
+        //    }
+        //}
 
 
-        public IActionResult OnPostDeletePatient(Patient patient)
-        {
-            try
-            {
-                if (patient == null || patient.Id == 0) 
-                { 
-                    return new NotFoundResult();
-                }
-                PatientServices.DeletePatient(context, patient.Id);
-                Patient nPatient = PatientServices.GetPatientById(context, patient.Id);
-                if (nPatient != null) { return new NotFoundResult(); }   //проверка удаления
-                else
-                {
-                    return new OkResult();
-                }
-            }
-            catch { return new NotFoundResult(); }
-            //return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
-        }
+        //public IActionResult OnPostDeletePatient(Patient patient)
+        //{
+        //    try
+        //    {
+        //        if (patient == null || patient.Id == 0) 
+        //        { 
+        //            return new NotFoundResult();
+        //        }
+        //        PatientServices.DeletePatient(context, patient.Id);
+        //        Patient nPatient = PatientServices.GetPatientById(context, patient.Id);
+        //        if (nPatient != null) { return new NotFoundResult(); }   //проверка удаления
+        //        else
+        //        {
+        //            return new OkResult();
+        //        }
+        //    }
+        //    catch { return new NotFoundResult(); }
+        //    //return RedirectToPage("DepartmentWards", new { depNumber = newPatient.Department });
+        //}
     }
 }

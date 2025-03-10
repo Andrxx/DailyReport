@@ -1,14 +1,17 @@
 ﻿@page
+@using DailyReport.Models
 @model DailyReport.Pages.Wards.WardsAdministrationModel
 @{
     ViewData["Title"] = "Администрирование(палаты)";
 }
 <div class="text-center">
     <h1 class="display-4">Регистрация палат</h1>
-    <p><a href="WardsManagement?depNumber=1">Первое отделение</a></p>
-    <p><a href="WardsManagement?depNumber=3">Третье отделение</a></p>
-    <p><a href="WardsManagement?depNumber=4">Четвертое отделение</a></p>
-    <p><a href="WardsManagement?depNumber=5">Пятое отделение</a></p>
-    <p><a href="WardsManagement?depNumber=6">Шестое отделение</a></p>
-    <p><a href="WardsManagement?depNumber=7">Седьмое отделение</a></p>
+
+    <h1 class="display-4">Управление палатами</h1>
+    @{
+        foreach (Department dep in Model.Departments)
+        {
+            <p><a href="WardsManagement?depAllias=@dep.Allias">@dep.Name</a></p>
+        }
+    }
 </div>

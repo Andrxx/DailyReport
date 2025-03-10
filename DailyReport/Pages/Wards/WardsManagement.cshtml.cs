@@ -19,10 +19,10 @@ namespace DailyReport.Pages.Wards
         public Ward Ward, newWard = new();
         public List<Ward> Wards { get; set; }
         public int departmentNumber;
-        public void OnGet(int depNumber)
+        public void OnGet(int depAllias)
         {
-            departmentNumber = depNumber;
-            Wards = WardServices.GetWardsByDepartment(context, depNumber);
+            departmentNumber = depAllias;
+            Wards = WardServices.GetWardsByDepartment(context, depAllias);
         }
 
         public IActionResult OnPostAddWard(Ward ward)

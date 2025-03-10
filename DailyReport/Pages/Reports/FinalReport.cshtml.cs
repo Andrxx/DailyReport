@@ -234,14 +234,15 @@ namespace DailyReport.Pages.Reports
             ChildrenFullSpotsSum = DepSpotsService.GetFullChildrenSpots(activeDepartments, ORITcorrection);
             try
             {
-                ORITAdults = activeDepartments.FirstOrDefault(d => d.Allias == ORITAllias).AdultSpotsQuantity
-                    + activeDepartments.FirstOrDefault(d => d.Allias == ORITDirtyAllias).AdultSpotsQuantity;
+                ORITAdults += (activeDepartments.FirstOrDefault(d => d.Allias == ORITAllias) != null) ? activeDepartments.FirstOrDefault(d => d.Allias == ORITAllias).AdultSpotsQuantity : 0;
+                ORITAdults += (activeDepartments.FirstOrDefault(d => d.Allias == ORITDirtyAllias) != null) ? activeDepartments.FirstOrDefault(d => d.Allias == ORITDirtyAllias).AdultSpotsQuantity : 0;
             }
             catch { ORITAdults = 0; }
             try
             {
-                ORITChildren = activeDepartments.FirstOrDefault(d => d.Allias == ORITAllias).ChildrenSpotsQuantity
-                    + activeDepartments.FirstOrDefault(d => d.Allias == ORITDirtyAllias).ChildrenSpotsQuantity;
+                ORITChildren += (activeDepartments.FirstOrDefault(d => d.Allias == ORITAllias) != null) ? activeDepartments.FirstOrDefault(d => d.Allias == ORITAllias).ChildrenSpotsQuantity : 0;
+                ORITChildren += (activeDepartments.FirstOrDefault(d => d.Allias == ORITDirtyAllias) != null) ? activeDepartments.FirstOrDefault(d => d.Allias == ORITDirtyAllias).ChildrenSpotsQuantity : 0;
+
             }
             catch { ORITChildren = 0; }
 

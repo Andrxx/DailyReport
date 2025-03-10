@@ -83,8 +83,8 @@
                     </thead>
                     <tr>
                         <td scope="col">Состояло</td>
-                        <td scope="col"><input required min="0" @Model.existedStatus id="existed" oninput="CountSum()" value="@Model.report.existed" type="number" name="existed" asp-for="report.existed" /></td>
-                        <td scope="col"><input required min="0" @Model.existedStatus id="existedChildren" oninput="CountSumChildrens()" value="@Model.report.existedChildren" type="number" name="existedChildren" asp-for="report.existedChildren" /> </td>
+                        <td scope="col"><!input @Model.existedStatus required min="0" id="existed" oninput="CountSum()" value="@Model.report.existed" type="number" name="existed" asp-for="report.existed" /></td>
+                        <td scope="col"><!input @Model.existedStatus required min="0"  id="existedChildren" oninput="CountSumChildrens()" value="@Model.report.existedChildren" type="number" name="existedChildren" asp-for="report.existedChildren" /> </td>
 
                     </tr>
                     <tr>
@@ -143,8 +143,8 @@
                     </tr>
                     <tr>
                         <td scope="col">Состоит</td>
-                        <td scope="col"><input required @Model.presentStatus min="0" id="present" value="@Model.report.present" type="number" name="present" asp-for="report.present" /></td>
-                        <td scope="col"><input required @Model.presentStatus min="0" id="presentChildrens" value="@Model.report.presentChildrens" type="number" name="presentChildrens" asp-for="report.presentChildrens" /> </td>
+                        <td scope="col"><!input required @Model.presentStatus min="0" id="present" value="@Model.report.present" type="number" name="present" asp-for="report.present" /></td>
+                        <td scope="col"><!input required @Model.presentStatus min="0" id="presentChildrens" value="@Model.report.presentChildrens" type="number" name="presentChildrens" asp-for="report.presentChildrens" /> </td>
                     </tr>
 
                     @*раздел кислорода*@

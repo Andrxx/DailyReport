@@ -86,6 +86,7 @@
                         <input class="d-none" type="number" value="@ward.PatientsInWard[i].Department" asp-for="@Model.newPatient.Department" />
                         <input class="d-none" type="text" value="@ward.PatientsInWard[i].WardNumber" asp-for="@Model.newPatient.WardNumber" />
                         <input class="d-none" type="number" value="@ward.PatientsInWard[i].Id" asp-for="@Model.newPatient.Id" />
+                        <input class="d-none" type="date" value="@ward.PatientsInWard[i].HospitalisationDate.ToString("yyyy-MM-dd")" asp-for="@Model.newPatient.HospitalisationDate" />
                             <div class="row patient @style" draggable="true">
                                 <div class="col-2">
                                     <input type="text" value="@ward.PatientsInWard[i].Name" asp-for="@Model.newPatient.Name" required />
@@ -106,7 +107,7 @@
                                 <input class="m-width-100" type="text" value="@ward.PatientsInWard[i].Diagnos" placeholder="Диагноз" asp-for="@Model.newPatient.Diagnos" required />
                                 </div>
                                 <div class="col-1 ">
-                                <input type="date" class="d-none" value="@ward.PatientsInWard[i].HospitalisationDate" asp-for="@Model.newPatient.HospitalisationDate" />
+
                                     @ward.PatientsInWard[i].HospitalisationDate.ToString("dd.MM.yy")
                                 </div>
                                 
@@ -176,7 +177,7 @@
                                 <input class="m-width-100" type="text" placeholder="Диагноз" asp-for="@Model.newPatient.Diagnos" required/>
                                 </div>
                                 <div class="col-1 ">
-                                <input type="date" class="m-width-100" value="@DateTime.Now.ToString("dd.MM.yy")" asp-for="@Model.newPatient.HospitalisationDate" required />
+                                <input type="date" class="m-width-100" value="@DateTime.Now.ToString("yyyy-MM-dd")" asp-for="@Model.newPatient.HospitalisationDate" required />
                                 </div>
                                 <div class="col-1">
                                     <input  type="checkbox" asp-for="@Model.newPatient.HasRash">
@@ -198,7 +199,5 @@
     }
 }
 
-@*Клиентская верстка*@
-<div class="ward-wrapper row" id="ward_wrapper">
-    
-</div>
+@*Клиентская верстка   <div class="ward-wrapper row" id="ward_wrapper"></div>*@
+@* *@
