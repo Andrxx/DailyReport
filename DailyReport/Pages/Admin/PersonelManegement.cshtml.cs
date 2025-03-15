@@ -26,6 +26,7 @@ namespace DailyReport.Pages.Admin
             activeDepartments = DepartmentServices.GetSortedDepartments(context);
             departmentCounter = activeDepartments.Count;
             DepsList = PersonelServices.GetDepartments(context);
+            DepsList.Add("Приемное отделение");                     //добавление дополнительно приемное отделение
             personels = (from pers in context.Personels
                          orderby pers.Name, pers.Name.Substring(0, 1)
                          select pers).ToList();

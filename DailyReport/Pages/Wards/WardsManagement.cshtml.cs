@@ -29,32 +29,32 @@ namespace DailyReport.Pages.Wards
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToPage("WardsManagement", new { depNumber = ward.Department });
+                return RedirectToPage("WardsManagement", new { depAllias = ward.Department });
             }
             WardServices.AddWard(context, ward);
 
-            return RedirectToPage("WardsManagement", new { depNumber = ward.Department });
+            return RedirectToPage("WardsManagement", new { depAllias = ward.Department });
         }
 
-        public IActionResult OnPostDeleteWard(Ward ward, int depNumber)
+        public IActionResult OnPostDeleteWard(Ward ward, int depAllias)
         {
             //todo - если в палате есть пациент, палата не удаляется. Сделать оповещение пользователя 
             if (PatientServices.GetPatientsByDepartmentAndWard(context, ward.Department, ward.Number).Count == 0)
             {
                 WardServices.DeleteWard(context, ward.Id); 
             }
-            return RedirectToPage("WardsManagement", new { depNumber });
+            return RedirectToPage("WardsManagement", new { depAllias = ward.Department });
         }
 
         public IActionResult OnPostUpdateWard(Ward ward)
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToPage("WardsManagement", new { depNumber = ward.Department });
+                return RedirectToPage("WardsManagement", new { depAllias = ward.Department });
             }
             WardServices.UpdateWard(context, ward);
 
-            return RedirectToPage("WardsManagement", new { depNumber = ward.Department });
+            return RedirectToPage("WardsManagement", new { depAllias = ward.Department });
         }
     }
 }
