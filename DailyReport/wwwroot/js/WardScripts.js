@@ -1,10 +1,39 @@
 ﻿const wardsUrlRequest = document.location + '&handler=WardsList';
 const patientsUrlRequest = document.location + '&handler=PatientsList'
 const editPatient = document.location + '&handler=OnPostUpdatePatient'
-
+const patientsInWardRequest = document.location + '&handler=PatientsInWard'
+const baseUrl = window.location.origin + window.location.pathname;
+const doc = document;
+;
 //window.onload = async () => {
 //	await loadData(wardsUrlRequest);
 //}
+
+//document.addEventListener('DOMContentLoaded', function () {
+//	document.querySelectorAll('.empty-form-placeholder').forEach(container => {
+//		const department = container.dataset.department;
+//		const wardNumber = container.dataset.wardNumber;
+
+//		const template = document.getElementById('ward_form_template');
+//		if (!template) return;
+
+//		const form = template.content.cloneNode(true).querySelector('form');
+
+//		// Заполняем поля Department и WardNumber
+//		form.querySelector('[name="newPatient.Department"]').value = department;
+//		form.querySelector('[name="newPatient.WardNumber"]').value = wardNumber;
+
+//		// Меняем атрибуты data у формы
+//		form.setAttribute('data-department', department);
+//		form.setAttribute('data-ward-number', wardNumber);
+
+//		// Вставляем форму в контейнер
+//		container.replaceWith(form);
+//	});
+//});
+
+
+
 async function loadData(url) {
 	let responseWardsList = await fetch(url);		//запрашиваем список палат
 	if (responseWardsList.ok) {
@@ -207,7 +236,7 @@ async function loadData(url) {
 	//alert("load");
 } 
 
-async function submitWard(event) {
+async function updateWard(event) {
 	event.preventDefault();
 	var dep = event.target.elements.ward_Department.value;
 	let dirty = event.target.elements.ward_IsDirtyZone.checked;
@@ -223,12 +252,11 @@ async function submitWard(event) {
 	ward.append('CanPut', event.target.elements.ward_CanPut.checked);
 
 	//alert(ward);
-	let response = await fetch(url	//)
+	let response = await fetch(url
 		, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded'	//используем кодировку для сохранения привязки объекта
-				// 'Content-Type': 'application/x-www-form-urlencoded',
 			},
 			body: new URLSearchParams(ward)		//преобразуем форму в application/x-www-form-urlencoded для работы привязки
 		})
@@ -268,7 +296,7 @@ async function submitWard(event) {
 		});
 }
 
-async function savePatient(event) {
+async function EditPatient(event) {
 	event.preventDefault();
 	let fSubmitter = event.submitter;	
 	let url;
@@ -401,3 +429,238 @@ async function savePatient(event) {
 	//	alert("Не сохранено, " + response.statusText);
 	//}
 }
+
+let draggedForm;
+function drag_handler(event) {
+	const form = event.target.closest('form');
+	draggedForm = form;
+	// Собираем данные из всех полей формы
+	//const formData = new FormData(form);
+	//const patientData = {};
+	//formData.forEach((value, key) => {
+	//	patientData[key] = value;
+	//});
+
+	//event.dataTransfer.setData("application/json", JSON.stringify(patientData));
+
+	//console.log("Перетаскиваемый объект:", patientData);
+
+	let id = form.querySelector('input[name="newPatient.Id"]').value;
+	event.dataTransfer.setData("text/plain", id);
+	//console.log(id, event);
+}
+
+ //Разрешаем сброс элемента
+function allowDrop(event) {
+	event.preventDefault(); 
+	console.log("allodrop", event);
+
+}
+
+//function drop_handler(event) {
+//	event.preventDefault();
+
+//	// Находим целевой элемент
+//	const form = event.target.closest('form');
+//	//let id = form.querySelector('input[name="ward.Number"]').value;
+//	const wardNumber = form.dataset.wardNumber;
+//	//const targetElement = event.target.closest('.droppable-area');
+//	//if (!targetElement) return;
+
+//	//const wardId = targetElement.dataset.ward.Number; // ID палаты
+//	const patientId = event.dataTransfer.getData("text/plain"); // ID пациента
+//	const TransferData = {
+//		PatientId: patientId,
+//		WardNumber : wardNumber
+//	}
+//	//console.log("drop", wardNumber, patientId, event);
+
+//	// Отправляем данные на сервер через AJAX
+//	let action =  document.location.pathname + document.location.search + '&handler=DropPatient';
+//	fetch(action, {
+		
+//		method: 'POST',
+//		headers: {
+//			'Content-Type': 'application/json',
+//		//	"RequestVerificationToken": document.querySelector('input[name="__RequestVerificationToken"]').value
+//		},
+//		body: JSON.stringify(TransferData)
+//	})
+//		.then(response => response.json())
+//		.then(data => {
+//			const parent = draggedForm.parentElement;
+//			parent.removeChild(draggedForm);
+
+//			const newForm = createWardForm(4, 5);
+//			document.getElementById('form-container').appendChild(newForm);
+//			//let emptyForm = `
+//			//<form method="post" draggable="true" class="target" data-department="@ward.Department" data-ward-number="@ward.Number" ondragover="allowDrop(event)" ondrop="drop_handler(event)">@*onsubmit="EditPatient(event)"*@
+//   //                     <input class="d-none" type="number" value="@ward.Department" asp-for="@Model.newPatient.Department"/>
+//   //                     <input class="d-none" type="text" value="@ward.Number" asp-for="@Model.newPatient.WardNumber" />
+//   //                     <div class="row patient" asp-page-handler="AddPatient" >
+//   //                             <div class="col-2" >
+//   //                                 <input  type="text" asp-for="@Model.newPatient.Name" required/>
+//   //                             </div>
+//   //                             <div class="col-2">
+//   //                             <input type="text" placeholder="" asp-for="@Model.newPatient.sAge" required />
+//   //                             </div>                               
+//   //                             <div class="col-1">
+//   //                             <input class="m-width-100" type="text" placeholder="Пол" asp-for="@Model.newPatient.Male" required/>
+//   //                             </div>
+//   //                             <div class="col-1">
+//   //                             <input class="m-width-100" type="text" placeholder="Диагноз" asp-for="@Model.newPatient.Diagnos" required/>
+//   //                             </div>
+//   //                             <div class="col-1 ">
+//   //                             <input type="date" class="m-width-100" value="@DateTime.Now.ToString("yyyy-MM-dd")" asp-for="@Model.newPatient.HospitalisationDate" required />
+//   //                             </div>
+//   //                             <div class="col-1">
+//   //                                 <input  type="checkbox" asp-for="@Model.newPatient.HasRash">
+//   //                             </div>
+//   //                             <div class="col-1">
+//   //                                 <input  type="checkbox" asp-for="@Model.newPatient.HasCareRisk">
+//   //                             </div>
+//   //                             <div class="col-1">
+//   //                                 <input  type="checkbox" asp-for="@Model.newPatient.IsUntochable">
+//   //                             </div>
+//   //                             <div class="col-1 ">
+//   //                                 <input type="submit" value="+" name="add" asp-page-handler="AddPatient" />
+//   //                             </div>
+//   //                         </div>
+//   //                 </form>	`
+//			//parent.insertBefore(emptyForm, event.currentTarget);
+//		})
+//		.catch(error => {
+			
+//		});
+//}
+
+
+function createPatientForm(department, wardNumber) {
+	const template = document.getElementById('ward_form_template');
+	const form = template.content.cloneNode(true).querySelector('form');
+
+	form.querySelector('[name="department"]').value = department;
+	form.querySelector('[name="wardNumber"]').value = wardNumber;
+
+	return form;
+}
+
+
+
+//надмозг
+document.addEventListener('DOMContentLoaded', function () {
+	const wards = document.querySelectorAll('.patients-container');
+
+	wards.forEach(ward => {
+		const wardNumber = ward.dataset.ward;
+		const depNumber = ward.dataset.department;
+		const capacity = ward.dataset.wardcapacity;
+		let isFull;
+
+		fetch(baseUrl + `?handler=PatientsInWard&depNumber=${depNumber}&wardNumber=${wardNumber}`)
+			.then(response => {
+				if (!response.ok) throw new Error('Ошибка сети');
+				return response.json();
+			})
+			.then(patients => {
+				// Очистка контейнера перед добавлением
+				ward.innerHTML = '';
+				
+				if (patients) {
+					// Добавляем пациентов
+					patients.forEach(patient => {
+						const template = document.getElementById('patient-row-template');
+						const clone = template.content.cloneNode(true);
+						const row = clone.querySelector('.patient-row');
+
+						row.querySelector('.name').textContent = patient.Name;
+						row.querySelector('.age').textContent = patient.sAge;
+						row.querySelector('.male').textContent = patient.Male;
+						row.querySelector('.diagnos').textContent = patient.Diagnos;
+						row.querySelector('.date').textContent = formatDate(patient.HospitalisationDate);
+						row.querySelector('input[type="checkbox"]').checked = patient.HasRash;
+						row.querySelectorAll('input[type="checkbox"]')[1].checked = patient.HasCareRisk;
+
+						container.appendChild(row);
+					});
+					if (patients.length) {
+						if (patients.length >= capacity) { isFull = true; }
+					}
+					// Проверяем вместимость
+					if (!patients.length) {
+						for (i = 0; i < capacity; i++)
+						{
+							const addForm = createAddPatientForm(depNumber, wardNumber);
+							container.appendChild(addForm);
+						}
+					}
+					else if(patients.length < capacity) {
+						let diff = capacity - patients.length;
+						for (i = 0; i < diff; i++) {
+							const addForm = createAddPatientForm(depNumber, wardNumber);
+							container.appendChild(addForm);
+						}
+					}
+
+					if (canPut) {
+						//ward.addClass
+					}
+				}
+			});
+			//.catch(err => {
+			//	console.error('Ошибка загрузки пациентов:', err);
+			//});
+	});
+});
+
+// Создание формы добавления пациента
+function createAddPatientForm(depNumber, wardNumber) {
+	const template = document.getElementById('add-patient-form-template');
+	const clone = template.content.cloneNode(true);
+	const form = clone.querySelector('form');
+
+	// Добавляем скрытые поля
+	const inputWard = document.createElement('input');
+	inputWard.type = 'hidden';
+	inputWard.name = 'WardNumber';
+	inputWard.value = wardNumber;
+	form.appendChild(inputWard);
+
+	const inputDep = document.createElement('input');
+	inputDep.type = 'hidden';
+	inputDep.name = 'Department';
+	inputDep.value = depNumber;
+	form.appendChild(inputDep);
+
+	// Обработчик отправки формы
+	form.onsubmit = function (e) {
+		e.preventDefault();
+
+		const formData = new FormData(form);
+
+		fetch('/Wards/DepartmentWards?handler=AddPatient', {
+			method: 'POST',
+			body: formData
+		})
+			.then(response => {
+				if (!response.ok) throw new Error('Ошибка при добавлении пациента');
+				return response.json();
+			})
+			.then(() => {
+				// Перезагружаем пациентов или обновляем список
+				location.reload(); // можно улучшить до динамического обновления
+			})
+			.catch(err => {
+				console.error('Ошибка добавления пациента:', err);
+			});
+	};
+
+	return form;
+}
+
+// Формат даты
+function formatDate(dateString) {
+	const date = new Date(dateString);
+	return `${String(date.getDate()).padStart(2, '0')}.${String(date.getMonth() + 1).padStart(2, '0')}`;
+}
+

@@ -129,13 +129,13 @@ th, td {
     background-color: #4cff00a7
 }
 .ward-close {
-    background-color: #ff0000 !important 
+    background-color: #f7eb09 !important 
 }
 .ward-dirty {
     border: 3px solid black; 
 }
 .ward-full {
-    background-color: #2c8ffb
+    background-color: #ca0d0d;
 }
 
 .ward-header {

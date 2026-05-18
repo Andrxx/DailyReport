@@ -21,6 +21,13 @@ namespace DailyReport.Models.WardsModels
 
     }
 
+    public class WardTransferData
+    {
+        public string? WardNumber { get; set; }
+        public int PatientId { get; set; }
+    }
+
+
     //public class ShortPatient
     //{
     //    public int PatientId { get; set; }

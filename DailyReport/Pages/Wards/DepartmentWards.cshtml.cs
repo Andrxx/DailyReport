@@ -52,19 +52,30 @@ namespace DailyReport.Pages.Wards
             //добавление пациентов в палаты, сохран€ем в неотслеживаемое в Ѕƒ поле
             foreach (Ward ward in wards)
             {
-                foreach (Patient patient in patients)
-                {
-                    if (patient.WardNumber == ward.Number) ward.PatientsInWard.Add(patient);
-                }
+                var nestedPatients = patients.FindAll(p => p.WardNumber == ward.Number);
+
+                if(nestedPatients != null)
+                    ward.PatientsInWard = nestedPatients;
+
+                //foreach (Patient patient in patients)
+                //{
+                //    if (patient.WardNumber == ward.Number) ward.PatientsInWard.Add(patient);
+                //}
             }
+
+            
 
             //определ€ем доступность палаты в соответствии со статусом пациента
             foreach (Ward ward in wards)
             {
-                foreach (Patient patient in ward.PatientsInWard)
-                {
-                    if (patient.HasCareRisk || patient.HasRash || patient.IsUntochable) ward.CanPut = false;
-                }
+                if (!ward.CanPut) continue;
+
+                bool restricted = ward.PatientsInWard.Any(p => p.HasCareRisk == true || p.IsUntochable == true || p.HasRash == true); 
+                if (restricted) ward.CanPut = false;
+              //  foreach (Patient patient in ward.PatientsInWard)
+              //  {
+              //      if (patient.HasCareRisk || patient.HasRash || patient.IsUntochable) ward.CanPut = false;
+               // }
             }
         }
 
@@ -135,12 +146,12 @@ namespace DailyReport.Pages.Wards
         /// <summary>
         /// возвращаем список палат по номеру отделени€ 
         /// </summary>
-        /// <param name="depNumber"></param>
+        /// <param name="depAllias"></param>
         /// <returns></returns>
-        public IActionResult OnGetWardsList(int depNumber)
+        public IActionResult OnGetWardsList(int depAllias)
         {
-            departmentNumber = depNumber;
-            wards = WardServices.GetWardsByDepartment(context, depNumber);
+            departmentNumber = depAllias;
+            wards = WardServices.GetWardsByDepartment(context, depAllias);
 
             //добавление пациентов в палаты, сохран€ем в неотслеживаемое в Ѕƒ поле
             foreach (Ward ward in wards)
@@ -170,7 +181,7 @@ namespace DailyReport.Pages.Wards
         public IActionResult OnGetPatientsList(int depNumber)
         {
             departmentNumber = depNumber;
-            patients = PatientServices.GetPatientsByDepartment(context, depNumber);
+            patients = PatientServices.GetPatientsByDepartment(context, departmentNumber);
             if (patients != null)
             {
                 //string ward = JsonConvert.SerializeObject(patients);
@@ -181,6 +192,46 @@ namespace DailyReport.Pages.Wards
                 return new NotFoundResult();
             }
         }
+
+        /// <summary>
+        /// запрашиваем пациентов по номкру отделени€ и палаты, возможен возврат пустого списка
+        /// </summary>
+        /// <param name="depNumber"></param>
+        /// <param name="wardNumber"></param>
+        /// <returns></returns>
+        public IActionResult OnGetPatientsInWard(int depNumber, string wardNumber)
+        {
+            patients = PatientServices.GetPatientsByDepartmentAndWard(context, depNumber, wardNumber);
+            if (patients != null)
+            {
+                //string ward = JsonConvert.SerializeObject(patients);
+                return Content(JsonConvert.SerializeObject(patients));
+            }
+            else
+            {
+                return new NotFoundResult();
+            }
+        }
+
+
+
+        public IActionResult OnPostDropPatient([FromBody] WardTransferData TransferData)
+        {
+
+            Patient patient = PatientServices.GetPatientById(context, TransferData.PatientId);
+            if (patient != null)
+            {
+                patient.WardNumber = TransferData.WardNumber;
+                PatientServices.UpdatePatient(context, patient);
+                return Content(JsonConvert.SerializeObject(patients));
+            }
+            else {
+                return new BadRequestResult();
+            }
+        }
+
+
+
 
         /// <summary>
         /// ƒобавл€ем пациента в Ѕƒ, возвращаем сохраненного пациента

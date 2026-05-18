@@ -36,7 +36,7 @@ namespace DailyReport.Services.WardServices
         }
 
         /// <summary>
-        /// Получаем список пацинтов по номеру отделения и палаты
+        /// Получаем список пациентов по номеру отделения и палаты, возможен возврат пустого списка
         /// </summary>
         /// <param name="context"></param>
         /// <param name="depNumber"></param>
@@ -77,7 +77,7 @@ namespace DailyReport.Services.WardServices
         }
 
         /// <summary>
-        /// Обновляем пациента
+        /// Обновляем пациента и сохраняем в БД
         /// </summary>
         /// <param name="context"></param>
         /// <param name="newPatient"></param>

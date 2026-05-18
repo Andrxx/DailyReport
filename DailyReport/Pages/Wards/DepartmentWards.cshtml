@@ -10,12 +10,61 @@
 
 <h4>Регистрация пациентов @msg</h4>
 
+@* @{
+    foreach(Ward wardjs in Model.wards){
+        <div class="container mt-1">
+            <form method="post" onsubmit=updateWard(event) asp-page-handler="UpdateWard">
+                <div class="row bg-lightgray">
+                    <div class="col-2">
+                        Палата @wardjs.Number
+                    </div>
+                    <div class="col-2 form-check form-switch">
+                        <input class="form-check-input" type="checkbox" asp-for="@wardjs.CanPut">
+                        <label class="form-check-label" for="">Палата открыта</label>
+                    </div>
+                    <div class="d-none col-1">
+                        <input type="text" value="@wardjs.Number" asp-for="@wardjs.Number" />
+                        <input type="number" value="@wardjs.Capacity" asp-for="@wardjs.Capacity" />
+                        <input type="number" value="@wardjs.Department" asp-for="@wardjs.Department" />
+                        <input type="number" value="@wardjs.Id" asp-for="@wardjs.Id" />
+                    </div>
+                    <div class="col-1">
+                        <input type="submit" value="&#9998" asp-page-handler="" /> @*UpdateWard@
+                    </div>
+                </div>
+            </form>
+
+            <div class="row bg-lightgray">
+            @*ward-header@
+                <div class="col-2">
+                    ФИО пациента
+                </div>
+                <div class="col-2">Возраст пациента</div>
+                <div class="col-1">Пол</div>
+                <div class="col-1">Диагноз</div>
+                <div class="col-1">Дата</div>
+                <div class="col-1">Сыпь</div>
+                <div class="col-1">Риск ВБИ </div>
+                <div class="col-2">От главного</div>
+            </div>
+
+
+            <div class="patients-container" data-ward="@wardjs.Number" data-department="@wardjs.Department" data-wardcapacity="@wardjs.Capacity"></div>
+
+
+        </div>
+    }
+}
+ *@
+
+
 @{
     foreach (Ward ward in Model.wards)
     {
         string dirtyStyle = ward.IsDirtyZone ? "ward-dirty" : "";
-                string style = "ward-open";
-                if(ward.CanPut){
+        string style = "ward-open";
+            if(ward.CanPut)
+                {
                     if(ward.PatientsInWard.Count >= ward.Capacity) style = "ward-full";
                 }
                 else
@@ -26,8 +75,8 @@
 
         int counter = ward.Capacity > ward.PatientsInWard.Count ? ward.Capacity : ward.PatientsInWard.Count;
         <div class="container mt-1 @dirtyStyle @style">
-           
-            <form method="post" onsubmit=submitWard(event)>
+
+            <form method="post" onsubmit=updateWard(event) asp-page-handler="UpdateWard">
                 <div class="row bg-lightgray">
                     <div class="col-2">
                         Палата @ward.Number
@@ -83,12 +132,12 @@
                 @for(int i = 0; i < counter; i++){
                 if (i < ward.PatientsInWard.Count)
                 {
-                    <form method="post" >
+                    <form method="post" draggable="true" ondragstart="drag_handler(event)" class="drag_source">
                         <input class="d-none" type="number" value="@ward.PatientsInWard[i].Department" asp-for="@Model.newPatient.Department" />
                         <input class="d-none" type="text" value="@ward.PatientsInWard[i].WardNumber" asp-for="@Model.newPatient.WardNumber" />
                         <input class="d-none" type="number" value="@ward.PatientsInWard[i].Id" asp-for="@Model.newPatient.Id" />
                         <input class="d-none" type="date" value="@ward.PatientsInWard[i].HospitalisationDate.ToString("yyyy-MM-dd")" asp-for="@Model.newPatient.HospitalisationDate" />
-                            <div class="row patient" draggable="true">
+                        <div class="row patient">
                                 <div class="col-2">
                                     <input type="text" value="@ward.PatientsInWard[i].Name" asp-for="@Model.newPatient.Name" required />
                                 </div>
@@ -108,7 +157,6 @@
                                 <input class="m-width-100" type="text" value="@ward.PatientsInWard[i].Diagnos" placeholder="Диагноз" asp-for="@Model.newPatient.Diagnos" required />
                                 </div>
                                 <div class="col-1 ">
-
                                     @ward.PatientsInWard[i].HospitalisationDate.ToString("dd.MM.yy")
                                 </div>
                                 
@@ -155,11 +203,11 @@
                     </form>
                 }
                 else {
-                    <form method="post">
+                    <form method="post" draggable="true" class="target" data-department="@ward.Department" data-ward-number="@ward.Number" ondragover="allowDrop(event)" ondrop="drop_handler(event)">@*onsubmit="EditPatient(event)"*@ 
                         <input class="d-none" type="number" value="@ward.Department" asp-for="@Model.newPatient.Department"/>
                         <input class="d-none" type="text" value="@ward.Number" asp-for="@Model.newPatient.WardNumber" />
-                        <div class="row patient">
-                                <div class="col-2">
+                        <div class="row patient" asp-page-handler="AddPatient" >
+                                <div class="col-2" >
                                     <input  type="text" asp-for="@Model.newPatient.Name" required/>
                                 </div>
                                 <div class="col-2">
@@ -190,7 +238,7 @@
                                     <input  type="checkbox" asp-for="@Model.newPatient.IsUntochable">
                                 </div>
                                 <div class="col-1 ">
-                                    <input type="submit" value="+" asp-page-handler="AddPatient"/>
+                                    <input type="submit" value="+" name="add" asp-page-handler="AddPatient" />
                                 </div>
                             </div>
                     </form>
@@ -200,5 +248,55 @@
     }
 }
 
-@*Клиентская верстка   <div class="ward-wrapper row" id="ward_wrapper"></div>*@
+@* <div class="ward-wrapper row" id="ward_wrapper"></div>*@
 @* *@
+
+
+
+<template id="patient-row-template">
+    <div class="row patient-row">
+        <div class="col-2 name"></div>
+        <div class="col-2 age"></div>
+        <div class="col-1 male"></div>
+        <div class="col-1 diagnos"></div>
+        <div class="col-1 date"></div>
+        <div class="col-1"><input type="checkbox" disabled></div>
+        <div class="col-1"><input type="checkbox" disabled></div>
+        <div class="col-2">
+            <input type="button" value="&#9998" />
+            <input type="button" value="&#128465" />
+        </div>
+    </div>
+</template>
+
+<template id="add-patient-form-template">
+    <form method="post" class="row patient-row add-patient-form">
+        <div class="col-2">
+            <input type="text" name="Name" placeholder="Имя" required />
+        </div>
+        <div class="col-2">
+            <input type="text" name="sAge" placeholder="Возраст" required />
+        </div>
+        <div class="col-1">
+            <input type="text" name="Male" placeholder="Пол" required />
+        </div>
+        <div class="col-1">
+            <input type="text" name="Diagnos" placeholder="Диагноз" required />
+        </div>
+        <div class="col-1">
+            <input type="date" name="HospitalisationDate" value="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+        </div>
+        <div class="col-1">
+            <input class="form-check-input" type="checkbox" name="HasRash" />
+        </div>
+        <div class="col-1">
+            <input class="form-check-input" type="checkbox" name="HasCareRisk" />
+        </div>
+        <div class="col-1">
+            <input class="form-check-input" type="checkbox" name="IsUntochable" />
+        </div>
+        <div class="col-1">
+            <input type="submit" value="+" class="btn btn-success" />
+        </div>
+    </form>
+</template>
