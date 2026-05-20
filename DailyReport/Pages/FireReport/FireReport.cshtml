@@ -1,38 +1,38 @@
-﻿@page
+﻿
+@page
 @using DailyReport.Models
 @using DailyReport.Models.PersonelFolder
 @model DailyReport.Pages.FireReport.FireReportModel
 @{
-    
     ViewData["Title"] = "Пожарная сводка " + @Model.department.Name;
 }
-
 
 @if (@Model.department.Allias == @Model.RHAllias)
 {
     <form method="post">
-    <div class="row">
-        <div class="col-4">
-            <select class="form-select" asp-for="DutyNurse.name">
-                <option selected disabled>Выбрать дежурного рентгенолога</option>
-                @{
-                    foreach (Personel nurse in Model.rentgenologistsList)
-                    {
-                        <option value="@nurse.Name">@nurse.Name</option>
+        <div class="row">
+            <div class="col-4">
+                <select class="form-select" asp-for="DutyNurse.name">
+                    <option selected disabled>Выбрать дежурного рентгенолога</option>
+                    @{
+                        foreach (Personel nurse in Model.rentgenologistsList)
+                        {
+                            <option value="@nurse.Name">@nurse.Name</option>
+                        }
                     }
-                }
-            </select>
+                </select>
+            </div>
+            <div class="col-2 d-none">
+                <input type="int" value="@Model.department.Allias" class="form-control invisible" asp-for="DutyNurse.department" />
+                <input type="datetime" value="@DateTime.Now" class="form-control invisible" asp-for="DutyNurse.dutyDate" />
+            </div>
+            <div class="col-2">
+                <input type="submit" value="+" asp-page-handler="SaveRHDoc" />
+            </div>
         </div>
-        <div class="col-2 d-none">
-            <input type="int" value="@Model.department.Allias" class="form-control invisible" asp-for="DutyNurse.department" />
-            <input type="datetime" value="@DateTime.Now" class="form-control invisible" asp-for="DutyNurse.dutyDate" />
-        </div>
-        <div class="col-2">
-            <input type="submit" value="+" asp-page-handler="SaveRHDoc" />
-        </div>
-    </div>
     </form>
 }
+
 <form method="post">
     <div class="row">
         <div class="col-4">
@@ -51,17 +51,20 @@
             <input type="datetime" value="@DateTime.Now" class="form-control invisible" asp-for="DutyNurse.dutyDate" />
         </div>
         <div class="col-2">
-            <input type="submit" value="+" asp-page-handler="SaveNurse"/>
+            <input type="submit" value="+" asp-page-handler="SaveNurse" />
         </div>
     </div>
 </form>
+
 <div class="row pb-3">
     <div class="col-5"> <h3>Дежурная медсестра</h3></div>
     <div class="col-3"><h4>Телефон</h4></div>
     <div class="col-2"><h4>Отделение</h4></div>
 </div>
+
 @{
-    foreach (DutyNurse dutyNurse in Model.dutyNurses){
+    foreach (DutyNurse dutyNurse in Model.dutyNurses)
+    {
         <form method="post">
             <div class="row">
                 <div class="col-5">@dutyNurse.name</div>
@@ -81,37 +84,48 @@
 <div class="row pb-3">
     <div class="col-6"> <h2>Состоит</h2></div>
 </div>
-<div class="row ">
-    <div class="col-2"> <h4>Взрослых</h4></div>
-    <div class="col-2"><h4>Детей</h4></div>
-    <div class="col-2"><h4>По уходу</h4></div>
-    <div class="col-2"><h4>Сотрудников</h4></div>
+
+<!-- Заголовки полей формы (обновлены) -->
+<div class="row">
+    <div class="col-1"> <h4>Взрослых</h4></div>
+    <div class="col-1"><h4>Детей</h4></div>
+    <div class="col-1"><h4>Уход</h4></div>
+    <div class="col-1"><h4>Врачи</h4></div>
+    <div class="col-1"><h4>м/с</h4></div>
+    <div class="col-1"><h4>сан</h4></div>
     <div class="col-2"><h4>Дата и время</h4></div>
+    <div class="col-1"></div> <!-- под кнопку -->
 </div>
 
 <form method="post">
     <div class="row">
-        <div class="col-2">
-            <input required min="0" value="@Model.fireReport.Adult" type="number" name="Adult" asp-for="fireReport.Adult"/>
+        <div class="col-1">
+            <input required min="0" value="@Model.fireReport.Adult" type="number" name="Adult" asp-for="fireReport.Adult" class="form-control" />
+        </div>
+        <div class="col-1">
+            <input required min="0" value="@Model.fireReport.Children" type="number" name="Children" asp-for="fireReport.Children" class="form-control" />
+        </div>
+        <div class="col-1">
+            <input required min="0" value="@Model.fireReport.Care" type="number" name="Care" asp-for="fireReport.Care" class="form-control" />
+        </div>
+        <div class="col-1">
+            <input required min="0" value="@Model.fireReport.Doctors" type="number" name="Doctors" asp-for="fireReport.Doctors" class="form-control" />
+        </div>
+        <div class="col-1">
+            <input required min="0" value="@Model.fireReport.Nurses" type="number" name="Nurses" asp-for="fireReport.Nurses" class="form-control" />
+        </div>
+        <div class="col-1">
+            <input required min="0" value="@Model.fireReport.Sanitarians" type="number" name="Sanitarians" asp-for="fireReport.Sanitarians" class="form-control" />
         </div>
         <div class="col-2">
-            <input required min="0" value="@Model.fireReport.Children" type="number" name="Children" asp-for="fireReport.Children"/>
-        </div>
-        <div class="col-2">
-            <input required min="0" value="@Model.fireReport.Care" type="number" name="Care" asp-for="fireReport.Care"/>
-        </div>
-        <div class="col-2">
-            <input required min="0" value="@Model.fireReport.Personel" type="number" name="Personel" asp-for="fireReport.Personel"/>
-        </div>
-        <div class="col-2">
-            <input disabled value="@Model.fireReport.Date.ToString("HH:mm dd.MM.yy")" type="datetime"/>
+            <input disabled value="@Model.fireReport.Date.ToString("HH:mm dd.MM.yy")" type="datetime" class="form-control" />
         </div>
         <div class="col-2 d-none">
-            <input value="@Model.fireReport.DepNumber" type="number" name="DepNumber" asp-for="fireReport.DepNumber"/>
+            <input value="@Model.fireReport.DepNumber" type="number" name="DepNumber" asp-for="fireReport.DepNumber" />
             <input value="@Model.fireReport.Id" type="number" name="Id" asp-for="fireReport.Id" />
         </div>
-        <div class="col-2">
-            <input type="submit" value="+" asp-page-handler="SaveFireReport"/>
+        <div class="col-1">
+            <input type="submit" value="+" asp-page-handler="SaveFireReport" class="btn btn-primary" />
         </div>
     </div>
 </form>

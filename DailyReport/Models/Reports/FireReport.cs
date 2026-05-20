@@ -14,6 +14,9 @@ namespace DailyReport.Models.Reports
         public int? ShowOrder { get; set; }
         [NotMapped]
         public bool IsAdded { get; set; }
+        public int Doctors { get; set; }      // Врачи
+        public int Nurses { get; set; }       // м/с (медицинские сёстры)
+        public int Sanitarians { get; set; }  // сан (санитары)
 
         public string ToDepName()
         {

@@ -42,17 +42,19 @@
     <h2>Пожарная сводка</h2>
 </div>
 
-<div class="row text-end fw-bold">
-    <div class=" col-2">Отделение</div>
-    <div class=" col-1">Взр</div>
-    <div class=" col-1">Дети</div>
-    <div class=" col-1">Уход</div>
-    <div class=" col-1">Сотр</div>
-    <div class=" col-1">Всего взр</div>
-    <div class=" col-1">Всего дет</div>
-    <div class=" col-2">Время сводки</div>
-</div>
-    @{
+    <div class="row text-end fw-bold">
+        <div class="col-2">Отделение</div>
+        <div class="col-1">Взр</div>
+        <div class="col-1">Дети</div>
+        <div class="col-1">Уход</div>
+        <div class="col-1">Врачи</div>      <!-- новое название -->
+        <div class="col-1">м/с</div>        <!-- новая колонка -->
+        <div class="col-1">сан</div>        <!-- новая колонка -->
+        <div class="col-1">Всего взр</div>
+        <div class="col-1">Всего дет</div>
+        <div class="col-2">Время сводки</div>
+    </div>
+    @*     @{
         foreach (FullFireReport ffr in Model.fullFireReports)
         {
             if (ffr.Department.Allias != Model.RHAllias)
@@ -68,7 +70,26 @@
                     <div class=" col-2 border border-dark">@ffr.FireReport.Date.ToString("HH:mm dd.MM.yy")</div>
                 </div>
         }
+    } *@
+    @{
+        foreach (FullFireReport ffr in Model.fullFireReports)
+        {
+            if (ffr.Department.Allias != Model.RHAllias)
+            {
+                <div class="row text-end">
+                    <div class="col-2 border border-dark">@ffr.Department.Name</div>
+                    <div class="col-1 border border-dark">@ffr.FireReport.Adult</div>
+                    <div class="col-1 border border-dark">@ffr.FireReport.Children</div>
+                    <div class="col-1 border border-dark">@ffr.FireReport.Care</div>
+                    <div class="col-1 border border-dark">@ffr.FireReport.Doctors</div>
+                    <div class="col-1 border border-dark">@ffr.FireReport.Nurses</div>
+                    <div class="col-1 border border-dark">@ffr.FireReport.Sanitarians</div>
+                    <div class="col-1 border border-dark">@(ffr.FireReport.Adult + ffr.FireReport.Care)</div>
+                    <div class="col-1 border border-dark">@ffr.FireReport.Children</div>
+                    <div class="col-2 border border-dark">@ffr.FireReport.Date.ToString("HH:mm dd.MM.yy")</div>
+                </div>
+            }
+        }
     }
-}
     <button class="d-print-none mt-2 action-print">Печать</button>
 </div>
