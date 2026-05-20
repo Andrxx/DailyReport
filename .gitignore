@@ -368,3 +368,11 @@ FodyWeavers.xsd
 /DailyReport/departments.db~tDirty67Added
 /DailyReport/departments.db-shm~1
 /DailyReport/departments.db-wal~1
+
+
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+departments.db
